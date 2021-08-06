@@ -1,3 +1,7 @@
+# kotlin-datagouvfr-client
+
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+
 # Usage
 
 La librairie permet de fournir les outils suffisants pour accéder à l'API de [data.gouv.fr](https://data.gouv.fr).

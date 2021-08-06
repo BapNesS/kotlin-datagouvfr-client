@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.20'
+    id 'org.sonarqube' version '3.3'
 }
 
 android {
@@ -49,4 +50,12 @@ dependencies {
     implementation "io.ktor:ktor-client-logging:1.6.2"
     implementation "io.ktor:ktor-client-android:1.6.2"
     implementation "org.jetbrains.kotlinx:kotlinx-datetime:0.2.1"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "com.baptistecarlier.kotlin.datagouvfr:datagouvfr-client"
+        property "sonar.organization", "kotlin-datagouvfr"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
