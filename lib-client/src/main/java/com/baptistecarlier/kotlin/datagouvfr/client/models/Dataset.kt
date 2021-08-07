@@ -60,8 +60,8 @@ data class Dataset(
     var archived: LocalDateTime? = null,
     @SerialName("badges")
     var badges: List<Badge>? = null,
-    //@SerialName("community_resources")
-    //var communityResources: List<Map<String, Any?>>? = null,
+    @SerialName("community_resources")
+    var communityResources: List<CommunityResource>? = null,
     @SerialName("deleted")
     var deleted: LocalDateTime? = null,
     //@SerialName("extras")
@@ -74,8 +74,8 @@ data class Dataset(
     var id: String? = null,
     @SerialName("license")
     var license: String? = null,
-    //@SerialName("metrics")
-    //var metrics: Map<String, Any?>? = null,
+    @SerialName("metrics")
+    var metrics: Metrics? = null,
     //@SerialName("organization")
     //var organization: Map<String, Any?>? = null,
     @SerialName("owner")
@@ -98,57 +98,60 @@ data class Dataset(
      * Values: UNKNOWN, PUNCTUAL, CONTINUOUS, HOURLY, FOURTIMESADAY, THREETIMESADAY, SEMIDAILY, DAILY, FOURTIMESAWEEK, THREETIMESAWEEK, SEMIWEEKLY, WEEKLY, BIWEEKLY, THREETIMESAMONTH, SEMIMONTHLY, MONTHLY, BIMONTHLY, QUARTERLY, THREETIMESAYEAR, SEMIANNUAL, ANNUAL, BIENNIAL, TRIENNIAL, QUINQUENNIAL, IRREGULAR
      */
     @Serializable
-    enum class FrequencyEnum(val value: String) {
+    enum class FrequencyEnum {
         @SerialName("unknown")
-        UNKNOWN("unknown"),
+        UNKNOWN,
         @SerialName("punctual")
-        PUNCTUAL("punctual"),
+        PUNCTUAL,
         @SerialName("continuous")
-        CONTINUOUS("continuous"),
+        CONTINUOUS,
         @SerialName("hourly")
-        HOURLY("hourly"),
+        HOURLY,
         @SerialName("fourTimesADay")
-        FOURTIMESADAY("fourTimesADay"),
+        FOURTIMESADAY,
         @SerialName("threeTimesADay")
-        THREETIMESADAY("threeTimesADay"),
+        THREETIMESADAY,
         @SerialName("semidaily")
-        SEMIDAILY("semidaily"),
+        SEMIDAILY,
         @SerialName("daily")
-        DAILY("daily"),
+        DAILY,
         @SerialName("fourTimesAWeek")
-        FOURTIMESAWEEK("fourTimesAWeek"),
+        FOURTIMESAWEEK,
         @SerialName("threeTimesAWeek")
-        THREETIMESAWEEK("threeTimesAWeek"),
+        THREETIMESAWEEK,
         @SerialName("semiweekly")
-        SEMIWEEKLY("semiweekly"),
+        SEMIWEEKLY,
         @SerialName("weekly")
-        WEEKLY("weekly"),
+        WEEKLY,
         @SerialName("biweekly")
-        BIWEEKLY("biweekly"),
+        BIWEEKLY,
         @SerialName("threeTimesAMonth")
-        THREETIMESAMONTH("threeTimesAMonth"),
+        THREETIMESAMONTH,
         @SerialName("semimonthly")
-        SEMIMONTHLY("semimonthly"),
+        SEMIMONTHLY,
         @SerialName("monthly")
-        MONTHLY("monthly"),
+        MONTHLY,
         @SerialName("bimonthly")
-        BIMONTHLY("bimonthly"),
+        BIMONTHLY,
         @SerialName("quarterly")
-        QUARTERLY("quarterly"),
+        QUARTERLY,
         @SerialName("threeTimesAYear")
-        THREETIMESAYEAR("threeTimesAYear"),
+        THREETIMESAYEAR,
         @SerialName("semiannual")
-        SEMIANNUAL("semiannual"),
+        SEMIANNUAL,
         @SerialName("annual")
-        ANNUAL("annual"),
+        ANNUAL,
         @SerialName("biennial")
-        BIENNIAL("biennial"),
+        BIENNIAL,
         @SerialName("triennial")
-        TRIENNIAL("triennial"),
+        TRIENNIAL,
         @SerialName("quinquennial")
-        QUINQUENNIAL("quinquennial"),
+        QUINQUENNIAL,
         @SerialName("irregular")
-        IRREGULAR("irregular")
+        IRREGULAR
 
     }
 }
+
+
+
