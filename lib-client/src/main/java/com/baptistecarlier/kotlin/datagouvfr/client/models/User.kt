@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.models
 
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -29,8 +30,8 @@ data class User(
     var id: String,
     @SerialName("last_name")
     var lastName: String,
-    //@SerialName("since")
-    //var since: ZonedDateTime,
+    @SerialName("since")
+    var since: LocalDateTime? = null,
     @SerialName("slug")
     var slug: String,
     @SerialName("uri")

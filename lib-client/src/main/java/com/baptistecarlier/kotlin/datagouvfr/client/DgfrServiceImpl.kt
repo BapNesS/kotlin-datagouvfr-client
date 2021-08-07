@@ -1,8 +1,10 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
+import android.icu.text.SimpleDateFormat
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
+import com.baptistecarlier.kotlin.datagouvfr.client.models.User
 import com.baptistecarlier.kotlin.datagouvfr.util.appendIfNotNull
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -11,7 +13,13 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+import java.util.*
 
 class DgfrService(private val apiKey: String? = null, logging: Boolean = false) :
     DgfrServiceContract {
@@ -100,11 +108,12 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
             //@retrofit2.http.Header("X-Fields") xFields: String?
             //builder.append("X=$elds&")
 
-            Log.d(this.tag, "getDatasetByIdKtorMapping / begin")
+            Log.d(this.tag, "listDatasets / begin")
             val response = client.get<DatasetPage>(
                 path = "datasets/?$builder"
             )
-            Log.d(this.tag, "getDatasetByIdKtorMapping / response = $response")
+            Log.d(this.tag, "listDatasets / response = $response")
+
 
             response
         } catch (e: Exception) {
@@ -112,6 +121,10 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
             e.printStackTrace()
             null
         }
+    }
+
+    private fun HttpRequestBuilder.addApiKey() {
+        header("X-API-KEY", apiKey)
     }
 
 }

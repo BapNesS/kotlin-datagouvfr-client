@@ -1,7 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.models
 
-import kotlinx.serialization.Serializable
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @property acronym An optional dataset acronym
@@ -35,16 +36,16 @@ import kotlinx.serialization.SerialName
  */
 @Serializable
 data class Dataset(
-    //@SerialName("created_at")
-    //var createdAt: ZonedDateTime,
+    @SerialName("created_at")
+    var createdAt: LocalDateTime,
     @SerialName("description")
     var description: String,
     @SerialName("frequency")
     var frequency: FrequencyEnum,
-    //@SerialName("last_modified")
-    //var lastModified: ZonedDateTime,
-    //@SerialName("last_update")
-    //var lastUpdate: ZonedDateTime,
+    @SerialName("last_modified")
+    var lastModified: LocalDateTime,
+    @SerialName("last_update")
+    var lastUpdate: LocalDateTime,
     @SerialName("page")
     var page: String,
     @SerialName("slug")
@@ -55,20 +56,20 @@ data class Dataset(
     var uri: String,
     @SerialName("acronym")
     var acronym: String? = null,
-    //@SerialName("archived")
-    //var archived: ZonedDateTime? = null,
+    @SerialName("archived")
+    var archived: LocalDateTime? = null,
     @SerialName("badges")
     var badges: List<Badge>? = null,
     //@SerialName("community_resources")
     //var communityResources: List<Map<String, Any?>>? = null,
-    //@SerialName("deleted")
-    //var deleted: ZonedDateTime? = null,
+    @SerialName("deleted")
+    var deleted: LocalDateTime? = null,
     //@SerialName("extras")
     //var extras: Map<String, Any?>? = null,
     @SerialName("featured")
     var featured: Boolean? = null,
-    //@SerialName("frequency_date")
-    //var frequencyDate: ZonedDateTime? = null,
+    @SerialName("frequency_date")
+    var frequencyDate: LocalDateTime? = null,
     @SerialName("id")
     var id: String? = null,
     @SerialName("license")
