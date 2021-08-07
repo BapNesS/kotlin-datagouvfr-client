@@ -31,13 +31,13 @@ import java.security.acl.Owner
 @Serializable
 data class CommunityResource(
     @SerialName("filetype")
-    var filetype: CommunityResource.FiletypeEnum,
+    var filetype: FiletypeEnum,
     @SerialName("format")
     var format: String,
     @SerialName("title")
     var title: String,
     @SerialName("type")
-    var type: CommunityResource.TypeEnum,
+    var type: TypeEnum,
     @SerialName("url")
     var url: String,
     //@SerialName("checksum")

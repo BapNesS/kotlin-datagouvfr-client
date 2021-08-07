@@ -1,21 +1,16 @@
 package com.baptistecarlier.kotlin.datagouvfr.app.repository
 
-import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
 
 class Repository {
 
     @Deprecated("To remove")
     private val apiKey = ""
 
-    suspend fun call(): Dataset? {
-        Log.d("Repo", "call () ")
-        val res = DgfrService(logging = true, apiKey = apiKey).listDatasets( q ="api.gouv.fr")
-        Log.d("Repo", "res = $res")
+    private val dgfrService = DgfrService(logging = true, apiKey = apiKey)
 
-        return res?.data?.first()
-    }
+    suspend fun call(query: String): DatasetPage? = dgfrService.listDatasets(q = query)
 
 }
 

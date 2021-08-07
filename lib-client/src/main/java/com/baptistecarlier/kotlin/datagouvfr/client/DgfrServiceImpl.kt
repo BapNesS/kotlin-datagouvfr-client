@@ -1,6 +1,5 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
-import android.icu.text.SimpleDateFormat
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
@@ -15,10 +14,6 @@ import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.toInstant
-import kotlinx.datetime.toLocalDateTime
 import java.util.*
 
 class DgfrService(private val apiKey: String? = null, logging: Boolean = false) :
