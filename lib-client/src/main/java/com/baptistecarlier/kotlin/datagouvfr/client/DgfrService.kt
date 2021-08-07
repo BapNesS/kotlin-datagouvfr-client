@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
+import com.baptistecarlier.kotlin.datagouvfr.client.models.User
 
 internal interface DgfrServiceContract {
 
@@ -50,5 +51,7 @@ internal interface DgfrServiceContract {
         pageSize: Int? = null,
         xFields: String? = null
     ): DatasetPage?
+
+    suspend fun me(): User?
 
 }

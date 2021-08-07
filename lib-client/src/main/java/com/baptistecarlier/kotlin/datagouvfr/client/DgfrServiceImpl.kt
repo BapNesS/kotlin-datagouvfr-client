@@ -114,10 +114,27 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
             )
             Log.d(this.tag, "listDatasets / response = $response")
 
+            response
+        } catch (e: Exception) {
+            Log.d(this.tag, "listDatasets / Crash = $e")
+            e.printStackTrace()
+            null
+        }
+    }
+
+    override suspend fun me(): User? {
+        return try {
+            Log.d(this.tag, "me / begin")
+            val response = client.get<User>(
+                path = "me/"
+            ) {
+                addApiKey()
+            }
+            Log.d(this.tag, "me / response = $response")
 
             response
         } catch (e: Exception) {
-            Log.d(this.tag, "getDatasetByIdKtorMapping / Crash  = $e")
+            Log.d(this.tag, "me / Crash = $e")
             e.printStackTrace()
             null
         }
