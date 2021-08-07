@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.Repository
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
@@ -21,8 +22,9 @@ class MainViewModel : ViewModel() {
     fun seach(query: String) {
         this.query = query
         viewModelScope.launch {
-            val resultList = repository.call(query)?.data.orEmpty()
-            _data.postValue( resultList )
+            repository.call(query).collect {
+                _data.postValue( it )
+            }
         }
     }
 

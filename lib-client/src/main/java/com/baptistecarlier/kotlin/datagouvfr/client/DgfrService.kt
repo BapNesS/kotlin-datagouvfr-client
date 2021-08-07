@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client
 
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
 import com.baptistecarlier.kotlin.datagouvfr.client.models.User
+import kotlinx.coroutines.flow.Flow
 
 internal interface DgfrServiceContract {
 
@@ -50,8 +51,8 @@ internal interface DgfrServiceContract {
         page: Int? = null,
         pageSize: Int? = null,
         xFields: String? = null
-    ): DatasetPage?
+    ): Flow<DatasetPage?>
 
-    suspend fun me(): User?
+    suspend fun me(): Flow<User?>
 
 }
