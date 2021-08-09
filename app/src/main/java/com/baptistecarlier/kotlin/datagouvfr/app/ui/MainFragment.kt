@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.adapter.DatasetAdapter
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentMainBinding
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.MainViewModel
 import com.baptistecarlier.kotlin.datagouvfr.extensions.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collectLatest
 
 class MainFragment : Fragment() {
 
@@ -43,8 +44,9 @@ class MainFragment : Fragment() {
         val defaultQueryValue = viewModel.query.ifBlank { getString(R.string.default_search_query) }
         with(binding) {
             searchEditText.setText(defaultQueryValue)
-            recyclerView.adapter = adapter
+            binding.recyclerView.adapter = adapter
         }
+
     }
 
     private fun initListeners() {
@@ -54,7 +56,7 @@ class MainFragment : Fragment() {
                 if (query.isNotEmpty()) {
                     snack(R.string.searching)
                     view.hideKeyboard()
-                    viewModel.seach(query)
+                    viewModel.search(query)
                 } else {
                     snack(R.string.empty_query)
                 }
@@ -63,12 +65,11 @@ class MainFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.data.observe(this.viewLifecycleOwner, {
-            adapter.submitList(it)
-            if (it?.isEmpty() == true) {
-                binding.snack(R.string.no_result)
+        lifecycleScope.launchWhenCreated {
+            viewModel.posts.collectLatest {
+                adapter.submitData(it)
             }
-        })
+        }
     }
 
     private fun FragmentMainBinding.snack(@StringRes label: Int) {
@@ -83,4 +84,7 @@ class MainFragment : Fragment() {
         _binding = null
     }
 }
+
+
+
 

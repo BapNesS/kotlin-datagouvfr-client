@@ -1,23 +1,25 @@
 package com.baptistecarlier.kotlin.datagouvfr.app.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.baptistecarlier.kotlin.datagouvfr.app.repository.paging.DatasetPagingSource
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
-import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-class Repository {
+class Repository(private val dgfrService: DgfrService) {
 
-    @Deprecated("To remove")
-    private val apiKey = ""
+    private val pageSize = 20
 
-    private val dgfrService = DgfrService(logging = true, apiKey = apiKey)
-
-    suspend fun call(query: String): Flow<List<Dataset>?> =
-        dgfrService.listDatasets(q = query)
-            .map {
-                it?.data
-            }
-
+    fun postsOfSubreddit(query: String): Flow<PagingData<Dataset>> {
+        return Pager(
+            config = PagingConfig(pageSize)
+        ) {
+            DatasetPagingSource(
+                dgfrService = dgfrService,
+                query = query
+            )
+        }.flow
+    }
 }
-
