@@ -107,7 +107,7 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
 
             Log.d(tag, "listDatasets / begin")
             val response = client.get<DatasetPage>(
-                path = "datasets/?$builder"
+                path = "datasets/?${builder.urlEncore()}"
             )
             Log.d(tag, "listDatasets / response = $response")
 
@@ -145,3 +145,4 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
 
 }
 
+private fun StringBuilder.urlEncore(): String = this.toString().encodeURLPath()

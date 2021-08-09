@@ -78,6 +78,7 @@ data class CommunityResource(
      * Whether the resource is an uploaded file, a remote file or an API
      * Values: FILE, REMOTE
      */
+    @Serializable
     enum class FiletypeEnum {
         @SerialName("file")
         FILE,
@@ -89,6 +90,7 @@ data class CommunityResource(
      * Resource type (documentation, API...)
      * Values: MAIN, DOCUMENTATION, UPDATE, API, CODE, OTHER
      */
+    @Serializable
     enum class TypeEnum {
         @SerialName("main")
         MAIN,
