@@ -14,11 +14,13 @@ import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentDetailsBinding
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.DetailsViewModel
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.extensions.date
 import com.baptistecarlier.kotlin.datagouvfr.extensions.displayName
 import com.baptistecarlier.kotlin.datagouvfr.extensions.nullIfEmpty
-import com.baptistecarlier.kotlin.datagouvfr.extensions.date
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private val viewModel: DetailsViewModel by viewModels()
@@ -44,7 +46,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.data.observe(this.viewLifecycleOwner, Observer {
+        viewModel.data.observe(this.viewLifecycleOwner, {
             if (it != null) {
                 binding.loaded(it)
             } else {

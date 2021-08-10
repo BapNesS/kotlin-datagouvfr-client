@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.ItemDatasetBinding
-import com.baptistecarlier.kotlin.datagouvfr.app.ui.MainFragment
 import com.baptistecarlier.kotlin.datagouvfr.app.ui.viewholder.DatasetViewHolder
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 
-class DatasetAdapter(private val clickListener: DatasetAdapter.ClickListener) :
+class DatasetAdapter(private val clickListener: ClickListener) :
     PagingDataAdapter<Dataset, DatasetViewHolder>(DatasetCallback) {
 
     interface ClickListener {

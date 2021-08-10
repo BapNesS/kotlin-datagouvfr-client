@@ -1,23 +1,28 @@
 package com.baptistecarlier.kotlin.datagouvfr.app.vm
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val dgfrRepository: DgfrRepository
+) : ViewModel() {
 
     var query: String = ""
         private set
 
     private val innerQuery = MutableLiveData(query)
-
-    private val repository = DgfrRepository(DgfrService(logging = true))
 
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
 
@@ -25,7 +30,7 @@ class MainViewModel : ViewModel() {
     val posts = flowOf(
         clearListCh.receiveAsFlow().map { PagingData.empty() },
         innerQuery.asFlow().flatMapLatest {
-            repository.listDatasets(query).cachedIn(viewModelScope)
+            dgfrRepository.listDatasets(query).cachedIn(viewModelScope)
         }
     ).flattenMerge(2)
 

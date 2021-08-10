@@ -6,11 +6,26 @@ import androidx.paging.PagingData
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.paging.DatasetPagingSource
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
-class DgfrRepository(private val dgfrService: DgfrService) {
+class DgfrRepository(private val storage: Storage) {
+
+    private var dgfrService = DgfrService()
 
     private val pageSize = 20
+
+    private val scope = CoroutineScope(Dispatchers.Main + Job())
+
+    init {
+        storage.apiKeyFlow.onEach { newKey ->
+            dgfrService = DgfrService(apiKey = newKey)
+        }.launchIn(scope)
+    }
 
     fun listDatasets(query: String): Flow<PagingData<Dataset>> {
         return Pager(
@@ -26,5 +41,5 @@ class DgfrRepository(private val dgfrService: DgfrService) {
     suspend fun getDataset(id: String): Flow<Dataset?> {
         return dgfrService.getDataset(id)
     }
-}
 
+}

@@ -5,15 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsViewModel : ViewModel() {
-
-    private val repository = DgfrRepository(DgfrService())
+@HiltViewModel
+class DetailsViewModel @Inject constructor(
+    private val dgfrRepository: DgfrRepository
+) : ViewModel() {
 
     private val _data = MutableLiveData<Dataset?>()
     val data: LiveData<Dataset?> = _data
@@ -21,7 +23,7 @@ class DetailsViewModel : ViewModel() {
     @InternalCoroutinesApi
     fun load(datasetId: String) {
         viewModelScope.launch {
-            repository.getDataset(datasetId).collect {
+            dgfrRepository.getDataset(datasetId).collect {
                 _data.postValue( it )
             }
         }

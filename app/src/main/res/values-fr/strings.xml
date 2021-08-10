@@ -12,4 +12,7 @@
     <string name="create_date_formatted">Création : %s</string>
     <string name="update_date_formatted">Mise à jour : %s</string>
     <string name="tags_formatted">Tags : %s</string>
+    <string name="settings">Paramètres</string>
+    <string name="apikey">Clé d\'API</string>
+    <string name="confirm">Confirmer</string>
 </resources>

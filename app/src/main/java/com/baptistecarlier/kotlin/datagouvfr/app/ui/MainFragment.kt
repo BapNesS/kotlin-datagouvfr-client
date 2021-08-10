@@ -16,8 +16,10 @@ import com.baptistecarlier.kotlin.datagouvfr.app.vm.MainViewModel
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class MainFragment : Fragment(), DatasetAdapter.ClickListener {
 
     private val viewModel: MainViewModel by viewModels()

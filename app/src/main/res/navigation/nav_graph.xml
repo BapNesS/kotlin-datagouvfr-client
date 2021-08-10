@@ -18,6 +18,9 @@
                 app:argType="string"
                 app:nullable="false" />
         </action>
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -29,4 +32,9 @@
             app:argType="string"
             app:nullable="false"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.baptistecarlier.kotlin.datagouvfr.app.ui.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
