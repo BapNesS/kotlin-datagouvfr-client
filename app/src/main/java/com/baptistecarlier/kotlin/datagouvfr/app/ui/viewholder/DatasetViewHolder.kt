@@ -4,11 +4,15 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.baptistecarlier.kotlin.datagouvfr.app.R
+import com.baptistecarlier.kotlin.datagouvfr.app.adapter.DatasetAdapter
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.ItemDatasetBinding
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.truncatedDescription
 
-class DatasetViewHolder(private val viewBinding: ItemDatasetBinding) :
+class DatasetViewHolder(
+    private val viewBinding: ItemDatasetBinding,
+    private val clickListener: DatasetAdapter.ClickListener
+) :
     RecyclerView.ViewHolder(viewBinding.root) {
 
     fun bind(item: Dataset) {
@@ -18,6 +22,9 @@ class DatasetViewHolder(private val viewBinding: ItemDatasetBinding) :
             setStats(ressources, R.string.ressources, item.communityResources?.size ?: 0)
             setStats(reutilisations, R.string.reutilisations, item.metrics?.reuses)
             setStats(favoris, R.string.favoris, item.metrics?.followers)
+            root.setOnClickListener {
+                clickListener.onDatasetClick(item)
+            }
         }
     }
 

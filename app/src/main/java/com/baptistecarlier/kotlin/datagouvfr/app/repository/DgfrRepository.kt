@@ -8,11 +8,11 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import kotlinx.coroutines.flow.Flow
 
-class Repository(private val dgfrService: DgfrService) {
+class DgfrRepository(private val dgfrService: DgfrService) {
 
     private val pageSize = 20
 
-    fun postsOfSubreddit(query: String): Flow<PagingData<Dataset>> {
+    fun listDatasets(query: String): Flow<PagingData<Dataset>> {
         return Pager(
             config = PagingConfig(pageSize)
         ) {
@@ -22,4 +22,9 @@ class Repository(private val dgfrService: DgfrService) {
             )
         }.flow
     }
+
+    suspend fun getDataset(id: String): Flow<Dataset?> {
+        return dgfrService.getDataset(id)
+    }
 }
+

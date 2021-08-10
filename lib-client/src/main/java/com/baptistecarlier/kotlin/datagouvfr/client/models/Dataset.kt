@@ -76,8 +76,8 @@ data class Dataset(
     var license: String? = null,
     @SerialName("metrics")
     var metrics: Metrics? = null,
-    //@SerialName("organization")
-    //var organization: Map<String, Any?>? = null,
+    @SerialName("organization")
+    var organization: Organization? = null,
     @SerialName("owner")
     var owner: User? = null,
     @SerialName("private")

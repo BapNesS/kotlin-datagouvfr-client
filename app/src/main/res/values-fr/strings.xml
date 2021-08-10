@@ -7,4 +7,9 @@
     <string name="ressources">%d ressouces</string>
     <string name="reutilisations">%d réutilisations</string>
     <string name="favoris">%d favoris</string>
+    <string name="id_formatted">Id: %s</string>
+    <string name="author_formatted">Autheur: %s</string>
+    <string name="create_date_formatted">Création : %s</string>
+    <string name="update_date_formatted">Mise à jour : %s</string>
+    <string name="tags_formatted">Tags : %s</string>
 </resources>

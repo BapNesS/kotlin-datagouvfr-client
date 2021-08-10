@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
+import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
 import com.baptistecarlier.kotlin.datagouvfr.client.models.User
 import com.baptistecarlier.kotlin.datagouvfr.util.appendIfNotNull
@@ -114,6 +115,23 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
             response
         } catch (e: Exception) {
             Log.d(tag, "listDatasets / Crash = $e")
+            e.printStackTrace()
+            null
+        }
+        emit(value)
+    }
+
+    override suspend fun getDataset(id: String): Flow<Dataset?> = flow {
+        val value = try {
+            Log.d(tag, "getDataset / begin")
+            val response = client.get<Dataset>(
+                path = "datasets/$id/"
+            )
+            Log.d(tag, "getDataset / response = $response")
+
+            response
+        } catch (e: Exception) {
+            Log.d(tag, "getDataset / Crash = $e")
             e.printStackTrace()
             null
         }

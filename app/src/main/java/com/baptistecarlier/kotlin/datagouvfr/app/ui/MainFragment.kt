@@ -8,22 +8,24 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.adapter.DatasetAdapter
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentMainBinding
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.MainViewModel
+import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), DatasetAdapter.ClickListener {
 
     private val viewModel: MainViewModel by viewModels()
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = DatasetAdapter()
+    private val adapter = DatasetAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +84,16 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDatasetClick(dataset: Dataset) {
+        dataset.id?.let { datasetId ->
+            val action =
+                MainFragmentDirections.actionMainFragmentToDetailsFragment(
+                    datasetId = datasetId
+                )
+            findNavController().navigate(action)
+        }
     }
 }
 

@@ -10,4 +10,9 @@
     <string name="ressources">%d resouces</string>
     <string name="reutilisations">%d reuses</string>
     <string name="favoris">%d bookmarks</string>
+    <string name="id_formatted">Id: %s</string>
+    <string name="author_formatted">Author: %s</string>
+    <string name="create_date_formatted">Creation date: %s</string>
+    <string name="update_date_formatted">Last update: %s</string>
+    <string name="tags_formatted">Tags: %s</string>
 </resources>

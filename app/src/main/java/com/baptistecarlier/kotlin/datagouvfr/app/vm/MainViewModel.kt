@@ -3,9 +3,8 @@ package com.baptistecarlier.kotlin.datagouvfr.app.vm
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.baptistecarlier.kotlin.datagouvfr.app.repository.Repository
+import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
@@ -18,7 +17,7 @@ class MainViewModel : ViewModel() {
 
     private val innerQuery = MutableLiveData(query)
 
-    private val repository = Repository(DgfrService(logging = true))
+    private val repository = DgfrRepository(DgfrService(logging = true))
 
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
 
@@ -26,7 +25,7 @@ class MainViewModel : ViewModel() {
     val posts = flowOf(
         clearListCh.receiveAsFlow().map { PagingData.empty() },
         innerQuery.asFlow().flatMapLatest {
-            repository.postsOfSubreddit(query).cachedIn(viewModelScope)
+            repository.listDatasets(query).cachedIn(viewModelScope)
         }
     ).flattenMerge(2)
 

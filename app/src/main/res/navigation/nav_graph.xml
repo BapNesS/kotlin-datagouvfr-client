@@ -3,11 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/mainFragment"
         android:name="com.baptistecarlier.kotlin.datagouvfr.app.ui.MainFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment">
+            <argument
+                android:name="datasetId"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.baptistecarlier.kotlin.datagouvfr.app.ui.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="datasetId"
+            app:argType="string"
+            app:nullable="false"/>
+    </fragment>
 </navigation>
