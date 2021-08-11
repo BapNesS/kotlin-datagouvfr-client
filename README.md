@@ -27,9 +27,15 @@ La librairie permet de fournir les outils suffisants pour accéder à l'API de [
 * Android SDK
 * Android S (API 31)
 
-# Langages, librairies et outils used
+# Langages, librairies et outils utilisés
 * `Kotlin`
 * `Kotlin Coroutines`
 * `Kotlinx DateTime`
 * `Ktor`
+* `Google Material Components` (app démo)
+* `AndroidX Navigation library` (app démo)
 * `AndroidX Paging3` (app démo)
+* `AndroidX DataStore` (app démo)
+* `Hilt` (app démo)
+* `Jetpack Compose` (app démo)
+* `Timber` (app démo)
