@@ -84,8 +84,8 @@ data class Dataset(
     var private: Boolean? = null,
     //@SerialName("quality")
     //var quality: Map<String, Any?>? = null,
-    //@SerialName("resources")
-    //var resources: List<Map<String, Any?>>? = null,
+    @SerialName("resources")
+    var resources: List<Resource>? = null,
     //@SerialName("spatial")
     //var spatial: Map<String, Any?>? = null,
     @SerialName("tags")
