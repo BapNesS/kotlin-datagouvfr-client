@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentDetailsBinding
+import com.baptistecarlier.kotlin.datagouvfr.app.theme.OdfDefaultTheme
+import com.baptistecarlier.kotlin.datagouvfr.app.ui.compose.DetailsView
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.DetailsViewModel
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
-import com.baptistecarlier.kotlin.datagouvfr.extensions.date
-import com.baptistecarlier.kotlin.datagouvfr.extensions.displayName
-import com.baptistecarlier.kotlin.datagouvfr.extensions.nullIfEmpty
+import com.baptistecarlier.kotlin.datagouvfr.extensions.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -24,9 +27,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class DetailsFragment : Fragment() {
 
     private val viewModel: DetailsViewModel by viewModels()
-
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
 
     // Args
     private val datasetId: String?
@@ -36,46 +36,29 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initObservers()
-    }
-
-    private fun initObservers() {
-        viewModel.data.observe(this.viewLifecycleOwner, {
-            if (it != null) {
-                binding.loaded(it)
-            } else {
-                binding.loader()
+        return ComposeView(requireContext()).apply {
+            setContent {
+                val dataset: Dataset? by viewModel.data.observeAsState(null)
+                OdfDefaultTheme(isSystemInDarkTheme()) {
+                    DetailsView(dataset)
+                }
             }
-        })
+        }
     }
 
     private fun FragmentDetailsBinding.loaded(dataset: Dataset) {
-        loader.isVisible = false
-        loaded.isVisible = true
 
         title.text = dataset.title
-        val authorValue = dataset.organization?.name?.let {
-            it
-        } ?: run {
-            dataset.owner?.displayName()
-        }
-        this.author.text = getString(R.string.author_formatted, authorValue)
-        val tagsValue = dataset.tags?.joinToString(separator = ", ")?.nullIfEmpty()
+        val tagsValue = dataset.getTagsOrNull()
 
         setStatsNotNull(id, R.string.id_formatted, dataset.id)
         setStatsNotNull(createDate, R.string.create_date_formatted, dataset.createdAt.date())
         setStatsNotNull(updateDate, R.string.update_date_formatted, dataset.lastUpdate.date())
         setStatsNotNull(tags, R.string.tags_formatted, tagsValue)
 
-        setStats(ressources, R.string.ressources, dataset.communityResources?.size ?: 0)
-        setStats(reutilisations, R.string.reutilisations, dataset.metrics?.reuses)
-        setStats(favoris, R.string.favoris, dataset.metrics?.followers)
+        setStats(ressources, R.string.resources, dataset.resources?.size ?: 0)
+        setStats(reutilisations, R.string.reuses, dataset.metrics?.reuses)
+        setStats(favoris, R.string.followers, dataset.metrics?.followers)
 
         description.text = dataset.description
     }
@@ -89,11 +72,6 @@ class DetailsFragment : Fragment() {
         view.text = view.context.getString(label, value)
     }
 
-    private fun FragmentDetailsBinding.loader() {
-        loader.isVisible = true
-        loaded.isVisible = false
-    }
-
     @InternalCoroutinesApi
     override fun onStart() {
         super.onStart()
@@ -102,10 +80,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }
+
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.Storage
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -21,12 +22,12 @@ class SettingsViewModel @Inject constructor(
 
     init {
         storage.apiKeyFlow.onEach {
-            _apiKey.postValue( it )
+            _apiKey.postValue(it)
         }.launchIn(viewModelScope)
     }
 
     fun updateTo(newValue: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             storage.updateApiKey(newValue)
         }
     }

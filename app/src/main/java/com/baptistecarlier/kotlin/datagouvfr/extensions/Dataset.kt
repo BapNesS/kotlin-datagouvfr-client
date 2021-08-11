@@ -10,3 +10,14 @@ fun Dataset.truncatedDescription(): String = with(description) {
         this
     }.replace("\n", " ")
 }
+
+
+fun Dataset.getTagsOrNull() =
+    tags?.joinToString(separator = ", ")?.nullIfEmpty()
+
+fun Dataset.getAuthor() =
+    organization?.name?.let {
+        it.toString()
+    } ?: run {
+        owner?.displayName().orEmpty()
+    }

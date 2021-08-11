@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name" translatable="false">DataGouvFr App</string>
     <string name="default_search_query" translatable="false">Ecologie</string>
+    <string name="empty" translatable="false">-</string>
 
     <string name="dataset">Dataset</string>
     <string name="cta_search">Search</string>
     <string name="empty_query">Missing query</string>
     <string name="searching">Searching…</string>
     <string name="no_result">No result</string>
-    <string name="ressources">%d resouces</string>
-    <string name="reutilisations">%d reuses</string>
-    <string name="favoris">%d bookmarks</string>
+    <string name="resources">%d resouces</string>
+    <string name="reuses">%d reuses</string>
+    <string name="followers">%d bookmarks</string>
     <string name="id_formatted">Id: %s</string>
     <string name="author_formatted">Author: %s</string>
     <string name="create_date_formatted">Creation date: %s</string>

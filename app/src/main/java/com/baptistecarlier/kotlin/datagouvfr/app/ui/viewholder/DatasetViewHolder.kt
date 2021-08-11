@@ -9,23 +9,25 @@ import com.baptistecarlier.kotlin.datagouvfr.app.databinding.ItemDatasetBinding
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.truncatedDescription
 
+
 class DatasetViewHolder(
     private val viewBinding: ItemDatasetBinding,
     private val clickListener: DatasetAdapter.ClickListener
 ) :
     RecyclerView.ViewHolder(viewBinding.root) {
 
-    fun bind(item: Dataset) {
+    fun bind(dataset: Dataset) {
         with(viewBinding) {
-            title.text = item.title
-            description.text = item.truncatedDescription()
-            setStats(ressources, R.string.ressources, item.communityResources?.size ?: 0)
-            setStats(reutilisations, R.string.reutilisations, item.metrics?.reuses)
-            setStats(favoris, R.string.favoris, item.metrics?.followers)
+            title.text = dataset.title
+            description.text = dataset.truncatedDescription()
+            setStats(ressources, R.string.resources, dataset.resources?.size ?: 0)
+            setStats(reutilisations, R.string.reuses, dataset.metrics?.reuses)
+            setStats(favoris, R.string.followers, dataset.metrics?.followers)
             root.setOnClickListener {
-                clickListener.onDatasetClick(item)
+                clickListener.onDatasetClick(dataset)
             }
         }
+
     }
 
     private fun setStats(view: TextView, @StringRes label: Int, value: Int? = 0) {

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,9 +23,9 @@ class DetailsViewModel @Inject constructor(
 
     @InternalCoroutinesApi
     fun load(datasetId: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             dgfrRepository.getDataset(datasetId).collect {
-                _data.postValue( it )
+                _data.postValue(it)
             }
         }
     }

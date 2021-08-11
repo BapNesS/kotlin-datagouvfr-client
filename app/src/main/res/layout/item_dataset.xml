@@ -59,7 +59,7 @@
         android:id="@+id/flow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:constraint_referenced_ids="ressources, reutilisations, favoris"
+        app:constraint_referenced_ids="favoris, reutilisations, ressources"
         app:flow_horizontalBias="0"
         app:flow_horizontalGap="@dimen/margin_vertical_full"
         app:flow_horizontalStyle="packed"
