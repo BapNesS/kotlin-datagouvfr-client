@@ -63,9 +63,6 @@ sonarqube {
 // Publishing
 apply plugin: 'maven-publish'
 
-def Properties properties = new Properties()
-properties.load(project.rootProject.file("local.properties").newDataInputStream())
-
 publishing {
     publications {
         release(MavenPublication) {
@@ -112,8 +109,8 @@ publishing {
             def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = rootProject.versionName.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username properties.getProperty("ossrhUsername")
-                password properties.getProperty("ossrhPassword")
+                username findProperty("ossrhUsername")
+                password findProperty("ossrhPassword")
             }
         }
     }
