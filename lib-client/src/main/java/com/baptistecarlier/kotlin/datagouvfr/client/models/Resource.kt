@@ -45,7 +45,7 @@ data class Resource(
     //@SerialName("extras")
     //var extras: Map<String, Any?>? = null,
     @SerialName("filesize")
-    var filesize: Int? = null,
+    var filesize: Long? = null,
     @SerialName("id")
     var id: String? = null,
     @SerialName("last_modified")
