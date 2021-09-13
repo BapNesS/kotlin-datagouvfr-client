@@ -44,4 +44,6 @@ class DgfrRepository(storage: Storage) {
 
     suspend fun me() = dgfrService.me()
 
+    suspend fun getTagsSuggest(query: String) = dgfrService.getTagsSuggest(query, 10)
+
 }

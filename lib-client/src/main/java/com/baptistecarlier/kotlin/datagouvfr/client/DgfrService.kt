@@ -1,9 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
-import com.baptistecarlier.kotlin.datagouvfr.client.api.DatasetsApi
-import com.baptistecarlier.kotlin.datagouvfr.client.api.DatasetsApiImpl
-import com.baptistecarlier.kotlin.datagouvfr.client.api.MeApi
-import com.baptistecarlier.kotlin.datagouvfr.client.api.MeApiImpl
+import com.baptistecarlier.kotlin.datagouvfr.client.api.*
 import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -46,10 +43,12 @@ private val httpClient: HttpClient by lazy {
 
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
+private val tagsApi by lazy { TagsApiImpl(httpClient) }
 
 class DgfrService(apiKey: String = "") :
     DatasetsApi by datasetsApi,
-    MeApi by meApi
+    MeApi by meApi,
+    TagsApi by tagsApi
 {
 
     init {
