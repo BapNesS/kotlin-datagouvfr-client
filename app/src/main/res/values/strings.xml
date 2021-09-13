@@ -13,10 +13,12 @@
     <string name="followers">%d bookmarks</string>
     <string name="id_formatted">Id: %s</string>
     <string name="author_formatted">Author: %s</string>
+    <string name="user_formatted">%1$s\nSlug: %2$s\nWebsite: %3$s</string>
     <string name="create_date_formatted">Creation date: %s</string>
     <string name="update_date_formatted">Last update: %s</string>
     <string name="tags_formatted">Tags: %s</string>
     <string name="settings">Settings</string>
     <string name="apikey">API key</string>
     <string name="confirm">Confirm</string>
+    <string name="check">Check</string>
 </resources>

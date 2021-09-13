@@ -51,6 +51,18 @@
             app:layout_constraintStart_toStartOf="@id/guideleine_begin" />
 
         <Button
+            android:id="@+id/check"
+            style="?materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check"
+            android:layout_marginEnd="@dimen/margin_medium"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toTopOf="@id/button"
+            app:layout_constraintBottom_toBottomOf="@id/button"
+            app:layout_constraintEnd_toStartOf="@id/button" />
+
+        <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +70,17 @@
             android:layout_marginTop="@dimen/margin_medium"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintTop_toBottomOf="@id/edittext"
+            app:layout_constraintBottom_toTopOf="@id/check_result"
+            app:layout_constraintEnd_toEndOf="@id/guideleine_end"
+            app:layout_constraintStart_toStartOf="@id/guideleine_begin" />
+
+        <TextView
+            android:id="@+id/check_result"
+            style="?android:textAppearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@id/button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideleine_end"
             app:layout_constraintStart_toStartOf="@id/guideleine_begin" />

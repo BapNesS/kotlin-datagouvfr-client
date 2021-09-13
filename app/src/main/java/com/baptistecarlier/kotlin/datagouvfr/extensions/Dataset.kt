@@ -17,7 +17,7 @@ fun Dataset.getTagsOrNull() =
 
 fun Dataset.getAuthor() =
     organization?.name?.let {
-        it.toString()
+        it
     } ?: run {
         owner?.displayName().orEmpty()
     }

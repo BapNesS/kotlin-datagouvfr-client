@@ -1,58 +1,18 @@
-package com.baptistecarlier.kotlin.datagouvfr.client
+package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
-import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
-import com.baptistecarlier.kotlin.datagouvfr.client.models.User
 import com.baptistecarlier.kotlin.datagouvfr.util.appendIfNotNull
+import com.baptistecarlier.kotlin.datagouvfr.util.urlEncore
 import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.util.*
 
-class DgfrService(private val apiKey: String? = null, logging: Boolean = false) :
-    DgfrServiceContract {
+class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
 
-    private val tag = "DgfrService"
-    private val timeOut: Long = 60_000
-    private val host = "www.data.gouv.fr"
-    private val basePath = "/api/1/"
-    private val engineFactory = CIO
-
-    private val client: HttpClient = HttpClient(engineFactory) {
-        this.defaultRequest {
-            url.host = this@DgfrService.host
-            url.protocol = URLProtocol.HTTPS
-            url.encodedPath = basePath + url.encodedPath
-        }
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-                prettyPrint = true
-                isLenient = true
-                ignoreUnknownKeys = true
-            })
-
-            engine {
-                requestTimeout = timeOut
-            }
-        }
-
-        if (logging) {
-            install(Logging) {
-                logger = DgfrHttpLogger()
-                level = LogLevel.ALL
-            }
-        }
-    }
+    private val tag = "DatasetApiImpl"
 
     //@Headers(
     //    "X-Operation-ID: list_datasets",
@@ -137,30 +97,4 @@ class DgfrService(private val apiKey: String? = null, logging: Boolean = false) 
         }
         emit(value)
     }
-
-    override suspend fun me(): Flow<User?> = flow {
-        val value = try {
-            Log.d(tag, "me / begin")
-            val response = client.get<User>(
-                path = "me/"
-            ) {
-                addApiKey()
-            }
-            Log.d(tag, "me / response = $response")
-
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "me / Crash = $e")
-            e.printStackTrace()
-            null
-        }
-        emit(value)
-    }
-
-    private fun HttpRequestBuilder.addApiKey() {
-        header("X-API-KEY", apiKey)
-    }
-
 }
-
-private fun StringBuilder.urlEncore(): String = this.toString().encodeURLPath()

@@ -1,61 +1,63 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
-import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
-import com.baptistecarlier.kotlin.datagouvfr.client.models.User
-import kotlinx.coroutines.flow.Flow
+import com.baptistecarlier.kotlin.datagouvfr.client.api.DatasetsApi
+import com.baptistecarlier.kotlin.datagouvfr.client.api.DatasetsApiImpl
+import com.baptistecarlier.kotlin.datagouvfr.client.api.MeApi
+import com.baptistecarlier.kotlin.datagouvfr.client.api.MeApiImpl
+import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.features.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.features.logging.*
+import io.ktor.http.*
 
-internal interface DgfrServiceContract {
 
-    /**
-     * List or search all datasets
-     * The endpoint is owned by kotlincoroutines service owner
-     * @param q The search query (optional)
-     * @param facets Selected facets to fetch (optional)
-     * @param tag (optional)
-     * @param badge (optional)
-     * @param organization (optional)
-     * @param owner (optional)
-     * @param license (optional)
-     * @param geozone (optional)
-     * @param granularity (optional)
-     * @param format (optional)
-     * @param schema (optional)
-     * @param schemaVersion (optional)
-     * @param resourceType (optional)
-     * @param reuses (optional)
-     * @param temporalCoverage Une couverture temporelle est exprimée par début-fin où les deux dates sont au format ISO (c&#39;est-à-dire YYYY-MM-DD-YYYY-MM-DD) (optional)
-     * @param featured (optional)
-     * @param sort The field (and direction) on which sorting apply (optional)
-     * @param page The page to display (optional, default to 0)
-     * @param pageSize The page size (optional, default to 20)
-     * @param xFields An optional fields mask (optional)
-     */
-    suspend fun listDatasets(
-        q: String? = null,
-        facets: List<String>? = null,
-        tag: String? = null,
-        badge: String? = null,
-        organization: String? = null,
-        owner: String? = null,
-        license: String? = null,
-        geozone: String? = null,
-        granularity: String? = null,
-        format: String? = null,
-        schema: String? = null,
-        schemaVersion: String? = null,
-        resourceType: String? = null,
-        reuses: String? = null,
-        temporalCoverage: String? = null,
-        featured: Boolean? = null,
-        sort: String? = null,
-        page: Int? = null,
-        pageSize: Int? = null,
-        xFields: String? = null
-    ): Flow<DatasetPage?>
+private val httpClient: HttpClient by lazy {
+    HttpClient(CIO) {
+        val timeOut: Long = 60_000
+        val host = "www.data.gouv.fr"
+        val basePath = "/api/1/"
 
-    suspend fun getDataset(id: String): Flow<Dataset?>
+        this.defaultRequest {
+            url.host = host
+            url.protocol = URLProtocol.HTTPS
+            url.encodedPath = basePath + url.encodedPath
+        }
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+            })
 
-    suspend fun me(): Flow<User?>
+            engine {
+                requestTimeout = timeOut
+            }
+        }
+
+        install(Logging) {
+            logger = DgfrHttpLogger()
+            level = LogLevel.ALL
+        }
+    }
+}
+
+private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
+private val meApi by lazy { MeApiImpl(httpClient) }
+
+class DgfrService(apiKey: String = "") :
+    DatasetsApi by datasetsApi,
+    MeApi by meApi
+{
+
+    init {
+        setApiKey(apiKey)
+    }
+
+    override fun setApiKey(apiKey: String) {
+        meApi.setApiKey(apiKey)
+    }
 
 }

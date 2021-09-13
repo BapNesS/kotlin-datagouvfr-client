@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-class DgfrRepository(private val storage: Storage) {
+class DgfrRepository(storage: Storage) {
 
     private var dgfrService = DgfrService()
 
@@ -27,7 +27,7 @@ class DgfrRepository(private val storage: Storage) {
         }.launchIn(scope)
     }
 
-    fun listDatasets(query: String): Flow<PagingData<Dataset>> {
+    suspend fun listDatasets(query: String): Flow<PagingData<Dataset>> {
         return Pager(
             config = PagingConfig(pageSize)
         ) {
@@ -41,5 +41,7 @@ class DgfrRepository(private val storage: Storage) {
     suspend fun getDataset(id: String): Flow<Dataset?> {
         return dgfrService.getDataset(id)
     }
+
+    suspend fun me() = dgfrService.me()
 
 }
