@@ -42,8 +42,13 @@ class DgfrRepository(storage: Storage) {
         return dgfrService.getDataset(id)
     }
 
+    // Me
     suspend fun me() = dgfrService.me()
 
+    // Tags
     suspend fun getTagsSuggest(query: String) = dgfrService.getTagsSuggest(query, 10)
+
+    // Avatar
+    suspend fun getAvatar(identifier: String) = dgfrService.getAvatar(identifier, 200)
 
 }

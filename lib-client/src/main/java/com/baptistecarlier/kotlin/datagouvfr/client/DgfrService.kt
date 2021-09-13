@@ -44,11 +44,13 @@ private val httpClient: HttpClient by lazy {
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
 private val tagsApi by lazy { TagsApiImpl(httpClient) }
+private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
 
 class DgfrService(apiKey: String = "") :
     DatasetsApi by datasetsApi,
     MeApi by meApi,
-    TagsApi by tagsApi
+    TagsApi by tagsApi,
+    AvatarsApi by avatarsApi
 {
 
     init {

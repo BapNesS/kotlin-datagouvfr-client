@@ -1,4 +1,4 @@
-package com.baptistecarlier.kotlin.datagouvfr.util
+package com.baptistecarlier.kotlin.datagouvfr.client.tools
 
 import io.ktor.client.request.*
 import io.ktor.http.*

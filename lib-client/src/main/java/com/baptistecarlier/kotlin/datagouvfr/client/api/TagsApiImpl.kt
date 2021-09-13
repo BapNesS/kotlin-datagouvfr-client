@@ -2,8 +2,8 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Tag
-import com.baptistecarlier.kotlin.datagouvfr.util.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.util.urlEncore
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow

@@ -2,7 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.models.User
-import com.baptistecarlier.kotlin.datagouvfr.util.addApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow
