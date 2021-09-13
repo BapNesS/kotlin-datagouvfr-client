@@ -23,8 +23,7 @@ class AvatarsApiImpl(private val client: HttpClient) : AvatarsApi {
 
             byteArrayBody
         } catch (e: Exception) {
-            Log.d(tag, "getAvatar / Crash = $e")
-            e.printStackTrace()
+            Log.d(tag, "getAvatar / Exception =  $e")
             null
         }
         emit(value)

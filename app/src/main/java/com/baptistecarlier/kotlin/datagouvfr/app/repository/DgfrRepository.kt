@@ -51,4 +51,7 @@ class DgfrRepository(storage: Storage) {
     // Avatar
     suspend fun getAvatar(identifier: String) = dgfrService.getAvatar(identifier, 200)
 
+    // Notifications
+    suspend fun getNotifications() = dgfrService.getNotifications()
+
 }

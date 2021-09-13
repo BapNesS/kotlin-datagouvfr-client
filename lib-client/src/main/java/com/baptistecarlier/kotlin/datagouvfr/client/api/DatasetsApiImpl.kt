@@ -74,8 +74,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
 
             response
         } catch (e: Exception) {
-            Log.d(tag, "listDatasets / Crash = $e")
-            e.printStackTrace()
+            Log.d(tag, "listDatasets / Exception =  $e")
             null
         }
         emit(value)
@@ -91,8 +90,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
 
             response
         } catch (e: Exception) {
-            Log.d(tag, "getDataset / Crash = $e")
-            e.printStackTrace()
+            Log.d(tag, "getDataset / Exception =  $e")
             null
         }
         emit(value)

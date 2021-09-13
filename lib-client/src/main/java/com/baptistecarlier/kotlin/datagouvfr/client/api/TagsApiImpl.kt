@@ -28,8 +28,7 @@ class TagsApiImpl(private val client: HttpClient) : TagsApi {
 
             response
         } catch (e: Exception) {
-            Log.d(tag, "getSuggest / Crash = $e")
-            e.printStackTrace()
+            Log.d(tag, "getSuggest / Exception =  $e")
             null
         }
         emit(value)
