@@ -54,4 +54,7 @@ class DgfrRepository(storage: Storage) {
     // Notifications
     suspend fun getNotifications() = dgfrService.getNotifications()
 
+    // Spatial
+    suspend fun getSpatialGranularities() = dgfrService.getSpatialGranularities()
+
 }
