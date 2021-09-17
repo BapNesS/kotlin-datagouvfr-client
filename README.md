@@ -23,7 +23,7 @@ La librairie permet de fournir les outils suffisants pour accéder à l'API de [
 | `tags`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `topics`         | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
 | `posts`          | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
-| `transfer`       | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
+| `transfer`       | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `notifications`  | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `avatars`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `harvest`        | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |

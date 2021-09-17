@@ -59,6 +59,7 @@ private val spatialApi by lazy { SpatialApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
 private val tagsApi by lazy { TagsApiImpl(httpClient) }
+private val transferApi by lazy { TransferApiImpl(httpClient) }
 private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
 private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
 
@@ -76,7 +77,7 @@ class DgfrService(apiKey: String = "") :
     TagsApi by tagsApi,
     TopicsApi,
     PostsApi,
-    TransferApi,
+    TransferApi by transferApi,
     NotificationsApi by notificationsApi,
     AvatarsApi by avatarsApi,
     HarvestApi
