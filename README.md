@@ -11,7 +11,7 @@ La librairie permet de fournir les outils suffisants pour accéder à l'API de [
 | API	           | Couverture                                                            |
 | ---------------- | :-------------------------------------------------------------------- |
 | `site`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `spatial`        | ![12%](https://img.shields.io/badge/-12%25-red?style=flat-square) |
+| `spatial`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `issues`         | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
 | `discussions`    | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
 | `users`          | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |

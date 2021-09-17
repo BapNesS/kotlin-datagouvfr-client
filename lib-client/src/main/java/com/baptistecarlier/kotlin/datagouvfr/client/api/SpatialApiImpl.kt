@@ -1,10 +1,10 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
-import com.baptistecarlier.kotlin.datagouvfr.client.models.GeoGranularity
-import com.baptistecarlier.kotlin.datagouvfr.client.models.GeoJSONFeatureCollection
-import com.baptistecarlier.kotlin.datagouvfr.client.models.GeoLevel
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.Draft
+import com.baptistecarlier.kotlin.datagouvfr.client.models.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +18,7 @@ class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
         Log.d(tag, "getSpatialCoverage / begin")
         val value = try {
             val response = client.get<List<GeoJSONFeatureCollection>?>(
-                path = "spatial/coverage/{$level}/"
+                path = "spatial/coverage/$level/"
             )
             response
         } catch (e: Exception) {
@@ -56,37 +56,90 @@ class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
         emit(value)
     }
 
-    @Draft
-    override suspend fun getSpatialZone(id: String): Flow<Any?> {
-        TODO("Not yet implemented")
+    override suspend fun getSpatialZone(id: String): Flow<GeoJSONFeature?> = flow {
+        Log.d(tag, "getSpatialZone / begin")
+        val value = try {
+            val response = client.get<GeoJSONFeature?>(
+                path = "spatial/zone/$id/"
+            )
+            response
+        } catch (e: Exception) {
+            Log.d(tag, "getSpatialZone / Exception =  $e")
+            null
+        }
+        emit(value)
     }
 
-
-    @Draft
-    override suspend fun getSpatialZoneChildren(id: String): Flow<Any?> {
-        TODO("Not yet implemented")
+    override suspend fun getSpatialZoneChildren(id: String): Flow<List<GeoJSONFeatureCollection>?> = flow {
+        Log.d(tag, "getSpatialZoneChildren / begin")
+        val value = try {
+            val response = client.get<List<GeoJSONFeatureCollection>?>(
+                path = "spatial/zone/$id/children/"
+            )
+            response
+        } catch (e: Exception) {
+            Log.d(tag, "getSpatialZoneChildren / Exception =  $e")
+            null
+        }
+        emit(value)
     }
 
-
-    @Draft
     override suspend fun getSpatialZoneDatasets(
         id: String,
         dynamic: Boolean?,
         size: Int?
-    ): Flow<Any?> {
-        TODO("Not yet implemented")
+    ) : Flow<List<DatasetReference>?> = flow {
+        Log.d(tag, "getSpatialZoneDatasets / begin")
+        val value = try {
+            val builder = StringBuilder()
+            builder.appendIfNotNull("id", id)
+            builder.appendIfNotNull("dynamic", dynamic)
+            builder.appendIfNotNull("size", size)
+
+            val response = client.get<List<DatasetReference>?>(
+                path = "spatial/zone/{id}/datasets/?${builder.urlEncore()}"
+            )
+            response
+        } catch (e: Exception) {
+            Log.d(tag, "getSpatialZoneDatasets / Exception =  $e")
+            null
+        }
+        emit(value)
     }
 
+    override suspend fun getSuggestZones(
+        q: String,
+        size: Int?
+    ): Flow<List<TerritorySuggestion>?> = flow {
+        Log.d(tag, "getSuggestZones / begin")
+        val value = try {
+            val builder = StringBuilder()
+            builder.appendIfNotNull("q", q)
+            builder.appendIfNotNull("size", size)
 
-    @Draft
-    override suspend fun getSuggestZones(q: String, size: Int?): Flow<Any?> {
-        TODO("Not yet implemented")
+            val response = client.get<List<TerritorySuggestion>?>(
+                path = "spatial/zones/suggest/?${builder.urlEncore()}"
+            )
+            response
+        } catch (e: Exception) {
+            Log.d(tag, "getSuggestZones / Exception =  $e")
+            null
+        }
+        emit(value)
     }
 
-
-    @Draft
-    override suspend fun getSpatialZones(ids: List<String>): Flow<Any?> {
-        TODO("Not yet implemented")
+    override suspend fun getSpatialZones(ids: List<String>): Flow<GeoJSONFeatureCollection?> = flow {
+        Log.d(tag, "getSpatialZones / begin")
+        val value = try {
+            val response = client.get<GeoJSONFeatureCollection?>(
+                path = "spatial/zones/?${ids}/"
+            )
+            response
+        } catch (e: Exception) {
+            Log.d(tag, "getSpatialZones / Exception =  $e")
+            null
+        }
+        emit(value)
     }
 
 }

@@ -19,6 +19,7 @@ data class GeoJSONFeatureCollection(
      */
     @Serializable
     enum class TypeEnum(val value: String) {
-        @SerialName("FeatureCollection") FEATURECOLLECTION("FeatureCollection")
+        @SerialName("FeatureCollection")
+        FEATURECOLLECTION("FeatureCollection")
     }
 }

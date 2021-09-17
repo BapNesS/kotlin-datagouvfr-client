@@ -9,7 +9,6 @@ interface DatasetsApi: WithApiKey {
 
     /**
      * List or search all datasets
-     * The endpoint is owned by kotlincoroutines service owner
      * @param q The search query (optional)
      * @param facets Selected facets to fetch (optional)
      * @param tag (optional)
