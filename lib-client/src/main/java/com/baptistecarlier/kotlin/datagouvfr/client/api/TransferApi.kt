@@ -1,5 +1,5 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-interface TransferApi {
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 
-}
+interface TransferApi: WithApiKey

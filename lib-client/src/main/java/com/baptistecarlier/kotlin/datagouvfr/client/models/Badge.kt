@@ -11,4 +11,3 @@ data class Badge(
     @SerialName("kind")
     var kind: String
 )
-

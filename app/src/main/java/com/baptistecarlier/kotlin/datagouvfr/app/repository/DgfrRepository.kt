@@ -45,16 +45,4 @@ class DgfrRepository(storage: Storage) {
     // Me
     suspend fun me() = dgfrService.me()
 
-    // Tags
-    suspend fun getTagsSuggest(query: String) = dgfrService.getTagsSuggest(query, 10)
-
-    // Avatar
-    suspend fun getAvatar(identifier: String) = dgfrService.getAvatar(identifier, 200)
-
-    // Notifications
-    suspend fun getNotifications() = dgfrService.getNotifications()
-
-    // Spatial
-    suspend fun getSpatialGranularities() = dgfrService.getSpatialGranularities()
-
 }

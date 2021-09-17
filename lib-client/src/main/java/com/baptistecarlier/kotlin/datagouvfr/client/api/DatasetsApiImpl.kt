@@ -14,6 +14,11 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
 
     private val tag = "DatasetApiImpl"
 
+    private var apiKey: String = ""
+    override fun setApiKey(apiKey: String) {
+        this.apiKey = apiKey
+    }
+
     //@Headers(
     //    "X-Operation-ID: list_datasets",
     //    "Content-Type: application/json"
@@ -40,6 +45,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         pageSize: Int?,
         xFields: String?
     ): Flow<DatasetPage?> = flow {
+        Log.d(tag, "listDatasets / begin")
         val value = try {
             val builder = StringBuilder()
             builder.appendIfNotNull("q", q)
@@ -62,16 +68,9 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
             builder.appendIfNotNull("page", page)
             builder.appendIfNotNull("page_size", pageSize)
 
-            //* @param xFields An optional fields mask (optional)
-            //@retrofit2.http.Header("X-Fields") xFields: String?
-            //builder.append("X=$elds&")
-
-            Log.d(tag, "listDatasets / begin")
             val response = client.get<DatasetPage>(
                 path = "datasets/?${builder.urlEncore()}"
             )
-            Log.d(tag, "listDatasets / response = $response")
-
             response
         } catch (e: Exception) {
             Log.d(tag, "listDatasets / Exception =  $e")
@@ -81,13 +80,11 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     }
 
     override suspend fun getDataset(id: String): Flow<Dataset?> = flow {
+        Log.d(tag, "getDataset / begin")
         val value = try {
-            Log.d(tag, "getDataset / begin")
             val response = client.get<Dataset>(
                 path = "datasets/$id/"
             )
-            Log.d(tag, "getDataset / response = $response")
-
             response
         } catch (e: Exception) {
             Log.d(tag, "getDataset / Exception =  $e")

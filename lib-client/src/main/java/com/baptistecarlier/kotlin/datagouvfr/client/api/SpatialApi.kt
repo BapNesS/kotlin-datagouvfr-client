@@ -1,6 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.models.GeoGranularity
+import com.baptistecarlier.kotlin.datagouvfr.client.models.GeoJSONFeatureCollection
+import com.baptistecarlier.kotlin.datagouvfr.client.models.GeoLevel
 import io.ktor.client.*
 import kotlinx.coroutines.flow.Flow
 
@@ -13,7 +15,7 @@ interface SpatialApi {
      * List each zone for a given level with their datasets count
      * @param level
      */
-    suspend fun getSpatialCoverage(level: String) : Flow<Any?>
+    suspend fun getSpatialCoverage(level: String) : Flow<List<GeoJSONFeatureCollection>?>
 
     /**
      * List all known spatial granularities
@@ -23,7 +25,7 @@ interface SpatialApi {
     /**
      * List all known levels
      */
-    suspend fun getSpatialLevels() : Flow<Any?>
+    suspend fun getSpatialLevels() : Flow<List<GeoLevel>?>
 
     /**
      * Fetch a zone

@@ -18,15 +18,13 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
     }
 
     override suspend fun me(): Flow<User?> = flow {
+        Log.d(tag, "me / begin")
         val value = try {
-            Log.d(tag, "me / begin")
             val response = client.get<User>(
                 path = "me/"
             ) {
                 addApiKey(apiKey)
             }
-            Log.d(tag, "me / response = $response")
-
             response
         } catch (e: Exception) {
             Log.d(tag, "me / Exception =  $e")

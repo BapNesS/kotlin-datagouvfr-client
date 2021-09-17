@@ -18,15 +18,13 @@ class NotificationsApiImpl(private val client: HttpClient) : NotificationsApi {
     }
 
     override suspend fun getNotifications(): Flow<List<Notification>?> = flow {
+        Log.d(tag, "getNotifications / begin")
         val value = try {
-            Log.d(tag, "getNotifications / begin")
             val response = client.get<List<Notification>>(
                 path = "notifications/"
             ) {
                 addApiKey(apiKey)
             }
-            Log.d(tag, "getNotifications / response = $response")
-
             response
         } catch (e: Exception) {
             Log.d(tag, "getNotifications / Exception =  $e")

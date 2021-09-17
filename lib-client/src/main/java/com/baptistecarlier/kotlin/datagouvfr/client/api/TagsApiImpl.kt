@@ -17,15 +17,14 @@ class TagsApiImpl(private val client: HttpClient) : TagsApi {
         q: String,
         size: Int?
     ): Flow<List<Tag>?> = flow {
+        Log.d(tag, "getSuggest / begin")
         val value = try {
             val builder = StringBuilder()
             builder.appendIfNotNull("q", q)
-            Log.d(tag, "getSuggest / begin")
+
             val response = client.get<List<Tag>>(
                 path = "tags/suggest/?${builder.urlEncore()}"
             )
-            Log.d(tag, "getSuggest / response = $response")
-
             response
         } catch (e: Exception) {
             Log.d(tag, "getSuggest / Exception =  $e")

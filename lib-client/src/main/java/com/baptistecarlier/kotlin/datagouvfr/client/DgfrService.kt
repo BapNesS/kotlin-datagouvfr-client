@@ -16,7 +16,7 @@ import io.ktor.http.*
 
 private val httpClient: HttpClient by lazy {
     HttpClient(CIO) {
-        val timeOut: Long = 60_000
+        val timeOut: Long = 60000
         val host = "www.data.gouv.fr"
         val basePath = "/api/1/"
 
@@ -54,6 +54,7 @@ private val httpClient: HttpClient by lazy {
     }
 }
 
+private val siteApi by lazy { SiteApiImpl(httpClient) }
 private val spatialApi by lazy { SpatialApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
@@ -62,7 +63,7 @@ private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
 private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
 
 class DgfrService(apiKey: String = "") :
-    SiteApi,
+    SiteApi by siteApi,
     SpatialApi by spatialApi,
     IssuesApi,
     DiscussionsApi,

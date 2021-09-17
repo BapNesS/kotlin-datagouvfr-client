@@ -2,9 +2,10 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
-interface DatasetsApi {
+interface DatasetsApi: WithApiKey {
 
     /**
      * List or search all datasets

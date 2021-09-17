@@ -10,7 +10,7 @@ La librairie permet de fournir les outils suffisants pour accéder à l'API de [
 
 | API	           | Couverture                                                            |
 | ---------------- | :-------------------------------------------------------------------- |
-| `site`           | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
+| `site`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `spatial`        | ![12%](https://img.shields.io/badge/-12%25-red?style=flat-square) |
 | `issues`         | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
 | `discussions`    | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
@@ -33,19 +33,23 @@ La librairie permet de fournir les outils suffisants pour accéder à l'API de [
 * [Sonar](https://sonarcloud.io/dashboard?id=com.baptistecarlier.kotlin.datagouvfr%3Adatagouvfr-client) du projet
 
 # Pré-requis
+
 * JDK 1.8
 * Android SDK
 * Android S (API 31)
 
 # Langages, librairies et outils utilisés
+**Lib :**
 * `Kotlin`
 * `Kotlin Coroutines`
 * `Kotlinx DateTime`
 * `Ktor`
-* `Google Material Components` (app démo)
-* `AndroidX Navigation library` (app démo)
-* `AndroidX Paging3` (app démo)
-* `AndroidX DataStore` (app démo)
-* `Hilt` (app démo)
-* `Jetpack Compose` (app démo)
-* `Timber` (app démo)
+
+**App :**
+* `Google Material Components`
+* `AndroidX Navigation library`
+* `AndroidX Paging3`
+* `AndroidX DataStore`
+* `Hilt`
+* `Jetpack Compose`
+* `Timber`

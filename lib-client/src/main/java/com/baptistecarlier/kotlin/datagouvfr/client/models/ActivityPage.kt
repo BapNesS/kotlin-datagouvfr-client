@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @property total The total paginated items
  */
 @Serializable
-data class DatasetPage(
+data class ActivityPage(
     @SerialName("page")
     var page: Int,
     @SerialName("page_size")
@@ -21,9 +21,9 @@ data class DatasetPage(
     @SerialName("total")
     var total: Int,
     @SerialName("data")
-    var data: List<Dataset>? = null,
-    //@SerialName("facets")
-    //var facets: Map<String, Any?>? = null,
+    var data: List<Activity>? = null,
+    /*@SerialName("facets")
+    var facets: Map<String, Any?>? = null,*/
     @SerialName("next_page")
     var nextPage: String? = null,
     @SerialName("previous_page")

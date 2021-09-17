@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property description The resource markdown description
  * @property extras Extra attributes as key-value pairs
  * @property filesize The resource file size in bytes
- * @property filetype Whether the resource is an uploaded file, a remote file or an API
+ * @property fileType Whether the resource is an uploaded file, a remote file or an API
  * @property format The resource format
  * @property id The resource unique ID
  * @property lastModified The resource last modification date
@@ -27,13 +27,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Resource(
     @SerialName("filetype")
-    var filetype: FiletypeEnum,
+    var fileType: FileTypeEnum,
     @SerialName("format")
     var format: String? = null,
     @SerialName("title")
     var title: String,
     @SerialName("type")
-    var type: TypeEnum,
+    var type: Type,
     @SerialName("url")
     var url: String,
     //@SerialName("checksum")
@@ -63,23 +63,13 @@ data class Resource(
     //@SerialName("schema")
     //var schema: Map<String, Any?>? = null
 ) {
-    /**
-     * Whether the resource is an uploaded file, a remote file or an API
-     * Values: FILE, REMOTE
-     */
-    @Serializable
-    enum class FiletypeEnum {
-        @SerialName("file")
-        FILE,
-        @SerialName("remote")
-        REMOTE
-    }
+
     /**
      * Resource type (documentation, API...)
      * Values: MAIN, DOCUMENTATION, UPDATE, API, CODE, OTHER
      */
     @Serializable
-    enum class TypeEnum {
+    enum class Type {
         @SerialName("main")
         MAIN,
         @SerialName("documentation")

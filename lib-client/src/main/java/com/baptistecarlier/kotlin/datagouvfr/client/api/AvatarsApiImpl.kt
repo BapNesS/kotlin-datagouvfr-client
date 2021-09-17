@@ -13,14 +13,11 @@ class AvatarsApiImpl(private val client: HttpClient) : AvatarsApi {
     private val tag = "AvatarsApiImpl"
 
     override suspend fun getAvatar(identifier: String, size: Int): Flow<ByteArray?> = flow {
+        Log.d(tag, "getAvatar / begin")
         val value = try {
-            Log.d(tag, "getAvatar / begin")
-
             val httpResponse: HttpResponse = client.get(
                 path = "avatars/$identifier/$size")
             val byteArrayBody: ByteArray = httpResponse.receive()
-            Log.d(tag, "getAvatar / response = $byteArrayBody")
-
             byteArrayBody
         } catch (e: Exception) {
             Log.d(tag, "getAvatar / Exception =  $e")
