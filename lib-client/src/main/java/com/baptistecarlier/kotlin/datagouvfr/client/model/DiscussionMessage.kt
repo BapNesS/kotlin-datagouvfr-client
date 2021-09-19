@@ -14,7 +14,7 @@ data class DiscussionMessage(
     @SerialName("content")
     var content: String? = null,
     @SerialName("posted_by")
-    var postedBy: DiscussionMessageAuthor? = null,
+    var postedBy: Owner? = null,
     @SerialName("posted_on")
     var postedOn: LocalDateTime? = null
 )

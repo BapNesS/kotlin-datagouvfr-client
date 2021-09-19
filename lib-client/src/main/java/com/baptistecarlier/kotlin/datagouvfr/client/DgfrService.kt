@@ -61,10 +61,14 @@ private val discussionsApiImpl by lazy { DiscussionsApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
 private val tagsApi by lazy { TagsApiImpl(httpClient) }
+private val topicsApi by lazy { TopicsApiImpl(httpClient) }
 private val transferApi by lazy { TransferApiImpl(httpClient) }
 private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
 private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
 
+/**
+ * @param apiKey Clé d'API (optionnel)
+ */
 class DgfrService(apiKey: String = "") :
     SiteApi by siteApi,
     SpatialApi by spatialApi,
@@ -77,7 +81,7 @@ class DgfrService(apiKey: String = "") :
     OrganizationsApi,
     WorkersApi,
     TagsApi by tagsApi,
-    TopicsApi,
+    TopicsApi by topicsApi,
     PostsApi,
     TransferApi by transferApi,
     NotificationsApi by notificationsApi,

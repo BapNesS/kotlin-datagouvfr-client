@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
  * @property uri The user API URI (required)
  */
 @Serializable
-data class DiscussionMessageAuthor(
+data class Owner(
     @SerialName("description")
     var description: String? = null,
     @SerialName("class")
