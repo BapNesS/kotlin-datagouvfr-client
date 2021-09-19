@@ -57,6 +57,7 @@ private val httpClient: HttpClient by lazy {
 private val siteApi by lazy { SiteApiImpl(httpClient) }
 private val spatialApi by lazy { SpatialApiImpl(httpClient) }
 private val issuesApi by lazy { IssuesApiImpl(httpClient) }
+private val discussionsApiImpl by lazy { DiscussionsApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
 private val tagsApi by lazy { TagsApiImpl(httpClient) }
@@ -68,7 +69,7 @@ class DgfrService(apiKey: String = "") :
     SiteApi by siteApi,
     SpatialApi by spatialApi,
     IssuesApi by issuesApi,
-    DiscussionsApi,
+    DiscussionsApi by discussionsApiImpl,
     UsersApi,
     MeApi by meApi,
     DatasetsApi by datasetsApi,

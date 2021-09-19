@@ -24,8 +24,8 @@ data class Issue(
     var subject: Map<String, Any?>,*/
     @SerialName("title")
     var title: String,
-    /*@SerialName("user")
-    var user: Map<String, Any?>,*/
+    @SerialName("user")
+    var user: User,
     @SerialName("closed")
     var closed: LocalDateTime? = null,
     @SerialName("closed_by")
