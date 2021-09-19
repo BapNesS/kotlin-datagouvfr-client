@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.readAndClose
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -178,6 +179,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
             val response = client.put<List<Dataset>?>(
                 path = "site/home/datasets/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = datasetIds
             }
@@ -209,6 +211,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
             val response = client.put<List<Reuse>?>(
                 path = "site/home/reuses/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = reuseIds
             }

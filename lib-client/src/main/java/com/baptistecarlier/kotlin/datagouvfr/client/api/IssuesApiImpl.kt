@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
@@ -55,6 +56,7 @@ class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
             val response = client.post<Issue?>(
                 path = "issues/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }
@@ -86,6 +88,7 @@ class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
             val response = client.post<Issue?>(
                 path = "issues/$id/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }

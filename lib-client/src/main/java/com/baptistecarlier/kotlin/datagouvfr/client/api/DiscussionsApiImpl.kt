@@ -5,6 +5,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
@@ -59,6 +60,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
             val response = client.post<Discussion?>(
                 path = "discussions/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }
@@ -75,7 +77,9 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         val value = try {
             val response = client.delete<HttpResponse>(
                 path = "discussions/$id"
-            )
+            ) {
+                addApiKey(apiKey)
+            }
             (response.status.value in 200..299)
         } catch (e: Exception) {
             Log.d(tag, "deleteDiscussion / Exception =  $e")
@@ -107,6 +111,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
             val response = client.post<Discussion?>(
                 path = "discussions/$id/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }
@@ -123,7 +128,9 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         val value = try {
             val response = client.delete<HttpResponse>(
                 path = "discussions/$id/comments/$cidx"
-            )
+            ) {
+                addApiKey(apiKey)
+            }
             (response.status.value in 200..299)
         } catch (e: Exception) {
             Log.d(tag, "deleteDiscussionComment / Exception =  $e")

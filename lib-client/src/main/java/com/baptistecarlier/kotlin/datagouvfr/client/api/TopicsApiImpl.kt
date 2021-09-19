@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
@@ -44,6 +45,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
             val response = client.post<Topic?>(
                 path = "topics/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }
@@ -60,7 +62,9 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
         val value = try {
             val response = client.delete<HttpResponse>(
                 path = "topics/$topic"
-            )
+            ) {
+                addApiKey(apiKey)
+            }
             (response.status.value in 200..299)
         } catch (e: Exception) {
             Log.d(tag, "postCreateTopic / Exception =  $e")
@@ -89,6 +93,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
             val response = client.put<Topic?>(
                 path = "topics/$topic/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }

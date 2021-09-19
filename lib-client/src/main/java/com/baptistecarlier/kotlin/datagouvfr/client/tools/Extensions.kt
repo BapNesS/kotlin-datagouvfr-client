@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.tools
 
 import io.ktor.client.request.*
-import io.ktor.content.*
 import io.ktor.http.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.jvm.javaio.*

@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -37,6 +38,7 @@ class TransferApiImpl(private val client: HttpClient) : TransferApi {
             val response = client.post<Transfer?>(
                 path = "transfer/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }
@@ -71,6 +73,7 @@ class TransferApiImpl(private val client: HttpClient) : TransferApi {
             val response = client.post<Transfer?>(
                 path = "transfer/$id/"
             ) {
+                addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
                 body = payload
             }
