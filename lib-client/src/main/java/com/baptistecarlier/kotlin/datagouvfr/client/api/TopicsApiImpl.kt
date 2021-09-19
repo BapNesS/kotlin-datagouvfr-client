@@ -26,7 +26,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
         val value = try {
             val builder = StringBuilder()
             builder.appendIfNotNull("page", page)
-            builder.appendIfNotNull("pageSize", pageSize)
+            builder.appendIfNotNull("page_size", pageSize)
 
             val response = client.get<TopicPage?>(
                 path = "topics/?${builder.urlEncore()}"

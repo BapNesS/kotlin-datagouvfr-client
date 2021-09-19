@@ -41,7 +41,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
                 builder.appendIfNotNull("for", item)
             }
             builder.appendIfNotNull("page", page)
-            builder.appendIfNotNull("pageSize", pageSize)
+            builder.appendIfNotNull("page_size", pageSize)
 
             val response = client.get<DiscussionPage?>(
                 path = "discussions/?${builder.urlEncore()}"

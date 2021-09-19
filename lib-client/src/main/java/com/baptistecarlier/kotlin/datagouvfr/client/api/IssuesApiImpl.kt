@@ -37,7 +37,7 @@ class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
                 builder.appendIfNotNull("for", item)
             }
             builder.appendIfNotNull("page", page)
-            builder.appendIfNotNull("pageSize", pageSize)
+            builder.appendIfNotNull("page_size", pageSize)
 
             val response = client.get<IssuePage?>(
                 path = "issues/?${builder.urlEncore()}"

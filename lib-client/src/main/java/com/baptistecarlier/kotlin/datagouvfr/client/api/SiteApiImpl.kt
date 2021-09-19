@@ -32,7 +32,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         val value = try {
             val builder = StringBuilder()
             builder.appendIfNotNull("page", page)
-            builder.appendIfNotNull("pageSize", pageSize)
+            builder.appendIfNotNull("page_size", pageSize)
             builder.appendIfNotNull("user", user)
             builder.appendIfNotNull("organization", user)
 
