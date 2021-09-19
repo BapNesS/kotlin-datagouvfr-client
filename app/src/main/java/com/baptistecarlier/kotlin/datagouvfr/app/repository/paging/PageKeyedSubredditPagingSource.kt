@@ -3,7 +3,7 @@ package com.baptistecarlier.kotlin.datagouvfr.app.repository.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import kotlinx.coroutines.flow.first
 import java.io.IOException
 

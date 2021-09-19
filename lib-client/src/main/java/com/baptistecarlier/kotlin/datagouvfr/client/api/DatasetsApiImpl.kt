@@ -1,8 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
-import com.baptistecarlier.kotlin.datagouvfr.client.models.DatasetPage
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.DatasetPage
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*

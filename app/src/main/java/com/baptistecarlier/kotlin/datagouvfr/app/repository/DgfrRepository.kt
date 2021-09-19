@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.paging.DatasetPagingSource
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

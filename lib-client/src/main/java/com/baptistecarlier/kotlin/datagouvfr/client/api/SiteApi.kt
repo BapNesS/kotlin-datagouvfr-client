@@ -1,10 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.Draft
-import com.baptistecarlier.kotlin.datagouvfr.client.models.*
+import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
-import java.math.BigDecimal
 
 /**
  * Site global namespace

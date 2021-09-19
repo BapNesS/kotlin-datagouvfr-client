@@ -1,7 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Tag
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Tag
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*

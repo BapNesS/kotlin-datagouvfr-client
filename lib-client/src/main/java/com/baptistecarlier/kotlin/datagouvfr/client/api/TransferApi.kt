@@ -1,8 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Transfer
-import com.baptistecarlier.kotlin.datagouvfr.client.models.TransferRequest
-import com.baptistecarlier.kotlin.datagouvfr.client.models.TransferResponse
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Transfer
+import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferRequest
+import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
 

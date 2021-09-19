@@ -13,7 +13,7 @@ import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.adapter.DatasetAdapter
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentMainBinding
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.MainViewModel
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

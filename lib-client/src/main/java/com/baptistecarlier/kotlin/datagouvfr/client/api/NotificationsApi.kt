@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Notification
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Notification
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
 

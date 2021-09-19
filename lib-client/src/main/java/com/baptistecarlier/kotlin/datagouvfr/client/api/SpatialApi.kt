@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.models.*
-import io.ktor.client.*
+import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
 
 /**

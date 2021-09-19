@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.theme.*
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.date
 import com.baptistecarlier.kotlin.datagouvfr.extensions.getAuthor
 import com.baptistecarlier.kotlin.datagouvfr.extensions.getTagsOrNull

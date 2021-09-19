@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.Storage
-import com.baptistecarlier.kotlin.datagouvfr.client.models.User
+import com.baptistecarlier.kotlin.datagouvfr.client.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

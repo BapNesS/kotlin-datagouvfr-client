@@ -1,8 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Issue
-import com.baptistecarlier.kotlin.datagouvfr.client.models.IssuePage
-import com.baptistecarlier.kotlin.datagouvfr.client.models.IssueResponse
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
+import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
+import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
 

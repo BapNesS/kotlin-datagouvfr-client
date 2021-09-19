@@ -1,7 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Notification
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Notification
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import io.ktor.client.*
 import io.ktor.client.request.*

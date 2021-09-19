@@ -18,7 +18,7 @@ import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentDetailsBind
 import com.baptistecarlier.kotlin.datagouvfr.app.theme.OdfDefaultTheme
 import com.baptistecarlier.kotlin.datagouvfr.app.ui.compose.DetailsView
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.DetailsViewModel
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi

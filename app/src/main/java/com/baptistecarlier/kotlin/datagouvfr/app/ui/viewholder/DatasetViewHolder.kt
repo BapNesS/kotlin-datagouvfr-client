@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.baptistecarlier.kotlin.datagouvfr.app.R
 import com.baptistecarlier.kotlin.datagouvfr.app.adapter.DatasetAdapter
 import com.baptistecarlier.kotlin.datagouvfr.app.databinding.ItemDatasetBinding
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.truncatedDescription
 
 

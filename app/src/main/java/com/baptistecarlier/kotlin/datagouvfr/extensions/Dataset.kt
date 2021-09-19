@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.extensions
 
-import com.baptistecarlier.kotlin.datagouvfr.client.models.Dataset
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 
 fun Dataset.truncatedDescription(): String = with(description) {
     val maxLength = 300

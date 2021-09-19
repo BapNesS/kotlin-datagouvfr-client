@@ -1,10 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
-import com.baptistecarlier.kotlin.datagouvfr.client.models.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
+import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
