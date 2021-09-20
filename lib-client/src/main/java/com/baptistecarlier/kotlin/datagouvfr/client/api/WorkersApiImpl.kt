@@ -3,6 +3,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Job
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Task
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -74,7 +75,7 @@ class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
             ) {
                 addApiKey(apiKey)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "deleteJobApi / Exception =  $e")
             null

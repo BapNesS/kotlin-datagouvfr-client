@@ -17,7 +17,7 @@ class DatasetPagingSource(
 
             val pageNumber = if (params is LoadParams.Append) params.key else 0
 
-            val datasetPageFlow = dgfrService.listDatasets(
+            val datasetPageFlow = dgfrService.getListDatasets(
                 q = query,
                 page = pageNumber,
                 pageSize = params.loadSize

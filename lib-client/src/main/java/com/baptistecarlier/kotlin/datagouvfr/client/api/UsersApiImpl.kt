@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -112,7 +113,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
             ) {
                 addApiKey(apiKey)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "deleteUnfollowUser / Exception =  $e")
             null
@@ -152,7 +153,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
                 addApiKey(apiKey)
                 contentType(ContentType.Application.Json)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "postFollowUser / Exception =  $e")
             null
@@ -168,7 +169,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
             ) {
                 addApiKey(apiKey)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "deleteUser / Exception =  $e")
             null

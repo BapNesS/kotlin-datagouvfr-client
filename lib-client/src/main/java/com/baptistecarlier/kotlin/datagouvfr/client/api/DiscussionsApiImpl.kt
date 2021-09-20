@@ -5,6 +5,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -80,7 +81,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
             ) {
                 addApiKey(apiKey)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "deleteDiscussion / Exception =  $e")
             null
@@ -131,7 +132,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
             ) {
                 addApiKey(apiKey)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "deleteDiscussionComment / Exception =  $e")
             null

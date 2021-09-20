@@ -2,6 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -65,7 +66,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
             ) {
                 addApiKey(apiKey)
             }
-            (response.status.value in 200..299)
+            (response.status.value in HttpCodeRangeSucces)
         } catch (e: Exception) {
             Log.d(tag, "postCreateTopic / Exception =  $e")
             null
