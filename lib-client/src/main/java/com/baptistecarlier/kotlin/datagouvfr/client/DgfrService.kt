@@ -64,6 +64,7 @@ private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
 private val workersApi by lazy { WorkersApiImpl(httpClient) }
 private val tagsApi by lazy { TagsApiImpl(httpClient) }
 private val topicsApi by lazy { TopicsApiImpl(httpClient) }
+private val postsApi by lazy { PostsApiImpl(httpClient) }
 private val transferApi by lazy { TransferApiImpl(httpClient) }
 private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
 private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
@@ -84,7 +85,7 @@ class DgfrService(apiKey: String = "") :
     WorkersApi by workersApi,
     TagsApi by tagsApi,
     TopicsApi by topicsApi,
-    PostsApi,
+    PostsApi by postsApi,
     TransferApi by transferApi,
     NotificationsApi by notificationsApi,
     AvatarsApi by avatarsApi,

@@ -26,7 +26,7 @@ Les API suivantes sont disponibles :
 | `workers`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `tags`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `topics`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `posts`          | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
+| `posts`          | ![90%](https://img.shields.io/badge/-90%25-orange?style=flat-square) |
 | `transfer`       | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `notifications`  | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `avatars`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |

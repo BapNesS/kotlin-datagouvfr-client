@@ -122,7 +122,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
             builder.appendIfNotNull("page_size", pageSize)
             builder.appendIfNotNull("organization", organization)
             builder.appendIfNotNull("dataset", dataset)
-            builder.appendIfNotNull("owner", pageSize)
+            builder.appendIfNotNull("owner", owner)
 
             val response = client.get<CommunityResourcePage>(
                 path = "datasets/community_resources/?${builder.urlEncore()}"
