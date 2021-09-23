@@ -61,9 +61,9 @@ class SettingsFragment : Fragment() {
         viewModel.apiKey.observe(this.viewLifecycleOwner, {
             binding.edittext.setText(it)
         })
-        viewModel.user.observe(this.viewLifecycleOwner, { user ->
-            if ( user != null ) {
-                binding.checkResult.text = getString(R.string.user_formatted, user.displayName(), user.slug, user.website ?: "-")
+        viewModel.user.observe(this.viewLifecycleOwner, { me ->
+            if ( me != null ) {
+                binding.checkResult.text = getString(R.string.user_formatted, me.displayName(), me.slug, me.website ?: "-")
             }
         })
     }

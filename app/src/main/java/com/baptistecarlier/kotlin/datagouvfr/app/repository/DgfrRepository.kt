@@ -43,6 +43,6 @@ class DgfrRepository(storage: Storage) {
     }
 
     // Me
-    suspend fun me() = dgfrService.me()
+    suspend fun me() = dgfrService.getMe()
 
 }

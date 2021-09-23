@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.Storage
-import com.baptistecarlier.kotlin.datagouvfr.client.model.User
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Me
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -24,8 +24,8 @@ class SettingsViewModel @Inject constructor(
     private val _apiKey = MutableLiveData("")
     val apiKey: LiveData<String> = _apiKey
 
-    private val _user = MutableLiveData<User?>(null)
-    val user: LiveData<User?> = _user
+    private val _user = MutableLiveData<Me?>(null)
+    val user: LiveData<Me?> = _user
 
     init {
         storage.apiKeyFlow.onEach {

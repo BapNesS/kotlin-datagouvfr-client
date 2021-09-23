@@ -19,7 +19,7 @@ Les API suivantes sont disponibles :
 | `issues`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `discussions`    | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `users`          | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `me`             | ![7%](https://img.shields.io/badge/-7%25-red?style=flat-square) |
+| `me`             | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `datasets`       | ![95%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `reuses`         | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
 | `organizations`  | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
@@ -45,7 +45,15 @@ Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/Ba
 </p>
 </details>
 
-# Clé d'API
+#  Outils
+
+## Pré-requis
+
+* JDK 1.8
+* Android SDK
+* Android S (API 31)
+
+## Clé d'API
 
 Il est [nécessaire](https://doc.data.gouv.fr/api/intro/#authentification) de fournir une clé d'API pour les opérations en écriture (`POST`, `PUT`, `PATCH`, `DELETE`) ou pour l'utilisation des endpoints `me`,  `notifications`. Cette clé d'API est disponible dans votre profil.
 
@@ -57,7 +65,7 @@ val dgfrService = DgfrService(apiKey = VOTRE_CLE)
 dgfrService.setApiKey(apiKey = VOTRE_CLE)
 ```
 
-# [Suspend](https://kotlinlang.org/docs/async-programming.html#futures-promises-and-others)
+## [Suspend](https://kotlinlang.org/docs/async-programming.html#futures-promises-and-others)
 
 Les fonctions d'appel aux APIs sont asynchrones.
 
@@ -67,18 +75,10 @@ suspend fun getDataset(id: String): Flow<Dataset?>
 
 L'utilisation des coroutines est requis afin de pouvoir attendre la fin des fonctions `suspend`.
 
-# Liens
-* Plus d'information sur le fonctionnement de l'API : [https://doc.data.gouv.fr/api/intro/](https://doc.data.gouv.fr/api/intro/)
-* Documentation de référence de l’API : [https://doc.data.gouv.fr/api/reference/](https://doc.data.gouv.fr/api/reference/)
-* [Sonar](https://sonarcloud.io/dashboard?id=com.baptistecarlier.kotlin.datagouvfr%3Adatagouvfr-client) du projet
 
-# Pré-requis
 
-* JDK 1.8
-* Android SDK
-* Android S (API 31)
+## Langages & librairies
 
-# Langages, librairies et outils utilisés
 **Lib :**
 * `Kotlin`
 * `Kotlin Coroutines`
@@ -93,3 +93,8 @@ L'utilisation des coroutines est requis afin de pouvoir attendre la fin des fonc
 * `Hilt`
 * `Jetpack Compose`
 * `Timber`
+
+# Liens
+* Plus d'information sur le fonctionnement de l'API : [https://doc.data.gouv.fr/api/intro/](https://doc.data.gouv.fr/api/intro/)
+* Documentation de référence de l’API : [https://doc.data.gouv.fr/api/reference/](https://doc.data.gouv.fr/api/reference/)
+* [Sonar](https://sonarcloud.io/dashboard?id=com.baptistecarlier.kotlin.datagouvfr%3Adatagouvfr-client) du projet
