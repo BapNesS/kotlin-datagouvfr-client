@@ -59,6 +59,7 @@ sonarqube {
 
 // Publishing
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 publishing {
     publications {
@@ -67,6 +68,17 @@ publishing {
             artifactId LIB_ARTIFACT_ID
             version rootProject.versionName
             artifact("$buildDir/outputs/aar/${project.archivesBaseName}-release.aar")
+            if ( !rootProject.versionName.endsWith('SNAPSHOT') ) {
+                artifact(file("$buildDir/outputs/aar/${project.archivesBaseName}-release.aar.asc")) {
+                    classifier = null
+                    extension = 'aar.asc'
+                }
+                artifact(file("$buildDir/publications/release/pom-default.xml.asc")) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+            }
+
             pom {
                 name = POM_NAME
                 description = POM_DESCRIPTION
@@ -86,6 +98,11 @@ publishing {
                         name = POM_DEVELOPER_NAME
                         url = POM_DEVELOPER_URL
                     }
+                }
+                scm {
+                    url = POM_SCM_URL
+                    connection = POM_SCM_CONNECTION
+                    developerConnection = POM_SCM_DEV_CONNECTION
                 }
                 // A slightly hacky fix so that the POM will include transitive dependencies
                 withXml {
@@ -111,4 +128,12 @@ publishing {
             }
         }
     }
+}
+
+tasks.register("signArtifacts", Sign) {
+    ext."signing.keyId" = findProperty("signing.keyId")
+    ext."signing.secretKeyRingFile" = findProperty("signing.secretKeyRingFile")
+    ext."signing.password" = findProperty("signing.password")
+    sign file("${buildDir}/outputs/aar/${project.archivesBaseName}-release.aar")
+    sign file("${buildDir}/publications/release/pom-default.xml")
 }
