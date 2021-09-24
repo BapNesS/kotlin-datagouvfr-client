@@ -68,6 +68,7 @@ private val postsApi by lazy { PostsApiImpl(httpClient) }
 private val transferApi by lazy { TransferApiImpl(httpClient) }
 private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
 private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
+private val harvestApiImpl by lazy { HarvestApiImpl(httpClient) }
 
 /**
  * @param apiKey Clé d'API (optionnel)
@@ -89,7 +90,7 @@ class DgfrService(apiKey: String = "") :
     TransferApi by transferApi,
     NotificationsApi by notificationsApi,
     AvatarsApi by avatarsApi,
-    HarvestApi
+    HarvestApi by harvestApiImpl
 {
 
     init {

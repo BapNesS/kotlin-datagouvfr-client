@@ -56,31 +56,31 @@ interface MeApi: WithApiKey {
      * List all community resources related to me and my organizations
      * @param q The string to filter items (optional)
      */
-    suspend fun getMyOrgCommunityResources(q: String?): Flow<List<CommunityResource>?>
+    suspend fun getMyOrgCommunityResources(q: String? = null): Flow<List<CommunityResource>?>
 
     /**
      * List all datasets related to me and my organizations
      * @param q The string to filter items (optional)
      */
-    suspend fun getMyOrgDatasets(q: String?): Flow<List<Dataset>?>
+    suspend fun getMyOrgDatasets(q: String? = null): Flow<List<Dataset>?>
 
     /**
      * List all discussions related to my organizations
      * @param q The string to filter items (optional)
      */
-    suspend fun getMyOrgDiscussions(q: String?): Flow<List<Discussion>?>
+    suspend fun getMyOrgDiscussions(q: String? = null): Flow<List<Discussion>?>
 
     /**
      * List all issues related to my organizations
      * @param q The string to filter items (optional)
      */
-    suspend fun getMyOrgIssues(q: String?): Flow<List<Issue>?>
+    suspend fun getMyOrgIssues(q: String? = null): Flow<List<Issue>?>
 
     /**
      * List all reuses related to me and my organizations
      * @param q The string to filter items (optional)
      */
-    suspend fun getMyOrgReuses(q: String?): Flow<List<Reuse>?>
+    suspend fun getMyOrgReuses(q: String? = null): Flow<List<Reuse>?>
 
     /**
      * List all my reuses (including private ones)

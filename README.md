@@ -26,11 +26,11 @@ Les API suivantes sont disponibles :
 | `workers`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `tags`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `topics`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `posts`          | ![90%](https://img.shields.io/badge/-90%25-orange?style=flat-square) |
+| `posts`          | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `transfer`       | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `notifications`  | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `avatars`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `harvest`        | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
+| `harvest`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 
 Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/BapNesS/kotlin-datagouvfr-client/issues/new?labels=enhancement&title=Ajouter+le+endpoint+%5BNom+du+endpoint%5D) pour demander son ajout, ou soyez génial(e) en faisant une PR.
 
