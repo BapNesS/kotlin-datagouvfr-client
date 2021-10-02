@@ -20,8 +20,8 @@ Les API suivantes sont disponibles :
 | `discussions`    | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `users`          | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `me`             | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `datasets`       | ![95%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `reuses`         | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
+| `datasets`       | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
+| `reuses`         | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
 | `organizations`  | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `workers`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `tags`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |

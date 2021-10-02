@@ -40,7 +40,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DatasetPage?> = flow {
-        Log.d(tag, "getListDatasets / begin")
+        Log.d(this@DatasetsApiImpl.tag, "getListDatasets / begin")
         val value = try {
             val builder = StringBuilder()
             builder.appendIfNotNull("q", q)
@@ -68,7 +68,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
             )
             response
         } catch (e: Exception) {
-            Log.d(tag, "getListDatasets / Exception =  $e")
+            Log.d(this@DatasetsApiImpl.tag, "getListDatasets / Exception =  $e")
             null
         }
         emit(value)
