@@ -22,7 +22,7 @@ Les API suivantes sont disponibles :
 | `me`             | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `datasets`       | ![95%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `reuses`         | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
-| `organizations`  | ![0%](https://img.shields.io/badge/-0%25-lightgrey?style=flat-square) |
+| `organizations`  | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `workers`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `tags`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `topics`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
@@ -40,7 +40,7 @@ Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/Ba
 
 | API | Méthode | Chemin | Nom |
 |---|---|---|---|
-| site | `GET` | `/metrics/{id}` | `metrics_for` |
+| `site` | `GET` | `/metrics/{id}` | `metrics_for` |
 
 </p>
 </details>

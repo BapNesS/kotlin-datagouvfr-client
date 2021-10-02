@@ -61,6 +61,7 @@ private val discussionsApiImpl by lazy { DiscussionsApiImpl(httpClient) }
 private val usersApi by lazy { UsersApiImpl(httpClient) }
 private val meApi by lazy { MeApiImpl(httpClient) }
 private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
+private val organizationsApi by lazy { OrganizationsApiImpl(httpClient) }
 private val workersApi by lazy { WorkersApiImpl(httpClient) }
 private val tagsApi by lazy { TagsApiImpl(httpClient) }
 private val topicsApi by lazy { TopicsApiImpl(httpClient) }
@@ -82,7 +83,7 @@ class DgfrService(apiKey: String = "") :
     MeApi by meApi,
     DatasetsApi by datasetsApi,
     ReusesApi,
-    OrganizationsApi,
+    OrganizationsApi by organizationsApi,
     WorkersApi by workersApi,
     TagsApi by tagsApi,
     TopicsApi by topicsApi,
