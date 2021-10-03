@@ -67,14 +67,18 @@ dgfrService.setApiKey(apiKey = VOTRE_CLE)
 
 ## [Suspend](https://kotlinlang.org/docs/async-programming.html#futures-promises-and-others)
 
-Les fonctions d'appel aux APIs sont asynchrones.
+Les fonctions d'appel aux endpoints sont asynchrones.
 
 ```kotlin
-suspend fun getDataset(id: String): Flow<Dataset?>
+suspend fun getDataset(dataset: String): Flow<DgfrResource<Dataset>>
 ```
 
 L'utilisation des coroutines est requis afin de pouvoir attendre la fin des fonctions `suspend`.
 
+## Flow & DgfrResource
+
+Les functions d'appel aux endpoint retournent un `Flow` d'objet `DgfrResource`.
+Vous pouvez accéder aux [sources](https://github.com/BapNesS/kotlin-datagouvfr-client/tree/develop/lib-client/src/main/java/com/baptistecarlier/kotlin/datagouvfr/client/exception/DgfrResource.kt) pour savoir comment les gérer dans votre app.
 
 
 ## Langages & librairies

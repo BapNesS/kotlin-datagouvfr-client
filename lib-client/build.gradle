@@ -68,16 +68,7 @@ publishing {
             artifactId LIB_ARTIFACT_ID
             version rootProject.versionName
             artifact("$buildDir/outputs/aar/${project.archivesBaseName}-release.aar")
-            if ( !rootProject.versionName.endsWith('SNAPSHOT') ) {
-                artifact(file("$buildDir/outputs/aar/${project.archivesBaseName}-release.aar.asc")) {
-                    classifier = null
-                    extension = 'aar.asc'
-                }
-                artifact(file("$buildDir/publications/release/pom-default.xml.asc")) {
-                    classifier = null
-                    extension = 'pom.asc'
-                }
-            }
+            artifact("$buildDir/publications/release/pom-default.xml.asc")
 
             pom {
                 name = POM_NAME
@@ -130,10 +121,9 @@ publishing {
     }
 }
 
-tasks.register("signArtifacts", Sign) {
+signing {
     ext."signing.keyId" = findProperty("signing.keyId")
     ext."signing.secretKeyRingFile" = findProperty("signing.secretKeyRingFile")
     ext."signing.password" = findProperty("signing.password")
-    sign file("${buildDir}/outputs/aar/${project.archivesBaseName}-release.aar")
-    sign file("${buildDir}/publications/release/pom-default.xml")
+    sign publishing.publications
 }
