@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Tag
 import kotlinx.coroutines.flow.Flow
 
@@ -15,7 +16,7 @@ interface TagsApi {
     suspend fun getTagsSuggest(
         q: String,
         size: Int? = null
-    ): Flow<List<Tag>?>
+    ): Flow<DgfrResource<List<Tag>>>
 
 }
 

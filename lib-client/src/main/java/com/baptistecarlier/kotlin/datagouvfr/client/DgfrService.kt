@@ -1,7 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
 import com.baptistecarlier.kotlin.datagouvfr.client.api.*
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrNetworkException
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrException
 import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -19,6 +19,8 @@ private val httpClient: HttpClient by lazy {
         val timeOut: Long = 60000
         val host = "www.data.gouv.fr"
         val basePath = "/api/1/"
+
+        expectSuccess = true
 
         this.defaultRequest {
             url.host = host
@@ -44,11 +46,12 @@ private val httpClient: HttpClient by lazy {
 
         HttpResponseValidator {
             handleResponseException { exception ->
-                if (exception !is ClientRequestException) return@handleResponseException
+                if (exception !is ClientRequestException) {
+                    return@handleResponseException
+                }
 
-                val exceptionResponse = exception.response
-                val exceptionResponseStatus = exception.response.status
-                throw DgfrNetworkException(exceptionResponse, exceptionResponseStatus)
+                val status = exception.response.status.value
+                throw DgfrException(status)
             }
         }
     }

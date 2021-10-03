@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
@@ -25,7 +26,7 @@ interface IssuesApi: WithApiKey {
         forIds: List<String>? = null,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<IssuePage?>
+    ): Flow<DgfrResource<IssuePage>>
 
     /**
      * Create a new Issue
@@ -33,7 +34,7 @@ interface IssuesApi: WithApiKey {
      */
     suspend fun postCreateIssue(
         payload: Issue
-    ): Flow<Issue?>
+    ): Flow<DgfrResource<Issue>>
 
     /**
      * Get an issue given its ID
@@ -41,7 +42,7 @@ interface IssuesApi: WithApiKey {
      */
     suspend fun getIssue(
         id: String
-    ): Flow<Issue?>
+    ): Flow<DgfrResource<Issue>>
 
     /**
      * Add comment and optionally close an issue given its ID
@@ -51,6 +52,6 @@ interface IssuesApi: WithApiKey {
     suspend fun postCommentIssue(
         id: String,
         payload: IssueResponse
-    ): Flow<Issue?>
+    ): Flow<DgfrResource<Issue>>
 
 }

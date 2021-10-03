@@ -38,9 +38,7 @@ class DgfrRepository(storage: Storage) {
         }.flow
     }
 
-    suspend fun getDataset(id: String): Flow<Dataset?> {
-        return dgfrService.getDataset(id)
-    }
+    suspend fun getDataset(id: String) = dgfrService.getDataset(id)
 
     // Me
     suspend fun me() = dgfrService.getMe()

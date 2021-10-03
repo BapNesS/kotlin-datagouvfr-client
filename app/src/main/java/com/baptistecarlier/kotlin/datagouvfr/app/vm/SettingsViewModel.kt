@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.Storage
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Me
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,15 +36,29 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun updateTo(newValue: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             storage.updateApiKey(newValue)
         }
     }
 
     fun checkMe() {
         viewModelScope.launch (Dispatchers.IO ) {
-            dgfrRepository.me().collect {
-                _user.postValue( it )
+            dgfrRepository.me().collect { dgfrResource ->
+                when( dgfrResource ) {
+                    is DgfrResource.Success -> {
+                        Timber.d("me() / Success")
+                        _user.postValue( dgfrResource.data )
+                    }
+                    is DgfrResource.Loading -> {
+                        Timber.d("me() / Loading")
+                    }
+                    is DgfrResource.ClientError -> {
+                        Timber.d("me() / ClientError")
+                    }
+                    is DgfrResource.ServerError -> {
+                        Timber.d("me() / ServerError")
+                    }
+                }
             }
         }
     }

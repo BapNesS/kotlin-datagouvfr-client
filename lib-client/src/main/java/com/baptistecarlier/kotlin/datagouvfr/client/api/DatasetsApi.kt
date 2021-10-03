@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
@@ -48,7 +49,7 @@ interface DatasetsApi : WithApiKey {
         sort: String? = null,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<DatasetPage?>
+    ): Flow<DgfrResource<DatasetPage>>
 
     /**
      * Create a new dataset
@@ -56,12 +57,12 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun postCreateDataset(
         payload: Dataset
-    ): Flow<Dataset?>
+    ): Flow<DgfrResource<Dataset>>
 
     /**
      * List all available dataset badges and their labels
      */
-    suspend fun getAvailableDatasetBadges(): Flow<Map<String, String>?>
+    suspend fun getAvailableDatasetBadges(): Flow<DgfrResource<Map<String, String>>>
 
     /**
      * List all community resources
@@ -79,7 +80,7 @@ interface DatasetsApi : WithApiKey {
         organization: String? = null,
         dataset: String? = null,
         owner: String? = null
-    ): Flow<CommunityResourcePage?>
+    ): Flow<DgfrResource<CommunityResourcePage>>
 
     /**
      * Create a new community resource
@@ -87,7 +88,7 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun postCreateCommunityResource(
         payload: CommunityResource
-    ): Flow<CommunityResource?>
+    ): Flow<DgfrResource<CommunityResource>>
 
     /**
      * Delete a given community resource
@@ -97,7 +98,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun deleteCommunityResource(
         community: String,
         dataset: String? = null
-    ): Flow<CommunityResource?>
+    ): Flow<DgfrResource<CommunityResource>>
 
     /**
      * Retrieve a community resource given its identifier
@@ -107,7 +108,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getRetrieveCommunityResource(
         community: String,
         dataset: String? = null
-    ): Flow<CommunityResource?>
+    ): Flow<DgfrResource<CommunityResource>>
 
     /**
      * Update a given community resource
@@ -119,7 +120,7 @@ interface DatasetsApi : WithApiKey {
         community: String,
         payload: CommunityResource,
         dataset: String? = null
-    ): Flow<CommunityResource?>
+    ): Flow<DgfrResource<CommunityResource>>
 
     /**
      * Update the file related to a given community resource
@@ -129,24 +130,24 @@ interface DatasetsApi : WithApiKey {
     suspend fun postUploadCommunityResource(
         community: String,
         dataset: String? = null
-    ): Flow<UploadedResource?>
+    ): Flow<DgfrResource<UploadedResource>>
 
     /**
      * List all allowed resources extensions
      */
-    suspend fun getAllowedExtensions(): Flow<List<String>?>
+    suspend fun getAllowedExtensions(): Flow<DgfrResource<List<String>>>
 
     /**
      * List all available frequencies
      */
     suspend fun getListFrequencies(
-    ): Flow<List<Frequency>?>
+    ): Flow<DgfrResource<List<Frequency>>>
 
     /**
      * List all available licenses
      */
     suspend fun getListLicenses(
-    ): Flow<List<License>?>
+    ): Flow<DgfrResource<List<License>>>
 
     /**
      * Redirect to the latest version of a resource given its
@@ -156,19 +157,19 @@ interface DatasetsApi : WithApiKey {
     suspend fun getRedirectResource(
         id: String,
         dataset: String?
-    ): Flow<String?>
+    ): Flow<DgfrResource<String>>
 
     /**
      * List all resource types
      */
     suspend fun getResourceTypes(
-    ): Flow<List<ResourceType>?>
+    ): Flow<DgfrResource<List<ResourceType>>>
 
     /**
      * List all available schemas
      */
     suspend fun getSchemas(
-    ): Flow<List<Schema>?>
+    ): Flow<DgfrResource<List<Schema>>>
 
     /**
      * Suggest datasets
@@ -178,7 +179,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getSuggestDatasets(
         q: String,
         size: Int? = null
-    ): Flow<List<DatasetSuggestion>?>
+    ): Flow<DgfrResource<List<DatasetSuggestion>>>
 
     /**
      * Suggest file formats
@@ -188,7 +189,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getSuggestFormats(
         q: String,
         size: Int?
-    ): Flow<List<Format>?>
+    ): Flow<DgfrResource<List<Format>>>
 
     /**
      * Suggest mime types
@@ -198,7 +199,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getSuggestMime(
         q: String,
         size: Int?
-    ): Flow<List<Mime>?>
+    ): Flow<DgfrResource<List<Mime>>>
 
     /**
      * Delete a dataset given its identifier
@@ -206,7 +207,7 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun deleteDataset(
         dataset: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
     /**
      * Get a dataset given its identifier
@@ -214,7 +215,7 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun getDataset(
         dataset: String
-    ): Flow<Dataset?>
+    ): Flow<DgfrResource<Dataset>>
 
     /**
      * Update a dataset given its identifier
@@ -224,7 +225,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun putUpdateDataset(
         dataset: String,
         payload: Dataset
-    ): Flow<Dataset?>
+    ): Flow<DgfrResource<Dataset>>
 
     /**
      * Create a new badge for a given dataset
@@ -234,7 +235,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun postAddDatasetBadge(
         dataset: String,
         payload: Badge
-    ): Flow<Badge?>
+    ): Flow<DgfrResource<Badge>>
 
     /**
      * Delete a badge for a given dataset
@@ -244,7 +245,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun deleteDatasetBadge(
         badgeKind: String,
         dataset: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
     /**
      * Unmark the dataset as featured
@@ -252,7 +253,7 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun deleteUnfeatureDataset(
         dataset: String
-    ): Flow<Dataset?>
+    ): Flow<DgfrResource<Dataset>>
 
     /**
      * Mark the dataset as featured
@@ -260,14 +261,14 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun postFeatureDataset(
         dataset: String
-    ): Flow<Dataset?>
+    ): Flow<DgfrResource<Dataset>>
 
     /**
      * @param dataset The dataset ID or slug (required)
      */
     suspend fun getRdfDataset(
         dataset: String
-    ): Flow<String?>
+    ): Flow<DgfrResource<String>>
 
     /**
      * @param dataset The dataset ID or slug (required)
@@ -276,7 +277,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getRdfDatasetFormat(
         dataset: String,
         format: String
-    ): Flow<String?>
+    ): Flow<DgfrResource<String>>
 
     /**
      * Create a new resource for a given dataset
@@ -286,7 +287,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun postCreateResource(
         dataset: String,
         payload: Resource
-    ): Flow<Resource?>
+    ): Flow<DgfrResource<Resource>>
 
     /**
      * Reorder resources
@@ -296,7 +297,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun putUpdateResources(
         dataset: String,
         payload: List<Resource>
-    ): Flow<List<Resource>?>
+    ): Flow<DgfrResource<List<Resource>>>
 
     /**
      * Delete a given resource on a given dataset
@@ -306,7 +307,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun deleteResource(
         rid: String,
         dataset: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
     /**
      * Get a resource given its identifier
@@ -316,7 +317,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getResource(
         rid: String,
         dataset: String
-    ): Flow<Resource?>
+    ): Flow<DgfrResource<Resource>>
 
     /**
      * Update a given resource on a given dataset
@@ -328,7 +329,7 @@ interface DatasetsApi : WithApiKey {
         rid: String,
         dataset: String,
         payload: Resource
-    ): Flow<Resource?>
+    ): Flow<DgfrResource<Resource>>
 
     /**
      * Checks that a resource's URL exists and returns metadat
@@ -338,7 +339,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun getCheckDatasetResource(
         rid: String,
         dataset: String
-    ): Flow<Map<String, String>?>
+    ): Flow<DgfrResource<Map<String, String>>>
 
     /**
      * Upload a file related to a given resource on a given da
@@ -348,7 +349,7 @@ interface DatasetsApi : WithApiKey {
     suspend fun postUploadDatasetResource(
         rid: String,
         dataset: String
-    ): Flow<UploadedResource?>
+    ): Flow<DgfrResource<UploadedResource>>
 
     /**
      * Upload a new dataset resource
@@ -370,7 +371,7 @@ interface DatasetsApi : WithApiKey {
         partbyteoffset: Int? = null,
         totalparts: Int? = null,
         chunksize: Int? = null
-    ): Flow<UploadedResource?>*/
+    ): Flow<DgfrResource<UploadedResource?>>*/
 
     /**
      * Upload a new community resource
@@ -392,7 +393,7 @@ interface DatasetsApi : WithApiKey {
         partbyteoffset: Int? = null,
         totalparts: Int? = null,
         chunksize: Int? = null
-    ): Flow<UploadedResource?>*/
+    ): Flow<DgfrResource<UploadedResource?>>*/
 
     /**
      * Unfollow an object given its ID
@@ -401,7 +402,7 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun deleteUnfollowDataset(
         id: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
     /**
      * List all followers for a given object
@@ -413,7 +414,7 @@ interface DatasetsApi : WithApiKey {
         id: String,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<FollowPage?>
+    ): Flow<DgfrResource<FollowPage>>
 
     /**
      * Follow an object given its ID
@@ -422,6 +423,6 @@ interface DatasetsApi : WithApiKey {
      */
     suspend fun postFollowDataset(
         id: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
 }

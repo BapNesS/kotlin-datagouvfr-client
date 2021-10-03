@@ -48,7 +48,7 @@ class MainFragment : Fragment(), DatasetAdapter.ClickListener {
         val defaultQueryValue = viewModel.query.ifBlank { getString(R.string.default_search_query) }
         with(binding) {
             searchEditText.setText(defaultQueryValue)
-            binding.recyclerView.adapter = adapter
+            recyclerView.adapter = adapter
         }
 
     }

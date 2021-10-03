@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
@@ -21,32 +22,32 @@ interface PostsApi : WithApiKey {
         page: Int? = null,
         pageSize: Int? = null,
         sort: String? = null
-    ): Flow<PostPage?>
+    ): Flow<DgfrResource<PostPage>>
 
     /**
      * Create a post
      * @param payload (required)
      */
-    suspend fun postCreatePost(payload: Post): Flow<Post?>
+    suspend fun postCreatePost(payload: Post): Flow<DgfrResource<Post>>
 
     /**
      * Delete a given post
      * @param post The post ID or slug (required)
      */
-    suspend fun deletePost(post: String): Flow<Boolean?>
+    suspend fun deletePost(post: String): Flow<DgfrResource<Boolean>>
 
     /**
      * Get a given post
      * @param post The post ID or slug (required)
      */
-    suspend fun getPost(post: String): Flow<Post?>
+    suspend fun getPost(post: String): Flow<DgfrResource<Post>>
 
     /**
      * Update a given post
      * @param post The post ID or slug (required)
      * @param payload (required)
      */
-    suspend fun putUpdatePost(post: String, payload: Post): Flow<Post?>
+    suspend fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>>
 
     /**
      * Upload a new image
@@ -58,7 +59,7 @@ interface PostsApi : WithApiKey {
         post: String,
         file: RequestBody? = null,
         bbox: String? = null
-    ): Flow<UploadedImage?>*/
+    ): Flow<DgfrResource<UploadedImage>>*/
 
     /**
      * Set the image BBox
@@ -70,18 +71,18 @@ interface PostsApi : WithApiKey {
         post: String,
         file: RequestBody? = null,
         bbox: String? = null
-    ): Flow<UploadedImage?>*/
+    ): Flow<DgfrResource<UploadedImage>>*/
 
     /**
      * Publish an existing post
      * @param post (required)
      */
-    suspend fun deleteUnpublishPost(post: String): Flow<Post?>
+    suspend fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>>
 
     /**
      * Publish an existing post
      * @param post (required)
      */
-    suspend fun postPublishPost(post: String): Flow<Post?>
+    suspend fun postPublishPost(post: String): Flow<DgfrResource<Post>>
 
 }

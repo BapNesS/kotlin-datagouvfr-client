@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -14,6 +15,6 @@ interface AvatarsApi {
     suspend fun getAvatar(
         identifier: String,
         size: Int
-    ): Flow<ByteArray?>
+    ): Flow<DgfrResource<ByteArray>>
 
 }

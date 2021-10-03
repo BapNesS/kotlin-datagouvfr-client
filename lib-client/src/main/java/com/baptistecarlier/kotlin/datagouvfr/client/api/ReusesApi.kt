@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
@@ -40,7 +41,7 @@ interface ReusesApi: WithApiKey {
         sort: String? = null,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<ReusePage?>
+    ): Flow<DgfrResource<ReusePage>>
 
     /**
      * Create a new object
@@ -48,13 +49,13 @@ interface ReusesApi: WithApiKey {
      */
     suspend fun postCreateReuse(
         payload: Reuse
-    ): Flow<Reuse?>
+    ): Flow<DgfrResource<Reuse>>
 
     /**
      * List all available reuse badges and their labels
      * TODO : check the return content
      */
-    suspend fun getAvailableReuseBadges(): Flow<Boolean?>
+    suspend fun getAvailableReuseBadges(): Flow<DgfrResource<Boolean>>
 
     /**
      * Suggest reuses
@@ -64,19 +65,19 @@ interface ReusesApi: WithApiKey {
     suspend fun getSuggestReuses(
         q: String,
         size: Int? = null
-    ): Flow<List<ReuseSuggestion>?>
+    ): Flow<DgfrResource<List<ReuseSuggestion>>>
 
     /**
      * List all reuse types
      */
-    suspend fun getReuseTypes(): Flow<List<ReuseType>?>
+    suspend fun getReuseTypes(): Flow<DgfrResource<List<ReuseType>>>
 
     /**
      * Unfollow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    suspend fun deleteUnfollowReuse(id: String): Flow<Boolean?>
+    suspend fun deleteUnfollowReuse(id: String): Flow<DgfrResource<Boolean>>
 
     /**
      * List all followers for a given object
@@ -88,20 +89,20 @@ interface ReusesApi: WithApiKey {
         id: String,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<FollowPage?>
+    ): Flow<DgfrResource<FollowPage>>
 
     /**
      * Follow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    suspend fun postFollowReuse(id: String): Flow<Boolean?>
+    suspend fun postFollowReuse(id: String): Flow<DgfrResource<Boolean>>
 
     /**
      * Delete a given reuse
      * @param reuse The reuse ID or slug (required)
      */
-    suspend fun deleteReuse(reuse: String): Flow<Boolean?>
+    suspend fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>>
 
     /**
      * Fetch a given reuse
@@ -109,7 +110,7 @@ interface ReusesApi: WithApiKey {
      */
     suspend fun getReuse(
         reuse: String
-    ): Flow<Reuse?>
+    ): Flow<DgfrResource<Reuse>>
 
     /**
      * Update a given reuse
@@ -119,7 +120,7 @@ interface ReusesApi: WithApiKey {
     suspend fun putUpdateReuse(
         reuse: String,
         payload: Reuse
-    ): Flow<Reuse?>
+    ): Flow<DgfrResource<Reuse>>
 
     /**
      * Create a new badge for a given reuse
@@ -129,7 +130,7 @@ interface ReusesApi: WithApiKey {
     suspend fun postAddReuseBadge(
         reuse: String,
         payload: Badge
-    ): Flow<Badge?>
+    ): Flow<DgfrResource<Badge>>
 
     /**
      * Delete a badge for a given reuse
@@ -139,7 +140,7 @@ interface ReusesApi: WithApiKey {
     suspend fun deleteReuseBadge(
         badgeKind: String,
         reuse: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
     /**
      * Add a dataset to a given reuse
@@ -149,14 +150,14 @@ interface ReusesApi: WithApiKey {
     suspend fun postReuseAddDataset(
         reuse: String,
         payload: DatasetReference
-    ): Flow<Reuse?>
+    ): Flow<DgfrResource<Reuse>>
     /**
      * Unmark a reuse as featured
      * @param reuse The reuse ID or slug (required)
      */
     suspend fun deleteUnfeatureReuse(
         reuse: String
-    ): Flow<Reuse?>
+    ): Flow<DgfrResource<Reuse>>
 
     /**
      * Mark a reuse as featured
@@ -164,6 +165,6 @@ interface ReusesApi: WithApiKey {
      */
     suspend fun postFeatureReuse(
         reuse: String
-    ): Flow<Reuse?>
+    ): Flow<DgfrResource<Reuse>>
 
 }

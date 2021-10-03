@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import android.util.Log
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
@@ -11,11 +12,8 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class SiteApiImpl(private val client: HttpClient): SiteApi {
-
-    private val tag = "SiteApiImpl"
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -27,24 +25,16 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         pageSize: Int?,
         user: String?,
         organization: String?)
-    : Flow<List<ActivityPage>?> = flow {
-        Log.d(tag, "getActivity / begin")
-        val value = try {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("page", page)
-            builder.appendIfNotNull("page_size", pageSize)
-            builder.appendIfNotNull("user", user)
-            builder.appendIfNotNull("organization", user)
+    : Flow<DgfrResource<List<ActivityPage>>> = loadingFlow {
+        val builder = StringBuilder()
+        builder.appendIfNotNull("page", page)
+        builder.appendIfNotNull("page_size", pageSize)
+        builder.appendIfNotNull("user", user)
+        builder.appendIfNotNull("organization", user)
 
-            val response = client.get<List<ActivityPage>?>(
-                path = "activity/?${builder.urlEncore()}"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getActivity / Exception =  $e")
-            null
-        }
-        emit(value)
+        client.get(
+            path = "activity/?${builder.urlEncore()}"
+        )
     }
 
     override suspend fun getOembed(
@@ -52,196 +42,104 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         maxWidth: String?,
         maxHeight: String?,
         format: String?)
-    : Flow<Oembed?> = flow {
-        Log.d(tag, "getOembed / begin")
-        val value = try {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("url", url)
-            builder.appendIfNotNull("maxwidth", maxWidth)
-            builder.appendIfNotNull("maxheight", maxHeight)
-            builder.appendIfNotNull("format", format)
+    : Flow<DgfrResource<Oembed>> = loadingFlow {
+        val builder = StringBuilder()
+        builder.appendIfNotNull("url", url)
+        builder.appendIfNotNull("maxwidth", maxWidth)
+        builder.appendIfNotNull("maxheight", maxHeight)
+        builder.appendIfNotNull("format", format)
 
-            val response = client.get<Oembed?>(
-                path = "oembed/?${builder.urlEncore()}"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getOembed / Exception =  $e")
-            null
-        }
-        emit(value)
+        client.get(
+            path = "oembed/?${builder.urlEncore()}"
+        )
     }
 
-    override suspend fun getOembeds(references: String): Flow<List<Oembed>?> = flow {
-        Log.d(tag, "getOembeds / begin")
-        val value = try {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("references", references)
+    override suspend fun getOembeds(references: String): Flow<DgfrResource<List<Oembed>>> = loadingFlow {
+        val builder = StringBuilder()
+        builder.appendIfNotNull("references", references)
 
-            val response = client.get<List<Oembed>?>(
-                path = "oembeds/?${builder.urlEncore()}"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getOembeds / Exception =  $e")
-            null
-        }
-        emit(value)
+        client.get(
+            path = "oembeds/?${builder.urlEncore()}"
+        )
     }
 
-    override suspend fun getSite(): Flow<Site?> = flow {
-        Log.d(tag, "getSite / begin")
-        val value = try {
-            val response = client.get<Site?>(
-                path = "site/"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getSite / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getSite(): Flow<DgfrResource<Site>> = loadingFlow {
+        client.get(
+            path = "site/"
+        )
     }
 
-    override suspend fun getSiteRdfCatalog(): Flow<String?> = flow {
-        Log.d(tag, "getSiteRdfCatalog / begin")
-        val value = try {
-            val response = client.get<HttpResponse?>(
-                path = "site/catalog"
-            )
-            response?.content?.readAndClose()
-        } catch (e: Exception) {
-            Log.d(tag, "getSiteRdfCatalog / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getSiteRdfCatalog(): Flow<DgfrResource<String>> = loadingFlow {
+         val response = client.get<HttpResponse>(
+            path = "site/catalog"
+        )
+         response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getSiteRdfCatalogFormat(format: String): Flow<String?> = flow {
-        Log.d(tag, "getSiteRdfCatalogFormat / begin")
-        val value = try {
-            val response = client.get<HttpResponse?>(
-                path = "site/catalog.$format"
-            )
-            response?.content?.readAndClose()
-        } catch (e: Exception) {
-            Log.d(tag, "getSiteRdfCatalogFormat / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getSiteRdfCatalogFormat(format: String): Flow<DgfrResource<String>> = loadingFlow {
+        val response = client.get<HttpResponse>(
+            path = "site/catalog.$format"
+        )
+         response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getSiteJsonLdContext(): Flow<String?> = flow {
-        Log.d(tag, "getSiteJsonLdContext / begin")
-        val value = try {
-            val response = client.get<HttpResponse?>(
-                path = "site/context.jsonld"
-            )
-            response?.content?.readAndClose()
-        } catch (e: Exception) {
-            Log.d(tag, "getSiteJsonLdContext / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getSiteJsonLdContext(): Flow<DgfrResource<String>> = loadingFlow {
+         val response = client.get<HttpResponse>(
+            path = "site/context.jsonld"
+        )
+         response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getSiteDataPortal(format: String): Flow<String?> = flow {
-        Log.d(tag, "getSiteRdfCatalogFormat / begin")
-        val value = try {
-            val response = client.get<HttpResponse?>(
-                path = "site/data.$format"
-            )
-            response?.content?.readAndClose()
-        } catch (e: Exception) {
-            Log.d(tag, "getSiteRdfCatalogFormat / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getSiteDataPortal(format: String): Flow<DgfrResource<String>> = loadingFlow {
+         val response = client.get<HttpResponse>(
+            path = "site/data.$format"
+        )
+         response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getHomeDatasets(): Flow<List<Dataset>?> = flow {
-        Log.d(tag, "getHomeDatasets / begin")
-        val value = try {
-            val response = client.get<List<Dataset>?>(
-                path = "site/home/datasets/"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getHomeDatasets / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getHomeDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+        client.get(
+            path = "site/home/datasets/"
+        )
     }
 
-    override suspend fun putSetHomeDatasets(datasetIds: List<String>): Flow<List<Dataset>?> = flow {
-        Log.d(tag, "putSetHomeDatasets / begin")
-        val value = try {
-            val response = client.put<List<Dataset>?>(
-                path = "site/home/datasets/"
-            ) {
-                addApiKey(apiKey)
-                contentType(ContentType.Application.Json)
-                body = datasetIds
-            }
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "putSetHomeDatasets / Exception =  $e")
-            null
+    override suspend fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+        client.put(
+            path = "site/home/datasets/"
+        ) {
+            addApiKey(apiKey)
+            contentType(ContentType.Application.Json)
+            body = datasetIds
         }
-        emit(value)
     }
 
-    override suspend fun getHomeReuses(): Flow<List<Reuse>?> = flow {
-        Log.d(tag, "getHomeReuses / begin")
-        val value = try {
-            val response = client.get<List<Reuse>?>(
-                path = "site/home/reuses/"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getHomeReuses / Exception =  $e")
-            null
-        }
-        emit(value)
+    override suspend fun getHomeReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+        client.get(
+            path = "site/home/reuses/"
+        )
     }
 
-    override suspend fun putSetHomeReuses(reuseIds: List<String>): Flow<List<Reuse>?> = flow {
-        Log.d(tag, "putSetHomeReuses / begin")
-        val value = try {
-            val response = client.put<List<Reuse>?>(
-                path = "site/home/reuses/"
-            ) {
-                addApiKey(apiKey)
-                contentType(ContentType.Application.Json)
-                body = reuseIds
-            }
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "putSetHomeReuses / Exception =  $e")
-            null
+    override suspend fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+        client.put(
+            path = "site/home/reuses/"
+        ) {
+            addApiKey(apiKey)
+            contentType(ContentType.Application.Json)
+            body = reuseIds
         }
-        emit(value)
     }
 
     override suspend fun getSuggestTerritory(
         q: String,
         size: Int?)
-    : Flow<List<Territory>?> = flow {
-        Log.d(tag, "getSuggestTerritory / begin")
-        val value = try {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("q", q)
-            builder.appendIfNotNull("size", size)
+    : Flow<DgfrResource<List<Territory>>> = loadingFlow {
+        val builder = StringBuilder()
+        builder.appendIfNotNull("q", q)
+        builder.appendIfNotNull("size", size)
 
-            val response = client.get<List<Territory>?>(
-                path = "territory/suggest/?${builder.urlEncore()}"
-            )
-            response
-        } catch (e: Exception) {
-            Log.d(tag, "getSuggestTerritory / Exception =  $e")
-            null
-        }
-        emit(value)
+        client.get(
+            path = "territory/suggest/?${builder.urlEncore()}"
+        )
     }
 
 }

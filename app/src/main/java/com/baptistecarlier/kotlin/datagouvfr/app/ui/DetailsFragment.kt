@@ -18,6 +18,7 @@ import com.baptistecarlier.kotlin.datagouvfr.app.databinding.FragmentDetailsBind
 import com.baptistecarlier.kotlin.datagouvfr.app.theme.OdfDefaultTheme
 import com.baptistecarlier.kotlin.datagouvfr.app.ui.compose.DetailsView
 import com.baptistecarlier.kotlin.datagouvfr.app.vm.DetailsViewModel
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import com.baptistecarlier.kotlin.datagouvfr.extensions.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,9 +39,11 @@ class DetailsFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                val dataset: Dataset? by viewModel.data.observeAsState(null)
+                val dgfrResourceDataset: DgfrResource<Dataset> by viewModel.data.observeAsState(DgfrResource.Loading())
                 OdfDefaultTheme(isSystemInDarkTheme()) {
-                    DetailsView(dataset)
+                    if (dgfrResourceDataset is DgfrResource.Success) {
+                        DetailsView((dgfrResourceDataset as DgfrResource.Success<Dataset>).data)
+                    }
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Notification
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
@@ -12,5 +13,5 @@ interface NotificationsApi: WithApiKey {
     /**
      * List all current user pending notifications
      */
-    suspend fun getNotifications(): Flow<List<Notification>?>
+    suspend fun getNotifications(): Flow<DgfrResource<List<Notification>>>
 }

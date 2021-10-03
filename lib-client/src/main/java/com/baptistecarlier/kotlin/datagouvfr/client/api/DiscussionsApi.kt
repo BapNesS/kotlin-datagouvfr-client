@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
@@ -26,7 +27,7 @@ interface DiscussionsApi: WithApiKey {
         forIds: List<String>? = null,
         page: Int? = null,
         pageSize: Int? = null,
-    ): Flow<DiscussionPage?>
+    ): Flow<DgfrResource<DiscussionPage>>
 
     /**
      * Create a new Discussion
@@ -34,7 +35,7 @@ interface DiscussionsApi: WithApiKey {
      */
     suspend fun postCreateDiscussion(
         payload: DiscussionStart,
-    ): Flow<Discussion?>
+    ): Flow<DgfrResource<Discussion>>
 
     /**
      * Delete a discussion given its ID
@@ -42,7 +43,7 @@ interface DiscussionsApi: WithApiKey {
      */
     suspend fun deleteDiscussion(
         id: String
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
 
     /**
      * Get a discussion given its ID
@@ -50,7 +51,7 @@ interface DiscussionsApi: WithApiKey {
      */
     suspend fun getDiscussion(
         id: String,
-    ): Flow<Discussion?>
+    ): Flow<DgfrResource<Discussion>>
 
     /**
      * Add comment and optionally close a discussion given its ID
@@ -60,7 +61,7 @@ interface DiscussionsApi: WithApiKey {
     suspend fun postCommentDiscussion(
         id: String,
         payload: DiscussionResponse,
-    ): Flow<Discussion?>
+    ): Flow<DgfrResource<Discussion>>
 
     /**
      * Delete a comment given its index
@@ -70,6 +71,6 @@ interface DiscussionsApi: WithApiKey {
     suspend fun deleteDiscussionComment(
         id: String,
         cidx: Int
-    ): Flow<Boolean?>
+    ): Flow<DgfrResource<Boolean>>
     
 }
