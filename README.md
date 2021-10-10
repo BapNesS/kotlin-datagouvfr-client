@@ -35,6 +35,25 @@ Les API suivantes sont disponibles :
 Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/BapNesS/kotlin-datagouvfr-client/issues/new?labels=enhancement&title=Ajouter+le+endpoint+%5BNom+du+endpoint%5D) pour demander son ajout, ou soyez génial(e) en faisant une PR.
 
 <details>
+<summary><strong>API en cours d'implémentation :</strong></summary>
+<p>
+
+| API | Méthode |  Nom |
+|---|---|---|
+ `users` | `POST` | `user_avatar` |
+ `datasets` | `POST` | `upload_new_dataset_resource` |
+ `datasets` | `POST` | `upload_new_community_resource` |
+ `reuses` | `POST` | `reuse_image` |
+ `organizations` | `POST` | `organization_logo` |
+ `organizations` | `PUT` | `resize_organization_logo` |
+ `organizations` | `POST` | `post_membership_request_api` |
+ `posts` | `POST` | `post_image` |
+ `posts` | `PUT` | `resize_post_image` |
+
+
+</p>
+</details>
+<details>
 <summary><strong>API dépréciées :</strong></summary>
 <p>
 
