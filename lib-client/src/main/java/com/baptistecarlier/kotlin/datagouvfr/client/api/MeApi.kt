@@ -35,13 +35,18 @@ interface MeApi: WithApiKey {
      * (Re)Generate my API Key
      */
     suspend fun postGenerateApikey(): Flow<DgfrResource<ApiKey>>
+
     /**
      * Upload a new avatar
-     * @param file (optional)
-     * @param bbox (optional)
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
      */
-
-    /*suspend fun postMyAvatar(bbox: String?): Flow<UploadedImage?>*/
+    suspend fun postMyAvatar(
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>>
 
     /**
      * List all my datasets (including private ones)

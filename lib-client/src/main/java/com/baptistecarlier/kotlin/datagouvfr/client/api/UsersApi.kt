@@ -93,9 +93,15 @@ interface UsersApi: WithApiKey {
     /**
      * Upload a new avatar for a given user
      * @param user (required)
-     * @param file (optional)
-     * @param bbox (optional)
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
      */
-    /*suspend fun postUserAvatar(user: String, bbox: String?): Flow<DgfrResource<UploadedImage>>*/
+    suspend fun postUserAvatar(
+        user: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>>
 
 }

@@ -167,4 +167,18 @@ interface ReusesApi: WithApiKey {
         reuse: String
     ): Flow<DgfrResource<Reuse>>
 
+    /**
+     * Upload a new reuse image
+     * @param reuse The reuse ID or slug (required)
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
+     */
+    suspend fun postReuseImage(
+        reuse: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>>
+
 }

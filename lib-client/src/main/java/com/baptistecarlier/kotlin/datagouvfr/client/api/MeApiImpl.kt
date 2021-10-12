@@ -3,9 +3,13 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +35,25 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
             path = "me/"
         ) {
             addApiKey(apiKey)
+        }
+    }
+
+    override suspend fun postMyAvatar(
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "me/avatar",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+            }
+        ) {
+            method = HttpMethod.Post
+            header("X-API-KEY", apiKey)
         }
     }
 

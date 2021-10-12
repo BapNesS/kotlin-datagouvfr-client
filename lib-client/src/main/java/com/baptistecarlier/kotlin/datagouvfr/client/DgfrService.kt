@@ -10,9 +10,10 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
+import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-
 
 private val httpClient: HttpClient by lazy {
     HttpClient(CIO) {
@@ -104,6 +105,20 @@ class DgfrService(apiKey: String = "") :
 
     override fun setApiKey(apiKey: String) {
         meApi.setApiKey(apiKey)
+        siteApi.setApiKey(apiKey)
+        issuesApi.setApiKey(apiKey)
+        discussionsApiImpl.setApiKey(apiKey)
+        usersApi.setApiKey(apiKey)
+        meApi.setApiKey(apiKey)
+        datasetsApi.setApiKey(apiKey)
+        reusesApi.setApiKey(apiKey)
+        organizationsApi.setApiKey(apiKey)
+        workersApi.setApiKey(apiKey)
+        topicsApi.setApiKey(apiKey)
+        postsApi.setApiKey(apiKey)
+        transferApi.setApiKey(apiKey)
+        notificationsApi.setApiKey(apiKey)
+        harvestApiImpl.setApiKey(apiKey)
     }
 
 }
