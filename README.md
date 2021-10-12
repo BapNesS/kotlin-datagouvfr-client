@@ -20,7 +20,7 @@ Les API suivantes sont disponibles :
 | `discussions`    | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `users`          | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `me`             | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `datasets`       | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
+| `datasets`       | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `reuses`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `organizations`  | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
 | `workers`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
@@ -40,8 +40,6 @@ Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/Ba
 
 | API | Méthode |  Nom |
 |---|---|---|
- `datasets` | `POST` | `upload_new_dataset_resource` |
- `datasets` | `POST` | `upload_new_community_resource` |
  `organizations` | `POST` | `organization_logo` |
  `organizations` | `PUT` | `resize_organization_logo` |
  `organizations` | `POST` | `post_membership_request_api` |

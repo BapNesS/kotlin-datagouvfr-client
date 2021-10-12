@@ -354,46 +354,50 @@ interface DatasetsApi : WithApiKey {
     /**
      * Upload a new dataset resource
      * @param dataset The dataset ID or slug (required)
-     * @param file (optional)
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
      * @param uuid (optional)
-     * @param filename (optional)
      * @param partindex (optional)
      * @param partbyteoffset (optional)
      * @param totalparts (optional)
      * @param chunksize (optional)
      */
-    /*suspend fun postUploadNewDatasetResource(
+    suspend fun postUploadNewDatasetResource(
         dataset: String,
-        file: RequestBody? = null,
+        file: ByteArray,
+        fileName: String,
+        contentType: String,
         uuid: String? = null,
-        filename: String? = null,
-        partindex: Int? = null,
-        partbyteoffset: Int? = null,
-        totalparts: Int? = null,
-        chunksize: Int? = null
-    ): Flow<DgfrResource<UploadedResource?>>*/
+        partIndex: Int? = null,
+        partByteOffset: Int? = null,
+        totalParts: Int? = null,
+        chunkSize: Int? = null
+    ): Flow<DgfrResource<UploadedResource?>>
 
     /**
      * Upload a new community resource
      * @param dataset The dataset ID or slug (required)
-     * @param file (optional)
+     * @param file (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
      * @param uuid (optional)
-     * @param filename (optional)
      * @param partindex (optional)
      * @param partbyteoffset (optional)
      * @param totalparts (optional)
      * @param chunksize (optional)
      */
-    /*suspend fun postUploadNewCommunityResource(
+    suspend fun postUploadNewCommunityResource(
         dataset: String,
-        file: RequestBody? = null,
+        file: ByteArray,
+        fileName: String,
+        contentType: String,
         uuid: String? = null,
-        filename: String? = null,
-        partindex: Int? = null,
-        partbyteoffset: Int? = null,
-        totalparts: Int? = null,
-        chunksize: Int? = null
-    ): Flow<DgfrResource<UploadedResource?>>*/
+        partIndex: Int? = null,
+        partByteOffset: Int? = null,
+        totalParts: Int? = null,
+        chunkSize: Int? = null
+    ): Flow<DgfrResource<UploadedResource?>>
 
     /**
      * Unfollow an object given its ID

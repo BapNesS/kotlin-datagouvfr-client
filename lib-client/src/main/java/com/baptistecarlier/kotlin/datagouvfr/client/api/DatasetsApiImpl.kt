@@ -6,6 +6,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.*
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
@@ -386,31 +387,74 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    /*override suspend fun postUploadNewDatasetResource(
+    override suspend fun postUploadNewDatasetResource(
         dataset: String,
-        file: RequestBody?,
+        file: ByteArray,
+        fileName: String,
+        contentType: String,
         uuid: String?,
-        filename: String?,
-        partindex: Int?,
-        partbyteoffset: Int?,
-        totalparts: Int?,
-        chunksize: Int?
-    ): Flow<DgfrResource<UploadedResource>> {
-        TODO("Not yet implemented")
+        partIndex: Int?,
+        partByteOffset: Int?,
+        totalParts: Int?,
+        chunkSize: Int?
+    ): Flow<DgfrResource<UploadedResource?>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "datasets/$dataset/upload/",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+                fbAppendIfNotNull("uuid", uuid)
+                fbAppendIfNotNull("partindex", partIndex)
+                fbAppendIfNotNull("partbyteoffset", partByteOffset)
+                fbAppendIfNotNull("totalparts", totalParts)
+                fbAppendIfNotNull("chunksize", chunkSize)
+            }
+        ) {
+            header("X-API-KEY", apiKey)
+        }
     }
 
+    /**
+     * Upload a new community resource
+     * @param dataset The dataset ID or slug (required)
+     * @param file (optional)
+     * @param uuid (optional)
+     * @param filename (optional)
+     * @param partindex (optional)
+     * @param partbyteoffset (optional)
+     * @param totalparts (optional)
+     * @param chunksize (optional)
+     */
     override suspend fun postUploadNewCommunityResource(
         dataset: String,
-        file: RequestBody?,
+        file: ByteArray,
+        fileName: String,
+        contentType: String,
         uuid: String?,
-        filename: String?,
-        partindex: Int?,
-        partbyteoffset: Int?,
-        totalparts: Int?,
-        chunksize: Int?
-    ): Flow<DgfrResource<UploadedResource>> {
-        TODO("Not yet implemented")
-    }*/
+        partIndex: Int?,
+        partByteOffset: Int?,
+        totalParts: Int?,
+        chunkSize: Int?
+    ): Flow<DgfrResource<UploadedResource?>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "datasets/$dataset/upload/community/",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+                fbAppendIfNotNull("uuid", uuid)
+                fbAppendIfNotNull("partindex", partIndex)
+                fbAppendIfNotNull("partbyteoffset", partByteOffset)
+                fbAppendIfNotNull("totalparts", totalParts)
+                fbAppendIfNotNull("chunksize", chunkSize)
+            }
+        ) {
+            header("X-API-KEY", apiKey)
+        }
+    }
 
     override suspend fun deleteUnfollowDataset(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
