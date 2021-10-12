@@ -175,6 +175,34 @@ interface OrganizationsApi: WithApiKey {
     suspend fun getListOrganizationIssues(org: String): Flow<DgfrResource<List<Issue>>>
 
     /**
+     * Upload a new logo
+     * @param org The organization ID or slug (required)
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
+     */
+    suspend fun postOrganizationLogo(
+        org: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>>
+
+    /**
+     * Set the logo BBox
+     * @param org The organization ID or slug (required)
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
+     */
+    suspend fun putResizeOrganizationLogo(
+        org: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>>
+
+    /**
      * Delete member from an organization
      * @param org The organization ID or slug (required)
      * @param user (required)
@@ -217,6 +245,12 @@ interface OrganizationsApi: WithApiKey {
         org: String,
         status: String? = null
     ): Flow<DgfrResource<List<MembershipRequest>>>
+
+    /**
+     * Apply for membership to a given organization
+     * @param org The organization ID or slug (required)
+     */
+    suspend fun postMembershipRequest(org: String): Flow<DgfrResource<MembershipRequest>>
 
     /**
      * Accept user membership to a given organization

@@ -212,6 +212,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
                 })
             }
         ) {
+            method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }

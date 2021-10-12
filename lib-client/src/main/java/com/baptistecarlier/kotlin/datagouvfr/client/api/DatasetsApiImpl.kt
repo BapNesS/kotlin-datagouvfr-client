@@ -412,6 +412,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
                 fbAppendIfNotNull("chunksize", chunkSize)
             }
         ) {
+            method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }
@@ -452,6 +453,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
                 fbAppendIfNotNull("chunksize", chunkSize)
             }
         ) {
+            method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }

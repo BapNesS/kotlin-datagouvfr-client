@@ -146,6 +146,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
                 })
             }
         ) {
+            method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }

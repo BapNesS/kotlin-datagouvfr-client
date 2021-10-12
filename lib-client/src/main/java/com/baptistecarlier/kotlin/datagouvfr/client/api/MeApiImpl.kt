@@ -52,6 +52,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
                 })
             }
         ) {
+            method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }
