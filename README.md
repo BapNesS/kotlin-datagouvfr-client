@@ -18,8 +18,8 @@ Les API suivantes sont disponibles :
 | `spatial`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `issues`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `discussions`    | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `users`          | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `me`             | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
+| `users`          | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
+| `me`             | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
 | `datasets`       | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
 | `reuses`         | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
 | `organizations`  | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |

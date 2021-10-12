@@ -39,14 +39,14 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
     }
 
     override suspend fun postMyAvatar(
-        ba: ByteArray,
+        file: ByteArray,
         fileName: String,
         contentType: String
     ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "me/avatar",
             formData = formData {
-                append("file", ba, Headers.build {
+                append("file", file, Headers.build {
                     append(HttpHeaders.ContentDisposition, "filename=$fileName")
                     append(HttpHeaders.ContentType, contentType)
                 })

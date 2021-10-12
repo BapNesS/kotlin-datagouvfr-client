@@ -38,9 +38,9 @@ interface MeApi: WithApiKey {
 
     /**
      * Upload a new avatar
-     * @param file content byte array
-     * @param fileName file name with extension
-     * @param contentType content type
+     * @param file content byte array (required)
+     * @param fileName file name with extension (required)
+     * @param contentType content type (required)
      */
     suspend fun postMyAvatar(
         file: ByteArray,
