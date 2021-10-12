@@ -10,6 +10,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.tools.readAndClose
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
@@ -203,16 +204,45 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         )
     }
 
-    /*override suspend fun postOrganizationLogo(org: String, bbox: String?): Flow<DgfrResource<UploadedImage?> {
-        TODO("Not yet implemented")
-    }*/
-
-    /*override suspend fun putResizeOrganizationLogo(
+    override suspend fun postOrganizationLogo(
         org: String,
-        bbox: String?
-    ): Flow<DgfrResource<UploadedImage?> {
-        TODO("Not yet implemented")
-    }*/
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "organizations/$org/logo",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+            }
+        ) {
+            method = HttpMethod.Post
+            header("X-API-KEY", apiKey)
+        }
+    }
+
+    override suspend fun putResizeOrganizationLogo(
+        org: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "organizations/$org/logo",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+            }
+        ) {
+            method = HttpMethod.Put
+            header("X-API-KEY", apiKey)
+        }
+    }
 
     override suspend fun deleteOrganizationMember(org: String, user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
@@ -261,6 +291,17 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         client.get(
             path = "organizations/$org/membership/?${builder.urlEncore()}"
         )
+    }
+
+    // A bit light, isn't ?
+    override suspend fun postMembershipRequest(
+        org: String
+    ) : Flow<DgfrResource<MembershipRequest>> = loadingFlow {
+        client.post(
+            path = "organizations/$org/membership/"
+        ) {
+            addApiKey(apiKey)
+        }
     }
 
     override suspend fun postAcceptMembership(id: String, org: String): Flow<DgfrResource<Member>> = loadingFlow {

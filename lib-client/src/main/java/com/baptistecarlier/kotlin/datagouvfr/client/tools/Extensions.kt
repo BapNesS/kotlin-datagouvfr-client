@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.tools
 
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.http.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.jvm.javaio.*
@@ -37,4 +38,16 @@ internal fun HttpRequestBuilder.addApiKey(apiKey: String) {
 
 internal fun ByteReadChannel?.readAndClose(): String? {
     return this?.toInputStream()?.bufferedReader().use { it?.readText() }
+}
+
+internal fun FormBuilder.fbAppendIfNotNull(key: String, value: Int?) {
+    if (value != null) {
+        append(key, value)
+    }
+}
+
+internal fun FormBuilder.fbAppendIfNotNull(key: String, value: String?) {
+    if (value != null) {
+        append(key, value)
+    }
 }

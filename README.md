@@ -4,38 +4,40 @@
 
 # Usage
 
-La librairie permet de fournir les outils suffisants pour accéder à l'API de [data.gouv.fr](https://data.gouv.fr).
+La librairie permet de fournir les outils pour accéder à l'API de [data.gouv.fr](https://data.gouv.fr).
 
-Elle est utilisable sur Android.
+Elle est utilisable sur Android à travers la dépendance disponible sur [Maven Central](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client).
+
+<details>
+<summary><strong>Kotlin DSL :</strong></summary>
+<p>
+
+```
+implementation("com.baptistecarlier.kotlin.datagouvfr:kotlin-datagouv-client:1.x")
+```
+
+</p>
+</details>
+
+<details>
+<summary><strong>Gradle DSL :</strong></summary>
+<p>
+
+```
+implementation 'com.baptistecarlier.kotlin.datagouvfr:kotlin-datagouv-client:1.x'
+```
+
+</p>
+</details>
 
 # Périmètre
 
-Les API suivantes sont disponibles :
+Toutes les API sont disponibles mais peut-être avez-vous vu un endpoint est manquant ?
 
-| API	           | Couverture                                                            |
-| ---------------- | :-------------------------------------------------------------------- |
-| `site`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `spatial`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `issues`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `discussions`    | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `users`          | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `me`             | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `datasets`       | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
-| `reuses`         | ![95%](https://img.shields.io/badge/-95%25-yellowgreen?style=flat-square) |
-| `organizations`  | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `workers`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `tags`           | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `topics`         | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `posts`          | ![90%](https://img.shields.io/badge/-90%25-yellowgreen?style=flat-square) |
-| `transfer`       | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `notifications`  | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `avatars`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-| `harvest`        | ![100%](https://img.shields.io/badge/-100%25-success?style=flat-square) |
-
-Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/BapNesS/kotlin-datagouvfr-client/issues/new?labels=enhancement&title=Ajouter+le+endpoint+%5BNom+du+endpoint%5D) pour demander son ajout, ou soyez génial(e) en faisant une PR.
+Dans ce cas, vous pouvez [ajouter une issue](https://github.com/BapNesS/kotlin-datagouvfr-client/issues/new?labels=enhancement&title=Ajouter+le+endpoint+%5BNom+du+endpoint%5D) pour demander son ajout, ou soyez génial(e) en faisant une PR.
 
 <details>
-<summary><strong>API dépréciées :</strong></summary>
+<summary><strong>Certaines API sont dépréciées :</strong></summary>
 <p>
 
 | API | Méthode | Chemin | Nom |
@@ -49,7 +51,7 @@ Un endpoint est manquant ? Vous pouvez [ajouter une issue](https://github.com/Ba
 
 ## Pré-requis
 
-* JDK 1.8
+* Gradle JDK Java 11
 * Android SDK
 * Android S (API 31)
 
@@ -99,6 +101,7 @@ Vous pouvez accéder aux [sources](https://github.com/BapNesS/kotlin-datagouvfr-
 * `Timber`
 
 # Liens
+* Liste des versions sur [Maven Central](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client)
 * Plus d'information sur le fonctionnement de l'API : [https://doc.data.gouv.fr/api/intro/](https://doc.data.gouv.fr/api/intro/)
 * Documentation de référence de l’API : [https://doc.data.gouv.fr/api/reference/](https://doc.data.gouv.fr/api/reference/)
 * [Sonar](https://sonarcloud.io/dashboard?id=com.baptistecarlier.kotlin.datagouvfr%3Adatagouvfr-client) du projet

@@ -9,6 +9,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
@@ -127,6 +128,26 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
             body = payload
+        }
+    }
+
+    override suspend fun postUserAvatar(
+        user: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "users/$user/avatar",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+            }
+        ) {
+            method = HttpMethod.Post
+            header("X-API-KEY", apiKey)
         }
     }
 
