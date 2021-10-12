@@ -9,6 +9,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
@@ -193,6 +194,25 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
             path = "reuses/$reuse/featured/"
         ) {
             addApiKey(apiKey)
+        }
+    }
+
+    override suspend fun postReuseImage(
+        reuse: String,
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "reuses/$reuse/image",
+            formData = formData {
+                append("file", file, Headers.build {
+                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                    append(HttpHeaders.ContentType, contentType)
+                })
+            }
+        ) {
+            header("X-API-KEY", apiKey)
         }
     }
 
