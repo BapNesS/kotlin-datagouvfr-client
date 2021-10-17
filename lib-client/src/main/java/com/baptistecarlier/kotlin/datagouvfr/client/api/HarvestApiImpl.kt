@@ -18,13 +18,13 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getHarvestBackends(): Flow<DgfrResource<HarvestBackend>> = loadingFlow {
+    override fun getHarvestBackends(): Flow<DgfrResource<HarvestBackend>> = loadingFlow {
         client.get(
             path = "harvest/backends/"
         )
     }
 
-    override suspend fun getHarvestJob(
+    override fun getHarvestJob(
         ident: String,
         page: Int?,
         pageSize: Int?
@@ -38,13 +38,13 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         )
     }
 
-    override suspend fun getListHarvesterApi(): Flow<DgfrResource<List<String>>> = loadingFlow {
+    override fun getListHarvesterApi(): Flow<DgfrResource<List<String>>> = loadingFlow {
         client.get(
             path = "harvest/job_status/"
         )
     }
 
-    override suspend fun postPreviewHarvestSourceConfig(payload: HarvestSource): Flow<DgfrResource<HarvestJobPreview>> = loadingFlow {
+    override fun postPreviewHarvestSourceConfig(payload: HarvestSource): Flow<DgfrResource<HarvestJobPreview>> = loadingFlow {
         client.post(
             path = "harvest/sources/preview/"
         ) {
@@ -54,7 +54,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
-    override suspend fun deleteHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    override fun deleteHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
         client.delete(
             path = "harvest/source/$ident/"
         ) {
@@ -62,13 +62,13 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
-    override suspend fun getHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    override fun getHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
         client.get(
             path = "harvest/source/$ident/"
         )
     }
 
-    override suspend fun putUpdateHarvestSource(
+    override fun putUpdateHarvestSource(
         ident: String,
         payload: HarvestSource
     ): Flow<DgfrResource<HarvestSource>> = loadingFlow {
@@ -81,7 +81,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
-    override suspend fun getListHarvestJobs(
+    override fun getListHarvestJobs(
         ident: String,
         page: Int?,
         pageSize: Int?
@@ -91,13 +91,13 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         )
     }
 
-    override suspend fun getPreviewHarvestSource(ident: String): Flow<DgfrResource<HarvestJobPreview>> = loadingFlow {
+    override fun getPreviewHarvestSource(ident: String): Flow<DgfrResource<HarvestJobPreview>> = loadingFlow {
         client.get(
             path = "harvest/source/$ident/preview/"
         )
     }
 
-    override suspend fun deleteUnscheduleHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    override fun deleteUnscheduleHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
         client.delete(
             path = "harvest/source/$ident/schedule"
         ) {
@@ -105,7 +105,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
-    override suspend fun postScheduleHarvestSource(
+    override fun postScheduleHarvestSource(
         ident: String,
         payload: String
     ): Flow<DgfrResource<HarvestSource>> = loadingFlow {
@@ -118,7 +118,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
-    override suspend fun postValidateHarvestSource(
+    override fun postValidateHarvestSource(
         ident: String,
         payload: HarvestSourceValidation
     ): Flow<DgfrResource<HarvestSource>> = loadingFlow {
@@ -131,7 +131,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
-    override suspend fun getListHarvestSources(
+    override fun getListHarvestSources(
         page: Int?,
         pageSize: Int?,
         owner: String?,
@@ -148,7 +148,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         )
     }
 
-    override suspend fun postCreateHarvestSource(payload: HarvestSource): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    override fun postCreateHarvestSource(payload: HarvestSource): Flow<DgfrResource<HarvestSource>> = loadingFlow {
         client.post(
             path = "harvest/sources/"
         ) {

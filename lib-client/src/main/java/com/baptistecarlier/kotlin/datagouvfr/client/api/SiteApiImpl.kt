@@ -20,7 +20,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getActivity(
+    override fun getActivity(
         page: Int?,
         pageSize: Int?,
         user: String?,
@@ -37,7 +37,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         )
     }
 
-    override suspend fun getOembed(
+    override fun getOembed(
         url: String,
         maxWidth: String?,
         maxHeight: String?,
@@ -54,7 +54,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         )
     }
 
-    override suspend fun getOembeds(references: String): Flow<DgfrResource<List<Oembed>>> = loadingFlow {
+    override fun getOembeds(references: String): Flow<DgfrResource<List<Oembed>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("references", references)
 
@@ -63,47 +63,47 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         )
     }
 
-    override suspend fun getSite(): Flow<DgfrResource<Site>> = loadingFlow {
+    override fun getSite(): Flow<DgfrResource<Site>> = loadingFlow {
         client.get(
             path = "site/"
         )
     }
 
-    override suspend fun getSiteRdfCatalog(): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteRdfCatalog(): Flow<DgfrResource<String>> = loadingFlow {
          val response = client.get<HttpResponse>(
             path = "site/catalog"
         )
          response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getSiteRdfCatalogFormat(format: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteRdfCatalogFormat(format: String): Flow<DgfrResource<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "site/catalog.$format"
         )
          response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getSiteJsonLdContext(): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteJsonLdContext(): Flow<DgfrResource<String>> = loadingFlow {
          val response = client.get<HttpResponse>(
             path = "site/context.jsonld"
         )
          response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getSiteDataPortal(format: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteDataPortal(format: String): Flow<DgfrResource<String>> = loadingFlow {
          val response = client.get<HttpResponse>(
             path = "site/data.$format"
         )
          response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getHomeDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun getHomeDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
         client.get(
             path = "site/home/datasets/"
         )
     }
 
-    override suspend fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
         client.put(
             path = "site/home/datasets/"
         ) {
@@ -113,13 +113,13 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         }
     }
 
-    override suspend fun getHomeReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getHomeReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
         client.get(
             path = "site/home/reuses/"
         )
     }
 
-    override suspend fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
         client.put(
             path = "site/home/reuses/"
         ) {
@@ -129,7 +129,7 @@ class SiteApiImpl(private val client: HttpClient): SiteApi {
         }
     }
 
-    override suspend fun getSuggestTerritory(
+    override fun getSuggestTerritory(
         q: String,
         size: Int?)
     : Flow<DgfrResource<List<Territory>>> = loadingFlow {

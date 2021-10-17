@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class TagsApiImpl(private val client: HttpClient) : TagsApi {
 
-    override suspend fun getTagsSuggest(
+    override fun getTagsSuggest(
         q: String,
         size: Int?
     ): Flow<DgfrResource<List<Tag>>> = loadingFlow {

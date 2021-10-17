@@ -21,7 +21,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun deleteMe() = loadingFlow {
+    override fun deleteMe() = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "me/"
         ) {
@@ -30,7 +30,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getMe(): Flow<DgfrResource<Me>> = loadingFlow {
+    override fun getMe(): Flow<DgfrResource<Me>> = loadingFlow {
         client.get(
             path = "me/"
         ) {
@@ -38,7 +38,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun postMyAvatar(
+    override fun postMyAvatar(
         file: ByteArray,
         fileName: String,
         contentType: String
@@ -57,7 +57,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun putUpdateMe(payload: Me): Flow<DgfrResource<Me>> = loadingFlow {
+    override fun putUpdateMe(payload: Me): Flow<DgfrResource<Me>> = loadingFlow {
         client.put(
             path = "me/"
         ) {
@@ -67,7 +67,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun deleteClearApikey(): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteClearApikey(): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "me/apikey/"
         ) {
@@ -76,7 +76,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun postGenerateApikey(): Flow<DgfrResource<ApiKey>> = loadingFlow {
+    override fun postGenerateApikey(): Flow<DgfrResource<ApiKey>> = loadingFlow {
         client.post(
             path = "me/"
         ) {
@@ -85,7 +85,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun getMyDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
         client.get(
             path = "me/datasets/"
         ) {
@@ -93,7 +93,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyMetrics(): Flow<DgfrResource<List<MyMetrics>>> = loadingFlow {
+    override fun getMyMetrics(): Flow<DgfrResource<List<MyMetrics>>> = loadingFlow {
         client.get(
             path = "me/metrics/"
         ) {
@@ -101,7 +101,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyOrgCommunityResources(q: String?): Flow<DgfrResource<List<CommunityResource>>> = loadingFlow {
+    override fun getMyOrgCommunityResources(q: String?): Flow<DgfrResource<List<CommunityResource>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -112,7 +112,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyOrgDatasets(q: String?): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun getMyOrgDatasets(q: String?): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -123,7 +123,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyOrgDiscussions(q: String?): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
+    override fun getMyOrgDiscussions(q: String?): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -134,7 +134,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyOrgIssues(q: String?): Flow<DgfrResource<List<Issue>>> = loadingFlow {
+    override fun getMyOrgIssues(q: String?): Flow<DgfrResource<List<Issue>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -145,7 +145,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyOrgReuses(q: String?): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getMyOrgReuses(q: String?): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -156,7 +156,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override suspend fun getMyReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getMyReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
         client.get(
             path = "me/reuses/"
         ) {

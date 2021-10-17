@@ -22,7 +22,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListOrganizations(
+    override fun getListOrganizations(
         q: String?,
         /*facets: List<String>?,*/ // TODO
         reuses: String?,
@@ -48,7 +48,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         )
     }
 
-    override suspend fun postCreateOrganization(payload: Organization): Flow<DgfrResource<Organization>> = loadingFlow {
+    override fun postCreateOrganization(payload: Organization): Flow<DgfrResource<Organization>> = loadingFlow {
         client.post(
             path = "organizations/"
         ) {
@@ -58,19 +58,19 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun getAvailableOrganizationBadges(): Flow<DgfrResource<Map<String, String>>> = loadingFlow {
+    override fun getAvailableOrganizationBadges(): Flow<DgfrResource<Map<String, String>>> = loadingFlow {
         client.get(
             path = "organizations/badges/"
         )
     }
 
-    override suspend fun getOrgRoles(): Flow<DgfrResource<List<OrganizationRole>>> = loadingFlow {
+    override fun getOrgRoles(): Flow<DgfrResource<List<OrganizationRole>>> = loadingFlow {
         client.get(
             path = "organizations/roles/"
         )
     }
 
-    override suspend fun getSuggestOrganizations(
+    override fun getSuggestOrganizations(
         q: String,
         size: Int?
     ): Flow<DgfrResource<List<OrganizationSuggestion>>> = loadingFlow {
@@ -83,7 +83,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         )
     }
 
-    override suspend fun deleteUnfollowOrganization(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUnfollowOrganization(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$id/followers/"
         ) {
@@ -92,7 +92,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getListOrganizationFollowers(
+    override fun getListOrganizationFollowers(
         id: String,
         page: Int?,
         pageSize: Int?
@@ -106,7 +106,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         )
     }
 
-    override suspend fun postFollowOrganization(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun postFollowOrganization(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "organizations/$id/followers/"
         ) {
@@ -115,7 +115,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun deleteOrganization(org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteOrganization(org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$org/"
         ) {
@@ -124,13 +124,13 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getOrganization(org: String): Flow<DgfrResource<Organization>> = loadingFlow {
+    override fun getOrganization(org: String): Flow<DgfrResource<Organization>> = loadingFlow {
         client.get(
             path = "organizations/$org/"
         )
     }
 
-    override suspend fun putUpdateOrganization(
+    override fun putUpdateOrganization(
         org: String,
         payload: Organization
     ): Flow<DgfrResource<Organization>> = loadingFlow {
@@ -143,7 +143,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun postAddOrganizationBadge(org: String, payload: Badge): Flow<DgfrResource<Badge>> = loadingFlow {
+    override fun postAddOrganizationBadge(org: String, payload: Badge): Flow<DgfrResource<Badge>> = loadingFlow {
         client.post(
             path = "organizations/$org/badges/"
         ) {
@@ -153,7 +153,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun deleteOrganizationBadge(badgeKind: String, org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteOrganizationBadge(badgeKind: String, org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$org/badges/$badgeKind/"
         ) {
@@ -162,21 +162,21 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getRdfOrganization(org: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getRdfOrganization(org: String): Flow<DgfrResource<String>> = loadingFlow {
          val response = client.get<HttpResponse>(
             path = "organizations/$org/catalog"
         )
          response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getRdfOrganizationFormat(org: String, format: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getRdfOrganizationFormat(org: String, format: String): Flow<DgfrResource<String>> = loadingFlow {
          val response = client.get<HttpResponse>(
             path = "organizations/$org/catalog.$format"
         )
          response.content.readAndClose().orEmpty()
     }
 
-    override suspend fun getListOrganizationDatasets(
+    override fun getListOrganizationDatasets(
         org: String,
         page: Int?,
         pageSize: Int?,
@@ -192,19 +192,19 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         )
     }
 
-    override suspend fun getListOrganizationDiscussions(org: String): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
+    override fun getListOrganizationDiscussions(org: String): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
         client.get(
             path = "organizations/$org/discussions/"
         )
     }
 
-    override suspend fun getListOrganizationIssues(org: String): Flow<DgfrResource<List<Issue>>> = loadingFlow {
+    override fun getListOrganizationIssues(org: String): Flow<DgfrResource<List<Issue>>> = loadingFlow {
         client.get(
             path = "organizations/$org/issues/"
         )
     }
 
-    override suspend fun postOrganizationLogo(
+    override fun postOrganizationLogo(
         org: String,
         file: ByteArray,
         fileName: String,
@@ -224,7 +224,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun putResizeOrganizationLogo(
+    override fun putResizeOrganizationLogo(
         org: String,
         file: ByteArray,
         fileName: String,
@@ -244,7 +244,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun deleteOrganizationMember(org: String, user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteOrganizationMember(org: String, user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$org/member/$user/"
         ) {
@@ -253,7 +253,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun postCreateOrganizationMember(
+    override fun postCreateOrganizationMember(
         org: String,
         user: String,
         payload: Member
@@ -267,7 +267,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun putUpdateOrganizationMember(
+    override fun putUpdateOrganizationMember(
         org: String,
         user: String,
         payload: Member
@@ -281,7 +281,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun getListMembershipRequests(
+    override fun getListMembershipRequests(
         org: String,
         status: String?
     ): Flow<DgfrResource<List<MembershipRequest>>> = loadingFlow {
@@ -294,7 +294,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
     }
 
     // A bit light, isn't ?
-    override suspend fun postMembershipRequest(
+    override fun postMembershipRequest(
         org: String
     ) : Flow<DgfrResource<MembershipRequest>> = loadingFlow {
         client.post(
@@ -304,7 +304,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun postAcceptMembership(id: String, org: String): Flow<DgfrResource<Member>> = loadingFlow {
+    override fun postAcceptMembership(id: String, org: String): Flow<DgfrResource<Member>> = loadingFlow {
         client.post(
             path = "organizations/$org/membership/$id/accept/"
         ) {
@@ -312,7 +312,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         }
     }
 
-    override suspend fun postRefuseMembership(
+    override fun postRefuseMembership(
         id: String,
         org: String,
         payload: RefuseMembership
@@ -325,7 +325,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getListOrganizationReuses(org: String): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getListOrganizationReuses(org: String): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
         client.get(
             path = "organizations/$org/reuses/"
         )

@@ -12,7 +12,7 @@ interface AvatarsApi {
      * @param identifier
      * @param size
      */
-    suspend fun getAvatar(
+    fun getAvatar(
         identifier: String,
         size: Int
     ): Flow<DgfrResource<ByteArray>>

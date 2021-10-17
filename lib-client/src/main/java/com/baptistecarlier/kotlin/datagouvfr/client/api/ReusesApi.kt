@@ -26,7 +26,7 @@ interface ReusesApi: WithApiKey {
      * @param page The page to display (optional, default to 0)
      * @param pageSize The page size (optional, default to 20)
      */
-    suspend fun getListReuses(
+    fun getListReuses(
         q: String? = null,
         /*facets: List<String>? = null,*/
         tag: String? = null,
@@ -47,7 +47,7 @@ interface ReusesApi: WithApiKey {
      * Create a new object
      * @param payload (required)
      */
-    suspend fun postCreateReuse(
+    fun postCreateReuse(
         payload: Reuse
     ): Flow<DgfrResource<Reuse>>
 
@@ -55,14 +55,14 @@ interface ReusesApi: WithApiKey {
      * List all available reuse badges and their labels
      * TODO : check the return content
      */
-    suspend fun getAvailableReuseBadges(): Flow<DgfrResource<Boolean>>
+    fun getAvailableReuseBadges(): Flow<DgfrResource<Boolean>>
 
     /**
      * Suggest reuses
      * @param q The string to autocomplete/suggest (required)
      * @param size The amount of suggestion to fetch (optional, default to 10)
      */
-    suspend fun getSuggestReuses(
+    fun getSuggestReuses(
         q: String,
         size: Int? = null
     ): Flow<DgfrResource<List<ReuseSuggestion>>>
@@ -70,14 +70,14 @@ interface ReusesApi: WithApiKey {
     /**
      * List all reuse types
      */
-    suspend fun getReuseTypes(): Flow<DgfrResource<List<ReuseType>>>
+    fun getReuseTypes(): Flow<DgfrResource<List<ReuseType>>>
 
     /**
      * Unfollow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    suspend fun deleteUnfollowReuse(id: String): Flow<DgfrResource<Boolean>>
+    fun deleteUnfollowReuse(id: String): Flow<DgfrResource<Boolean>>
 
     /**
      * List all followers for a given object
@@ -85,7 +85,7 @@ interface ReusesApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
-    suspend fun getListReuseFollowers(
+    fun getListReuseFollowers(
         id: String,
         page: Int? = null,
         pageSize: Int? = null
@@ -96,19 +96,19 @@ interface ReusesApi: WithApiKey {
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    suspend fun postFollowReuse(id: String): Flow<DgfrResource<Boolean>>
+    fun postFollowReuse(id: String): Flow<DgfrResource<Boolean>>
 
     /**
      * Delete a given reuse
      * @param reuse The reuse ID or slug (required)
      */
-    suspend fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>>
+    fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>>
 
     /**
      * Fetch a given reuse
      * @param reuse The reuse ID or slug (required)
      */
-    suspend fun getReuse(
+    fun getReuse(
         reuse: String
     ): Flow<DgfrResource<Reuse>>
 
@@ -117,7 +117,7 @@ interface ReusesApi: WithApiKey {
      * @param reuse The reuse ID or slug (required)
      * @param payload (required)
      */
-    suspend fun putUpdateReuse(
+    fun putUpdateReuse(
         reuse: String,
         payload: Reuse
     ): Flow<DgfrResource<Reuse>>
@@ -127,7 +127,7 @@ interface ReusesApi: WithApiKey {
      * @param reuse The reuse ID or slug (required)
      * @param payload (required)
      */
-    suspend fun postAddReuseBadge(
+    fun postAddReuseBadge(
         reuse: String,
         payload: Badge
     ): Flow<DgfrResource<Badge>>
@@ -137,7 +137,7 @@ interface ReusesApi: WithApiKey {
      * @param badgeKind (required)
      * @param reuse The reuse ID or slug (required)
      */
-    suspend fun deleteReuseBadge(
+    fun deleteReuseBadge(
         badgeKind: String,
         reuse: String
     ): Flow<DgfrResource<Boolean>>
@@ -147,7 +147,7 @@ interface ReusesApi: WithApiKey {
      * @param reuse The reuse ID or slug (required)
      * @param payload (required)
      */
-    suspend fun postReuseAddDataset(
+    fun postReuseAddDataset(
         reuse: String,
         payload: DatasetReference
     ): Flow<DgfrResource<Reuse>>
@@ -155,7 +155,7 @@ interface ReusesApi: WithApiKey {
      * Unmark a reuse as featured
      * @param reuse The reuse ID or slug (required)
      */
-    suspend fun deleteUnfeatureReuse(
+    fun deleteUnfeatureReuse(
         reuse: String
     ): Flow<DgfrResource<Reuse>>
 
@@ -163,7 +163,7 @@ interface ReusesApi: WithApiKey {
      * Mark a reuse as featured
      * @param reuse The reuse ID or slug (required)
      */
-    suspend fun postFeatureReuse(
+    fun postFeatureReuse(
         reuse: String
     ): Flow<DgfrResource<Reuse>>
 
@@ -174,7 +174,7 @@ interface ReusesApi: WithApiKey {
      * @param fileName file name with extension (required)
      * @param contentType content type (required)
      */
-    suspend fun postReuseImage(
+    fun postReuseImage(
         reuse: String,
         file: ByteArray,
         fileName: String,
