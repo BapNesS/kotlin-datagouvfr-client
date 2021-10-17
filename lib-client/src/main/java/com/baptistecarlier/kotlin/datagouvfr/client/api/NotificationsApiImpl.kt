@@ -15,7 +15,7 @@ class NotificationsApiImpl(private val client: HttpClient) : NotificationsApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getNotifications(): Flow<DgfrResource<List<Notification>>> = loadingFlow {
+    override fun getNotifications(): Flow<DgfrResource<List<Notification>>> = loadingFlow {
         client.get(
             path = "notifications/"
         ) {

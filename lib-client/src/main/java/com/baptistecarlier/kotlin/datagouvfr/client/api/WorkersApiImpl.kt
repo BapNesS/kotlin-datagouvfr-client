@@ -19,13 +19,13 @@ class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListJobs(): Flow<DgfrResource<List<Job>>> = loadingFlow {
+    override fun getListJobs(): Flow<DgfrResource<List<Job>>> = loadingFlow {
         client.get(
             path = "workers/jobs/"
         )
     }
 
-    override suspend fun postJobsApi(payload: Job): Flow<DgfrResource<Job>> = loadingFlow {
+    override fun postJobsApi(payload: Job): Flow<DgfrResource<Job>> = loadingFlow {
         client.post(
             path = "workers/jobs/"
         ) {
@@ -35,13 +35,13 @@ class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         }
     }
 
-    override suspend fun getJobsReferenceApi(): Flow<DgfrResource<List<String>>> = loadingFlow {
+    override fun getJobsReferenceApi(): Flow<DgfrResource<List<String>>> = loadingFlow {
         client.get(
             path = "workers/jobs/schedulables/"
         )
     }
 
-    override suspend fun deleteJobApi(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteJobApi(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "workers/jobs/$id"
         ) {
@@ -50,13 +50,13 @@ class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
+    override fun getJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
         client.get(
             path = "workers/jobs/$id"
         )
     }
 
-    override suspend fun putJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
+    override fun putJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
         client.put(
             path = "workers/jobs/$id"
         ) {
@@ -64,7 +64,7 @@ class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         }
     }
 
-    override suspend fun getTaskApi(id: String): Flow<DgfrResource<Task>> = loadingFlow {
+    override fun getTaskApi(id: String): Flow<DgfrResource<Task>> = loadingFlow {
         client.get(
             path = "workers/tasks/$id"
         )

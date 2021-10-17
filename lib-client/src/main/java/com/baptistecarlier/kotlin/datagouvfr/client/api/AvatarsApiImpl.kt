@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 class AvatarsApiImpl(private val client: HttpClient) : AvatarsApi {
 
-    override suspend fun getAvatar(identifier: String, size: Int): Flow<DgfrResource<ByteArray>> = loadingFlow {
+    override fun getAvatar(identifier: String, size: Int): Flow<DgfrResource<ByteArray>> = loadingFlow {
         val httpResponse: HttpResponse = client.get(path = "avatars/$identifier/$size")
         val byteArrayBody: ByteArray = httpResponse.receive()
         byteArrayBody

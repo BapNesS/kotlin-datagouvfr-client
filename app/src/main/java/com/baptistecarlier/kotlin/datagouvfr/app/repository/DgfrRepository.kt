@@ -27,7 +27,7 @@ class DgfrRepository(storage: Storage) {
         }.launchIn(scope)
     }
 
-    suspend fun listDatasets(query: String): Flow<PagingData<Dataset>> {
+    fun listDatasets(query: String): Flow<PagingData<Dataset>> {
         return Pager(
             config = PagingConfig(pageSize)
         ) {
@@ -38,9 +38,9 @@ class DgfrRepository(storage: Storage) {
         }.flow
     }
 
-    suspend fun getDataset(id: String) = dgfrService.getDataset(id)
+    fun getDataset(id: String) = dgfrService.getDataset(id)
 
     // Me
-    suspend fun me() = dgfrService.getMe()
+    fun me() = dgfrService.getMe()
 
 }

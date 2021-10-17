@@ -21,7 +21,7 @@ interface DiscussionsApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
-    suspend fun getListDiscussions(
+    fun getListDiscussions(
         sort: String? = null,
         closed: Boolean? = null,
         forIds: List<String>? = null,
@@ -33,7 +33,7 @@ interface DiscussionsApi: WithApiKey {
      * Create a new Discussion
      * @param payload (required)
      */
-    suspend fun postCreateDiscussion(
+    fun postCreateDiscussion(
         payload: DiscussionStart,
     ): Flow<DgfrResource<Discussion>>
 
@@ -41,7 +41,7 @@ interface DiscussionsApi: WithApiKey {
      * Delete a discussion given its ID
      * @param id (required)
      */
-    suspend fun deleteDiscussion(
+    fun deleteDiscussion(
         id: String
     ): Flow<DgfrResource<Boolean>>
 
@@ -49,7 +49,7 @@ interface DiscussionsApi: WithApiKey {
      * Get a discussion given its ID
      * @param id (required)
      */
-    suspend fun getDiscussion(
+    fun getDiscussion(
         id: String,
     ): Flow<DgfrResource<Discussion>>
 
@@ -58,7 +58,7 @@ interface DiscussionsApi: WithApiKey {
      * @param id (required)
      * @param payload (required)
      */
-    suspend fun postCommentDiscussion(
+    fun postCommentDiscussion(
         id: String,
         payload: DiscussionResponse,
     ): Flow<DgfrResource<Discussion>>
@@ -68,7 +68,7 @@ interface DiscussionsApi: WithApiKey {
      * @param id (required)
      * @param cidx (required)
      */
-    suspend fun deleteDiscussionComment(
+    fun deleteDiscussionComment(
         id: String,
         cidx: Int
     ): Flow<DgfrResource<Boolean>>

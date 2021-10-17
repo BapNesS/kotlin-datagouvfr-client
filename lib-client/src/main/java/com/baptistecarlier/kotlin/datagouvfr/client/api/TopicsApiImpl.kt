@@ -20,7 +20,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListTopics(page: Int?, pageSize: Int?): Flow<DgfrResource<TopicPage>> = loadingFlow {
+    override fun getListTopics(page: Int?, pageSize: Int?): Flow<DgfrResource<TopicPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("page", page)
         builder.appendIfNotNull("page_size", pageSize)
@@ -30,7 +30,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
         )
     }
 
-    override suspend fun postCreateTopic(payload: Topic): Flow<DgfrResource<Topic>> = loadingFlow {
+    override fun postCreateTopic(payload: Topic): Flow<DgfrResource<Topic>> = loadingFlow {
         client.post(
             path = "topics/"
         ) {
@@ -40,7 +40,7 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
         }
     }
 
-    override suspend fun deleteTopic(topic: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteTopic(topic: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "topics/$topic"
         ) {
@@ -49,13 +49,13 @@ class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getTopic(topic: String): Flow<DgfrResource<Topic>> = loadingFlow {
+    override fun getTopic(topic: String): Flow<DgfrResource<Topic>> = loadingFlow {
         client.get(
             path = "topics/$topic/"
         )
     }
 
-    override suspend fun putUpdateTopic(topic: String, payload: Topic): Flow<DgfrResource<Topic>> = loadingFlow {
+    override fun putUpdateTopic(topic: String, payload: Topic): Flow<DgfrResource<Topic>> = loadingFlow {
         client.put(
             path = "topics/$topic/"
         ) {

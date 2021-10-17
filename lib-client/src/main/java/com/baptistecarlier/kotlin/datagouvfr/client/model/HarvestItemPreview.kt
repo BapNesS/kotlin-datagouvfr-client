@@ -22,7 +22,7 @@ data class HarvestItemPreview(
     @SerialName("remote_id")
     var remoteId: String,
     @SerialName("status")
-    var status: HarvestItemPreview.StatusEnum,
+    var status: HarvestItemStatusEnum,
     @SerialName("args")
     var args: List<String>? = null,
 /*    @SerialName("dataset")
@@ -35,18 +35,4 @@ data class HarvestItemPreview(
     var kwargs: Map<String, Any?>? = null,*/
     @SerialName("started")
     var started: LocalDateTime? = null
-) {
-    /**
-     * The item status
-     * Values: PENDING, STARTED, DONE, FAILED, SKIPPED, ARCHIVED
-     */
-    @Serializable
-    enum class StatusEnum(val value: String) {
-        @SerialName("pending") PENDING("pending"),
-        @SerialName("started") STARTED("started"),
-        @SerialName("done") DONE("done"),
-        @SerialName("failed") FAILED("failed"),
-        @SerialName("skipped") SKIPPED("skipped"),
-        @SerialName("archived") ARCHIVED("archived")
-    }
-}
+)

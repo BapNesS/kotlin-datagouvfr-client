@@ -23,7 +23,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListDiscussions(
+    override fun getListDiscussions(
         sort: String?,
         closed: Boolean?,
         forIds: List<String>?,
@@ -45,7 +45,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         )
     }
 
-    override suspend fun postCreateDiscussion(payload: DiscussionStart): Flow<DgfrResource<Discussion>> = loadingFlow {
+    override fun postCreateDiscussion(payload: DiscussionStart): Flow<DgfrResource<Discussion>> = loadingFlow {
         client.post(
             path = "discussions/"
         ) {
@@ -55,7 +55,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         }
     }
 
-    override suspend fun deleteDiscussion(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteDiscussion(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "discussions/$id"
         ) {
@@ -64,13 +64,13 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getDiscussion(id: String): Flow<DgfrResource<Discussion>> = loadingFlow {
+    override fun getDiscussion(id: String): Flow<DgfrResource<Discussion>> = loadingFlow {
         client.get(
             path = "discussions/$id/"
         )
     }
 
-    override suspend fun postCommentDiscussion(
+    override fun postCommentDiscussion(
         id: String,
         payload: DiscussionResponse
     ): Flow<DgfrResource<Discussion>> = loadingFlow {
@@ -83,7 +83,7 @@ class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
         }
     }
 
-    override suspend fun deleteDiscussionComment(id: String, cidx: Int): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteDiscussionComment(id: String, cidx: Int): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "discussions/$id/comments/$cidx"
         ) {
