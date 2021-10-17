@@ -11,37 +11,37 @@ import kotlinx.coroutines.flow.Flow
 
 class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
 
-    override suspend fun getSpatialCoverage(level: String): Flow<DgfrResource<List<GeoJSONFeatureCollection>>> = loadingFlow {
+    override fun getSpatialCoverage(level: String): Flow<DgfrResource<List<GeoJSONFeatureCollection>>> = loadingFlow {
         client.get(
             path = "spatial/coverage/$level/"
         )
     }
 
-    override suspend fun getSpatialGranularities(): Flow<DgfrResource<List<GeoGranularity>>> = loadingFlow {
+    override fun getSpatialGranularities(): Flow<DgfrResource<List<GeoGranularity>>> = loadingFlow {
         client.get(
             path = "spatial/granularities/"
         )
     }
 
-    override suspend fun getSpatialLevels(): Flow<DgfrResource<List<GeoLevel>>> = loadingFlow {
+    override fun getSpatialLevels(): Flow<DgfrResource<List<GeoLevel>>> = loadingFlow {
         client.get(
             path = "spatial/levels/"
         )
     }
 
-    override suspend fun getSpatialZone(id: String): Flow<DgfrResource<GeoJSONFeature>> = loadingFlow {
+    override fun getSpatialZone(id: String): Flow<DgfrResource<GeoJSONFeature>> = loadingFlow {
         client.get(
             path = "spatial/zone/$id/"
         )
     }
 
-    override suspend fun getSpatialZoneChildren(id: String): Flow<DgfrResource<List<GeoJSONFeatureCollection>>> = loadingFlow {
+    override fun getSpatialZoneChildren(id: String): Flow<DgfrResource<List<GeoJSONFeatureCollection>>> = loadingFlow {
         client.get(
             path = "spatial/zone/$id/children/"
         )
     }
 
-    override suspend fun getSpatialZoneDatasets(
+    override fun getSpatialZoneDatasets(
         id: String,
         dynamic: Boolean?,
         size: Int?
@@ -56,7 +56,7 @@ class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
         )
     }
 
-    override suspend fun getSuggestZones(
+    override fun getSuggestZones(
         q: String,
         size: Int?
     ): Flow<DgfrResource<List<TerritorySuggestion>>> = loadingFlow {
@@ -69,7 +69,7 @@ class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
         )
     }
 
-    override suspend fun getSpatialZones(ids: List<String>): Flow<DgfrResource<GeoJSONFeatureCollection>> = loadingFlow {
+    override fun getSpatialZones(ids: List<String>): Flow<DgfrResource<GeoJSONFeatureCollection>> = loadingFlow {
         client.get(
             path = "spatial/zones/?${ids}/"
         )

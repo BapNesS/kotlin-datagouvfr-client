@@ -16,13 +16,13 @@ class TransferApiImpl(private val client: HttpClient) : TransferApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListTransfers(): Flow<DgfrResource<List<Transfer>>> = loadingFlow {
+    override fun getListTransfers(): Flow<DgfrResource<List<Transfer>>> = loadingFlow {
         client.get(
             path = "transfer/"
         )
     }
 
-    override suspend fun postRequestTransfer(payload: TransferRequest): Flow<DgfrResource<Transfer>> = loadingFlow {
+    override fun postRequestTransfer(payload: TransferRequest): Flow<DgfrResource<Transfer>> = loadingFlow {
         client.post(
             path = "transfer/"
         ) {
@@ -32,13 +32,13 @@ class TransferApiImpl(private val client: HttpClient) : TransferApi {
         }
     }
 
-    override suspend fun getTransfer(id: String): Flow<DgfrResource<Transfer>> = loadingFlow {
+    override fun getTransfer(id: String): Flow<DgfrResource<Transfer>> = loadingFlow {
         client.get(
             path = "transfer/$id/"
         )
     }
 
-    override suspend fun postRespondToTransfer(
+    override fun postRespondToTransfer(
         id: String,
         payload: TransferResponse
     ): Flow<DgfrResource<Transfer>> = loadingFlow {

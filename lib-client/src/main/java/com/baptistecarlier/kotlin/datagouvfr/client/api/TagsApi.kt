@@ -13,7 +13,7 @@ interface TagsApi {
      * @param q The string to autocomplete/suggest
      * @param size The amount of suggestion to fetch
      */
-    suspend fun getTagsSuggest(
+    fun getTagsSuggest(
         q: String,
         size: Int? = null
     ): Flow<DgfrResource<List<Tag>>>

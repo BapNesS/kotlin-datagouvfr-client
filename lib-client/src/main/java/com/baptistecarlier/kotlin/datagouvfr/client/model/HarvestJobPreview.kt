@@ -24,7 +24,7 @@ data class HarvestJobPreview(
     @SerialName("source")
     var source: String,
     @SerialName("status")
-    var status: HarvestJobPreview.StatusEnum,
+    var status: HarvestJobStatusEnum,
     @SerialName("ended")
     var ended: LocalDateTime? = null,
     @SerialName("errors")
@@ -33,19 +33,4 @@ data class HarvestJobPreview(
     var items: List<HarvestItemPreview>? = null,
     @SerialName("started")
     var started: LocalDateTime? = null
-) {
-    /**
-     * The job status
-     * Values: PENDING, INITIALIZING, INITIALIZED, PROCESSING, DONE, DONEMINUSERRORS, FAILED
-     */
-    @Serializable
-    enum class StatusEnum(val value: String) {
-        @SerialName("pending") PENDING("pending"),
-        @SerialName("initializing") INITIALIZING("initializing"),
-        @SerialName("initialized") INITIALIZED("initialized"),
-        @SerialName("processing") PROCESSING("processing"),
-        @SerialName("done") DONE("done"),
-        @SerialName("done-errors") DONEMINUSERRORS("done-errors"),
-        @SerialName("failed") FAILED("failed")
-    }
-}
+)

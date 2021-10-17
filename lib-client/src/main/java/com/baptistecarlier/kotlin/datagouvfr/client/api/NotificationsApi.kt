@@ -13,5 +13,5 @@ interface NotificationsApi: WithApiKey {
     /**
      * List all current user pending notifications
      */
-    suspend fun getNotifications(): Flow<DgfrResource<List<Notification>>>
+    fun getNotifications(): Flow<DgfrResource<List<Notification>>>
 }

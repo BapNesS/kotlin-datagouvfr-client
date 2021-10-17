@@ -20,7 +20,7 @@ interface IssuesApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
-    suspend fun getListIssues(
+    fun getListIssues(
         sort: String? = null,
         closed: Boolean? = null,
         forIds: List<String>? = null,
@@ -32,7 +32,7 @@ interface IssuesApi: WithApiKey {
      * Create a new Issue
      * @param payload (required)
      */
-    suspend fun postCreateIssue(
+    fun postCreateIssue(
         payload: Issue
     ): Flow<DgfrResource<Issue>>
 
@@ -40,7 +40,7 @@ interface IssuesApi: WithApiKey {
      * Get an issue given its ID
      * @param id (required)
      */
-    suspend fun getIssue(
+    fun getIssue(
         id: String
     ): Flow<DgfrResource<Issue>>
 
@@ -49,7 +49,7 @@ interface IssuesApi: WithApiKey {
      * @param id (required)
      * @param payload (required)
      */
-    suspend fun postCommentIssue(
+    fun postCommentIssue(
         id: String,
         payload: IssueResponse
     ): Flow<DgfrResource<Issue>>

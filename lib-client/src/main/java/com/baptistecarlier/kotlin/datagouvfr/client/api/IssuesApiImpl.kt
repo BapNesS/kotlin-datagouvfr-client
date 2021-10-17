@@ -18,7 +18,7 @@ class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListIssues(
+    override fun getListIssues(
         sort: String?,
         closed: Boolean?,
         forIds: List<String>?,
@@ -40,7 +40,7 @@ class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         )
     }
 
-    override suspend fun postCreateIssue(payload: Issue): Flow<DgfrResource<Issue>> = loadingFlow {
+    override fun postCreateIssue(payload: Issue): Flow<DgfrResource<Issue>> = loadingFlow {
         client.post(
             path = "issues/"
         ) {
@@ -50,13 +50,13 @@ class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         }
     }
 
-    override suspend fun getIssue(id: String): Flow<DgfrResource<Issue>> = loadingFlow {
+    override fun getIssue(id: String): Flow<DgfrResource<Issue>> = loadingFlow {
         client.get(
             path = "issues/$id/"
         )
     }
 
-    override suspend fun postCommentIssue(id: String, payload: IssueResponse): Flow<DgfrResource<Issue>> = loadingFlow {
+    override fun postCommentIssue(id: String, payload: IssueResponse): Flow<DgfrResource<Issue>> = loadingFlow {
         client.post(
             path = "issues/$id/"
         ) {

@@ -21,7 +21,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListUsers(
+    override fun getListUsers(
         q: String?,
         facets: List<String>?,
         organization: String?,
@@ -46,7 +46,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         )
     }
 
-    override suspend fun postCreateUser(payload: User): Flow<DgfrResource<User>> = loadingFlow {
+    override fun postCreateUser(payload: User): Flow<DgfrResource<User>> = loadingFlow {
         client.post(
             path = "users/"
         ) {
@@ -56,13 +56,13 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         }
     }
 
-    override suspend fun getUserRoles(): Flow<DgfrResource<List<UserRole>>> = loadingFlow {
+    override fun getUserRoles(): Flow<DgfrResource<List<UserRole>>> = loadingFlow {
         client.get(
             path = "users/roles/"
         )
     }
 
-    override suspend fun getSuggestUsers(q: String, size: Int?): Flow<DgfrResource<List<UserSuggestion>>> = loadingFlow {
+    override fun getSuggestUsers(q: String, size: Int?): Flow<DgfrResource<List<UserSuggestion>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
         builder.appendIfNotNull("size", size)
@@ -72,7 +72,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         )
     }
 
-    override suspend fun deleteUnfollowUser(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUnfollowUser(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "users/$id/followers/"
         ) {
@@ -81,7 +81,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getListUserFollowers(
+    override fun getListUserFollowers(
         id: String,
         page: Int?,
         pageSize: Int?
@@ -96,7 +96,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         )
     }
 
-    override suspend fun postFollowUser(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun postFollowUser(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "users/$id/followers/"
         ) {
@@ -106,7 +106,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun deleteUser(user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUser(user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "users/$user/"
         ) {
@@ -115,13 +115,13 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getUser(user: String): Flow<DgfrResource<User>> = loadingFlow {
+    override fun getUser(user: String): Flow<DgfrResource<User>> = loadingFlow {
         client.get(
             path = "users/$user/"
         )
     }
 
-    override suspend fun putUpdateUser(user: String, payload: User): Flow<DgfrResource<User>> = loadingFlow {
+    override fun putUpdateUser(user: String, payload: User): Flow<DgfrResource<User>> = loadingFlow {
         client.put(
             path = "users/$user/"
         ) {
@@ -131,7 +131,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         }
     }
 
-    override suspend fun postUserAvatar(
+    override fun postUserAvatar(
         user: String,
         file: ByteArray,
         fileName: String,

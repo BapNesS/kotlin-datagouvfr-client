@@ -20,7 +20,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListPosts(page: Int?, pageSize: Int?, sort: String?): Flow<DgfrResource<PostPage>> = loadingFlow {
+    override fun getListPosts(page: Int?, pageSize: Int?, sort: String?): Flow<DgfrResource<PostPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("sort", sort)
         builder.appendIfNotNull("page", page)
@@ -31,7 +31,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         )
     }
 
-    override suspend fun postCreatePost(payload: Post): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun postCreatePost(payload: Post): Flow<DgfrResource<Post>> = loadingFlow {
         client.post(
             path = "posts/"
         ) {
@@ -41,7 +41,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         }
     }
 
-    override suspend fun deletePost(post: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deletePost(post: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "posts/$post/"
         ) {
@@ -50,13 +50,13 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun getPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
         client.get(
             path = "posts/$post/"
         )
     }
 
-    override suspend fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>> = loadingFlow {
         client.put(
             path = "posts/$post/"
         ) {
@@ -66,7 +66,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         }
     }
 
-    override suspend fun postImage(
+    override fun postImage(
         post: String,
         file: ByteArray,
         fileName: String,
@@ -86,7 +86,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         }
     }
 
-    override suspend fun putResizePostImage(
+    override fun putResizePostImage(
         post: String,
         file: ByteArray,
         fileName: String,
@@ -106,7 +106,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         }
     }
 
-    override suspend fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
         client.delete(
             path = "posts/$post/publish/"
         ) {
@@ -114,7 +114,7 @@ class PostsApiImpl(private val client: HttpClient) : PostsApi {
         }
     }
 
-    override suspend fun postPublishPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun postPublishPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
         client.post(
             path = "posts/$post/publish/"
         ) {

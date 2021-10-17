@@ -18,7 +18,7 @@ interface PostsApi : WithApiKey {
      * @param pageSize The page size to fetch (optional, default to 20)
      * @param sort The sorting attribute (optional, defa
      */
-    suspend fun getListPosts(
+    fun getListPosts(
         page: Int? = null,
         pageSize: Int? = null,
         sort: String? = null
@@ -28,26 +28,26 @@ interface PostsApi : WithApiKey {
      * Create a post
      * @param payload (required)
      */
-    suspend fun postCreatePost(payload: Post): Flow<DgfrResource<Post>>
+    fun postCreatePost(payload: Post): Flow<DgfrResource<Post>>
 
     /**
      * Delete a given post
      * @param post The post ID or slug (required)
      */
-    suspend fun deletePost(post: String): Flow<DgfrResource<Boolean>>
+    fun deletePost(post: String): Flow<DgfrResource<Boolean>>
 
     /**
      * Get a given post
      * @param post The post ID or slug (required)
      */
-    suspend fun getPost(post: String): Flow<DgfrResource<Post>>
+    fun getPost(post: String): Flow<DgfrResource<Post>>
 
     /**
      * Update a given post
      * @param post The post ID or slug (required)
      * @param payload (required)
      */
-    suspend fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>>
+    fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>>
 
     /**
      * Upload a new image
@@ -56,7 +56,7 @@ interface PostsApi : WithApiKey {
      * @param fileName file name with extension (required)
      * @param contentType content type (required)
      */
-    suspend fun postImage(
+    fun postImage(
         post: String,
         file: ByteArray,
         fileName: String,
@@ -70,7 +70,7 @@ interface PostsApi : WithApiKey {
      * @param fileName file name with extension (required)
      * @param contentType content type (required)
      */
-    suspend fun putResizePostImage(
+    fun putResizePostImage(
         post: String,
         file: ByteArray,
         fileName: String,
@@ -81,12 +81,12 @@ interface PostsApi : WithApiKey {
      * Publish an existing post
      * @param post (required)
      */
-    suspend fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>>
+    fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>>
 
     /**
      * Publish an existing post
      * @param post (required)
      */
-    suspend fun postPublishPost(post: String): Flow<DgfrResource<Post>>
+    fun postPublishPost(post: String): Flow<DgfrResource<Post>>
 
 }

@@ -2,7 +2,7 @@ package com.baptistecarlier.kotlin.datagouvfr.client.exception
 
 import kotlinx.coroutines.flow.flow
 
-suspend inline fun <reified T> loadingFlow(crossinline ktorCall: suspend () -> T) = flow {
+inline fun <reified T> loadingFlow(crossinline ktorCall: suspend () -> T) = flow {
     emit(DgfrResource.Loading())
     emit(
         exceptionalHandledCall {

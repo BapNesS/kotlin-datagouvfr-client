@@ -13,29 +13,29 @@ interface SpatialApi {
      * List each zone for a given level with their datasets count
      * @param level
      */
-    suspend fun getSpatialCoverage(level: String) : Flow<DgfrResource<List<GeoJSONFeatureCollection>>>
+    fun getSpatialCoverage(level: String) : Flow<DgfrResource<List<GeoJSONFeatureCollection>>>
 
     /**
      * List all known spatial granularities
      */
-    suspend fun getSpatialGranularities() : Flow<DgfrResource<List<GeoGranularity>>>
+    fun getSpatialGranularities() : Flow<DgfrResource<List<GeoGranularity>>>
 
     /**
      * List all known levels
      */
-    suspend fun getSpatialLevels() : Flow<DgfrResource<List<GeoLevel>>>
+    fun getSpatialLevels() : Flow<DgfrResource<List<GeoLevel>>>
 
     /**
      * Fetch a zone
      * @param id A zone identifier
      */
-    suspend fun getSpatialZone(id: String) : Flow<DgfrResource<GeoJSONFeature>>
+    fun getSpatialZone(id: String) : Flow<DgfrResource<GeoJSONFeature>>
 
     /**
      * Fetch children of a zone
      * @param id A zone identifier
      */
-    suspend fun getSpatialZoneChildren(id: String) : Flow<DgfrResource<List<GeoJSONFeatureCollection>>>
+    fun getSpatialZoneChildren(id: String) : Flow<DgfrResource<List<GeoJSONFeatureCollection>>>
 
     /**
      * Fetch datasets for a given zone
@@ -43,7 +43,7 @@ interface SpatialApi {
      * @param dynamic Append dynamic datasets (optional)
      * @param size The amount of datasets to fetch (optional, default to 25)
      */
-    suspend fun getSpatialZoneDatasets(
+    fun getSpatialZoneDatasets(
         id: String,
         dynamic: Boolean? = null,
         size: Int? = null
@@ -54,7 +54,7 @@ interface SpatialApi {
      * @param q The string to autocomplete/suggest (required)
      * @param size The amount of suggestion to fetch (optional, default to 10)
      */
-    suspend fun getSuggestZones(
+    fun getSuggestZones(
         q: String,
         size: Int? = null
     ) : Flow<DgfrResource<List<TerritorySuggestion>>>
@@ -63,7 +63,7 @@ interface SpatialApi {
      * Fetch a zone list as GeoJSON
      * @param ids A zone identifiers list (comma separated) (required)
      */
-    suspend fun getSpatialZones(
+    fun getSpatialZones(
         ids: List<String>
     ) : Flow<DgfrResource<GeoJSONFeatureCollection>>
 

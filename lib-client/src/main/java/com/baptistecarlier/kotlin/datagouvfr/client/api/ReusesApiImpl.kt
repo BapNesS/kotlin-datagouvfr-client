@@ -21,7 +21,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         this.apiKey = apiKey
     }
 
-    override suspend fun getListReuses(
+    override fun getListReuses(
         q: String?,
         /*facets: List<String>?,*/
         tag: String?,
@@ -57,7 +57,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         )
     }
 
-    override suspend fun postCreateReuse(payload: Reuse): Flow<DgfrResource<Reuse>> = loadingFlow {
+    override fun postCreateReuse(payload: Reuse): Flow<DgfrResource<Reuse>> = loadingFlow {
         client.post(
             path = "reuses/"
         ) {
@@ -67,7 +67,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         }
     }
 
-    override suspend fun getAvailableReuseBadges(): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun getAvailableReuseBadges(): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "reuses/badges/"
         ) {
@@ -76,7 +76,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getSuggestReuses(q: String, size: Int?): Flow<DgfrResource<List<ReuseSuggestion>>> = loadingFlow {
+    override fun getSuggestReuses(q: String, size: Int?): Flow<DgfrResource<List<ReuseSuggestion>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
         builder.appendIfNotNull("size", size)
@@ -86,13 +86,13 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         )
     }
 
-    override suspend fun getReuseTypes(): Flow<DgfrResource<List<ReuseType>>> = loadingFlow {
+    override fun getReuseTypes(): Flow<DgfrResource<List<ReuseType>>> = loadingFlow {
         client.get(
             path = "reuses/types/"
         )
     }
 
-    override suspend fun deleteUnfollowReuse(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUnfollowReuse(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "reuses/$id/followers/"
         ) {
@@ -101,7 +101,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getListReuseFollowers(
+    override fun getListReuseFollowers(
         id: String,
         page: Int?,
         pageSize: Int?
@@ -115,7 +115,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         )
     }
 
-    override suspend fun postFollowReuse(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun postFollowReuse(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "reuses/$id/followers/"
         ) {
@@ -124,7 +124,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "reuses/$reuse/"
         ) {
@@ -133,13 +133,13 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun getReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
+    override fun getReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
         client.get(
             path = "reuses/$reuse/"
         )
     }
 
-    override suspend fun putUpdateReuse(reuse: String, payload: Reuse): Flow<DgfrResource<Reuse>> = loadingFlow {
+    override fun putUpdateReuse(reuse: String, payload: Reuse): Flow<DgfrResource<Reuse>> = loadingFlow {
         client.put(
             path = "reuses/$reuse/"
         ) {
@@ -149,7 +149,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         }
     }
 
-    override suspend fun postAddReuseBadge(reuse: String, payload: Badge): Flow<DgfrResource<Badge>> = loadingFlow {
+    override fun postAddReuseBadge(reuse: String, payload: Badge): Flow<DgfrResource<Badge>> = loadingFlow {
         client.post(
             path = "reuses/$reuse/badges/"
         ) {
@@ -159,7 +159,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         }
     }
 
-    override suspend fun deleteReuseBadge(badgeKind: String, reuse: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteReuseBadge(badgeKind: String, reuse: String): Flow<DgfrResource<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "reuses/$reuse/badges/$badgeKind/"
         ) {
@@ -168,7 +168,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
-    override suspend fun postReuseAddDataset(
+    override fun postReuseAddDataset(
         reuse: String,
         payload: DatasetReference
     ): Flow<DgfrResource<Reuse>> = loadingFlow {
@@ -181,7 +181,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         }
     }
 
-    override suspend fun deleteUnfeatureReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
+    override fun deleteUnfeatureReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
         client.delete(
             path = "reuses/$reuse/featured/"
         ) {
@@ -189,7 +189,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         }
     }
 
-    override suspend fun postFeatureReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
+    override fun postFeatureReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
         client.post(
             path = "reuses/$reuse/featured/"
         ) {
@@ -197,7 +197,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         }
     }
 
-    override suspend fun postReuseImage(
+    override fun postReuseImage(
         reuse: String,
         file: ByteArray,
         fileName: String,
