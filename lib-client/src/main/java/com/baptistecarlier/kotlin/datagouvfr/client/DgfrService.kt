@@ -2,7 +2,6 @@ package com.baptistecarlier.kotlin.datagouvfr.client
 
 import com.baptistecarlier.kotlin.datagouvfr.client.api.*
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrException
-import com.baptistecarlier.kotlin.datagouvfr.client.logger.DgfrHttpLogger
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -28,32 +27,36 @@ private val httpClient: HttpClient by lazy {
             url.protocol = URLProtocol.HTTPS
             url.encodedPath = basePath + url.encodedPath
         }
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-                prettyPrint = true
-                isLenient = true
-                ignoreUnknownKeys = true
-            })
+        installers(timeOut)
+        validators()
+    }
+}
 
-            engine {
-                requestTimeout = timeOut
+private fun HttpClientConfig<CIOEngineConfig>.validators() {
+    HttpResponseValidator {
+        handleResponseException { exception ->
+            if (exception !is ClientRequestException) {
+                return@handleResponseException
             }
+
+            val status = exception.response.status.value
+            throw DgfrException(status)
         }
+    }
+}
 
-        install(Logging) {
-            logger = DgfrHttpLogger()
-            level = LogLevel.ALL
-        }
+private fun HttpClientConfig<CIOEngineConfig>.installers(
+    timeOut: Long
+) {
+    install(JsonFeature) {
+        serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+            prettyPrint = true
+            isLenient = true
+            ignoreUnknownKeys = true
+        })
 
-        HttpResponseValidator {
-            handleResponseException { exception ->
-                if (exception !is ClientRequestException) {
-                    return@handleResponseException
-                }
-
-                val status = exception.response.status.value
-                throw DgfrException(status)
-            }
+        engine {
+            requestTimeout = timeOut
         }
     }
 }
