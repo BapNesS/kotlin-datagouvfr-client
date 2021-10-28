@@ -93,7 +93,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -117,7 +117,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun deleteOrganization(org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
@@ -126,7 +126,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getOrganization(org: String): Flow<DgfrResource<Organization>> = loadingFlow {
@@ -164,7 +164,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getRdfOrganization(org: String): Flow<DgfrResource<String>> = loadingFlow {
@@ -256,7 +256,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun postCreateOrganizationMember(
@@ -328,7 +328,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getListOrganizationReuses(org: String): Flow<DgfrResource<List<Reuse>>> = loadingFlow {

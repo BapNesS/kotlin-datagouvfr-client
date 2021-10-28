@@ -1,4 +1,4 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.tools
 
-internal val HttpCodeRangeSucces = 200..299
+internal val HttpCodeRangeSuccess = 200..299
 

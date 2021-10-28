@@ -82,7 +82,7 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -108,7 +108,7 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun deleteUser(user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
@@ -117,7 +117,7 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getUser(user: String): Flow<DgfrResource<User>> = loadingFlow {

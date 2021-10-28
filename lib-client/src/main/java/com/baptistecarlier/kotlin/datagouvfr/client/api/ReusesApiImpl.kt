@@ -77,7 +77,7 @@ internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getSuggestReuses(q: String, size: Int?): Flow<DgfrResource<List<ReuseSuggestion>>> = loadingFlow {
@@ -102,7 +102,7 @@ internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -126,7 +126,7 @@ internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>> = loadingFlow {
@@ -135,7 +135,7 @@ internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
@@ -170,7 +170,7 @@ internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun postReuseAddDataset(

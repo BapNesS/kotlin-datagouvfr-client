@@ -47,7 +47,7 @@ internal class WorkersApiImpl(private val client: HttpClient): WorkersApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {

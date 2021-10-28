@@ -49,7 +49,7 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {

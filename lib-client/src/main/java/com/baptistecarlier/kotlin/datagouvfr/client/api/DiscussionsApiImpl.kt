@@ -63,7 +63,7 @@ internal class DiscussionsApiImpl(private val client: HttpClient): DiscussionsAp
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getDiscussion(id: String): Flow<DgfrResource<Discussion>> = loadingFlow {
@@ -91,7 +91,7 @@ internal class DiscussionsApiImpl(private val client: HttpClient): DiscussionsAp
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
 }

@@ -250,7 +250,7 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getDataset(dataset: String): Flow<DgfrResource<Dataset>> = loadingFlow {
@@ -288,7 +288,7 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun deleteUnfeatureDataset(dataset: String): Flow<DgfrResource<Dataset>> = loadingFlow {
@@ -351,7 +351,7 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getResource(rid: String, dataset: String): Flow<DgfrResource<Resource>> = loadingFlow {
@@ -469,7 +469,7 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -494,7 +494,7 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
             addApiKey(apiKey)
             // Post without payload ?
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
 }

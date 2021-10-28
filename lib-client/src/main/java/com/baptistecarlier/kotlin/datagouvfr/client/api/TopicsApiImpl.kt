@@ -48,7 +48,7 @@ internal class TopicsApiImpl(private val client: HttpClient): TopicsApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getTopic(topic: String): Flow<DgfrResource<Topic>> = loadingFlow {

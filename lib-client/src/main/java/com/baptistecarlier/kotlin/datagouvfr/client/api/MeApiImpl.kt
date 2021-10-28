@@ -27,7 +27,7 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getMe(): Flow<DgfrResource<Me>> = loadingFlow {
@@ -73,7 +73,7 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun postGenerateApikey(): Flow<DgfrResource<ApiKey>> = loadingFlow {
