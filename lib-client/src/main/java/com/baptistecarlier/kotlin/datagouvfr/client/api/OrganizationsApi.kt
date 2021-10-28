@@ -1,14 +1,16 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Organization related operations
  */
-interface OrganizationsApi: WithApiKey {
+internal interface OrganizationsApi: WithApiKey {
 
     /**
      * List or search all organizations
@@ -22,6 +24,8 @@ interface OrganizationsApi: WithApiKey {
      * @param page The page to display (optional, default to 0)
      * @param pageSize The page size (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     fun getListOrganizations(
         q: String? = null,
         /*facets: List<String>? = null,*/
@@ -73,6 +77,7 @@ interface OrganizationsApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListOrganizationFollowers(
         id: String,
         page: Int? = null,
@@ -155,6 +160,7 @@ interface OrganizationsApi: WithApiKey {
      * @param pageSize The page size to fetch (optional, default to 20)
      * @param sort The sorting attribute (optional, default to -created)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListOrganizationDatasets(
         org: String,
         page: Int? = null,

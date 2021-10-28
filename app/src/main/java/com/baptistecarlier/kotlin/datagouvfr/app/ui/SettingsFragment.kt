@@ -11,9 +11,6 @@ import com.baptistecarlier.kotlin.datagouvfr.extensions.displayName
 import dagger.hilt.android.AndroidEntryPoint
 import android.view.MenuInflater
 
-
-
-
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 

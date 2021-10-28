@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,6 +13,7 @@ import kotlinx.serialization.Serializable
  * @property previousPage The previous page URL if exists
  * @property total The total paginated items
  */
+@MissingFieldMapping
 @Serializable
 data class DatasetPage(
     @SerialName("page")

@@ -1,9 +1,11 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.readAndClose
@@ -15,16 +17,18 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
+internal class OrganizationsApiImpl(private val client: HttpClient): OrganizationsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
 
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     override fun getListOrganizations(
         q: String?,
-        /*facets: List<String>?,*/ // TODO
+        /*facets: List<String>?,*/
         reuses: String?,
         badge: String?,
         datasets: String?,
@@ -92,6 +96,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListOrganizationFollowers(
         id: String,
         page: Int?,
@@ -176,6 +181,7 @@ class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
          response.content.readAndClose().orEmpty()
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListOrganizationDatasets(
         org: String,
         page: Int?,

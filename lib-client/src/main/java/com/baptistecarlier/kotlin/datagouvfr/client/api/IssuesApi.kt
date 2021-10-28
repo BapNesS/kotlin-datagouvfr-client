@@ -1,16 +1,17 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Issue related operations
  */
-interface IssuesApi: WithApiKey {
+internal interface IssuesApi: WithApiKey {
 
     /**
      * List all Issues
@@ -20,6 +21,7 @@ interface IssuesApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListIssues(
         sort: String? = null,
         closed: Boolean? = null,

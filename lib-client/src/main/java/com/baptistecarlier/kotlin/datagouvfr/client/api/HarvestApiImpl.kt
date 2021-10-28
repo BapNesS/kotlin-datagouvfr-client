@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
@@ -11,7 +12,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class HarvestApiImpl(private val client: HttpClient): HarvestApi {
+internal class HarvestApiImpl(private val client: HttpClient): HarvestApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -24,6 +25,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getHarvestJob(
         ident: String,
         page: Int?,
@@ -131,6 +133,7 @@ class HarvestApiImpl(private val client: HttpClient): HarvestApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListHarvestSources(
         page: Int?,
         pageSize: Int?,

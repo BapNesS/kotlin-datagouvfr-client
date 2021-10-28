@@ -1,15 +1,15 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Job
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Task
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Asynchronous workers related operations
  */
-interface WorkersApi : WithApiKey {
+internal interface WorkersApi: WithApiKey {
 
     /**
      * List all scheduled jobs

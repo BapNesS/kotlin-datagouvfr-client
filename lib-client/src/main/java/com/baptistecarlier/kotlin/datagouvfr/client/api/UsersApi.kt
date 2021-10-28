@@ -1,14 +1,15 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * User related operations
  */
-interface UsersApi: WithApiKey {
+internal interface UsersApi: WithApiKey {
 
     /**
      * List all users
@@ -21,9 +22,11 @@ interface UsersApi: WithApiKey {
      * @param page The page to display (optional, default to 0)
      * @param pageSize The page size (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     fun getListUsers(
         q: String?,
-        facets: List<String>?,
+        /*facets: List<String>?,*/
         organization: String?,
         datasets: String?,
         followers: String?,
@@ -63,6 +66,7 @@ interface UsersApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListUserFollowers(id: String, page: Int?, pageSize: Int?): Flow<DgfrResource<FollowPage>>
 
     /**

@@ -1,11 +1,13 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
-interface DatasetsApi : WithApiKey {
+internal interface DatasetsApi: WithApiKey {
 
     /**
      * List or search all datasets
@@ -29,9 +31,11 @@ interface DatasetsApi : WithApiKey {
      * @param page The page to display (optional, default to 0)
      * @param pageSize The page size (optional, default
      */
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     fun getListDatasets(
         q: String? = null,
-        facets: List<String>? = null,
+        /*facets: List<String>? = null,*/
         tag: String? = null,
         badge: String? = null,
         organization: String? = null,
@@ -73,6 +77,7 @@ interface DatasetsApi : WithApiKey {
      * @param dataset Filter activities for that particular dataset (optional)
      * @param owner Filter activities for that particula
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListCommunityResources(
         sort: String? = null,
         page: Int? = null,
@@ -414,6 +419,7 @@ interface DatasetsApi : WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional,
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListDatasetFollowers(
         id: String,
         page: Int? = null,

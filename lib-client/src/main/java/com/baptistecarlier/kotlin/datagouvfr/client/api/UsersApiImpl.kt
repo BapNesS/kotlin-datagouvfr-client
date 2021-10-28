@@ -1,9 +1,11 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -14,16 +16,18 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class UsersApiImpl(private val client: HttpClient): UsersApi {
+internal class UsersApiImpl(private val client: HttpClient): UsersApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
 
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     override fun getListUsers(
         q: String?,
-        facets: List<String>?,
+        /*facets: List<String>?,*/
         organization: String?,
         datasets: String?,
         followers: String?,
@@ -33,7 +37,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
     ): Flow<DgfrResource<UserPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("facets", facets)
+        /*builder.appendIfNotNull("facets", facets)*/
         builder.appendIfNotNull("organization", organization)
         builder.appendIfNotNull("datasets", datasets)
         builder.appendIfNotNull("followers", followers)
@@ -81,6 +85,7 @@ class UsersApiImpl(private val client: HttpClient): UsersApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListUserFollowers(
         id: String,
         page: Int?,

@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
@@ -13,13 +14,14 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class PostsApiImpl(private val client: HttpClient) : PostsApi {
+internal class PostsApiImpl(private val client: HttpClient): PostsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListPosts(page: Int?, pageSize: Int?, sort: String?): Flow<DgfrResource<PostPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("sort", sort)

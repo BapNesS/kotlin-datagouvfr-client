@@ -1,17 +1,18 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Discussion related operations
  */
-interface DiscussionsApi: WithApiKey {
+internal interface DiscussionsApi: WithApiKey {
 
     /**
      * List all Discussions
@@ -21,6 +22,7 @@ interface DiscussionsApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListDiscussions(
         sort: String? = null,
         closed: Boolean? = null,
@@ -72,5 +74,5 @@ interface DiscussionsApi: WithApiKey {
         id: String,
         cidx: Int
     ): Flow<DgfrResource<Boolean>>
-    
+
 }

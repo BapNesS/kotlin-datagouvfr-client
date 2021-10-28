@@ -1,16 +1,17 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.UploadedImage
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Posts related operations
  */
-interface PostsApi : WithApiKey {
+internal interface PostsApi: WithApiKey {
 
     /**
      * List all posts
@@ -18,6 +19,7 @@ interface PostsApi : WithApiKey {
      * @param pageSize The page size to fetch (optional, default to 20)
      * @param sort The sorting attribute (optional, defa
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListPosts(
         page: Int? = null,
         pageSize: Int? = null,

@@ -1,12 +1,12 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Get a deterministic avatar given an identifier at a given size
  */
-interface AvatarsApi {
+internal interface AvatarsApi {
 
     /**
      * @param identifier

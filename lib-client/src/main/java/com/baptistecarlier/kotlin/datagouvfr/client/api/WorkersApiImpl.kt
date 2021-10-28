@@ -1,9 +1,9 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Job
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Task
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import io.ktor.client.*
@@ -12,7 +12,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
+internal class WorkersApiImpl(private val client: HttpClient): WorkersApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {

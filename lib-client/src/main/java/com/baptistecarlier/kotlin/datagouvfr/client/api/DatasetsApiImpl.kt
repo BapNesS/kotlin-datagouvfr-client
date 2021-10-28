@@ -1,6 +1,8 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.*
@@ -11,16 +13,18 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
+internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
 
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     override fun getListDatasets(
         q: String?,
-        facets: List<String>?,
+        /*facets: List<String>?,*/
         tag: String?,
         badge: String?,
         organization: String?,
@@ -41,7 +45,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     ): Flow<DgfrResource<DatasetPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("facets", facets)
+        /*builder.appendIfNotNull("facets", facets)*/
         builder.appendIfNotNull("tag", tag)
         builder.appendIfNotNull("badge", badge)
         builder.appendIfNotNull("organization", organization)
@@ -81,6 +85,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListCommunityResources(
         sort: String?,
         page: Int?,
@@ -467,6 +472,7 @@ class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         (response.status.value in HttpCodeRangeSucces)
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListDatasetFollowers(
         id: String,
         page: Int?,
