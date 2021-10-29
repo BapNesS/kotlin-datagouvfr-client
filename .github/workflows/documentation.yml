@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - $default-branch
-      - issue/10
 jobs:
   publish:
     runs-on: ubuntu-latest
