@@ -1,13 +1,13 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Transfer
 import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferRequest
 import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferResponse
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
-interface TransferApi: WithApiKey {
+internal interface TransferApi: WithApiKey {
 
     /**
      * Fetch a transfer request given its identifier

@@ -1,9 +1,9 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -14,7 +14,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class MeApiImpl(private val client: HttpClient) : MeApi {
+internal class MeApiImpl(private val client: HttpClient): MeApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -27,7 +27,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getMe(): Flow<DgfrResource<Me>> = loadingFlow {
@@ -73,7 +73,7 @@ class MeApiImpl(private val client: HttpClient) : MeApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun postGenerateApikey(): Flow<DgfrResource<ApiKey>> = loadingFlow {

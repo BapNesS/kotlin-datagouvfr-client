@@ -1,14 +1,15 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Site global namespace
  */
-interface SiteApi: WithApiKey {
+internal interface SiteApi: WithApiKey {
 
     /**
      * Fetch site activity, optionally filtered by user of org
@@ -17,6 +18,7 @@ interface SiteApi: WithApiKey {
      * @param user Filter activities for that particular user (optional)
      * @param organization Filter activities for that particular organization (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getActivity(
         page: Int? = null,
         pageSize: Int? = null,

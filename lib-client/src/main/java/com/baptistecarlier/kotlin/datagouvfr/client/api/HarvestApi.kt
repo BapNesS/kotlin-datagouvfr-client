@@ -1,14 +1,15 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.WithApiKey
+import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Harvest related operations
  */
-interface HarvestApi: WithApiKey {
+internal interface HarvestApi: WithApiKey {
 
     /**
      * List all available harvest backends
@@ -21,6 +22,7 @@ interface HarvestApi: WithApiKey {
      * @param page The page to fetch (optional, default to 1)
      * @param pageSize The page size to fetch (optional, default to 20)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getHarvestJob(ident: String, page: Int?, pageSize: Int?): Flow<DgfrResource<HarvestJobPage>>
 
     /**
@@ -93,6 +95,7 @@ interface HarvestApi: WithApiKey {
      * @param owner The organization or user ID to filter on (optional)
      * @param deleted Include sources flaggued as deleted (optional, default to false)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getListHarvestSources(page: Int?, pageSize: Int?, owner: String?, deleted: Boolean?): Flow<DgfrResource<List<HarvestSourcePage>>>
 
     /**

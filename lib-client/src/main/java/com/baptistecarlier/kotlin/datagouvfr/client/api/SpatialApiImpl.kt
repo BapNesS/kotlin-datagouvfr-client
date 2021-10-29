@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
@@ -9,7 +9,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow
 
-class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
+internal class SpatialApiImpl(private val client: HttpClient): SpatialApi {
 
     override fun getSpatialCoverage(level: String): Flow<DgfrResource<List<GeoJSONFeatureCollection>>> = loadingFlow {
         client.get(
