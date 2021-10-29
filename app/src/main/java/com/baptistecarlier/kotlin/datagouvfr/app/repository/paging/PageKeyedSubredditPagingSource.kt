@@ -3,7 +3,8 @@ package com.baptistecarlier.kotlin.datagouvfr.app.repository.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
@@ -15,6 +16,7 @@ class DatasetPagingSource(
     private val query: String
 ) : PagingSource<Int, Dataset>() {
 
+    @OptIn(MissingFieldMapping::class)
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Dataset> {
         return try {
 

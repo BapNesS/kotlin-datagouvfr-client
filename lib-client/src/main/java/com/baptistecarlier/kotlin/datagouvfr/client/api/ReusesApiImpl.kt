@@ -1,9 +1,11 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSucces
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
@@ -14,13 +16,15 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
+internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
 
+    @OptIn(MissingFieldMapping::class)
+    @MissingApiParamter
     override fun getListReuses(
         q: String?,
         /*facets: List<String>?,*/
@@ -73,7 +77,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getSuggestReuses(q: String, size: Int?): Flow<DgfrResource<List<ReuseSuggestion>>> = loadingFlow {
@@ -98,9 +102,10 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListReuseFollowers(
         id: String,
         page: Int?,
@@ -121,7 +126,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>> = loadingFlow {
@@ -130,7 +135,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun getReuse(reuse: String): Flow<DgfrResource<Reuse>> = loadingFlow {
@@ -165,7 +170,7 @@ class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         ) {
             addApiKey(apiKey)
         }
-        (response.status.value in HttpCodeRangeSucces)
+        response.status.value in HttpCodeRangeSuccess
     }
 
     override fun postReuseAddDataset(
