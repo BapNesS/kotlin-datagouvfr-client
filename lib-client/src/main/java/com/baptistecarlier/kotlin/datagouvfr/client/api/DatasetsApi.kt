@@ -4,10 +4,9 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
-internal interface DatasetsApi: WithApiKey {
+internal interface DatasetsApi : WithApiKey {
 
     /**
      * List or search all datasets
@@ -145,14 +144,12 @@ internal interface DatasetsApi: WithApiKey {
     /**
      * List all available frequencies
      */
-    fun getListFrequencies(
-    ): Flow<DgfrResource<List<Frequency>>>
+    fun getListFrequencies(): Flow<DgfrResource<List<Frequency>>>
 
     /**
      * List all available licenses
      */
-    fun getListLicenses(
-    ): Flow<DgfrResource<List<License>>>
+    fun getListLicenses(): Flow<DgfrResource<List<License>>>
 
     /**
      * Redirect to the latest version of a resource given its
@@ -167,14 +164,12 @@ internal interface DatasetsApi: WithApiKey {
     /**
      * List all resource types
      */
-    fun getResourceTypes(
-    ): Flow<DgfrResource<List<ResourceType>>>
+    fun getResourceTypes(): Flow<DgfrResource<List<ResourceType>>>
 
     /**
      * List all available schemas
      */
-    fun getSchemas(
-    ): Flow<DgfrResource<List<Schema>>>
+    fun getSchemas(): Flow<DgfrResource<List<Schema>>>
 
     /**
      * Suggest datasets
@@ -434,5 +429,4 @@ internal interface DatasetsApi: WithApiKey {
     fun postFollowDataset(
         id: String
     ): Flow<DgfrResource<Boolean>>
-
 }

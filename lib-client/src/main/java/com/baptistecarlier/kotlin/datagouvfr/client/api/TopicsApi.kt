@@ -4,13 +4,12 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Topic
 import com.baptistecarlier.kotlin.datagouvfr.client.model.TopicPage
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Topics related operations
  */
-internal interface TopicsApi: WithApiKey {
+internal interface TopicsApi : WithApiKey {
 
     /**
      * List all topics
@@ -44,5 +43,4 @@ internal interface TopicsApi: WithApiKey {
      * @param payload (required)
      */
     fun putUpdateTopic(topic: String, payload: Topic): Flow<DgfrResource<Topic>>
-
 }

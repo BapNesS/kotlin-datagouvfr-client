@@ -8,7 +8,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.flow.Flow
 
-internal class AvatarsApiImpl(private val client: HttpClient): AvatarsApi {
+internal class AvatarsApiImpl(private val client: HttpClient) : AvatarsApi {
 
     override fun getAvatar(identifier: String, size: Int): Flow<DgfrResource<ByteArray>> = loadingFlow {
         val httpResponse: HttpResponse = client.get(path = "avatars/$identifier/$size")

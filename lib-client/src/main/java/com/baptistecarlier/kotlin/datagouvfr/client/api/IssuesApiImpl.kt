@@ -2,17 +2,17 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class IssuesApiImpl(private val client: HttpClient): IssuesApi {
+internal class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -67,5 +67,4 @@ internal class IssuesApiImpl(private val client: HttpClient): IssuesApi {
             body = payload
         }
     }
-
 }

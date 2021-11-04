@@ -4,13 +4,12 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Organization related operations
  */
-internal interface OrganizationsApi: WithApiKey {
+internal interface OrganizationsApi : WithApiKey {
 
     /**
      * List or search all organizations
@@ -35,7 +34,8 @@ internal interface OrganizationsApi: WithApiKey {
         followers: String? = null,
         sort: String? = null,
         page: Int? = null,
-        pageSize: Int? = null): Flow<DgfrResource<OrganizationPage>>
+        pageSize: Int? = null
+    ): Flow<DgfrResource<OrganizationPage>>
 
     /**
      * Create a new organization
@@ -43,7 +43,7 @@ internal interface OrganizationsApi: WithApiKey {
      */
     fun postCreateOrganization(
         payload: Organization
-        ): Flow<DgfrResource<Organization>>
+    ): Flow<DgfrResource<Organization>>
 
     /**
      * List all available organization badges and their labels
@@ -62,7 +62,8 @@ internal interface OrganizationsApi: WithApiKey {
      */
     fun getSuggestOrganizations(
         q: String,
-        size: Int? = null): Flow<DgfrResource<List<OrganizationSuggestion>>>
+        size: Int? = null
+    ): Flow<DgfrResource<List<OrganizationSuggestion>>>
 
     /**
      * Unfollow an object given its ID
@@ -127,7 +128,7 @@ internal interface OrganizationsApi: WithApiKey {
     fun postAddOrganizationBadge(
         org: String,
         payload: Badge
-        ): Flow<DgfrResource<Badge>>
+    ): Flow<DgfrResource<Badge>>
 
     /**
      * Delete a badge for a given organization
@@ -287,5 +288,4 @@ internal interface OrganizationsApi: WithApiKey {
     fun getListOrganizationReuses(
         org: String
     ): Flow<DgfrResource<List<Reuse>>>
-
 }

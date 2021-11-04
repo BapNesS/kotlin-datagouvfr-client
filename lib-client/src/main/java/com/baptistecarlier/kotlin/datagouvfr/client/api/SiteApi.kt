@@ -3,13 +3,12 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Site global namespace
  */
-internal interface SiteApi: WithApiKey {
+internal interface SiteApi : WithApiKey {
 
     /**
      * Fetch site activity, optionally filtered by user of org
@@ -38,7 +37,8 @@ internal interface SiteApi: WithApiKey {
         url: String,
         maxWidth: String? = null,
         maxHeight: String? = null,
-        format: String? = null): Flow<DgfrResource<Oembed>>
+        format: String? = null
+    ): Flow<DgfrResource<Oembed>>
 
     /**
      * The returned payload is a list of OEmbed formatted responses
@@ -109,5 +109,4 @@ internal interface SiteApi: WithApiKey {
         q: String,
         size: Int? = null
     ): Flow<DgfrResource<List<Territory>>>
-
 }

@@ -40,20 +40,20 @@ data class CommunityResource(
     var type: Type,
     @SerialName("url")
     var url: String,
-    //@SerialName("checksum")
-    //var checksum: Map<String, Any?>? = null,
+    // @SerialName("checksum")
+    // var checksum: Map<String, Any?>? = null,
     @SerialName("created_at")
     var createdAt: LocalDateTime? = null,
     @SerialName("description")
     var description: String? = null,
-    //@SerialName("extras")
-    //var extras: Map<String, Any?>? = null,
+    // @SerialName("extras")
+    // var extras: Map<String, Any?>? = null,
     @SerialName("filesize")
     var filesize: Long? = null,
     @SerialName("id")
     var id: String? = null,
-    //@SerialName("last_modified")
-    //var lastModified: LocalDateTime? = null,
+    // @SerialName("last_modified")
+    // var lastModified: LocalDateTime? = null,
     @SerialName("latest")
     var latest: String? = null,
     @SerialName("metrics")
@@ -64,12 +64,12 @@ data class CommunityResource(
     var previewUrl: String? = null,
     @SerialName("published")
     var published: LocalDateTime? = null,
-    //@SerialName("schema")
-    //var schema: Map<String, Any?>? = null,
-    //@SerialName("dataset")
-    //var dataset: Map<String, Any?>? = null,
-    //@SerialName("organization")
-    //var organization: Map<String, Any?>? = null,
+    // @SerialName("schema")
+    // var schema: Map<String, Any?>? = null,
+    // @SerialName("dataset")
+    // var dataset: Map<String, Any?>? = null,
+    // @SerialName("organization")
+    // var organization: Map<String, Any?>? = null,
     @SerialName("owner")
     var owner: Owner? = null
 ) {

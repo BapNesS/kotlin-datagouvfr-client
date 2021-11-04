@@ -17,7 +17,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class OrganizationsApiImpl(private val client: HttpClient): OrganizationsApi {
+internal class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -168,17 +168,17 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
     }
 
     override fun getRdfOrganization(org: String): Flow<DgfrResource<String>> = loadingFlow {
-         val response = client.get<HttpResponse>(
+        val response = client.get<HttpResponse>(
             path = "organizations/$org/catalog"
         )
-         response.content.readAndClose().orEmpty()
+        response.content.readAndClose().orEmpty()
     }
 
     override fun getRdfOrganizationFormat(org: String, format: String): Flow<DgfrResource<String>> = loadingFlow {
-         val response = client.get<HttpResponse>(
+        val response = client.get<HttpResponse>(
             path = "organizations/$org/catalog.$format"
         )
-         response.content.readAndClose().orEmpty()
+        response.content.readAndClose().orEmpty()
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -219,10 +219,13 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         client.submitFormWithBinaryData(
             url = "organizations/$org/logo",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
@@ -239,10 +242,13 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         client.submitFormWithBinaryData(
             url = "organizations/$org/logo",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Put
@@ -302,7 +308,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
     // A bit light, isn't ?
     override fun postMembershipRequest(
         org: String
-    ) : Flow<DgfrResource<MembershipRequest>> = loadingFlow {
+    ): Flow<DgfrResource<MembershipRequest>> = loadingFlow {
         client.post(
             path = "organizations/$org/membership/"
         ) {
@@ -336,5 +342,4 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
             path = "organizations/$org/reuses/"
         )
     }
-
 }

@@ -1,0 +1,19 @@
+name: ktlint
+on:
+  push:
+    branches:
+      - init_ktlint
+  pull_request:
+    paths:
+      - .github/workflows/ktlint.yml
+      - 'src/**/*.kt'
+      - '**.kts'
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+      - name: ktlint
+        run: ./gradlew :lib-client:ktlintCheck --daemon

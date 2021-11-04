@@ -1,15 +1,15 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow
 
-internal class SpatialApiImpl(private val client: HttpClient): SpatialApi {
+internal class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
 
     override fun getSpatialCoverage(level: String): Flow<DgfrResource<List<GeoJSONFeatureCollection>>> = loadingFlow {
         client.get(
@@ -45,7 +45,7 @@ internal class SpatialApiImpl(private val client: HttpClient): SpatialApi {
         id: String,
         dynamic: Boolean?,
         size: Int?
-    ) : Flow<DgfrResource<List<DatasetReference>>> = loadingFlow {
+    ): Flow<DgfrResource<List<DatasetReference>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("id", id)
         builder.appendIfNotNull("dynamic", dynamic)
@@ -71,10 +71,7 @@ internal class SpatialApiImpl(private val client: HttpClient): SpatialApi {
 
     override fun getSpatialZones(ids: List<String>): Flow<DgfrResource<GeoJSONFeatureCollection>> = loadingFlow {
         client.get(
-            path = "spatial/zones/?${ids}/"
+            path = "spatial/zones/?$ids/"
         )
     }
-
 }
-
-

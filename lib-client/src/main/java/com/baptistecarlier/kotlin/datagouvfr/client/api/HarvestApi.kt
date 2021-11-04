@@ -3,13 +3,12 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Harvest related operations
  */
-internal interface HarvestApi: WithApiKey {
+internal interface HarvestApi : WithApiKey {
 
     /**
      * List all available harvest backends
@@ -103,5 +102,4 @@ internal interface HarvestApi: WithApiKey {
      * @param payload (required)
      */
     fun postCreateHarvestSource(payload: HarvestSource): Flow<DgfrResource<HarvestSource>>
-
 }

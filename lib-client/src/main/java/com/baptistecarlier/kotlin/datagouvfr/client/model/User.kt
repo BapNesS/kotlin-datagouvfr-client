@@ -4,7 +4,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * @property about The user self description
  * @property active
@@ -45,10 +44,10 @@ data class User(
     var avatar: String? = null,
     @SerialName("avatar_thumbnail")
     var avatarThumbnail: String? = null,
-    //@SerialName("email")
-    //var email: Map<String, Any?>? = null,
-    //@SerialName("metrics")
-    //var metrics: Map<String, Any?>? = null,
+    // @SerialName("email")
+    // var email: Map<String, Any?>? = null,
+    // @SerialName("metrics")
+    // var metrics: Map<String, Any?>? = null,
     @SerialName("organizations")
     var organizations: List<OrganizationReference>? = null,
     @SerialName("page")

@@ -13,7 +13,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
+internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -312,14 +312,14 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         val response = client.get<HttpResponse>(
             path = "datasets/$dataset/rdf"
         )
-         response.content.readAndClose().orEmpty()
+        response.content.readAndClose().orEmpty()
     }
 
     override fun getRdfDatasetFormat(dataset: String, format: String): Flow<DgfrResource<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "datasets/$dataset/rdf.$format"
         )
-         response.content.readAndClose().orEmpty()
+        response.content.readAndClose().orEmpty()
     }
 
     override fun postCreateResource(dataset: String, payload: Resource): Flow<DgfrResource<Resource>> = loadingFlow {
@@ -406,10 +406,13 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         client.submitFormWithBinaryData(
             url = "datasets/$dataset/upload/",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
                 fbAppendIfNotNull("uuid", uuid)
                 fbAppendIfNotNull("partindex", partIndex)
                 fbAppendIfNotNull("partbyteoffset", partByteOffset)
@@ -447,10 +450,13 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         client.submitFormWithBinaryData(
             url = "datasets/$dataset/upload/community/",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
                 fbAppendIfNotNull("uuid", uuid)
                 fbAppendIfNotNull("partindex", partIndex)
                 fbAppendIfNotNull("partbyteoffset", partByteOffset)
@@ -496,5 +502,4 @@ internal class DatasetsApiImpl(private val client: HttpClient): DatasetsApi {
         }
         response.status.value in HttpCodeRangeSuccess
     }
-
 }

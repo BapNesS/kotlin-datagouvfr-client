@@ -46,8 +46,8 @@ data class Organization(
     var logo: String? = null,
     @SerialName("logo_thumbnail")
     var logoThumbnail: String? = null,
-    //@SerialName("members")
-    //var members: List<Map<String, Any?>>? = null,
+    // @SerialName("members")
+    // var members: List<Map<String, Any?>>? = null,
     @SerialName("metrics")
     var metrics: Metrics? = null,
     @SerialName("page")

@@ -17,7 +17,4 @@ internal interface TagsApi {
         q: String,
         size: Int? = null
     ): Flow<DgfrResource<List<Tag>>>
-
 }
-
-

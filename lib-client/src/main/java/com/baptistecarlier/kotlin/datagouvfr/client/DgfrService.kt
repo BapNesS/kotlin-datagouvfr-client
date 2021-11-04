@@ -49,11 +49,13 @@ private fun HttpClientConfig<CIOEngineConfig>.installers(
     timeOut: Long
 ) {
     install(JsonFeature) {
-        serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-            prettyPrint = true
-            isLenient = true
-            ignoreUnknownKeys = true
-        })
+        serializer = KotlinxSerializer(
+            kotlinx.serialization.json.Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+            }
+        )
 
         engine {
             requestTimeout = timeOut
@@ -99,8 +101,7 @@ class DgfrService(apiKey: String = "") :
     TransferApi by transferApi,
     NotificationsApi by notificationsApi,
     AvatarsApi by avatarsApi,
-    HarvestApi by harvestApiImpl
-{
+    HarvestApi by harvestApiImpl {
 
     init {
         setApiKey(apiKey)
@@ -123,5 +124,4 @@ class DgfrService(apiKey: String = "") :
         notificationsApi.setApiKey(apiKey)
         harvestApiImpl.setApiKey(apiKey)
     }
-
 }

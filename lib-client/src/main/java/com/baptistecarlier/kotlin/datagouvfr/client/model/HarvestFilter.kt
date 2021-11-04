@@ -3,7 +3,6 @@ package com.baptistecarlier.kotlin.datagouvfr.client.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * @property description The filter details
  * @property key The filter key

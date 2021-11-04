@@ -5,13 +5,12 @@ import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMappi
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.UploadedImage
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Posts related operations
  */
-internal interface PostsApi: WithApiKey {
+internal interface PostsApi : WithApiKey {
 
     /**
      * List all posts
@@ -90,5 +89,4 @@ internal interface PostsApi: WithApiKey {
      * @param post (required)
      */
     fun postPublishPost(post: String): Flow<DgfrResource<Post>>
-
 }

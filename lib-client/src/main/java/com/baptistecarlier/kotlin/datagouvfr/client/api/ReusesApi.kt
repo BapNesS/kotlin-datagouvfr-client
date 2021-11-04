@@ -4,13 +4,12 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Reuse related operations
  */
-internal interface ReusesApi: WithApiKey {
+internal interface ReusesApi : WithApiKey {
 
     /**
      * @param q The search query (optional)
@@ -185,5 +184,4 @@ internal interface ReusesApi: WithApiKey {
         fileName: String,
         contentType: String
     ): Flow<DgfrResource<UploadedImage>>
-
 }
