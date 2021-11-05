@@ -1,6 +1,9 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
-import org.junit.Assert.assertEquals
+import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import io.ktor.util.date.*
+import kotlinx.datetime.*
+import org.junit.Assert
 import org.junit.Test
 
 /**
@@ -10,7 +13,22 @@ import org.junit.Test
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun tmp_test() {
+        val currentMoment: Instant = Clock.System.now()
+        val datetimeInUtc: LocalDateTime = currentMoment.toLocalDateTime(TimeZone.UTC)
+
+        val item = Dataset(
+            createdAt = datetimeInUtc,
+            description = "String",
+            frequency = Dataset.FrequencyEnum.ANNUAL,
+            lastModified = datetimeInUtc,
+            lastUpdate = datetimeInUtc,
+            page = "String",
+            slug = "String",
+            title = "String",
+            uri = "String",
+
+        )
+        Assert.assertNotNull(item)
     }
 }
