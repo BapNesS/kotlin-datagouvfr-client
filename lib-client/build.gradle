@@ -65,6 +65,11 @@ sonarqube {
         property "sonar.junit.reportsPath", "build/test-results/testReleaseUnitTest/"
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/testReleaseUnitTestCoverage/testReleaseUnitTestCoverage.xml"
+        def unit = fileTree(dir: project.projectDir, includes: ['**/*.exec']).files
+        def ui = fileTree(dir: project.projectDir, includes: ['**/*.ec']).files
+        unit.addAll(ui)
+        def files = unit.join(", ")
+        property "sonar.jacoco.reportPaths", files
     }
 }
 
