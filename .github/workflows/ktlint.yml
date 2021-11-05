@@ -1,8 +1,5 @@
 name: ktlint
 on:
-  push:
-    branches:
-      - init_ktlint
   pull_request:
     paths:
       - .github/workflows/ktlint.yml
