@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * User related operations
  */
-internal interface UsersApi: WithApiKey {
+internal interface UsersApi : WithApiKey {
 
     /**
      * List all users
@@ -107,5 +107,4 @@ internal interface UsersApi: WithApiKey {
         fileName: String,
         contentType: String
     ): Flow<DgfrResource<UploadedImage>>
-
 }

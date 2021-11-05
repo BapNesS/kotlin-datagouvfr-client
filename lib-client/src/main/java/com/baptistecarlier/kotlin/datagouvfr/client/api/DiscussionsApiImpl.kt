@@ -17,7 +17,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class DiscussionsApiImpl(private val client: HttpClient): DiscussionsApi {
+internal class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -93,5 +93,4 @@ internal class DiscussionsApiImpl(private val client: HttpClient): DiscussionsAp
         }
         response.status.value in HttpCodeRangeSuccess
     }
-
 }

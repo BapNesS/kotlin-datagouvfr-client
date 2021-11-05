@@ -16,7 +16,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class UsersApiImpl(private val client: HttpClient): UsersApi {
+internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -145,15 +145,17 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         client.submitFormWithBinaryData(
             url = "users/$user/avatar",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }
-
 }

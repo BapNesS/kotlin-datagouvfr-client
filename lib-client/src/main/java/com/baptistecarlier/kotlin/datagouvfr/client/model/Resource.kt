@@ -36,14 +36,14 @@ data class Resource(
     var type: Type,
     @SerialName("url")
     var url: String,
-    //@SerialName("checksum")
-    //var checksum: Map<String, Any?>? = null,
+    // @SerialName("checksum")
+    // var checksum: Map<String, Any?>? = null,
     @SerialName("created_at")
     var createdAt: LocalDateTime? = null,
     @SerialName("description")
     var description: String? = null,
-    //@SerialName("extras")
-    //var extras: Map<String, Any?>? = null,
+    // @SerialName("extras")
+    // var extras: Map<String, Any?>? = null,
     @SerialName("filesize")
     var filesize: Long? = null,
     @SerialName("id")
@@ -52,16 +52,16 @@ data class Resource(
     var lastModified: LocalDateTime? = null,
     @SerialName("latest")
     var latest: String? = null,
-    //@SerialName("metrics")
-    //var metrics: Map<String, Any?>? = null,
+    // @SerialName("metrics")
+    // var metrics: Map<String, Any?>? = null,
     @SerialName("mime")
     var mime: String? = null,
     @SerialName("preview_url")
     var previewUrl: String? = null,
     @SerialName("published")
     var published: LocalDateTime? = null,
-    //@SerialName("schema")
-    //var schema: Map<String, Any?>? = null
+    // @SerialName("schema")
+    // var schema: Map<String, Any?>? = null
 ) {
 
     /**

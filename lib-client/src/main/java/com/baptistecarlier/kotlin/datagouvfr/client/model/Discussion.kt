@@ -4,7 +4,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * @property `class` The object class
  * @property closed The discussion closing date

@@ -3,13 +3,12 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Job
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Task
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Asynchronous workers related operations
  */
-internal interface WorkersApi: WithApiKey {
+internal interface WorkersApi : WithApiKey {
 
     /**
      * List all scheduled jobs
@@ -50,5 +49,4 @@ internal interface WorkersApi: WithApiKey {
      * @param id (required)
      */
     fun getTaskApi(id: String): Flow<DgfrResource<Task>>
-
 }

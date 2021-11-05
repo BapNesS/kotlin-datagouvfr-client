@@ -4,7 +4,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * @property created The job creation date
  * @property ended The job end date

@@ -14,7 +14,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class PostsApiImpl(private val client: HttpClient): PostsApi {
+internal class PostsApiImpl(private val client: HttpClient) : PostsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -77,10 +77,13 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         client.submitFormWithBinaryData(
             url = "posts/$post/image",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
@@ -97,10 +100,13 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         client.submitFormWithBinaryData(
             url = "posts/$post/image",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Put

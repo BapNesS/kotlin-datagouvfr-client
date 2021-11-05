@@ -6,13 +6,12 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Discussion related operations
  */
-internal interface DiscussionsApi: WithApiKey {
+internal interface DiscussionsApi : WithApiKey {
 
     /**
      * List all Discussions
@@ -74,5 +73,4 @@ internal interface DiscussionsApi: WithApiKey {
         id: String,
         cidx: Int
     ): Flow<DgfrResource<Boolean>>
-
 }

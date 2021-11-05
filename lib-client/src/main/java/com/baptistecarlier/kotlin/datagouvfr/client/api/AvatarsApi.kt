@@ -16,5 +16,4 @@ internal interface AvatarsApi {
         identifier: String,
         size: Int
     ): Flow<DgfrResource<ByteArray>>
-
 }

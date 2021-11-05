@@ -4,7 +4,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * @property args The job execution arguments
  * @property crontab

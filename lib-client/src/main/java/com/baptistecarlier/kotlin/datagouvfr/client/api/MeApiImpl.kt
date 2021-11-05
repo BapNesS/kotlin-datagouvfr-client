@@ -14,7 +14,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class MeApiImpl(private val client: HttpClient): MeApi {
+internal class MeApiImpl(private val client: HttpClient) : MeApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -46,10 +46,13 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         client.submitFormWithBinaryData(
             url = "me/avatar",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
@@ -163,5 +166,4 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
             addApiKey(apiKey)
         }
     }
-
 }

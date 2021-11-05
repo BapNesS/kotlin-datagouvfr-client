@@ -14,7 +14,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class TopicsApiImpl(private val client: HttpClient): TopicsApi {
+internal class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -66,5 +66,4 @@ internal class TopicsApiImpl(private val client: HttpClient): TopicsApi {
             body = payload
         }
     }
-
 }

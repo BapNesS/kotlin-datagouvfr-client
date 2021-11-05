@@ -16,7 +16,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
+internal class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -211,15 +211,17 @@ internal class ReusesApiImpl(private val client: HttpClient): ReusesApi {
         client.submitFormWithBinaryData(
             url = "reuses/$reuse/image",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }
-
 }

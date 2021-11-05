@@ -2,13 +2,12 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Connected user related operations
  */
-internal interface MeApi: WithApiKey {
+internal interface MeApi : WithApiKey {
 
     /**
      * Delete my profile
@@ -92,6 +91,4 @@ internal interface MeApi: WithApiKey {
      * List all my reuses (including private ones)
      */
     fun getMyReuses(): Flow<DgfrResource<List<Reuse>>>
-
 }
-

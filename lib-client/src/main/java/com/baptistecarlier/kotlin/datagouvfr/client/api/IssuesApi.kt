@@ -5,13 +5,12 @@ import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMappi
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Issue related operations
  */
-internal interface IssuesApi: WithApiKey {
+internal interface IssuesApi : WithApiKey {
 
     /**
      * List all Issues
@@ -55,5 +54,4 @@ internal interface IssuesApi: WithApiKey {
         id: String,
         payload: IssueResponse
     ): Flow<DgfrResource<Issue>>
-
 }

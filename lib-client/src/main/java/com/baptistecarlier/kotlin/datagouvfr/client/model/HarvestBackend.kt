@@ -4,7 +4,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * @property createdAt The error creation date
  * @property details Optional details (ie. stacktrace)
@@ -19,7 +18,6 @@ data class HarvestError(
     @SerialName("details")
     var details: String? = null
 )
-
 
 /**
  * @property features The backend optional features

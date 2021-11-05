@@ -16,10 +16,8 @@ internal suspend inline fun <reified T> exceptionalHandledCall(ktorCall: suspend
     return try {
         val success = ktorCall.invoke()
         DgfrResource.Success(success)
-
     } catch (dgfrException: DgfrException) {
         DgfrResource.ServerError(dgfrException.httpCode)
-
     } catch (e: Exception) {
         DgfrResource.ClientError(ClientErrorCode.UNKNOWN)
     }

@@ -4,10 +4,9 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Transfer
 import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferRequest
 import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferResponse
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
-internal interface TransferApi: WithApiKey {
+internal interface TransferApi : WithApiKey {
 
     /**
      * Fetch a transfer request given its identifier
@@ -32,5 +31,4 @@ internal interface TransferApi: WithApiKey {
      * @param payload (required)
      */
     fun postRespondToTransfer(id: String, payload: TransferResponse): Flow<DgfrResource<Transfer>>
-
 }
