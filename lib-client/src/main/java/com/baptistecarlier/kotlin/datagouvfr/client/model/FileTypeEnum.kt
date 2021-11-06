@@ -8,9 +8,7 @@ import kotlinx.serialization.Serializable
  * Values: FILE, REMOTE
  */
 @Serializable
-enum class FileTypeEnum {
-    @SerialName("file")
-    FILE,
-    @SerialName("remote")
-    REMOTE
+enum class FileTypeEnum(val value: String) {
+    @SerialName("file") FILE("file"),
+    @SerialName("remote") REMOTE("remote")
 }

@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -17,6 +18,7 @@ import kotlinx.serialization.Serializable
  * @property relatedToKind The activity target object class name
  * @property relatedToUrl The activity target model
  */
+@MissingFieldMapping
 @Serializable
 data class Activity(
     @SerialName("icon")

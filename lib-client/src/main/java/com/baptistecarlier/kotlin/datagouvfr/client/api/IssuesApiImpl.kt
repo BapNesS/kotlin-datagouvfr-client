@@ -42,6 +42,7 @@ internal class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postCreateIssue(payload: Issue): Flow<DgfrResource<Issue>> = loadingFlow {
         client.post(
             path = "issues/"
@@ -52,12 +53,14 @@ internal class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getIssue(id: String): Flow<DgfrResource<Issue>> = loadingFlow {
         client.get(
             path = "issues/$id/"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postCommentIssue(id: String, payload: IssueResponse): Flow<DgfrResource<Issue>> = loadingFlow {
         client.post(
             path = "issues/$id/"

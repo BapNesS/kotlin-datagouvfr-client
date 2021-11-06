@@ -107,6 +107,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postCreateCommunityResource(payload: CommunityResource): Flow<DgfrResource<CommunityResource>> = loadingFlow {
         client.post(
             path = "datasets/community_resources/"
@@ -117,6 +118,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun deleteCommunityResource(
         community: String,
         dataset: String?
@@ -131,6 +133,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getRetrieveCommunityResource(
         community: String,
         dataset: String?
@@ -143,6 +146,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun putUpdateCommunityResource(
         community: String,
         payload: CommunityResource,
@@ -160,6 +164,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postUploadCommunityResource(
         community: String,
         dataset: String?
@@ -322,6 +327,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         response.content.readAndClose().orEmpty()
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postCreateResource(dataset: String, payload: Resource): Flow<DgfrResource<Resource>> = loadingFlow {
         client.post(
             path = "datasets/$dataset/resources/"
@@ -332,6 +338,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun putUpdateResources(
         dataset: String,
         payload: List<Resource>
@@ -354,12 +361,14 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getResource(rid: String, dataset: String): Flow<DgfrResource<Resource>> = loadingFlow {
         client.get(
             path = "datasets/$dataset/resources/$rid/"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun putUpdateResource(
         rid: String,
         dataset: String,
@@ -380,6 +389,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postUploadDatasetResource(
         rid: String,
         dataset: String
@@ -392,6 +402,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postUploadNewDatasetResource(
         dataset: String,
         file: ByteArray,
@@ -436,6 +447,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
      * @param totalparts (optional)
      * @param chunksize (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     override fun postUploadNewCommunityResource(
         dataset: String,
         file: ByteArray,

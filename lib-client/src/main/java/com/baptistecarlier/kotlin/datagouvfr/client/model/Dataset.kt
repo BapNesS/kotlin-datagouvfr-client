@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -35,6 +36,7 @@ import kotlinx.serialization.Serializable
  * @property uri The dataset API URI
  */
 @Serializable
+@OptIn(MissingFieldMapping::class)
 data class Dataset(
     @SerialName("created_at")
     var createdAt: LocalDateTime,

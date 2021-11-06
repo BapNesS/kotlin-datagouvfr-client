@@ -90,6 +90,7 @@ internal interface DatasetsApi : WithApiKey {
      * Create a new community resource
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCreateCommunityResource(
         payload: CommunityResource
     ): Flow<DgfrResource<CommunityResource>>
@@ -99,6 +100,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param community The community resource unique identifier (required)
      * @param dataset The dataset ID or slug (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun deleteCommunityResource(
         community: String,
         dataset: String? = null
@@ -109,6 +111,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param community The community resource unique identifier (required)
      * @param dataset The dataset ID or slug (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getRetrieveCommunityResource(
         community: String,
         dataset: String? = null
@@ -120,6 +123,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param payload (required)
      * @param dataset The dataset ID or slug (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun putUpdateCommunityResource(
         community: String,
         payload: CommunityResource,
@@ -131,6 +135,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param community The community resource unique identifier (required)
      * @param dataset The dataset ID or slug (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postUploadCommunityResource(
         community: String,
         dataset: String? = null
@@ -284,6 +289,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param dataset The dataset ID or slug (required)
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCreateResource(
         dataset: String,
         payload: Resource
@@ -294,6 +300,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param dataset The dataset ID or slug (required)
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun putUpdateResources(
         dataset: String,
         payload: List<Resource>
@@ -314,6 +321,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param rid The resource unique identifier (required)
      * @param dataset The dataset ID or slug (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getResource(
         rid: String,
         dataset: String
@@ -325,6 +333,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param dataset The dataset ID or slug (required)
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun putUpdateResource(
         rid: String,
         dataset: String,
@@ -346,6 +355,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param rid The resource unique identifier (required)
      * @param dataset The dataset ID or slug (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postUploadDatasetResource(
         rid: String,
         dataset: String
@@ -363,6 +373,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param totalparts (optional)
      * @param chunksize (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postUploadNewDatasetResource(
         dataset: String,
         file: ByteArray,
@@ -387,6 +398,7 @@ internal interface DatasetsApi : WithApiKey {
      * @param totalparts (optional)
      * @param chunksize (optional)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postUploadNewCommunityResource(
         dataset: String,
         file: ByteArray,

@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Job
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Task
@@ -19,12 +20,14 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         this.apiKey = apiKey
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getListJobs(): Flow<DgfrResource<List<Job>>> = loadingFlow {
         client.get(
             path = "workers/jobs/"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postJobsApi(payload: Job): Flow<DgfrResource<Job>> = loadingFlow {
         client.post(
             path = "workers/jobs/"
@@ -50,12 +53,14 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
         client.get(
             path = "workers/jobs/$id"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun putJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
         client.put(
             path = "workers/jobs/$id"

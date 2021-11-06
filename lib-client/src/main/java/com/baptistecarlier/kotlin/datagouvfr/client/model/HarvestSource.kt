@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -21,6 +22,7 @@ import kotlinx.serialization.Serializable
  * @property url The source base URL
  * @property validation Has the source been validated
  */
+@MissingFieldMapping
 @Serializable
 data class HarvestSource(
     @SerialName("active")

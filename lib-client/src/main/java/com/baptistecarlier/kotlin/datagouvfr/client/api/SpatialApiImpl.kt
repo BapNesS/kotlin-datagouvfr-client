@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
@@ -29,6 +30,7 @@ internal class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun getSpatialZone(id: String): Flow<DgfrResource<GeoJSONFeature>> = loadingFlow {
         client.get(
             path = "spatial/zone/$id/"

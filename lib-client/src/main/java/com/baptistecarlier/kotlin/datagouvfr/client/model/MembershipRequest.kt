@@ -16,22 +16,11 @@ data class MembershipRequest(
     @SerialName("comment")
     var comment: String,
     @SerialName("status")
-    var status: MembershipRequest.StatusEnum,
+    var status: StatusEnum,
     @SerialName("created")
     var created: LocalDateTime? = null,
     @SerialName("id")
     var id: String? = null,
     @SerialName("user")
     var user: UserReference? = null
-) {
-    /**
-     * The current request status
-     * Values: PENDING, ACCEPTED, REFUSED
-     */
-    @Serializable
-    enum class StatusEnum(val value: String) {
-        @SerialName("pending") PENDING("pending"),
-        @SerialName("accepted") ACCEPTED("accepted"),
-        @SerialName("refused") REFUSED("refused")
-    }
-}
+)
