@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -19,7 +19,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         this.apiKey = apiKey
     }
 
-    override fun getHarvestBackends(): Flow<DgfrResource<HarvestBackend>> = loadingFlow {
+    override fun getHarvestBackends(): Flow<DgfrCallState<HarvestBackend>> = loadingFlow {
         client.get(
             path = "harvest/backends/"
         )
@@ -30,7 +30,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         ident: String,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<HarvestJobPage>> = loadingFlow {
+    ): Flow<DgfrCallState<HarvestJobPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("page", page)
         builder.appendIfNotNull("page_size", pageSize)
@@ -40,13 +40,14 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         )
     }
 
-    override fun getListHarvesterApi(): Flow<DgfrResource<List<String>>> = loadingFlow {
+    override fun getListHarvesterApi(): Flow<DgfrCallState<List<String>>> = loadingFlow {
         client.get(
             path = "harvest/job_status/"
         )
     }
 
-    override fun postPreviewHarvestSourceConfig(payload: HarvestSource): Flow<DgfrResource<HarvestJobPreview>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postPreviewHarvestSourceConfig(payload: HarvestSource): Flow<DgfrCallState<HarvestJobPreview>> = loadingFlow {
         client.post(
             path = "harvest/sources/preview/"
         ) {
@@ -56,7 +57,8 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         }
     }
 
-    override fun deleteHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun deleteHarvestSource(ident: String): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.delete(
             path = "harvest/source/$ident/"
         ) {
@@ -64,16 +66,18 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         }
     }
 
-    override fun getHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getHarvestSource(ident: String): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.get(
             path = "harvest/source/$ident/"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun putUpdateHarvestSource(
         ident: String,
         payload: HarvestSource
-    ): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    ): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.put(
             path = "harvest/source/$ident/"
         ) {
@@ -87,19 +91,20 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         ident: String,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<HarvestJob>> = loadingFlow {
+    ): Flow<DgfrCallState<HarvestJob>> = loadingFlow {
         client.get(
             path = "harvest/source/$ident/jobs/"
         )
     }
 
-    override fun getPreviewHarvestSource(ident: String): Flow<DgfrResource<HarvestJobPreview>> = loadingFlow {
+    override fun getPreviewHarvestSource(ident: String): Flow<DgfrCallState<HarvestJobPreview>> = loadingFlow {
         client.get(
             path = "harvest/source/$ident/preview/"
         )
     }
 
-    override fun deleteUnscheduleHarvestSource(ident: String): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun deleteUnscheduleHarvestSource(ident: String): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.delete(
             path = "harvest/source/$ident/schedule"
         ) {
@@ -107,10 +112,11 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postScheduleHarvestSource(
         ident: String,
         payload: String
-    ): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    ): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.post(
             path = "harvest/source/$ident/schedule/"
         ) {
@@ -120,10 +126,11 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         }
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postValidateHarvestSource(
         ident: String,
         payload: HarvestSourceValidation
-    ): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    ): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.post(
             path = "harvest/source/$ident/validate/"
         ) {
@@ -139,7 +146,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         pageSize: Int?,
         owner: String?,
         deleted: Boolean?
-    ): Flow<DgfrResource<List<HarvestSourcePage>>> = loadingFlow {
+    ): Flow<DgfrCallState<List<HarvestSourcePage>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("page", page)
         builder.appendIfNotNull("page_size", pageSize)
@@ -151,7 +158,8 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         )
     }
 
-    override fun postCreateHarvestSource(payload: HarvestSource): Flow<DgfrResource<HarvestSource>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postCreateHarvestSource(payload: HarvestSource): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.post(
             path = "harvest/sources/"
         ) {

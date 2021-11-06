@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.DgfrRepository
 import com.baptistecarlier.kotlin.datagouvfr.app.repository.Storage
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Me
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,9 @@ class SettingsViewModel @Inject constructor(
     private val _apiKey = MutableLiveData("")
     val apiKey: LiveData<String> = _apiKey
 
+    @OptIn(MissingFieldMapping::class)
     private val _user = MutableLiveData<Me?>(null)
+    @OptIn(MissingFieldMapping::class)
     val user: LiveData<Me?> = _user
 
     init {
@@ -43,19 +46,19 @@ class SettingsViewModel @Inject constructor(
 
     fun checkMe() {
         viewModelScope.launch (Dispatchers.IO ) {
-            dgfrRepository.me().collect { dgfrResource ->
-                when( dgfrResource ) {
-                    is DgfrResource.Success -> {
+            dgfrRepository.me().collect { callState ->
+                when( callState ) {
+                    is DgfrCallState.Success -> {
                         Timber.d("me() / Success")
-                        _user.postValue( dgfrResource.data )
+                        _user.postValue( callState.data )
                     }
-                    is DgfrResource.Loading -> {
+                    is DgfrCallState.Loading -> {
                         Timber.d("me() / Loading")
                     }
-                    is DgfrResource.ClientError -> {
+                    is DgfrCallState.ClientError -> {
                         Timber.d("me() / ClientError")
                     }
-                    is DgfrResource.ServerError -> {
+                    is DgfrCallState.ServerError -> {
                         Timber.d("me() / ServerError")
                     }
                 }

@@ -67,10 +67,10 @@ val dgfrService = DgfrService(apiKey = VOTRE_CLE)
 dgfrService.setApiKey(apiKey = VOTRE_CLE)
 ```
 
-## Flow & DgfrResource
+## Flow & DgfrCallState
 
-Les functions d'appel aux endpoint retournent un `Flow` d'objet `DgfrResource`.
-Vous pouvez accéder aux [sources](https://github.com/BapNesS/kotlin-datagouvfr-client/tree/develop/lib-client/src/main/java/com/baptistecarlier/kotlin/datagouvfr/client/exception/DgfrResource.kt) pour savoir comment les gérer dans votre app.
+Les functions d'appel aux endpoint retournent un `Flow` d'objet `DgfrCallState`.
+Vous pouvez accéder aux [sources](https://github.com/BapNesS/kotlin-datagouvfr-client/tree/develop/lib-client/src/main/java/com/baptistecarlier/kotlin/datagouvfr/client/DgfrCallState.kt) pour savoir comment les gérer dans votre app.
 
 
 ## Langages & librairies

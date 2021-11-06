@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Job
@@ -21,14 +21,14 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun getListJobs(): Flow<DgfrResource<List<Job>>> = loadingFlow {
+    override fun getListJobs(): Flow<DgfrCallState<List<Job>>> = loadingFlow {
         client.get(
             path = "workers/jobs/"
         )
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun postJobsApi(payload: Job): Flow<DgfrResource<Job>> = loadingFlow {
+    override fun postJobsApi(payload: Job): Flow<DgfrCallState<Job>> = loadingFlow {
         client.post(
             path = "workers/jobs/"
         ) {
@@ -38,13 +38,13 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         }
     }
 
-    override fun getJobsReferenceApi(): Flow<DgfrResource<List<String>>> = loadingFlow {
+    override fun getJobsReferenceApi(): Flow<DgfrCallState<List<String>>> = loadingFlow {
         client.get(
             path = "workers/jobs/schedulables/"
         )
     }
 
-    override fun deleteJobApi(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteJobApi(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "workers/jobs/$id"
         ) {
@@ -54,14 +54,14 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun getJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
+    override fun getJobApi(id: String): Flow<DgfrCallState<Job>> = loadingFlow {
         client.get(
             path = "workers/jobs/$id"
         )
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun putJobApi(id: String): Flow<DgfrResource<Job>> = loadingFlow {
+    override fun putJobApi(id: String): Flow<DgfrCallState<Job>> = loadingFlow {
         client.put(
             path = "workers/jobs/$id"
         ) {
@@ -69,7 +69,7 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
         }
     }
 
-    override fun getTaskApi(id: String): Flow<DgfrResource<Task>> = loadingFlow {
+    override fun getTaskApi(id: String): Flow<DgfrCallState<Task>> = loadingFlow {
         client.get(
             path = "workers/tasks/$id"
         )

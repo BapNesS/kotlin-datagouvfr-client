@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import io.ktor.util.date.*
 import kotlinx.datetime.*
 import org.junit.Assert
 import org.junit.Test

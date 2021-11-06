@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
@@ -42,7 +42,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         sort: String?,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<DatasetPage>> = loadingFlow {
+    ): Flow<DgfrCallState<DatasetPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
         /*builder.appendIfNotNull("facets", facets)*/
@@ -69,7 +69,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
-    override fun postCreateDataset(payload: Dataset): Flow<DgfrResource<Dataset>> = loadingFlow {
+    override fun postCreateDataset(payload: Dataset): Flow<DgfrCallState<Dataset>> = loadingFlow {
         client.post(
             path = "datasets/"
         ) {
@@ -79,7 +79,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun getAvailableDatasetBadges(): Flow<DgfrResource<Map<String, String>>> = loadingFlow {
+    override fun getAvailableDatasetBadges(): Flow<DgfrCallState<Map<String, String>>> = loadingFlow {
         client.get(
             path = "datasets/badges/"
         )
@@ -93,7 +93,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         organization: String?,
         dataset: String?,
         owner: String?
-    ): Flow<DgfrResource<CommunityResourcePage>> = loadingFlow {
+    ): Flow<DgfrCallState<CommunityResourcePage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("sort", sort)
         builder.appendIfNotNull("page", page)
@@ -108,7 +108,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun postCreateCommunityResource(payload: CommunityResource): Flow<DgfrResource<CommunityResource>> = loadingFlow {
+    override fun postCreateCommunityResource(payload: CommunityResource): Flow<DgfrCallState<CommunityResource>> = loadingFlow {
         client.post(
             path = "datasets/community_resources/"
         ) {
@@ -122,7 +122,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     override fun deleteCommunityResource(
         community: String,
         dataset: String?
-    ): Flow<DgfrResource<CommunityResource>> = loadingFlow {
+    ): Flow<DgfrCallState<CommunityResource>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("dataset", dataset)
 
@@ -137,7 +137,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     override fun getRetrieveCommunityResource(
         community: String,
         dataset: String?
-    ): Flow<DgfrResource<CommunityResource>> = loadingFlow {
+    ): Flow<DgfrCallState<CommunityResource>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("dataset", dataset)
 
@@ -151,7 +151,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         community: String,
         payload: CommunityResource,
         dataset: String?
-    ): Flow<DgfrResource<CommunityResource>> = loadingFlow {
+    ): Flow<DgfrCallState<CommunityResource>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("dataset", dataset)
 
@@ -168,7 +168,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     override fun postUploadCommunityResource(
         community: String,
         dataset: String?
-    ): Flow<DgfrResource<UploadedResource>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedResource>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("dataset", dataset)
 
@@ -179,25 +179,25 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun getAllowedExtensions(): Flow<DgfrResource<List<String>>> = loadingFlow {
+    override fun getAllowedExtensions(): Flow<DgfrCallState<List<String>>> = loadingFlow {
         client.get(
             path = "datasets/extensions/"
         )
     }
 
-    override fun getListFrequencies(): Flow<DgfrResource<List<Frequency>>> = loadingFlow {
+    override fun getListFrequencies(): Flow<DgfrCallState<List<Frequency>>> = loadingFlow {
         client.get(
             path = "datasets/frequencies/"
         )
     }
 
-    override fun getListLicenses(): Flow<DgfrResource<List<License>>> = loadingFlow {
+    override fun getListLicenses(): Flow<DgfrCallState<List<License>>> = loadingFlow {
         client.get(
             path = "datasets/licenses/"
         )
     }
 
-    override fun getRedirectResource(id: String, dataset: String?): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getRedirectResource(id: String, dataset: String?): Flow<DgfrCallState<String>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("dataset", dataset)
 
@@ -207,19 +207,19 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getResourceTypes(): Flow<DgfrResource<List<ResourceType>>> = loadingFlow {
+    override fun getResourceTypes(): Flow<DgfrCallState<List<ResourceType>>> = loadingFlow {
         client.get(
             path = "datasets/resource_types/"
         )
     }
 
-    override fun getSchemas(): Flow<DgfrResource<List<Schema>>> = loadingFlow {
+    override fun getSchemas(): Flow<DgfrCallState<List<Schema>>> = loadingFlow {
         client.get(
             path = "datasets/schemas/"
         )
     }
 
-    override fun getSuggestDatasets(q: String, size: Int?): Flow<DgfrResource<List<DatasetSuggestion>>> = loadingFlow {
+    override fun getSuggestDatasets(q: String, size: Int?): Flow<DgfrCallState<List<DatasetSuggestion>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
         builder.appendIfNotNull("size", size)
@@ -229,7 +229,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
-    override fun getSuggestFormats(q: String, size: Int?): Flow<DgfrResource<List<Format>>> = loadingFlow {
+    override fun getSuggestFormats(q: String, size: Int?): Flow<DgfrCallState<List<Format>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
         builder.appendIfNotNull("size", size)
@@ -239,7 +239,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
-    override fun getSuggestMime(q: String, size: Int?): Flow<DgfrResource<List<Mime>>> = loadingFlow {
+    override fun getSuggestMime(q: String, size: Int?): Flow<DgfrCallState<List<Mime>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
         builder.appendIfNotNull("size", size)
@@ -249,7 +249,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
-    override fun deleteDataset(dataset: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteDataset(dataset: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "datasets/$dataset/"
         ) {
@@ -258,13 +258,13 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getDataset(dataset: String): Flow<DgfrResource<Dataset>> = loadingFlow {
+    override fun getDataset(dataset: String): Flow<DgfrCallState<Dataset>> = loadingFlow {
         client.get(
             path = "datasets/$dataset/"
         )
     }
 
-    override fun putUpdateDataset(dataset: String, payload: Dataset): Flow<DgfrResource<Dataset>> = loadingFlow {
+    override fun putUpdateDataset(dataset: String, payload: Dataset): Flow<DgfrCallState<Dataset>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("dataset", dataset)
 
@@ -277,7 +277,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun postAddDatasetBadge(dataset: String, payload: Badge): Flow<DgfrResource<Badge>> = loadingFlow {
+    override fun postAddDatasetBadge(dataset: String, payload: Badge): Flow<DgfrCallState<Badge>> = loadingFlow {
         client.post(
             path = "datasets/$dataset/badges/"
         ) {
@@ -287,7 +287,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun deleteDatasetBadge(badgeKind: String, dataset: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteDatasetBadge(badgeKind: String, dataset: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "datasets/$dataset/badges/$badgeKind/"
         ) {
@@ -296,7 +296,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun deleteUnfeatureDataset(dataset: String): Flow<DgfrResource<Dataset>> = loadingFlow {
+    override fun deleteUnfeatureDataset(dataset: String): Flow<DgfrCallState<Dataset>> = loadingFlow {
         client.delete(
             path = "datasets/$dataset/featured/"
         ) {
@@ -304,7 +304,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun postFeatureDataset(dataset: String): Flow<DgfrResource<Dataset>> = loadingFlow {
+    override fun postFeatureDataset(dataset: String): Flow<DgfrCallState<Dataset>> = loadingFlow {
         client.post(
             path = "datasets/$dataset/featured/"
         ) {
@@ -313,14 +313,14 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun getRdfDataset(dataset: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getRdfDataset(dataset: String): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "datasets/$dataset/rdf"
         )
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getRdfDatasetFormat(dataset: String, format: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getRdfDatasetFormat(dataset: String, format: String): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "datasets/$dataset/rdf.$format"
         )
@@ -328,7 +328,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun postCreateResource(dataset: String, payload: Resource): Flow<DgfrResource<Resource>> = loadingFlow {
+    override fun postCreateResource(dataset: String, payload: Resource): Flow<DgfrCallState<Resource>> = loadingFlow {
         client.post(
             path = "datasets/$dataset/resources/"
         ) {
@@ -342,7 +342,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     override fun putUpdateResources(
         dataset: String,
         payload: List<Resource>
-    ): Flow<DgfrResource<List<Resource>>> = loadingFlow {
+    ): Flow<DgfrCallState<List<Resource>>> = loadingFlow {
         client.put(
             path = "datasets/$dataset/resources/"
         ) {
@@ -352,7 +352,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun deleteResource(rid: String, dataset: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteResource(rid: String, dataset: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "datasets/$dataset/resources/$rid/"
         ) {
@@ -362,7 +362,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun getResource(rid: String, dataset: String): Flow<DgfrResource<Resource>> = loadingFlow {
+    override fun getResource(rid: String, dataset: String): Flow<DgfrCallState<Resource>> = loadingFlow {
         client.get(
             path = "datasets/$dataset/resources/$rid/"
         )
@@ -373,7 +373,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         rid: String,
         dataset: String,
         payload: Resource
-    ): Flow<DgfrResource<Resource>> = loadingFlow {
+    ): Flow<DgfrCallState<Resource>> = loadingFlow {
         client.put(
             path = "datasets/$dataset/resources/$rid/"
         ) {
@@ -383,7 +383,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun getCheckDatasetResource(rid: String, dataset: String): Flow<DgfrResource<Map<String, String>>> = loadingFlow {
+    override fun getCheckDatasetResource(rid: String, dataset: String): Flow<DgfrCallState<Map<String, String>>> = loadingFlow {
         client.get(
             path = "datasets/$dataset/resources/$rid/check/"
         )
@@ -393,7 +393,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     override fun postUploadDatasetResource(
         rid: String,
         dataset: String
-    ): Flow<DgfrResource<UploadedResource>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedResource>> = loadingFlow {
         client.post(
             path = "datasets/$dataset/resources/$rid/upload/"
         ) {
@@ -413,7 +413,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         partByteOffset: Int?,
         totalParts: Int?,
         chunkSize: Int?
-    ): Flow<DgfrResource<UploadedResource?>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedResource?>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "datasets/$dataset/upload/",
             formData = formData {
@@ -458,7 +458,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         partByteOffset: Int?,
         totalParts: Int?,
         chunkSize: Int?
-    ): Flow<DgfrResource<UploadedResource?>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedResource?>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "datasets/$dataset/upload/community/",
             formData = formData {
@@ -481,7 +481,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         }
     }
 
-    override fun deleteUnfollowDataset(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUnfollowDataset(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "datasets/$id/followers/"
         ) {
@@ -495,7 +495,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         id: String,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<FollowPage>> = loadingFlow {
+    ): Flow<DgfrCallState<FollowPage>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("page", page)
         builder.appendIfNotNull("page_size", pageSize)
@@ -505,7 +505,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         )
     }
 
-    override fun postFollowDataset(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun postFollowDataset(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "datasets/$id/followers/"
         ) {

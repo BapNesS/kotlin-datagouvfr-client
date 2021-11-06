@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -27,7 +27,7 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         pageSize: Int?,
         user: String?,
         organization: String?
-    ): Flow<DgfrResource<List<ActivityPage>>> =
+    ): Flow<DgfrCallState<List<ActivityPage>>> =
         loadingFlow {
             val builder = StringBuilder()
             builder.appendIfNotNull("page", page)
@@ -45,7 +45,7 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         maxWidth: String?,
         maxHeight: String?,
         format: String?
-    ): Flow<DgfrResource<Oembed>> =
+    ): Flow<DgfrCallState<Oembed>> =
         loadingFlow {
             val builder = StringBuilder()
             builder.appendIfNotNull("url", url)
@@ -58,7 +58,7 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
             )
         }
 
-    override fun getOembeds(references: String): Flow<DgfrResource<List<Oembed>>> = loadingFlow {
+    override fun getOembeds(references: String): Flow<DgfrCallState<List<Oembed>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("references", references)
 
@@ -67,47 +67,47 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         )
     }
 
-    override fun getSite(): Flow<DgfrResource<Site>> = loadingFlow {
+    override fun getSite(): Flow<DgfrCallState<Site>> = loadingFlow {
         client.get(
             path = "site/"
         )
     }
 
-    override fun getSiteRdfCatalog(): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteRdfCatalog(): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "site/catalog"
         )
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getSiteRdfCatalogFormat(format: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteRdfCatalogFormat(format: String): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "site/catalog.$format"
         )
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getSiteJsonLdContext(): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteJsonLdContext(): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "site/context.jsonld"
         )
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getSiteDataPortal(format: String): Flow<DgfrResource<String>> = loadingFlow {
+    override fun getSiteDataPortal(format: String): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
             path = "site/data.$format"
         )
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getHomeDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun getHomeDatasets(): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
         client.get(
             path = "site/home/datasets/"
         )
     }
 
-    override fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
         client.put(
             path = "site/home/datasets/"
         ) {
@@ -117,13 +117,13 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         }
     }
 
-    override fun getHomeReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getHomeReuses(): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.get(
             path = "site/home/reuses/"
         )
     }
 
-    override fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.put(
             path = "site/home/reuses/"
         ) {
@@ -136,7 +136,7 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
     override fun getSuggestTerritory(
         q: String,
         size: Int?
-    ): Flow<DgfrResource<List<Territory>>> =
+    ): Flow<DgfrCallState<List<Territory>>> =
         loadingFlow {
             val builder = StringBuilder()
             builder.appendIfNotNull("q", q)
