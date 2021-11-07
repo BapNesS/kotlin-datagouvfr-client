@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -44,7 +44,7 @@ internal interface ReusesApi : WithApiKey {
         sort: String? = null,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<DgfrResource<ReusePage>>
+    ): Flow<DgfrCallState<ReusePage>>
 
     /**
      * Create a new object
@@ -52,13 +52,13 @@ internal interface ReusesApi : WithApiKey {
      */
     fun postCreateReuse(
         payload: Reuse
-    ): Flow<DgfrResource<Reuse>>
+    ): Flow<DgfrCallState<Reuse>>
 
     /**
      * List all available reuse badges and their labels
      * TODO : check the return content
      */
-    fun getAvailableReuseBadges(): Flow<DgfrResource<Boolean>>
+    fun getAvailableReuseBadges(): Flow<DgfrCallState<Boolean>>
 
     /**
      * Suggest reuses
@@ -68,19 +68,19 @@ internal interface ReusesApi : WithApiKey {
     fun getSuggestReuses(
         q: String,
         size: Int? = null
-    ): Flow<DgfrResource<List<ReuseSuggestion>>>
+    ): Flow<DgfrCallState<List<ReuseSuggestion>>>
 
     /**
      * List all reuse types
      */
-    fun getReuseTypes(): Flow<DgfrResource<List<ReuseType>>>
+    fun getReuseTypes(): Flow<DgfrCallState<List<ReuseType>>>
 
     /**
      * Unfollow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    fun deleteUnfollowReuse(id: String): Flow<DgfrResource<Boolean>>
+    fun deleteUnfollowReuse(id: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * List all followers for a given object
@@ -93,20 +93,20 @@ internal interface ReusesApi : WithApiKey {
         id: String,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<DgfrResource<FollowPage>>
+    ): Flow<DgfrCallState<FollowPage>>
 
     /**
      * Follow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    fun postFollowReuse(id: String): Flow<DgfrResource<Boolean>>
+    fun postFollowReuse(id: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * Delete a given reuse
      * @param reuse The reuse ID or slug (required)
      */
-    fun deleteReuse(reuse: String): Flow<DgfrResource<Boolean>>
+    fun deleteReuse(reuse: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * Fetch a given reuse
@@ -114,7 +114,7 @@ internal interface ReusesApi : WithApiKey {
      */
     fun getReuse(
         reuse: String
-    ): Flow<DgfrResource<Reuse>>
+    ): Flow<DgfrCallState<Reuse>>
 
     /**
      * Update a given reuse
@@ -124,7 +124,7 @@ internal interface ReusesApi : WithApiKey {
     fun putUpdateReuse(
         reuse: String,
         payload: Reuse
-    ): Flow<DgfrResource<Reuse>>
+    ): Flow<DgfrCallState<Reuse>>
 
     /**
      * Create a new badge for a given reuse
@@ -134,7 +134,7 @@ internal interface ReusesApi : WithApiKey {
     fun postAddReuseBadge(
         reuse: String,
         payload: Badge
-    ): Flow<DgfrResource<Badge>>
+    ): Flow<DgfrCallState<Badge>>
 
     /**
      * Delete a badge for a given reuse
@@ -144,7 +144,7 @@ internal interface ReusesApi : WithApiKey {
     fun deleteReuseBadge(
         badgeKind: String,
         reuse: String
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * Add a dataset to a given reuse
@@ -154,14 +154,14 @@ internal interface ReusesApi : WithApiKey {
     fun postReuseAddDataset(
         reuse: String,
         payload: DatasetReference
-    ): Flow<DgfrResource<Reuse>>
+    ): Flow<DgfrCallState<Reuse>>
     /**
      * Unmark a reuse as featured
      * @param reuse The reuse ID or slug (required)
      */
     fun deleteUnfeatureReuse(
         reuse: String
-    ): Flow<DgfrResource<Reuse>>
+    ): Flow<DgfrCallState<Reuse>>
 
     /**
      * Mark a reuse as featured
@@ -169,7 +169,7 @@ internal interface ReusesApi : WithApiKey {
      */
     fun postFeatureReuse(
         reuse: String
-    ): Flow<DgfrResource<Reuse>>
+    ): Flow<DgfrCallState<Reuse>>
 
     /**
      * Upload a new reuse image
@@ -183,5 +183,5 @@ internal interface ReusesApi : WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
+    ): Flow<DgfrCallState<UploadedImage>>
 }

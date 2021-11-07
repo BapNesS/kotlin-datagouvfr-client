@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Tag
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
@@ -14,7 +14,7 @@ internal class TagsApiImpl(private val client: HttpClient) : TagsApi {
     override fun getTagsSuggest(
         q: String,
         size: Int?
-    ): Flow<DgfrResource<List<Tag>>> = loadingFlow {
+    ): Flow<DgfrCallState<List<Tag>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 

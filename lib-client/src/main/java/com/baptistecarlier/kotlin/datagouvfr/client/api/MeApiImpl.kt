@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
@@ -30,7 +31,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getMe(): Flow<DgfrResource<Me>> = loadingFlow {
+    override fun getMe(): Flow<DgfrCallState<Me>> = loadingFlow {
         client.get(
             path = "me/"
         ) {
@@ -42,7 +43,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "me/avatar",
             formData = formData {
@@ -60,7 +61,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun putUpdateMe(payload: Me): Flow<DgfrResource<Me>> = loadingFlow {
+    override fun putUpdateMe(payload: Me): Flow<DgfrCallState<Me>> = loadingFlow {
         client.put(
             path = "me/"
         ) {
@@ -70,7 +71,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun deleteClearApikey(): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteClearApikey(): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "me/apikey/"
         ) {
@@ -79,7 +80,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun postGenerateApikey(): Flow<DgfrResource<ApiKey>> = loadingFlow {
+    override fun postGenerateApikey(): Flow<DgfrCallState<ApiKey>> = loadingFlow {
         client.post(
             path = "me/"
         ) {
@@ -88,7 +89,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun getMyDatasets(): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
         client.get(
             path = "me/datasets/"
         ) {
@@ -96,7 +97,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyMetrics(): Flow<DgfrResource<List<MyMetrics>>> = loadingFlow {
+    override fun getMyMetrics(): Flow<DgfrCallState<List<MyMetrics>>> = loadingFlow {
         client.get(
             path = "me/metrics/"
         ) {
@@ -104,7 +105,8 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyOrgCommunityResources(q: String?): Flow<DgfrResource<List<CommunityResource>>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getMyOrgCommunityResources(q: String?): Flow<DgfrCallState<List<CommunityResource>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -115,7 +117,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyOrgDatasets(q: String?): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun getMyOrgDatasets(q: String?): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -126,7 +128,8 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyOrgDiscussions(q: String?): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getMyOrgDiscussions(q: String?): Flow<DgfrCallState<List<Discussion>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -137,7 +140,8 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyOrgIssues(q: String?): Flow<DgfrResource<List<Issue>>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getMyOrgIssues(q: String?): Flow<DgfrCallState<List<Issue>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -148,7 +152,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyOrgReuses(q: String?): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getMyOrgReuses(q: String?): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         val builder = StringBuilder()
         builder.appendIfNotNull("q", q)
 
@@ -159,7 +163,7 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
-    override fun getMyReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getMyReuses(): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.get(
             path = "me/reuses/"
         ) {

@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Notification
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
@@ -15,7 +15,7 @@ internal class NotificationsApiImpl(private val client: HttpClient) : Notificati
         this.apiKey = apiKey
     }
 
-    override fun getNotifications(): Flow<DgfrResource<List<Notification>>> = loadingFlow {
+    override fun getNotifications(): Flow<DgfrCallState<List<Notification>>> = loadingFlow {
         client.get(
             path = "notifications/"
         ) {

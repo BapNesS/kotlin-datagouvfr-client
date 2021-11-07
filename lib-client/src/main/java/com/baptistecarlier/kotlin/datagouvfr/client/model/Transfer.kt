@@ -33,21 +33,7 @@ data class Transfer(
     @SerialName("responded")
     var responded: LocalDateTime? = null,
     @SerialName("status")
-    var status: Transfer.StatusEnum? = null,
+    var status: StatusEnum? = null,
     @SerialName("subject")
     var subject: TransferRequestSubject? = null
-) {
-    /**
-     * The current transfer request status
-     * Values: PENDING, ACCEPTED, REFUSED
-     */
-    @Serializable
-    enum class StatusEnum(val value: String) {
-        @SerialName("pending")
-        PENDING("pending"),
-        @SerialName("accepted")
-        ACCEPTED("accepted"),
-        @SerialName("refused")
-        REFUSED("refused")
-    }
-}
+)

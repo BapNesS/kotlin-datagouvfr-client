@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,7 +11,7 @@ import kotlinx.serialization.Serializable
  * @property description The resource markdown description
  * @property extras Extra attributes as key-value pairs
  * @property filesize The resource file size in bytes
- * @property filetype Whether the resource is an uploaded file, a remote file or an API
+ * @property fileType Whether the resource is an uploaded file, a remote file or an API
  * @property format The resource format
  * @property id The resource unique ID
  * @property lastModified The resource last modification date
@@ -25,16 +26,17 @@ import kotlinx.serialization.Serializable
  * @property url The resource URL
  * @property success Whether the upload succeeded or not.
  */
+@MissingFieldMapping
 @Serializable
 data class UploadedResource(
     @SerialName("filetype")
-    var filetype: UploadedResource.FiletypeEnum,
+    var fileType: FileTypeEnum,
     @SerialName("format")
     var format: String,
     @SerialName("title")
     var title: String,
     @SerialName("type")
-    var type: UploadedResource.TypeEnum,
+    var type: TypeEnum,
     @SerialName("url")
     var url: String,
     /*@SerialName("checksum")
@@ -65,27 +67,4 @@ data class UploadedResource(
     var schema: Map<String, Any?>? = null,*/
     @SerialName("success")
     var success: Boolean? = null
-) {
-    /**
-     * Whether the resource is an uploaded file, a remote file or an API
-     * Values: FILE, REMOTE
-     */
-    @Serializable
-    enum class FiletypeEnum(val value: String) {
-        @SerialName("file") FILE("file"),
-        @SerialName("remote") REMOTE("remote")
-    }
-    /**
-     * Resource type (documentation, API...)
-     * Values: MAIN, DOCUMENTATION, UPDATE, API, CODE, OTHER
-     */
-    @Serializable
-    enum class TypeEnum(val value: String) {
-        @SerialName("main") MAIN("main"),
-        @SerialName("documentation") DOCUMENTATION("documentation"),
-        @SerialName("update") UPDATE("update"),
-        @SerialName("api") API("api"),
-        @SerialName("code") CODE("code"),
-        @SerialName("other") OTHER("other")
-    }
-}
+)

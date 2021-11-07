@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
@@ -23,32 +23,32 @@ internal interface PostsApi : WithApiKey {
         page: Int? = null,
         pageSize: Int? = null,
         sort: String? = null
-    ): Flow<DgfrResource<PostPage>>
+    ): Flow<DgfrCallState<PostPage>>
 
     /**
      * Create a post
      * @param payload (required)
      */
-    fun postCreatePost(payload: Post): Flow<DgfrResource<Post>>
+    fun postCreatePost(payload: Post): Flow<DgfrCallState<Post>>
 
     /**
      * Delete a given post
      * @param post The post ID or slug (required)
      */
-    fun deletePost(post: String): Flow<DgfrResource<Boolean>>
+    fun deletePost(post: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * Get a given post
      * @param post The post ID or slug (required)
      */
-    fun getPost(post: String): Flow<DgfrResource<Post>>
+    fun getPost(post: String): Flow<DgfrCallState<Post>>
 
     /**
      * Update a given post
      * @param post The post ID or slug (required)
      * @param payload (required)
      */
-    fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>>
+    fun putUpdatePost(post: String, payload: Post): Flow<DgfrCallState<Post>>
 
     /**
      * Upload a new image
@@ -62,7 +62,7 @@ internal interface PostsApi : WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
+    ): Flow<DgfrCallState<UploadedImage>>
 
     /**
      * Set the image BBox
@@ -76,17 +76,17 @@ internal interface PostsApi : WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
+    ): Flow<DgfrCallState<UploadedImage>>
 
     /**
      * Publish an existing post
      * @param post (required)
      */
-    fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>>
+    fun deleteUnpublishPost(post: String): Flow<DgfrCallState<Post>>
 
     /**
      * Publish an existing post
      * @param post (required)
      */
-    fun postPublishPost(post: String): Flow<DgfrResource<Post>>
+    fun postPublishPost(post: String): Flow<DgfrCallState<Post>>
 }

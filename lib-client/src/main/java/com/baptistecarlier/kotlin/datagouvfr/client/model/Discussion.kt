@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -17,6 +18,7 @@ import kotlinx.serialization.Serializable
  * @property url The discussion API URI
  * @property user The discussion author
  */
+@MissingFieldMapping
 @Serializable
 data class Discussion(
     @SerialName("class")

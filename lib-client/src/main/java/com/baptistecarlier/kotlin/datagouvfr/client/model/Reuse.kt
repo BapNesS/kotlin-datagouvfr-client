@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -28,13 +29,14 @@ import kotlinx.serialization.Serializable
  * @property url The reuse remote URL (website)
  */
 @Serializable
-data class Reuse(
+@OptIn(MissingFieldMapping::class)
+data class Reuse constructor(
     @SerialName("description")
     var description: String,
     @SerialName("title")
     var title: String,
     @SerialName("type")
-    var typeEnum: Reuse.TypeEnum,
+    var typeEnum: TypeEnum,
     @SerialName("url")
     var url: String,
     @SerialName("badges")
@@ -71,28 +73,4 @@ data class Reuse(
     var tags: List<String>? = null,
     @SerialName("uri")
     var uri: String? = null
-) {
-    /**
-     * The reuse type
-     * Values: API, APPLICATION, IDEA, NEWS_ARTICLE, PAPER, POST, VISUALIZATION, HARDWARE
-     */
-    @Serializable
-    enum class TypeEnum(val value: String) {
-        @SerialName("api")
-        API("api"),
-        @SerialName("application")
-        APPLICATION("application"),
-        @SerialName("idea")
-        IDEA("idea"),
-        @SerialName("news_article")
-        NEWS_ARTICLE("news_article"),
-        @SerialName("paper")
-        PAPER("paper"),
-        @SerialName("post")
-        POST("post"),
-        @SerialName("visualization")
-        VISUALIZATION("visualization"),
-        @SerialName("hardware")
-        HARDWARE("hardware")
-    }
-}
+)

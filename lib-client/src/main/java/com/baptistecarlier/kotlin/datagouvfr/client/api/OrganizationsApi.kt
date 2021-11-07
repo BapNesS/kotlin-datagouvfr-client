@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -35,25 +35,26 @@ internal interface OrganizationsApi : WithApiKey {
         sort: String? = null,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<DgfrResource<OrganizationPage>>
+    ): Flow<DgfrCallState<OrganizationPage>>
 
     /**
      * Create a new organization
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCreateOrganization(
         payload: Organization
-    ): Flow<DgfrResource<Organization>>
+    ): Flow<DgfrCallState<Organization>>
 
     /**
      * List all available organization badges and their labels
      */
-    fun getAvailableOrganizationBadges(): Flow<DgfrResource<Map<String, String>>>
+    fun getAvailableOrganizationBadges(): Flow<DgfrCallState<Map<String, String>>>
 
     /**
      * List all possible organization roles
      */
-    fun getOrgRoles(): Flow<DgfrResource<List<OrganizationRole>>>
+    fun getOrgRoles(): Flow<DgfrCallState<List<OrganizationRole>>>
 
     /**
      * Suggest organizations
@@ -63,14 +64,14 @@ internal interface OrganizationsApi : WithApiKey {
     fun getSuggestOrganizations(
         q: String,
         size: Int? = null
-    ): Flow<DgfrResource<List<OrganizationSuggestion>>>
+    ): Flow<DgfrCallState<List<OrganizationSuggestion>>>
 
     /**
      * Unfollow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    fun deleteUnfollowOrganization(id: String): Flow<DgfrResource<Boolean>>
+    fun deleteUnfollowOrganization(id: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * List all followers for a given object
@@ -83,7 +84,7 @@ internal interface OrganizationsApi : WithApiKey {
         id: String,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<DgfrResource<FollowPage>>
+    ): Flow<DgfrCallState<FollowPage>>
 
     /**
      * Follow an object given its ID
@@ -92,7 +93,7 @@ internal interface OrganizationsApi : WithApiKey {
      */
     fun postFollowOrganization(
         id: String
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * Delete a organization given its identifier
@@ -100,25 +101,27 @@ internal interface OrganizationsApi : WithApiKey {
      */
     fun deleteOrganization(
         org: String
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * Get a organization given its identifier
      * @param org The organization ID or slug (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getOrganization(
         org: String
-    ): Flow<DgfrResource<Organization>>
+    ): Flow<DgfrCallState<Organization>>
 
     /**
      * Update a organization given its identifier
      * @param org The organization ID or slug (required)
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun putUpdateOrganization(
         org: String,
         payload: Organization
-    ): Flow<DgfrResource<Organization>>
+    ): Flow<DgfrCallState<Organization>>
 
     /**
      * Create a new badge for a given organization
@@ -128,7 +131,7 @@ internal interface OrganizationsApi : WithApiKey {
     fun postAddOrganizationBadge(
         org: String,
         payload: Badge
-    ): Flow<DgfrResource<Badge>>
+    ): Flow<DgfrCallState<Badge>>
 
     /**
      * Delete a badge for a given organization
@@ -138,12 +141,12 @@ internal interface OrganizationsApi : WithApiKey {
     fun deleteOrganizationBadge(
         badgeKind: String,
         org: String
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * @param org The organization ID or slug (required)
      */
-    fun getRdfOrganization(org: String): Flow<DgfrResource<String>>
+    fun getRdfOrganization(org: String): Flow<DgfrCallState<String>>
 
     /**
      * @param org The organization ID or slug (required)
@@ -152,7 +155,7 @@ internal interface OrganizationsApi : WithApiKey {
     fun getRdfOrganizationFormat(
         org: String,
         format: String
-    ): Flow<DgfrResource<String>>
+    ): Flow<DgfrCallState<String>>
 
     /**
      * List organization datasets (including private ones when member)
@@ -167,19 +170,21 @@ internal interface OrganizationsApi : WithApiKey {
         page: Int? = null,
         pageSize: Int? = null,
         sort: String? = null
-    ): Flow<DgfrResource<DatasetPage>>
+    ): Flow<DgfrCallState<DatasetPage>>
 
     /**
      * List organization discussions
      * @param org (required)
      */
-    fun getListOrganizationDiscussions(org: String): Flow<DgfrResource<List<Discussion>>>
+    @OptIn(MissingFieldMapping::class)
+    fun getListOrganizationDiscussions(org: String): Flow<DgfrCallState<List<Discussion>>>
 
     /**
      * List organization issues
      * @param org (required)
      */
-    fun getListOrganizationIssues(org: String): Flow<DgfrResource<List<Issue>>>
+    @OptIn(MissingFieldMapping::class)
+    fun getListOrganizationIssues(org: String): Flow<DgfrCallState<List<Issue>>>
 
     /**
      * Upload a new logo
@@ -193,7 +198,7 @@ internal interface OrganizationsApi : WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
+    ): Flow<DgfrCallState<UploadedImage>>
 
     /**
      * Set the logo BBox
@@ -207,7 +212,7 @@ internal interface OrganizationsApi : WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
+    ): Flow<DgfrCallState<UploadedImage>>
 
     /**
      * Delete member from an organization
@@ -217,7 +222,7 @@ internal interface OrganizationsApi : WithApiKey {
     fun deleteOrganizationMember(
         org: String,
         user: String
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * Add a member into a given organization
@@ -229,7 +234,7 @@ internal interface OrganizationsApi : WithApiKey {
         org: String,
         user: String,
         payload: Member
-    ): Flow<DgfrResource<Member>>
+    ): Flow<DgfrCallState<Member>>
 
     /**
      * Update member status into a given organization
@@ -241,7 +246,7 @@ internal interface OrganizationsApi : WithApiKey {
         org: String,
         user: String,
         payload: Member
-    ): Flow<DgfrResource<Member>>
+    ): Flow<DgfrCallState<Member>>
 
     /**
      * List membership requests for a given organization
@@ -251,13 +256,13 @@ internal interface OrganizationsApi : WithApiKey {
     fun getListMembershipRequests(
         org: String,
         status: String? = null
-    ): Flow<DgfrResource<List<MembershipRequest>>>
+    ): Flow<DgfrCallState<List<MembershipRequest>>>
 
     /**
      * Apply for membership to a given organization
      * @param org The organization ID or slug (required)
      */
-    fun postMembershipRequest(org: String): Flow<DgfrResource<MembershipRequest>>
+    fun postMembershipRequest(org: String): Flow<DgfrCallState<MembershipRequest>>
 
     /**
      * Accept user membership to a given organization
@@ -267,7 +272,7 @@ internal interface OrganizationsApi : WithApiKey {
     fun postAcceptMembership(
         id: String,
         org: String
-    ): Flow<DgfrResource<Member>>
+    ): Flow<DgfrCallState<Member>>
 
     /**
      * Refuse user membership to a given organization
@@ -279,7 +284,7 @@ internal interface OrganizationsApi : WithApiKey {
         id: String,
         org: String,
         payload: RefuseMembership
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * List organization reuses (including private ones when member)
@@ -287,5 +292,5 @@ internal interface OrganizationsApi : WithApiKey {
      */
     fun getListOrganizationReuses(
         org: String
-    ): Flow<DgfrResource<List<Reuse>>>
+    ): Flow<DgfrCallState<List<Reuse>>>
 }
