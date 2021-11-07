@@ -1,6 +1,6 @@
 # kotlin-datagouvfr-client
 
-![Build](https://github.com/BapNesS/kotlin-datagouvfr-client/actions/workflows/build.yml/badge.svg) [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Maven](https://img.shields.io/maven-metadata/v.svg?label=maven-central&metadataUrl=https://repo1.maven.org/maven2/com/baptistecarlier/kotlin/datagouvfr/kotlin-datagouv-client/maven-metadata.xml)](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client)
+![Build](https://github.com/BapNesS/kotlin-datagouvfr-client/actions/workflows/build.yml/badge.svg) [![Codefactor.io](https://www.codefactor.io/repository/github/bapness/kotlin-datagouvfr-client/badge?style=plastic)](https://www.codefactor.io/repository/github/bapness/kotlin-datagouvfr-client) [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Maven](https://img.shields.io/maven-metadata/v.svg?label=maven-central&metadataUrl=https://repo1.maven.org/maven2/com/baptistecarlier/kotlin/datagouvfr/kotlin-datagouv-client/maven-metadata.xml)](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client)
 
 # 📥 Usage
 
@@ -8,16 +8,11 @@ La librairie permet de fournir les outils pour accéder à l'API de [data.gouv.f
 
 Elle est utilisable sur Android à travers la dépendance disponible sur [Maven Central](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client).
 
-<details>
-<summary><strong>Kotlin DSL :</strong></summary>
-<p>
+**Kotlin DSL :**
 
 ```
 implementation("com.baptistecarlier.kotlin.datagouvfr:kotlin-datagouv-client:1.x")
 ```
-
-</p>
-</details>
 
 <details>
 <summary><strong>Gradle DSL :</strong></summary>
@@ -31,6 +26,8 @@ implementation 'com.baptistecarlier.kotlin.datagouvfr:kotlin-datagouv-client:1.x
 </details>
 
 # 🗃️ Périmètre
+
+## API
 
 Toutes les API sont disponibles mais peut-être avez-vous vu un endpoint est manquant ?
 
@@ -46,6 +43,10 @@ Dans ce cas, vous pouvez [ajouter une issue](https://github.com/BapNesS/kotlin-d
 
 </p>
 </details>
+
+## Modèles
+
+L'annotation `MissingFieldMapping` indique qu'un le modèle ne correspond pas (encore) exactement au modèle défini par l'API.
 
 # 🧰 Outils
 
@@ -71,7 +72,6 @@ dgfrService.setApiKey(apiKey = VOTRE_CLE)
 
 Les functions d'appel aux endpoint retournent un `Flow` d'objet `DgfrCallState`.
 Vous pouvez accéder aux [sources](https://github.com/BapNesS/kotlin-datagouvfr-client/tree/develop/lib-client/src/main/java/com/baptistecarlier/kotlin/datagouvfr/client/DgfrCallState.kt) pour savoir comment les gérer dans votre app.
-
 
 ## Langages & librairies
 
