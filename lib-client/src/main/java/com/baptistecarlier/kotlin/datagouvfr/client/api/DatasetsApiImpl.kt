@@ -119,6 +119,19 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     }
 
     @OptIn(MissingFieldMapping::class)
+    override fun getRetrieveCommunityResource(
+        community: String,
+        dataset: String?
+    ): Flow<DgfrCallState<CommunityResource>> = loadingFlow {
+        val builder = StringBuilder()
+        builder.appendIfNotNull("dataset", dataset)
+
+        client.get(
+            path = "datasets/community_resources/$community/?${builder.urlEncore()}"
+        )
+    }
+
+    @OptIn(MissingFieldMapping::class)
     override fun deleteCommunityResource(
         community: String,
         dataset: String?
@@ -131,19 +144,6 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         ) {
             addApiKey(apiKey)
         }
-    }
-
-    @OptIn(MissingFieldMapping::class)
-    override fun getRetrieveCommunityResource(
-        community: String,
-        dataset: String?
-    ): Flow<DgfrCallState<CommunityResource>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("dataset", dataset)
-
-        client.get(
-            path = "datasets/community_resources/$community/?${builder.urlEncore()}"
-        )
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -202,7 +202,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         builder.appendIfNotNull("dataset", dataset)
 
         val response = client.get<HttpResponse>(
-            path = "datasets/r/$id/?${builder.urlEncore()}"
+            path = "datasets/r/$id?${builder.urlEncore()}"
         )
         response.content.readAndClose().orEmpty()
     }

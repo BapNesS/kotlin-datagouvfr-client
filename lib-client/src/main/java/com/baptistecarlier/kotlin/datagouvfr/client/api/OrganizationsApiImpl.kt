@@ -263,7 +263,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
 
     override fun deleteOrganizationMember(org: String, user: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
-            path = "organizations/$org/member/$user/"
+            path = "organizations/$org/member/$user"
         ) {
             addApiKey(apiKey)
         }
@@ -276,7 +276,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         payload: Member
     ): Flow<DgfrCallState<Member>> = loadingFlow {
         client.post(
-            path = "organizations/$org/member/$user/"
+            path = "organizations/$org/member/$user"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
@@ -290,7 +290,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         payload: Member
     ): Flow<DgfrCallState<Member>> = loadingFlow {
         client.put(
-            path = "organizations/$org/member/$user/"
+            path = "organizations/$org/member/$user"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)

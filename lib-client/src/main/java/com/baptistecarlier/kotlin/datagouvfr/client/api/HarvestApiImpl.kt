@@ -21,7 +21,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
 
     override fun getHarvestBackends(): Flow<DgfrCallState<HarvestBackend>> = loadingFlow {
         client.get(
-            path = "harvest/backends/"
+            path = "harvest/backends"
         )
     }
 
@@ -42,14 +42,14 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
 
     override fun getListHarvesterApi(): Flow<DgfrCallState<List<String>>> = loadingFlow {
         client.get(
-            path = "harvest/job_status/"
+            path = "harvest/job_status"
         )
     }
 
     @OptIn(MissingFieldMapping::class)
     override fun postPreviewHarvestSourceConfig(payload: HarvestSource): Flow<DgfrCallState<HarvestJobPreview>> = loadingFlow {
         client.post(
-            path = "harvest/sources/preview/"
+            path = "harvest/sources/preview"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
@@ -60,7 +60,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
     @OptIn(MissingFieldMapping::class)
     override fun deleteHarvestSource(ident: String): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.delete(
-            path = "harvest/source/$ident/"
+            path = "harvest/source/$ident"
         ) {
             addApiKey(apiKey)
         }
@@ -69,7 +69,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
     @OptIn(MissingFieldMapping::class)
     override fun getHarvestSource(ident: String): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.get(
-            path = "harvest/source/$ident/"
+            path = "harvest/source/$ident"
         )
     }
 
@@ -79,7 +79,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         payload: HarvestSource
     ): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.put(
-            path = "harvest/source/$ident/"
+            path = "harvest/source/$ident"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
@@ -99,7 +99,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
 
     override fun getPreviewHarvestSource(ident: String): Flow<DgfrCallState<HarvestJobPreview>> = loadingFlow {
         client.get(
-            path = "harvest/source/$ident/preview/"
+            path = "harvest/source/$ident/preview"
         )
     }
 
@@ -118,7 +118,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         payload: String
     ): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.post(
-            path = "harvest/source/$ident/schedule/"
+            path = "harvest/source/$ident/schedule"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
@@ -132,7 +132,7 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         payload: HarvestSourceValidation
     ): Flow<DgfrCallState<HarvestSource>> = loadingFlow {
         client.post(
-            path = "harvest/source/$ident/validate/"
+            path = "harvest/source/$ident/validate"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)

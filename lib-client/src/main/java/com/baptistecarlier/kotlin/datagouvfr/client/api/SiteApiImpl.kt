@@ -36,7 +36,7 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
             builder.appendIfNotNull("organization", user)
 
             client.get(
-                path = "activity/?${builder.urlEncore()}"
+                path = "activity?${builder.urlEncore()}"
             )
         }
 
@@ -54,7 +54,7 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
             builder.appendIfNotNull("format", format)
 
             client.get(
-                path = "oembed/?${builder.urlEncore()}"
+                path = "oembed?${builder.urlEncore()}"
             )
         }
 

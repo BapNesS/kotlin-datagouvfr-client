@@ -39,6 +39,34 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         }
     }
 
+    override fun putUpdateMe(payload: Me): Flow<DgfrCallState<Me>> = loadingFlow {
+        client.put(
+            path = "me/"
+        ) {
+            addApiKey(apiKey)
+            contentType(ContentType.Application.Json)
+            body = payload
+        }
+    }
+
+    override fun deleteClearApikey(): Flow<DgfrCallState<Boolean>> = loadingFlow {
+        val response = client.delete<HttpResponse>(
+            path = "me/apikey"
+        ) {
+            addApiKey(apiKey)
+        }
+        response.status.value in HttpCodeRangeSuccess
+    }
+
+    override fun postGenerateApikey(): Flow<DgfrCallState<ApiKey>> = loadingFlow {
+        client.post(
+            path = "me/apikey"
+        ) {
+            addApiKey(apiKey)
+            contentType(ContentType.Application.Json)
+        }
+    }
+
     override fun postMyAvatar(
         file: ByteArray,
         fileName: String,
@@ -58,34 +86,6 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
         ) {
             method = HttpMethod.Post
             header("X-API-KEY", apiKey)
-        }
-    }
-
-    override fun putUpdateMe(payload: Me): Flow<DgfrCallState<Me>> = loadingFlow {
-        client.put(
-            path = "me/"
-        ) {
-            addApiKey(apiKey)
-            contentType(ContentType.Application.Json)
-            body = payload
-        }
-    }
-
-    override fun deleteClearApikey(): Flow<DgfrCallState<Boolean>> = loadingFlow {
-        val response = client.delete<HttpResponse>(
-            path = "me/apikey/"
-        ) {
-            addApiKey(apiKey)
-        }
-        response.status.value in HttpCodeRangeSuccess
-    }
-
-    override fun postGenerateApikey(): Flow<DgfrCallState<ApiKey>> = loadingFlow {
-        client.post(
-            path = "me/"
-        ) {
-            addApiKey(apiKey)
-            contentType(ContentType.Application.Json)
         }
     }
 
