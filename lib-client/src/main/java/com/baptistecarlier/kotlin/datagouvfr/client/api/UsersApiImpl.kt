@@ -7,8 +7,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -35,19 +33,18 @@ internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<UserPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        /*builder.appendIfNotNull("facets", facets)*/
-        builder.appendIfNotNull("organization", organization)
-        builder.appendIfNotNull("datasets", datasets)
-        builder.appendIfNotNull("followers", followers)
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "users/?${builder.urlEncore()}"
-        )
+            path = "users/"
+        ) {
+            parameter("q", q)
+            /*parameter("facets", facets)*/
+            parameter("organization", organization)
+            parameter("datasets", datasets)
+            parameter("followers", followers)
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -68,13 +65,12 @@ internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
     }
 
     override fun getSuggestUsers(q: String, size: Int?): Flow<DgfrCallState<List<UserSuggestion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("size", size)
-
         client.get(
-            path = "users/suggest/?${builder.urlEncore()}"
-        )
+            path = "users/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
+        }
     }
 
     override fun deleteUnfollowUser(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
@@ -92,14 +88,13 @@ internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<FollowPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("id", id)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "users/$id/followers/?${builder.urlEncore()}"
-        )
+            path = "users/$id/followers/"
+        ) {
+            parameter("id", id)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun postFollowUser(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {

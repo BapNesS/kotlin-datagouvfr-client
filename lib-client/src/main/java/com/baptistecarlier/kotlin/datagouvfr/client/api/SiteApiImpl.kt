@@ -5,9 +5,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMappi
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.readAndClose
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -27,44 +25,39 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         pageSize: Int?,
         user: String?,
         organization: String?
-    ): Flow<DgfrCallState<List<ActivityPage>>> =
-        loadingFlow {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("page", page)
-            builder.appendIfNotNull("page_size", pageSize)
-            builder.appendIfNotNull("user", user)
-            builder.appendIfNotNull("organization", user)
-
-            client.get(
-                path = "activity?${builder.urlEncore()}"
-            )
+    ): Flow<DgfrCallState<List<ActivityPage>>> = loadingFlow {
+        client.get(
+            path = "activity"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+            parameter("user", user)
+            parameter("organization", user)
         }
+    }
 
     override fun getOembed(
         url: String,
         maxWidth: String?,
         maxHeight: String?,
         format: String?
-    ): Flow<DgfrCallState<Oembed>> =
-        loadingFlow {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("url", url)
-            builder.appendIfNotNull("maxwidth", maxWidth)
-            builder.appendIfNotNull("maxheight", maxHeight)
-            builder.appendIfNotNull("format", format)
-
-            client.get(
-                path = "oembed?${builder.urlEncore()}"
-            )
+    ): Flow<DgfrCallState<Oembed>> = loadingFlow {
+        client.get(
+            path = "oembed"
+        ) {
+            parameter("url", url)
+            parameter("maxwidth", maxWidth)
+            parameter("maxheight", maxHeight)
+            parameter("format", format)
         }
+    }
 
     override fun getOembeds(references: String): Flow<DgfrCallState<List<Oembed>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("references", references)
-
         client.get(
-            path = "oembeds/?${builder.urlEncore()}"
-        )
+            path = "oembeds/"
+        ) {
+            parameter("references", references)
+        }
     }
 
     override fun getSite(): Flow<DgfrCallState<Site>> = loadingFlow {
@@ -80,12 +73,13 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         response.content.readAndClose().orEmpty()
     }
 
-    override fun getSiteRdfCatalogFormat(format: String): Flow<DgfrCallState<String>> = loadingFlow {
-        val response = client.get<HttpResponse>(
-            path = "site/catalog.$format"
-        )
-        response.content.readAndClose().orEmpty()
-    }
+    override fun getSiteRdfCatalogFormat(format: String): Flow<DgfrCallState<String>> =
+        loadingFlow {
+            val response = client.get<HttpResponse>(
+                path = "site/catalog.$format"
+            )
+            response.content.readAndClose().orEmpty()
+        }
 
     override fun getSiteJsonLdContext(): Flow<DgfrCallState<String>> = loadingFlow {
         val response = client.get<HttpResponse>(
@@ -107,15 +101,16 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         )
     }
 
-    override fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
-        client.put(
-            path = "site/home/datasets/"
-        ) {
-            addApiKey(apiKey)
-            contentType(ContentType.Application.Json)
-            body = datasetIds
+    override fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrCallState<List<Dataset>>> =
+        loadingFlow {
+            client.put(
+                path = "site/home/datasets/"
+            ) {
+                addApiKey(apiKey)
+                contentType(ContentType.Application.Json)
+                body = datasetIds
+            }
         }
-    }
 
     override fun getHomeReuses(): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.get(
@@ -123,27 +118,26 @@ internal class SiteApiImpl(private val client: HttpClient) : SiteApi {
         )
     }
 
-    override fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
-        client.put(
-            path = "site/home/reuses/"
-        ) {
-            addApiKey(apiKey)
-            contentType(ContentType.Application.Json)
-            body = reuseIds
+    override fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrCallState<List<Reuse>>> =
+        loadingFlow {
+            client.put(
+                path = "site/home/reuses/"
+            ) {
+                addApiKey(apiKey)
+                contentType(ContentType.Application.Json)
+                body = reuseIds
+            }
         }
-    }
 
     override fun getSuggestTerritory(
         q: String,
         size: Int?
-    ): Flow<DgfrCallState<List<Territory>>> =
-        loadingFlow {
-            val builder = StringBuilder()
-            builder.appendIfNotNull("q", q)
-            builder.appendIfNotNull("size", size)
-
-            client.get(
-                path = "territory/suggest/?${builder.urlEncore()}"
-            )
+    ): Flow<DgfrCallState<List<Territory>>> = loadingFlow {
+        client.get(
+            path = "territory/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
         }
+    }
 }

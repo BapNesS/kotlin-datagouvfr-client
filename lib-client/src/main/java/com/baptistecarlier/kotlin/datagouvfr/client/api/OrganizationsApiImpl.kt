@@ -7,9 +7,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.readAndClose
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -37,19 +35,18 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<OrganizationPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("reuses", reuses)
-        builder.appendIfNotNull("badge", badge)
-        builder.appendIfNotNull("datasets", datasets)
-        builder.appendIfNotNull("followers", followers)
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "organizations/?${builder.urlEncore()}"
-        )
+            path = "organizations/"
+        ) {
+            parameter("q", q)
+            parameter("reuses", reuses)
+            parameter("badge", badge)
+            parameter("datasets", datasets)
+            parameter("followers", followers)
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -79,13 +76,12 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         q: String,
         size: Int?
     ): Flow<DgfrCallState<List<OrganizationSuggestion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("size", size)
-
         client.get(
-            path = "organizations/suggest/?${builder.urlEncore()}"
-        )
+            path = "organizations/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
+        }
     }
 
     override fun deleteUnfollowOrganization(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
@@ -103,13 +99,12 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<FollowPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "organizations/$id/followers/?${builder.urlEncore()}"
-        )
+            path = "organizations/$id/followers/"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun postFollowOrganization(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
@@ -191,14 +186,13 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         pageSize: Int?,
         sort: String?
     ): Flow<DgfrCallState<DatasetPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "organizations/$org/datasets/?${builder.urlEncore()}"
-        )
+            path = "organizations/$org/datasets/"
+        ) {
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -302,12 +296,11 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
         org: String,
         status: String?
     ): Flow<DgfrCallState<List<MembershipRequest>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("status", status)
-
         client.get(
-            path = "organizations/$org/membership/?${builder.urlEncore()}"
-        )
+            path = "organizations/$org/membership/"
+        ) {
+            parameter("status", status)
+        }
     }
 
     // A bit light, isn't ?

@@ -5,8 +5,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMappi
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -31,13 +29,12 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<HarvestJobPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "harvest/job/$ident/?${builder.urlEncore()}"
-        )
+            path = "harvest/job/$ident/"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun getListHarvesterApi(): Flow<DgfrCallState<List<String>>> = loadingFlow {
@@ -147,15 +144,14 @@ internal class HarvestApiImpl(private val client: HttpClient) : HarvestApi {
         owner: String?,
         deleted: Boolean?
     ): Flow<DgfrCallState<List<HarvestSourcePage>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-        builder.appendIfNotNull("owner", page)
-        builder.appendIfNotNull("deleted", page)
-
         client.get(
-            path = "harvest/sources/?${builder.urlEncore()}"
-        )
+            path = "harvest/sources/"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+            parameter("owner", page)
+            parameter("deleted", page)
+        }
     }
 
     @OptIn(MissingFieldMapping::class)

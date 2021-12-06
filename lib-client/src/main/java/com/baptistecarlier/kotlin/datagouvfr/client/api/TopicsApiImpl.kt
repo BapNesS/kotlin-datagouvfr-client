@@ -3,11 +3,10 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
-import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Topic
+import com.baptistecarlier.kotlin.datagouvfr.client.model.TopicPage
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -23,13 +22,12 @@ internal class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
 
     @OptIn(MissingFieldMapping::class)
     override fun getListTopics(page: Int?, pageSize: Int?): Flow<DgfrCallState<TopicPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "topics/?${builder.urlEncore()}"
-        )
+            path = "topics/"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun postCreateTopic(payload: Topic): Flow<DgfrCallState<Topic>> = loadingFlow {

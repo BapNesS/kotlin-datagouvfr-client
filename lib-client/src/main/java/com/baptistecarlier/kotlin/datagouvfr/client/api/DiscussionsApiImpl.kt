@@ -9,8 +9,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -32,19 +30,18 @@ internal class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsA
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<DiscussionPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("closed", closed)
-        // Not sure about this
-        forIds?.forEach { item ->
-            builder.appendIfNotNull("for", item)
-        }
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "discussions/?${builder.urlEncore()}"
-        )
+            path = "discussions/"
+        ) {
+            parameter("sort", sort)
+            parameter("closed", closed)
+            // TODO Not sure about this
+            forIds?.forEach { item ->
+                parameter("for", item)
+            }
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     @OptIn(MissingFieldMapping::class)

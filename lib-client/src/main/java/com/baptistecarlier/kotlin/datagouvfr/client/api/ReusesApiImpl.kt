@@ -7,8 +7,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -41,24 +39,23 @@ internal class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<ReusePage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("tag", tag)
-        builder.appendIfNotNull("organization", organization)
-        builder.appendIfNotNull("owner", owner)
-        builder.appendIfNotNull("dataset", dataset)
-        builder.appendIfNotNull("type", type)
-        builder.appendIfNotNull("datasets", datasets)
-        builder.appendIfNotNull("followers", followers)
-        builder.appendIfNotNull("badge", badge)
-        builder.appendIfNotNull("featured", featured)
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "reuses/?${builder.urlEncore()}"
-        )
+            path = "reuses/"
+        ) {
+            parameter("q", q)
+            parameter("tag", tag)
+            parameter("organization", organization)
+            parameter("owner", owner)
+            parameter("dataset", dataset)
+            parameter("type", type)
+            parameter("datasets", datasets)
+            parameter("followers", followers)
+            parameter("badge", badge)
+            parameter("featured", featured)
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun postCreateReuse(payload: Reuse): Flow<DgfrCallState<Reuse>> = loadingFlow {
@@ -81,13 +78,12 @@ internal class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
     }
 
     override fun getSuggestReuses(q: String, size: Int?): Flow<DgfrCallState<List<ReuseSuggestion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("size", size)
-
         client.get(
-            path = "reuses/suggest/?${builder.urlEncore()}"
-        )
+            path = "reuses/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
+        }
     }
 
     override fun getReuseTypes(): Flow<DgfrCallState<List<ReuseType>>> = loadingFlow {
@@ -111,13 +107,12 @@ internal class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<FollowPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "reuses/$id/followers/?${builder.urlEncore()}"
-        )
+            path = "reuses/$id/followers/"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun postFollowReuse(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
