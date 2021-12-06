@@ -4,8 +4,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.flow.Flow
@@ -48,27 +46,25 @@ internal class SpatialApiImpl(private val client: HttpClient) : SpatialApi {
         dynamic: Boolean?,
         size: Int?
     ): Flow<DgfrCallState<List<DatasetReference>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("id", id)
-        builder.appendIfNotNull("dynamic", dynamic)
-        builder.appendIfNotNull("size", size)
-
         client.get(
-            path = "spatial/zone/{id}/datasets/?${builder.urlEncore()}"
-        )
+            path = "spatial/zone/{id}/datasets/"
+        ) {
+            parameter("id", id)
+            parameter("dynamic", dynamic)
+            parameter("size", size)
+        }
     }
 
     override fun getSuggestZones(
         q: String,
         size: Int?
     ): Flow<DgfrCallState<List<TerritorySuggestion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("size", size)
-
         client.get(
-            path = "spatial/zones/suggest/?${builder.urlEncore()}"
-        )
+            path = "spatial/zones/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
+        }
     }
 
     override fun getSpatialZones(ids: List<String>): Flow<DgfrCallState<GeoJSONFeatureCollection>> = loadingFlow {

@@ -3,10 +3,10 @@ package com.baptistecarlier.kotlin.datagouvfr.client.api
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
-import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
+import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
+import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -27,19 +27,18 @@ internal class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         page: Int?,
         pageSize: Int?
     ): Flow<DgfrCallState<IssuePage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("closed", closed)
-        // Not sure about this
-        forIds?.forEach { item ->
-            builder.appendIfNotNull("for", item)
-        }
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "issues/?${builder.urlEncore()}"
-        )
+            path = "issues/"
+        ) {
+            parameter("sort", sort)
+            parameter("closed", closed)
+            // TODO Not sure about this
+            forIds?.forEach { item ->
+                parameter("for", item)
+            }
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     @OptIn(MissingFieldMapping::class)

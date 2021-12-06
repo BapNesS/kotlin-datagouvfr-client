@@ -6,8 +6,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -107,59 +105,49 @@ internal class MeApiImpl(private val client: HttpClient) : MeApi {
 
     @OptIn(MissingFieldMapping::class)
     override fun getMyOrgCommunityResources(q: String?): Flow<DgfrCallState<List<CommunityResource>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
         client.get(
-            path = "me/org_community_resources/?${builder.urlEncore()}"
+            path = "me/org_community_resources/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
     override fun getMyOrgDatasets(q: String?): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
         client.get(
-            path = "me/org_datasets/?${builder.urlEncore()}"
+            path = "me/org_datasets/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
     @OptIn(MissingFieldMapping::class)
     override fun getMyOrgDiscussions(q: String?): Flow<DgfrCallState<List<Discussion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
         client.get(
-            path = "me/org_discussions/?${builder.urlEncore()}"
+            path = "me/org_discussions/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
     @OptIn(MissingFieldMapping::class)
     override fun getMyOrgIssues(q: String?): Flow<DgfrCallState<List<Issue>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
         client.get(
-            path = "me/org_issues/?${builder.urlEncore()}"
+            path = "me/org_issues/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
     override fun getMyOrgReuses(q: String?): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
         client.get(
-            path = "me/org_reuses/?${builder.urlEncore()}"
+            path = "me/org_reuses/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 

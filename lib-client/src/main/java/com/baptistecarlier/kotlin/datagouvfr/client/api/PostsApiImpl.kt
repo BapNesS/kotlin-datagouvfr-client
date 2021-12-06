@@ -6,7 +6,8 @@ import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.UploadedImage
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -23,14 +24,13 @@ internal class PostsApiImpl(private val client: HttpClient) : PostsApi {
 
     @OptIn(MissingFieldMapping::class)
     override fun getListPosts(page: Int?, pageSize: Int?, sort: String?): Flow<DgfrCallState<PostPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
         client.get(
-            path = "posts/?${builder.urlEncore()}"
-        )
+            path = "posts/"
+        ) {
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
     override fun postCreatePost(payload: Post): Flow<DgfrCallState<Post>> = loadingFlow {
