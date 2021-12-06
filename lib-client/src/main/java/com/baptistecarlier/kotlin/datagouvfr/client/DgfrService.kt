@@ -15,9 +15,6 @@ import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
 private val httpClient: HttpClient by lazy {
     HttpClient(CIO) {
@@ -159,5 +156,4 @@ class DgfrService(apiKey: String = "") :
             validators()
         }
     }
-
 }
