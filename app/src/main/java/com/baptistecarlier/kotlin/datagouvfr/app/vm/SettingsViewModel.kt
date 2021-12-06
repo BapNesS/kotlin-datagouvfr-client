@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-@HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val storage: Storage,
     private val dgfrRepository: DgfrRepository

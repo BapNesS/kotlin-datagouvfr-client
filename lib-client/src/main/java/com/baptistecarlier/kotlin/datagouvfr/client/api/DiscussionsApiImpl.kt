@@ -60,7 +60,7 @@ internal class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsA
 
     override fun deleteDiscussion(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
-            path = "discussions/$id"
+            path = "discussions/$id/"
         ) {
             addApiKey(apiKey)
         }

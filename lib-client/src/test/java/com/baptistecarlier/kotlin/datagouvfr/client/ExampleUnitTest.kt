@@ -5,11 +5,6 @@ import kotlinx.datetime.*
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class ExampleUnitTest {
     @Test
     fun tmp_test() {
@@ -29,5 +24,19 @@ class ExampleUnitTest {
 
         )
         Assert.assertNotNull(item)
+    }
+    @Test
+    fun tmp_test_2() {
+        val mockClient = HttpClient()
+        val siteApiImpl = SiteApiImpl(mockClient)
+        siteApiImpl.getHomeReuses()
+        siteApiImpl.getSite()
+        Assert.assertNotNull(siteApiImpl)
+    }
+    @Test
+    fun tmp_test_3() {
+        val a = loadingFlow {
+            Assert.assertNotNull("a")
+        }
     }
 }

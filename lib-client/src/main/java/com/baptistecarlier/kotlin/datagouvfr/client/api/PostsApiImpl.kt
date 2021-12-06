@@ -116,7 +116,7 @@ internal class PostsApiImpl(private val client: HttpClient) : PostsApi {
 
     override fun deleteUnpublishPost(post: String): Flow<DgfrCallState<Post>> = loadingFlow {
         client.delete(
-            path = "posts/$post/publish/"
+            path = "posts/$post/publish"
         ) {
             addApiKey(apiKey)
         }
@@ -124,7 +124,7 @@ internal class PostsApiImpl(private val client: HttpClient) : PostsApi {
 
     override fun postPublishPost(post: String): Flow<DgfrCallState<Post>> = loadingFlow {
         client.post(
-            path = "posts/$post/publish/"
+            path = "posts/$post/publish"
         ) {
             addApiKey(apiKey)
         }

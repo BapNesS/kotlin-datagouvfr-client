@@ -40,7 +40,7 @@ internal class WorkersApiImpl(private val client: HttpClient) : WorkersApi {
 
     override fun getJobsReferenceApi(): Flow<DgfrCallState<List<String>>> = loadingFlow {
         client.get(
-            path = "workers/jobs/schedulables/"
+            path = "workers/jobs/schedulables"
         )
     }
 

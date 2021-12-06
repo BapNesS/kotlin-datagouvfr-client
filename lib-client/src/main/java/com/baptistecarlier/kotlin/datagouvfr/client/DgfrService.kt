@@ -1,9 +1,11 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
+import android.util.Log
 import com.baptistecarlier.kotlin.datagouvfr.client.api.*
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrException
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.engine.android.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -13,6 +15,9 @@ import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 private val httpClient: HttpClient by lazy {
     HttpClient(CIO) {
@@ -48,6 +53,11 @@ private fun HttpClientConfig<CIOEngineConfig>.validators() {
 private fun HttpClientConfig<CIOEngineConfig>.installers(
     timeOut: Long
 ) {
+
+    install(Logging) {
+        logger = DgfrHttpLogger()
+        level = LogLevel.ALL
+    }
     install(JsonFeature) {
         serializer = KotlinxSerializer(
             kotlinx.serialization.json.Json {
@@ -80,6 +90,13 @@ private val transferApi by lazy { TransferApiImpl(httpClient) }
 private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
 private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
 private val harvestApiImpl by lazy { HarvestApiImpl(httpClient) }
+
+internal class DgfrHttpLogger : Logger {
+    private val tag = "DgfrHttpLogger"
+    override fun log(message: String) {
+        Log.i(tag, message)
+    }
+}
 
 /**
  * @param apiKey Clé d'API (optionnel)
@@ -124,4 +141,23 @@ class DgfrService(apiKey: String = "") :
         notificationsApi.setApiKey(apiKey)
         harvestApiImpl.setApiKey(apiKey)
     }
+
+    private val provideHttpClient: HttpClient by lazy {
+        HttpClient(CIO) {
+            val timeOut: Long = 60000
+            val host = "useless-industries.fr"
+            val basePath = "/soundboxes/"
+
+            expectSuccess = true
+
+            this.defaultRequest {
+                url.host = host
+                url.protocol = URLProtocol.HTTPS
+                url.encodedPath = basePath + url.encodedPath
+            }
+            installers(timeOut)
+            validators()
+        }
+    }
+
 }

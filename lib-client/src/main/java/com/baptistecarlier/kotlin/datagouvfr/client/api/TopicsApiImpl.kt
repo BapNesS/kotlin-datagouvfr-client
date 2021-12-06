@@ -44,7 +44,7 @@ internal class TopicsApiImpl(private val client: HttpClient) : TopicsApi {
 
     override fun deleteTopic(topic: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
-            path = "topics/$topic"
+            path = "topics/$topic/"
         ) {
             addApiKey(apiKey)
         }
