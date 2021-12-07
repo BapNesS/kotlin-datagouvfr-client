@@ -66,7 +66,7 @@ sonarqube {
         // Tmp
         property "sonar.coverage.exclusions", "lib-client/src/main/java/com/baptistecarlier/kotlin/datagouvfr/client/model/**"
         property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/testReleaseUnitTestCoverage/testReleaseUnitTestCoverage.xml, lib-client/build/reports/jacoco/testReleaseUnitTestCoverage/testReleaseUnitTestCoverage.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/testReleaseUnitTestCoverage/testReleaseUnitTestCoverage.xml"
         def unit = fileTree(dir: project.projectDir, includes: ['**/*.exec']).files
         def ui = fileTree(dir: project.projectDir, includes: ['**/*.ec']).files
         unit.addAll(ui)
