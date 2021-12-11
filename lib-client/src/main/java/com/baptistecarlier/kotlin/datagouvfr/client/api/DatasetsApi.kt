@@ -397,7 +397,7 @@ internal interface DatasetsApi : WithApiKey {
         partByteOffset: Int? = null,
         totalParts: Int? = null,
         chunkSize: Int? = null
-    ): Flow<DgfrResource<UploadedResource?>>
+    ): Flow<DgfrResource<UploadedResource>>
 
     /**
      * Unfollow an object given its ID

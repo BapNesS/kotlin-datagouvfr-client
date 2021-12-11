@@ -32,7 +32,7 @@ private val httpClient: HttpClient by lazy {
     }
 }
 
-private fun HttpClientConfig<CIOEngineConfig>.validators() {
+fun HttpClientConfig<*>.validators() {
     HttpResponseValidator {
         handleResponseException { exception ->
             if (exception !is ClientRequestException) {

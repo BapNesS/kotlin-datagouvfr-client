@@ -1,6 +1,6 @@
 # kotlin-datagouvfr-client
 
-![Build](https://github.com/BapNesS/kotlin-datagouvfr-client/actions/workflows/build.yml/badge.svg) [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Maven](https://img.shields.io/maven-metadata/v.svg?label=maven-central&metadataUrl=https://repo1.maven.org/maven2/com/baptistecarlier/kotlin/datagouvfr/kotlin-datagouv-client/maven-metadata.xml)](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client)
+[![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) ![Build](https://github.com/BapNesS/kotlin-datagouvfr-client/actions/workflows/build.yml/badge.svg) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=com.baptistecarlier.kotlin.datagouvfr%3Adatagouvfr-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=com.baptistecarlier.kotlin.datagouvfr%3Adatagouvfr-client) [![Maven](https://img.shields.io/maven-metadata/v.svg?label=maven-central&metadataUrl=https://repo1.maven.org/maven2/com/baptistecarlier/kotlin/datagouvfr/kotlin-datagouv-client/maven-metadata.xml)](https://search.maven.org/artifact/com.baptistecarlier.kotlin.datagouvfr/kotlin-datagouv-client)
 
 # 📥 Usage
 
