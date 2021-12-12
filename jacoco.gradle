@@ -84,7 +84,7 @@ project.afterEvaluate {
                   '**/*$Result.*',
                   '**/*$Result$*.*',
                   '**/*serializer*.*',
-                  '**/datagouvfr/client/model/*.*'
+                  '**/com/baptistecarlier/kotlin/datagouvfr/client/model/*.*'
             ]
 
             def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,

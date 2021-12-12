@@ -23,7 +23,13 @@ internal class ApiMockEngine {
             engine {
                 addHandler { request ->
                     if (request.method != HttpMethod.Get && request.headers.contains("X-API-KEY").not()) {
-                        // TODO add check for MeApi & NotificationApi
+                        val status = HttpStatusCode.Unauthorized
+                        respond(status.toString(), status, mockResponseHeaders)
+                    } else if ((
+                        request.url.fullPath.startsWith("https://localhost/me") ||
+                            request.url.fullPath.startsWith("https://localhost/notifications")
+                        ) && request.headers.contains("X-API-KEY").not()
+                    ) {
                         val status = HttpStatusCode.Unauthorized
                         respond(status.toString(), status, mockResponseHeaders)
                     } else {

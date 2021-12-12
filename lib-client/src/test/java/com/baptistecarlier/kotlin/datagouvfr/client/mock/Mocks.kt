@@ -166,3 +166,21 @@ internal val mockTransfer = Transfer()
 internal val mockTransferResponse = TransferResponse(TransferResponse.ResponseEnum.ACCEPT)
 
 internal val mockTransferRequest = TransferRequest("", TransferRequestRecipient(), TransferRequestSubject())
+
+internal val mockIssue = Issue("", "", mockUser)
+
+@OptIn(MissingFieldMapping::class)
+internal val mockIssuePage = IssuePage(0, 0, 0)
+
+internal val mockIssueResponse = IssueResponse("", false)
+
+internal val mockMe = Me(
+    firstName = "",
+    id = "",
+    lastName = "",
+    since = Clock.System.now().toLocalDateTime(TimeZone.UTC),
+    slug = "",
+    uri = ""
+)
+
+internal val mockApiKey = ApiKey("")
