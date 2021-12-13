@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -22,10 +21,9 @@ internal class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     override fun getListReuses(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         tag: String?,
         organization: String?,
         owner: String?,
@@ -43,6 +41,10 @@ internal class ReusesApiImpl(private val client: HttpClient) : ReusesApi {
             path = "reuses/"
         ) {
             parameter("q", q)
+            // TODO Not sure about this
+            facets?.forEach { item ->
+                parameter("facets", item)
+            }
             parameter("tag", tag)
             parameter("organization", organization)
             parameter("owner", owner)

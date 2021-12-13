@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -22,10 +21,9 @@ internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     override fun getListUsers(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         organization: String?,
         datasets: String?,
         followers: String?,
@@ -37,7 +35,10 @@ internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
             path = "users/"
         ) {
             parameter("q", q)
-            /*parameter("facets", facets)*/
+            // TODO Not sure about this
+            facets?.forEach { item ->
+                parameter("facets", item)
+            }
             parameter("organization", organization)
             parameter("datasets", datasets)
             parameter("followers", followers)

@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
@@ -28,10 +27,9 @@ interface ReusesApi : WithApiKey {
      * @param pageSize The page size (optional, default to 20)
      */
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     fun getListReuses(
         q: String? = null,
-        /*facets: List<String>? = null,*/
+        facets: List<String>? = null,
         tag: String? = null,
         organization: String? = null,
         owner: String? = null,
