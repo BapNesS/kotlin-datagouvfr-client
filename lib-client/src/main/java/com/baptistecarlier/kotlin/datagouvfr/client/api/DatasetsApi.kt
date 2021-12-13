@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
@@ -31,10 +30,9 @@ interface DatasetsApi : WithApiKey {
      * @param pageSize The page size (optional, default
      */
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     fun getListDatasets(
         q: String? = null,
-        /*facets: List<String>? = null,*/
+        facets: List<String>? = null,
         tag: String? = null,
         badge: String? = null,
         organization: String? = null,

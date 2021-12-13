@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
@@ -23,10 +22,9 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
     }
 
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     override fun getListOrganizations(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         reuses: String?,
         badge: String?,
         datasets: String?,
@@ -39,6 +37,10 @@ internal class OrganizationsApiImpl(private val client: HttpClient) : Organizati
             path = "organizations/"
         ) {
             parameter("q", q)
+            // TODO Not sure about this
+            facets?.forEach { item ->
+                parameter("facets", item)
+            }
             parameter("reuses", reuses)
             parameter("badge", badge)
             parameter("datasets", datasets)

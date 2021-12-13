@@ -35,7 +35,7 @@ internal class UsersApiImplTest {
     fun `getListUsers when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
 
-        val flow = apiImpl.getListUsers("", "", "", "", "", 0, 0)
+        val flow = apiImpl.getListUsers("", null, "", "", "", "", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
         assert(results[0] is DgfrCallState.Loading<UserPage>)
@@ -47,7 +47,7 @@ internal class UsersApiImplTest {
     fun `getListUsers when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockUserPage)
 
-        val flow = apiImpl.getListUsers("", "", "", "", "", 0, 0)
+        val flow = apiImpl.getListUsers("", null, "", "", "", "", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
         assert(results[0] is DgfrCallState.Loading<UserPage>)
@@ -59,7 +59,7 @@ internal class UsersApiImplTest {
     fun `getListUsers when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockUserPage)
 
-        val flow = apiImpl.getListUsers("", "", "", "", "", 0, 0)
+        val flow = apiImpl.getListUsers("", null, "", "", "", "", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
         assert(results[0] is DgfrCallState.Loading<UserPage>)
@@ -70,6 +70,7 @@ internal class UsersApiImplTest {
 
     // region postCreateUser
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCreateUser when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -81,6 +82,7 @@ internal class UsersApiImplTest {
         assert(results[1] is DgfrCallState.ClientError<User>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCreateUser when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockUser)
@@ -92,6 +94,7 @@ internal class UsersApiImplTest {
         assert(results[1] is DgfrCallState.ServerError<User>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCreateUser when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockUser)
@@ -333,6 +336,7 @@ internal class UsersApiImplTest {
     // region getUser
 
     @Test
+    @OptIn(MissingFieldMapping::class)
     fun `getUser when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
 
@@ -343,6 +347,7 @@ internal class UsersApiImplTest {
         assert(results[1] is DgfrCallState.ClientError<User>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getUser when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockUser)
@@ -354,6 +359,7 @@ internal class UsersApiImplTest {
         assert(results[1] is DgfrCallState.ServerError<User>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getUser when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockUser)
@@ -369,6 +375,7 @@ internal class UsersApiImplTest {
 
     // region putUpdateUser
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `putUpdateUser when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -381,6 +388,7 @@ internal class UsersApiImplTest {
     }
 
     @Test
+    @OptIn(MissingFieldMapping::class)
     fun `putUpdateUser when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockUser)
 
@@ -392,6 +400,7 @@ internal class UsersApiImplTest {
     }
 
     @Test
+    @OptIn(MissingFieldMapping::class)
     fun `putUpdateUser when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockUser)
 

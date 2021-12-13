@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
@@ -24,10 +23,9 @@ interface OrganizationsApi : WithApiKey {
      * @param pageSize The page size (optional, default to 20)
      */
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     fun getListOrganizations(
         q: String? = null,
-        /*facets: List<String>? = null,*/
+        facets: List<String>? = null,
         reuses: String? = null,
         badge: String? = null,
         datasets: String? = null,
