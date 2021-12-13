@@ -37,8 +37,8 @@ internal class TagsApiImplTest {
         val flow = apiImpl.getTagsSuggest("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Tag>>)
-        assert(results[1] is DgfrResource.ClientError<List<Tag>>)
+        assert(results[0] is DgfrCallState.Loading<List<Tag>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Tag>>)
     }
 
     @Test
@@ -48,8 +48,8 @@ internal class TagsApiImplTest {
         val flow = apiImpl.getTagsSuggest("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Tag>>)
-        assert(results[1] is DgfrResource.ServerError<List<Tag>>)
+        assert(results[0] is DgfrCallState.Loading<List<Tag>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Tag>>)
     }
 
     @Test
@@ -59,8 +59,8 @@ internal class TagsApiImplTest {
         val flow = apiImpl.getTagsSuggest("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Tag>>)
-        assert(results[1] is DgfrResource.Success<List<Tag>>)
+        assert(results[0] is DgfrCallState.Loading<List<Tag>>)
+        assert(results[1] is DgfrCallState.Success<List<Tag>>)
     }
 
     // endregion getTagsSuggest

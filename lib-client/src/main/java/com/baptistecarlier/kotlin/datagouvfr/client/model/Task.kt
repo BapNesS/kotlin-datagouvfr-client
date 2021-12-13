@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property status Cron expression for hour
  * @property traceback The execution traceback
  */
-@kotlinx.serialization.Serializable
+@Serializable
 data class Task(
     @SerialName("exc")
     var exc: String? = null,

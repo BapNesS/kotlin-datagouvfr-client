@@ -36,8 +36,8 @@ internal class NotificationsApiImplTest {
         val flow = apiImpl.getNotifications()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Notification>>)
-        assert(results[1] is DgfrResource.ClientError<List<Notification>>)
+        assert(results[0] is DgfrCallState.Loading<List<Notification>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Notification>>)
     }
 
     @Test
@@ -47,8 +47,8 @@ internal class NotificationsApiImplTest {
         val flow = apiImpl.getNotifications()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Notification>>)
-        assert(results[1] is DgfrResource.ServerError<List<Notification>>)
+        assert(results[0] is DgfrCallState.Loading<List<Notification>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Notification>>)
     }
 
     @Test
@@ -58,8 +58,8 @@ internal class NotificationsApiImplTest {
         val flow = apiImpl.getNotifications()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Notification>>)
-        assert(results[1] is DgfrResource.Success<List<Notification>>)
+        assert(results[0] is DgfrCallState.Loading<List<Notification>>)
+        assert(results[1] is DgfrCallState.Success<List<Notification>>)
     }
 
     // endregion getNotifications

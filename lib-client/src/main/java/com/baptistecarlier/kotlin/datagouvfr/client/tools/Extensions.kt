@@ -6,30 +6,6 @@ import io.ktor.http.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.jvm.javaio.*
 
-internal fun StringBuilder.appendIfNotNull(key: String, value: List<String>?) {
-    if (value != null) {
-        this.append("$key=$value&")
-    }
-}
-
-internal fun StringBuilder.appendIfNotNull(key: String, value: String?) {
-    if (value != null) {
-        this.append("$key=$value&")
-    }
-}
-
-internal fun StringBuilder.appendIfNotNull(key: String, value: Boolean?) {
-    if (value != null) {
-        this.append("$key=$value&")
-    }
-}
-
-internal fun StringBuilder.appendIfNotNull(key: String, value: Int?) {
-    if (value != null) {
-        this.append("$key=$value&")
-    }
-}
-
 internal fun StringBuilder.urlEncore(): String = this.toString().encodeURLPath()
 
 internal fun HttpRequestBuilder.addApiKey(apiKey: String) {

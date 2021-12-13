@@ -3,7 +3,7 @@ package com.baptistecarlier.kotlin.datagouvfr.app.repository.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.baptistecarlier.kotlin.datagouvfr.client.DgfrService
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 import kotlinx.coroutines.flow.filter
@@ -22,19 +22,19 @@ class DatasetPagingSource(
 
             val pageNumber = if (params is LoadParams.Append) params.key else 0
 
-            val datasetPageDgfrResourceFlow = dgfrService
+            val datasetPageDgfrCallStateFlow = dgfrService
                 .getListDatasets(
                     q = query,
                     page = pageNumber,
                     pageSize = params.loadSize
                 )
                 .filter {
-                    (it is DgfrResource.Loading).not()
+                    (it is DgfrCallState.Loading).not()
                 }
                 .first()
 
-            if (datasetPageDgfrResourceFlow is DgfrResource.Success) {
-                val list = datasetPageDgfrResourceFlow.data.data?.toList() ?: emptyList()
+            if (datasetPageDgfrCallStateFlow is DgfrCallState.Success) {
+                val list = datasetPageDgfrCallStateFlow.data.data?.toList() ?: emptyList()
                 LoadResult.Page(
                     data = list,
                     // Since 0 is the lowest page number, return null to signify no more pages

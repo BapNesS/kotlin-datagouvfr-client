@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
@@ -9,8 +9,6 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -31,23 +29,23 @@ internal class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsA
         forIds: List<String>?,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<DiscussionPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("closed", closed)
-        // Not sure about this
-        forIds?.forEach { item ->
-            builder.appendIfNotNull("for", item)
-        }
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<DiscussionPage>> = loadingFlow {
         client.get(
-            path = "discussions/?${builder.urlEncore()}"
-        )
+            path = "discussions/"
+        ) {
+            parameter("sort", sort)
+            parameter("closed", closed)
+            // TODO Not sure about this
+            forIds?.forEach { item ->
+                parameter("for", item)
+            }
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postCreateDiscussion(payload: DiscussionStart): Flow<DgfrResource<Discussion>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postCreateDiscussion(payload: DiscussionStart): Flow<DgfrCallState<Discussion>> = loadingFlow {
         client.post(
             path = "discussions/"
         ) {
@@ -57,25 +55,27 @@ internal class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsA
         }
     }
 
-    override fun deleteDiscussion(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteDiscussion(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
-            path = "discussions/$id"
+            path = "discussions/$id/"
         ) {
             addApiKey(apiKey)
         }
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getDiscussion(id: String): Flow<DgfrResource<Discussion>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getDiscussion(id: String): Flow<DgfrCallState<Discussion>> = loadingFlow {
         client.get(
             path = "discussions/$id/"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun postCommentDiscussion(
         id: String,
         payload: DiscussionResponse
-    ): Flow<DgfrResource<Discussion>> = loadingFlow {
+    ): Flow<DgfrCallState<Discussion>> = loadingFlow {
         client.post(
             path = "discussions/$id/"
         ) {
@@ -85,7 +85,7 @@ internal class DiscussionsApiImpl(private val client: HttpClient) : DiscussionsA
         }
     }
 
-    override fun deleteDiscussionComment(id: String, cidx: Int): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteDiscussionComment(id: String, cidx: Int): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "discussions/$id/comments/$cidx"
         ) {

@@ -43,8 +43,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.getListDiscussions()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DiscussionPage>)
-        assert(results[1] is DgfrResource.ClientError<DiscussionPage>)
+        assert(results[0] is DgfrCallState.Loading<DiscussionPage>)
+        assert(results[1] is DgfrCallState.ClientError<DiscussionPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -55,8 +55,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.getListDiscussions()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DiscussionPage>)
-        assert(results[1] is DgfrResource.ServerError<DiscussionPage>)
+        assert(results[0] is DgfrCallState.Loading<DiscussionPage>)
+        assert(results[1] is DgfrCallState.ServerError<DiscussionPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -67,8 +67,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.getListDiscussions()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DiscussionPage>)
-        assert(results[1] is DgfrResource.Success<DiscussionPage>)
+        assert(results[0] is DgfrCallState.Loading<DiscussionPage>)
+        assert(results[1] is DgfrCallState.Success<DiscussionPage>)
     }
 
     // endregion getListDiscussions
@@ -82,8 +82,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.postCreateDiscussion(mockDiscussionStart)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.ClientError<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.ClientError<Discussion>)
     }
 
     @Test
@@ -93,8 +93,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.postCreateDiscussion(mockDiscussionStart)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.ServerError<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.ServerError<Discussion>)
     }
 
     @Test
@@ -104,8 +104,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.postCreateDiscussion(mockDiscussionStart)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.Success<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.Success<Discussion>)
     }
 
     // endregion postCreateDiscussion
@@ -119,8 +119,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.deleteDiscussion("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -130,8 +130,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.deleteDiscussion("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -141,8 +141,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.deleteDiscussion("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteDiscussion
@@ -156,8 +156,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.getDiscussion("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.ClientError<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.ClientError<Discussion>)
     }
 
     @Test
@@ -167,8 +167,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.getDiscussion("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.ServerError<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.ServerError<Discussion>)
     }
 
     @Test
@@ -178,8 +178,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.getDiscussion("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.Success<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.Success<Discussion>)
     }
 
     // endregion getDiscussion
@@ -193,8 +193,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.postCommentDiscussion("", mockDiscussionResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.ClientError<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.ClientError<Discussion>)
     }
 
     @Test
@@ -204,8 +204,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.postCommentDiscussion("", mockDiscussionResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.ServerError<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.ServerError<Discussion>)
     }
 
     @Test
@@ -215,8 +215,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.postCommentDiscussion("", mockDiscussionResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Discussion>)
-        assert(results[1] is DgfrResource.Success<Discussion>)
+        assert(results[0] is DgfrCallState.Loading<Discussion>)
+        assert(results[1] is DgfrCallState.Success<Discussion>)
     }
 
     // endregion postCommentDiscussion
@@ -230,8 +230,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.deleteDiscussionComment("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -241,8 +241,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.deleteDiscussionComment("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -252,8 +252,8 @@ internal class DiscussionsApiImplTest {
         val flow = apiImpl.deleteDiscussionComment("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteDiscussionComment"

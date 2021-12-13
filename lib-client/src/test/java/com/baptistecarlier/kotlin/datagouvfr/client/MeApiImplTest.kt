@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.api.MeApiImpl
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.*
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.ApiMockEngine
@@ -40,8 +41,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.deleteMe()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -51,8 +52,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.deleteMe()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -62,8 +63,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.deleteMe()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteMe
@@ -77,8 +78,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMe()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Me>)
-        assert(results[1] is DgfrResource.ClientError<Me>)
+        assert(results[0] is DgfrCallState.Loading<Me>)
+        assert(results[1] is DgfrCallState.ClientError<Me>)
     }
 
     @Test
@@ -88,8 +89,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMe()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Me>)
-        assert(results[1] is DgfrResource.ServerError<Me>)
+        assert(results[0] is DgfrCallState.Loading<Me>)
+        assert(results[1] is DgfrCallState.ServerError<Me>)
     }
 
     @Test
@@ -99,8 +100,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMe()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Me>)
-        assert(results[1] is DgfrResource.Success<Me>)
+        assert(results[0] is DgfrCallState.Loading<Me>)
+        assert(results[1] is DgfrCallState.Success<Me>)
     }
 
     // endregion getMe
@@ -114,8 +115,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.putUpdateMe(mockMe)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Me>)
-        assert(results[1] is DgfrResource.ClientError<Me>)
+        assert(results[0] is DgfrCallState.Loading<Me>)
+        assert(results[1] is DgfrCallState.ClientError<Me>)
     }
 
     @Test
@@ -125,8 +126,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.putUpdateMe(mockMe)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Me>)
-        assert(results[1] is DgfrResource.ServerError<Me>)
+        assert(results[0] is DgfrCallState.Loading<Me>)
+        assert(results[1] is DgfrCallState.ServerError<Me>)
     }
 
     @Test
@@ -136,8 +137,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.putUpdateMe(mockMe)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Me>)
-        assert(results[1] is DgfrResource.Success<Me>)
+        assert(results[0] is DgfrCallState.Loading<Me>)
+        assert(results[1] is DgfrCallState.Success<Me>)
     }
 
     // endregion putUpdateMe
@@ -151,8 +152,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.deleteClearApikey()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -162,8 +163,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.deleteClearApikey()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -173,8 +174,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.deleteClearApikey()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteClearApikey
@@ -188,8 +189,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.postGenerateApikey()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<ApiKey>)
-        assert(results[1] is DgfrResource.ClientError<ApiKey>)
+        assert(results[0] is DgfrCallState.Loading<ApiKey>)
+        assert(results[1] is DgfrCallState.ClientError<ApiKey>)
     }
 
     @Test
@@ -199,8 +200,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.postGenerateApikey()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<ApiKey>)
-        assert(results[1] is DgfrResource.ServerError<ApiKey>)
+        assert(results[0] is DgfrCallState.Loading<ApiKey>)
+        assert(results[1] is DgfrCallState.ServerError<ApiKey>)
     }
 
     @Test
@@ -210,8 +211,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.postGenerateApikey()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<ApiKey>)
-        assert(results[1] is DgfrResource.Success<ApiKey>)
+        assert(results[0] is DgfrCallState.Loading<ApiKey>)
+        assert(results[1] is DgfrCallState.Success<ApiKey>)
     }
 
     // endregion postGenerateApikey
@@ -225,8 +226,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.postMyAvatar(ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -236,8 +237,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.postMyAvatar(ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -247,8 +248,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.postMyAvatar(ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion postMyAvatar
@@ -262,8 +263,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ClientError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Dataset>>)
     }
 
     @Test
@@ -273,8 +274,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ServerError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Dataset>>)
     }
 
     @Test
@@ -284,8 +285,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.Success<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.Success<List<Dataset>>)
     }
 
     // endregion getMyDatasets
@@ -299,8 +300,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyMetrics()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<MyMetrics>>)
-        assert(results[1] is DgfrResource.ClientError<List<MyMetrics>>)
+        assert(results[0] is DgfrCallState.Loading<List<MyMetrics>>)
+        assert(results[1] is DgfrCallState.ClientError<List<MyMetrics>>)
     }
 
     @Test
@@ -310,8 +311,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyMetrics()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<MyMetrics>>)
-        assert(results[1] is DgfrResource.ServerError<List<MyMetrics>>)
+        assert(results[0] is DgfrCallState.Loading<List<MyMetrics>>)
+        assert(results[1] is DgfrCallState.ServerError<List<MyMetrics>>)
     }
 
     @Test
@@ -321,14 +322,15 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyMetrics()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<MyMetrics>>)
-        assert(results[1] is DgfrResource.Success<List<MyMetrics>>)
+        assert(results[0] is DgfrCallState.Loading<List<MyMetrics>>)
+        assert(results[1] is DgfrCallState.Success<List<MyMetrics>>)
     }
 
     // endregion getMyMetrics
 
     // region getMyOrgCommunityResources
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgCommunityResources when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -336,10 +338,11 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgCommunityResources()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<CommunityResource>>)
-        assert(results[1] is DgfrResource.ClientError<List<CommunityResource>>)
+        assert(results[0] is DgfrCallState.Loading<List<CommunityResource>>)
+        assert(results[1] is DgfrCallState.ClientError<List<CommunityResource>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgCommunityResources when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, emptyList<CommunityResource>())
@@ -347,10 +350,11 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgCommunityResources()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<CommunityResource>>)
-        assert(results[1] is DgfrResource.ServerError<List<CommunityResource>>)
+        assert(results[0] is DgfrCallState.Loading<List<CommunityResource>>)
+        assert(results[1] is DgfrCallState.ServerError<List<CommunityResource>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgCommunityResources when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, emptyList<CommunityResource>())
@@ -358,8 +362,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgCommunityResources()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<CommunityResource>>)
-        assert(results[1] is DgfrResource.Success<List<CommunityResource>>)
+        assert(results[0] is DgfrCallState.Loading<List<CommunityResource>>)
+        assert(results[1] is DgfrCallState.Success<List<CommunityResource>>)
     }
 
     // endregion getMyOrgCommunityResources
@@ -373,8 +377,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ClientError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Dataset>>)
     }
 
     @Test
@@ -384,8 +388,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ServerError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Dataset>>)
     }
 
     @Test
@@ -395,14 +399,15 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.Success<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.Success<List<Dataset>>)
     }
 
     // endregion getMyOrgDatasets
 
     // region getMyOrgDiscussions
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgDiscussions when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -410,10 +415,11 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgDiscussions()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Discussion>>)
-        assert(results[1] is DgfrResource.ClientError<List<Discussion>>)
+        assert(results[0] is DgfrCallState.Loading<List<Discussion>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Discussion>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgDiscussions when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, emptyList<Discussion>())
@@ -421,10 +427,11 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgDiscussions()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Discussion>>)
-        assert(results[1] is DgfrResource.ServerError<List<Discussion>>)
+        assert(results[0] is DgfrCallState.Loading<List<Discussion>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Discussion>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgDiscussions when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, emptyList<Discussion>())
@@ -432,14 +439,15 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgDiscussions()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Discussion>>)
-        assert(results[1] is DgfrResource.Success<List<Discussion>>)
+        assert(results[0] is DgfrCallState.Loading<List<Discussion>>)
+        assert(results[1] is DgfrCallState.Success<List<Discussion>>)
     }
 
     // endregion getMyOrgDiscussions
 
     // region getMyOrgIssues
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgIssues when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -447,10 +455,11 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgIssues()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Issue>>)
-        assert(results[1] is DgfrResource.ClientError<List<Issue>>)
+        assert(results[0] is DgfrCallState.Loading<List<Issue>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Issue>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgIssues when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, emptyList<Issue>())
@@ -458,10 +467,11 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgIssues()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Issue>>)
-        assert(results[1] is DgfrResource.ServerError<List<Issue>>)
+        assert(results[0] is DgfrCallState.Loading<List<Issue>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Issue>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getMyOrgIssues when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, emptyList<Issue>())
@@ -469,8 +479,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgIssues()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Issue>>)
-        assert(results[1] is DgfrResource.Success<List<Issue>>)
+        assert(results[0] is DgfrCallState.Loading<List<Issue>>)
+        assert(results[1] is DgfrCallState.Success<List<Issue>>)
     }
 
     // endregion getMyOrgIssues
@@ -484,8 +494,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ClientError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Reuse>>)
     }
 
     @Test
@@ -495,8 +505,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ServerError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Reuse>>)
     }
 
     @Test
@@ -506,8 +516,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyOrgReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.Success<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.Success<List<Reuse>>)
     }
 
     // endregion getMyOrgReuses
@@ -521,8 +531,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ClientError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Reuse>>)
     }
 
     @Test
@@ -532,8 +542,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ServerError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Reuse>>)
     }
 
     @Test
@@ -543,8 +553,8 @@ internal class MeApiImplTest {
         val flow = apiImpl.getMyReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.Success<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.Success<List<Reuse>>)
     }
 
     // endregion getMyReuses

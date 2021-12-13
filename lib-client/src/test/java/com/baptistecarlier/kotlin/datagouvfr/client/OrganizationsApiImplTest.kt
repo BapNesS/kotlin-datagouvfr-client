@@ -38,8 +38,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizations()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<OrganizationPage>)
-        assert(results[1] is DgfrResource.ClientError<OrganizationPage>)
+        assert(results[0] is DgfrCallState.Loading<OrganizationPage>)
+        assert(results[1] is DgfrCallState.ClientError<OrganizationPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -50,8 +50,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizations()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<OrganizationPage>)
-        assert(results[1] is DgfrResource.ServerError<OrganizationPage>)
+        assert(results[0] is DgfrCallState.Loading<OrganizationPage>)
+        assert(results[1] is DgfrCallState.ServerError<OrganizationPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -62,8 +62,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizations()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<OrganizationPage>)
-        assert(results[1] is DgfrResource.Success<OrganizationPage>)
+        assert(results[0] is DgfrCallState.Loading<OrganizationPage>)
+        assert(results[1] is DgfrCallState.Success<OrganizationPage>)
     }
 
     // endregion getListOrganizations
@@ -77,8 +77,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postCreateOrganization(mockOrganization)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.ClientError<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.ClientError<Organization>)
     }
 
     @Test
@@ -88,8 +88,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postCreateOrganization(mockOrganization)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.ServerError<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.ServerError<Organization>)
     }
 
     @Test
@@ -99,8 +99,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postCreateOrganization(mockOrganization)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.Success<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.Success<Organization>)
     }
 
     // endregion postCreateOrganization
@@ -115,8 +115,8 @@ internal class OrganizationsApiImplTest {
             val flow = apiImpl.getAvailableOrganizationBadges()
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-            assert(results[1] is DgfrResource.ClientError<Map<String, String>>)
+            assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+            assert(results[1] is DgfrCallState.ClientError<Map<String, String>>)
         }
 
     @Test
@@ -127,8 +127,8 @@ internal class OrganizationsApiImplTest {
             val flow = apiImpl.getAvailableOrganizationBadges()
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-            assert(results[1] is DgfrResource.ServerError<Map<String, String>>)
+            assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+            assert(results[1] is DgfrCallState.ServerError<Map<String, String>>)
         }
 
     @Test
@@ -138,8 +138,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getAvailableOrganizationBadges()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.Success<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.Success<Map<String, String>>)
     }
 
     // endregion getAvailableOrganizationBadges
@@ -153,8 +153,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getOrgRoles()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<OrganizationRole>>)
-        assert(results[1] is DgfrResource.ClientError<List<OrganizationRole>>)
+        assert(results[0] is DgfrCallState.Loading<List<OrganizationRole>>)
+        assert(results[1] is DgfrCallState.ClientError<List<OrganizationRole>>)
     }
 
     @Test
@@ -164,8 +164,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getOrgRoles()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<OrganizationRole>>)
-        assert(results[1] is DgfrResource.ServerError<List<OrganizationRole>>)
+        assert(results[0] is DgfrCallState.Loading<List<OrganizationRole>>)
+        assert(results[1] is DgfrCallState.ServerError<List<OrganizationRole>>)
     }
 
     @Test
@@ -175,8 +175,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getOrgRoles()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<OrganizationRole>>)
-        assert(results[1] is DgfrResource.Success<List<OrganizationRole>>)
+        assert(results[0] is DgfrCallState.Loading<List<OrganizationRole>>)
+        assert(results[1] is DgfrCallState.Success<List<OrganizationRole>>)
     }
 
     // endregion getOrgRoles
@@ -190,8 +190,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getSuggestOrganizations("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<OrganizationSuggestion>>)
-        assert(results[1] is DgfrResource.ClientError<List<OrganizationSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<OrganizationSuggestion>>)
+        assert(results[1] is DgfrCallState.ClientError<List<OrganizationSuggestion>>)
     }
 
     @Test
@@ -201,8 +201,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getSuggestOrganizations("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<OrganizationSuggestion>>)
-        assert(results[1] is DgfrResource.ServerError<List<OrganizationSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<OrganizationSuggestion>>)
+        assert(results[1] is DgfrCallState.ServerError<List<OrganizationSuggestion>>)
     }
 
     @Test
@@ -212,8 +212,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getSuggestOrganizations("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<OrganizationSuggestion>>)
-        assert(results[1] is DgfrResource.Success<List<OrganizationSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<OrganizationSuggestion>>)
+        assert(results[1] is DgfrCallState.Success<List<OrganizationSuggestion>>)
     }
 
     // endregion getSuggestOrganizations
@@ -227,8 +227,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteUnfollowOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -238,8 +238,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteUnfollowOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -249,8 +249,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteUnfollowOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteUnfollowOrganization
@@ -265,8 +265,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ClientError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ClientError<FollowPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -277,8 +277,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ServerError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ServerError<FollowPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -289,8 +289,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.Success<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.Success<FollowPage>)
     }
 
     // endregion getListOrganizationFollowers
@@ -304,8 +304,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postFollowOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -315,8 +315,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postFollowOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -326,8 +326,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postFollowOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion postFollowOrganization
@@ -341,8 +341,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -352,8 +352,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -363,8 +363,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteOrganization
@@ -378,8 +378,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.ClientError<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.ClientError<Organization>)
     }
 
     @Test
@@ -389,8 +389,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.ServerError<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.ServerError<Organization>)
     }
 
     @Test
@@ -400,8 +400,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.Success<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.Success<Organization>)
     }
 
     // endregion getOrganization
@@ -415,8 +415,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putUpdateOrganization("", mockOrganization)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.ClientError<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.ClientError<Organization>)
     }
 
     @Test
@@ -426,8 +426,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putUpdateOrganization("", mockOrganization)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.ServerError<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.ServerError<Organization>)
     }
 
     @Test
@@ -437,8 +437,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putUpdateOrganization("", mockOrganization)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Organization>)
-        assert(results[1] is DgfrResource.Success<Organization>)
+        assert(results[0] is DgfrCallState.Loading<Organization>)
+        assert(results[1] is DgfrCallState.Success<Organization>)
     }
 
     // endregion putUpdateOrganization
@@ -452,8 +452,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postAddOrganizationBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.ClientError<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.ClientError<Badge>)
     }
 
     @Test
@@ -463,8 +463,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postAddOrganizationBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.ServerError<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.ServerError<Badge>)
     }
 
     @Test
@@ -474,8 +474,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postAddOrganizationBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.Success<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.Success<Badge>)
     }
 
     // endregion postAddOrganizationBadge
@@ -489,8 +489,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganizationBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -500,8 +500,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganizationBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -511,8 +511,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganizationBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteOrganizationBadge
@@ -526,8 +526,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getRdfOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -537,8 +537,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getRdfOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -548,8 +548,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getRdfOrganization("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getRdfOrganization
@@ -563,8 +563,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getRdfOrganizationFormat("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -574,8 +574,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getRdfOrganizationFormat("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -585,8 +585,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getRdfOrganizationFormat("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getRdfOrganizationFormat
@@ -601,8 +601,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationDatasets("", 0, 0, "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DatasetPage>)
-        assert(results[1] is DgfrResource.ClientError<DatasetPage>)
+        assert(results[0] is DgfrCallState.Loading<DatasetPage>)
+        assert(results[1] is DgfrCallState.ClientError<DatasetPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -613,8 +613,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationDatasets("", 0, 0, "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DatasetPage>)
-        assert(results[1] is DgfrResource.ServerError<DatasetPage>)
+        assert(results[0] is DgfrCallState.Loading<DatasetPage>)
+        assert(results[1] is DgfrCallState.ServerError<DatasetPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -625,8 +625,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationDatasets("", 0, 0, "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DatasetPage>)
-        assert(results[1] is DgfrResource.Success<DatasetPage>)
+        assert(results[0] is DgfrCallState.Loading<DatasetPage>)
+        assert(results[1] is DgfrCallState.Success<DatasetPage>)
     }
 
     // endregion getListOrganizationDatasets
@@ -641,8 +641,8 @@ internal class OrganizationsApiImplTest {
             val flow = apiImpl.getListOrganizationDiscussions("")
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<List<Discussion>>)
-            assert(results[1] is DgfrResource.ClientError<List<Discussion>>)
+            assert(results[0] is DgfrCallState.Loading<List<Discussion>>)
+            assert(results[1] is DgfrCallState.ClientError<List<Discussion>>)
         }
 
     @Test
@@ -653,8 +653,8 @@ internal class OrganizationsApiImplTest {
             val flow = apiImpl.getListOrganizationDiscussions("")
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<List<Discussion>>)
-            assert(results[1] is DgfrResource.ServerError<List<Discussion>>)
+            assert(results[0] is DgfrCallState.Loading<List<Discussion>>)
+            assert(results[1] is DgfrCallState.ServerError<List<Discussion>>)
         }
 
     @Test
@@ -664,8 +664,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationDiscussions("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Discussion>>)
-        assert(results[1] is DgfrResource.Success<List<Discussion>>)
+        assert(results[0] is DgfrCallState.Loading<List<Discussion>>)
+        assert(results[1] is DgfrCallState.Success<List<Discussion>>)
     }
 
     // endregion getListOrganizationDiscussions
@@ -679,8 +679,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationIssues("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Issue>>)
-        assert(results[1] is DgfrResource.ClientError<List<Issue>>)
+        assert(results[0] is DgfrCallState.Loading<List<Issue>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Issue>>)
     }
 
     @Test
@@ -690,8 +690,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationIssues("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Issue>>)
-        assert(results[1] is DgfrResource.ServerError<List<Issue>>)
+        assert(results[0] is DgfrCallState.Loading<List<Issue>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Issue>>)
     }
 
     @Test
@@ -701,8 +701,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationIssues("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Issue>>)
-        assert(results[1] is DgfrResource.Success<List<Issue>>)
+        assert(results[0] is DgfrCallState.Loading<List<Issue>>)
+        assert(results[1] is DgfrCallState.Success<List<Issue>>)
     }
 
     // endregion getListOrganizationIssues
@@ -716,8 +716,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postOrganizationLogo("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -727,8 +727,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postOrganizationLogo("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -738,8 +738,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postOrganizationLogo("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion postOrganizationLogo
@@ -753,8 +753,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putResizeOrganizationLogo("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -764,8 +764,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putResizeOrganizationLogo("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -775,8 +775,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putResizeOrganizationLogo("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion putResizeOrganizationLogo
@@ -790,8 +790,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganizationMember("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -801,8 +801,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganizationMember("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -812,8 +812,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.deleteOrganizationMember("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteOrganizationMember
@@ -827,8 +827,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postCreateOrganizationMember("", "", mockMember)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.ClientError<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.ClientError<Member>)
     }
 
     @Test
@@ -838,8 +838,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postCreateOrganizationMember("", "", mockMember)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.ServerError<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.ServerError<Member>)
     }
 
     @Test
@@ -849,8 +849,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postCreateOrganizationMember("", "", mockMember)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.Success<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.Success<Member>)
     }
 
     // endregion postCreateOrganizationMember
@@ -864,8 +864,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putUpdateOrganizationMember("", "", mockMember)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.ClientError<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.ClientError<Member>)
     }
 
     @Test
@@ -875,8 +875,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putUpdateOrganizationMember("", "", mockMember)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.ServerError<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.ServerError<Member>)
     }
 
     @Test
@@ -886,8 +886,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.putUpdateOrganizationMember("", "", mockMember)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.Success<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.Success<Member>)
     }
 
     // endregion putUpdateOrganizationMember
@@ -901,8 +901,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListMembershipRequests("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<MembershipRequest>>)
-        assert(results[1] is DgfrResource.ClientError<List<MembershipRequest>>)
+        assert(results[0] is DgfrCallState.Loading<List<MembershipRequest>>)
+        assert(results[1] is DgfrCallState.ClientError<List<MembershipRequest>>)
     }
 
     @Test
@@ -912,8 +912,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListMembershipRequests("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<MembershipRequest>>)
-        assert(results[1] is DgfrResource.ServerError<List<MembershipRequest>>)
+        assert(results[0] is DgfrCallState.Loading<List<MembershipRequest>>)
+        assert(results[1] is DgfrCallState.ServerError<List<MembershipRequest>>)
     }
 
     @Test
@@ -923,8 +923,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListMembershipRequests("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<MembershipRequest>>)
-        assert(results[1] is DgfrResource.Success<List<MembershipRequest>>)
+        assert(results[0] is DgfrCallState.Loading<List<MembershipRequest>>)
+        assert(results[1] is DgfrCallState.Success<List<MembershipRequest>>)
     }
 
     // endregion getListMembershipRequests
@@ -938,8 +938,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postMembershipRequest("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<MembershipRequest>)
-        assert(results[1] is DgfrResource.ClientError<MembershipRequest>)
+        assert(results[0] is DgfrCallState.Loading<MembershipRequest>)
+        assert(results[1] is DgfrCallState.ClientError<MembershipRequest>)
     }
 
     @Test
@@ -949,8 +949,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postMembershipRequest("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<MembershipRequest>)
-        assert(results[1] is DgfrResource.ServerError<MembershipRequest>)
+        assert(results[0] is DgfrCallState.Loading<MembershipRequest>)
+        assert(results[1] is DgfrCallState.ServerError<MembershipRequest>)
     }
 
     @Test
@@ -960,8 +960,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postMembershipRequest("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<MembershipRequest>)
-        assert(results[1] is DgfrResource.Success<MembershipRequest>)
+        assert(results[0] is DgfrCallState.Loading<MembershipRequest>)
+        assert(results[1] is DgfrCallState.Success<MembershipRequest>)
     }
 
     // endregion postMembershipRequest
@@ -975,8 +975,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postAcceptMembership("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.ClientError<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.ClientError<Member>)
     }
 
     @Test
@@ -986,8 +986,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postAcceptMembership("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.ServerError<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.ServerError<Member>)
     }
 
     @Test
@@ -997,8 +997,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postAcceptMembership("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Member>)
-        assert(results[1] is DgfrResource.Success<Member>)
+        assert(results[0] is DgfrCallState.Loading<Member>)
+        assert(results[1] is DgfrCallState.Success<Member>)
     }
 
     // endregion postAcceptMembership
@@ -1012,8 +1012,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postRefuseMembership("", "", mockRefuseMembership)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -1023,8 +1023,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postRefuseMembership("", "", mockRefuseMembership)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -1034,8 +1034,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.postRefuseMembership("", "", mockRefuseMembership)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion postRefuseMembership
@@ -1049,8 +1049,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationReuses("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ClientError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Reuse>>)
     }
 
     @Test
@@ -1060,8 +1060,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationReuses("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ServerError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Reuse>>)
     }
 
     @Test
@@ -1071,8 +1071,8 @@ internal class OrganizationsApiImplTest {
         val flow = apiImpl.getListOrganizationReuses("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.Success<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.Success<List<Reuse>>)
     }
 
     // endregion getListOrganizationReuses

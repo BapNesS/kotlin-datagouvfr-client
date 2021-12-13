@@ -4,6 +4,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.api.*
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.DgfrException
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.engine.android.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*

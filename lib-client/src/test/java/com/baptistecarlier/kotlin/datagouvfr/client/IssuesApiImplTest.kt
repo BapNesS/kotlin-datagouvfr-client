@@ -42,8 +42,8 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.getListIssues()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<IssuePage>)
-        assert(results[1] is DgfrResource.ClientError<IssuePage>)
+        assert(results[0] is DgfrCallState.Loading<IssuePage>)
+        assert(results[1] is DgfrCallState.ClientError<IssuePage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -54,8 +54,8 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.getListIssues()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<IssuePage>)
-        assert(results[1] is DgfrResource.ServerError<IssuePage>)
+        assert(results[0] is DgfrCallState.Loading<IssuePage>)
+        assert(results[1] is DgfrCallState.ServerError<IssuePage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -66,14 +66,15 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.getListIssues()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<IssuePage>)
-        assert(results[1] is DgfrResource.Success<IssuePage>)
+        assert(results[0] is DgfrCallState.Loading<IssuePage>)
+        assert(results[1] is DgfrCallState.Success<IssuePage>)
     }
 
     // endregion getListIssues
 
     // region postCreateIssue
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCreateIssue when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -81,10 +82,11 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.postCreateIssue(mockIssue)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.ClientError<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.ClientError<Issue>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCreateIssue when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockIssue)
@@ -92,10 +94,11 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.postCreateIssue(mockIssue)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.ServerError<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.ServerError<Issue>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCreateIssue when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockIssue)
@@ -103,14 +106,15 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.postCreateIssue(mockIssue)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.Success<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.Success<Issue>)
     }
 
     // endregion postCreateIssue
 
     // region getIssue
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getIssue when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -118,10 +122,11 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.getIssue("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.ClientError<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.ClientError<Issue>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getIssue when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockIssue)
@@ -129,10 +134,11 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.getIssue("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.ServerError<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.ServerError<Issue>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getIssue when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockIssue)
@@ -140,14 +146,15 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.getIssue("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.Success<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.Success<Issue>)
     }
 
     // endregion getIssue
 
     // region postCommentIssue
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCommentIssue when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -155,10 +162,11 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.postCommentIssue("", mockIssueResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.ClientError<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.ClientError<Issue>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCommentIssue when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockIssue)
@@ -166,10 +174,11 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.postCommentIssue("", mockIssueResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.ServerError<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.ServerError<Issue>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postCommentIssue when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockIssue)
@@ -177,8 +186,8 @@ internal class IssuesApiImplTest {
         val flow = apiImpl.postCommentIssue("", mockIssueResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Issue>)
-        assert(results[1] is DgfrResource.Success<Issue>)
+        assert(results[0] is DgfrCallState.Loading<Issue>)
+        assert(results[1] is DgfrCallState.Success<Issue>)
     }
 
     // endregion postCommentIssue

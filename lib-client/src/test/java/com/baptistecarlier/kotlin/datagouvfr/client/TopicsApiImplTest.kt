@@ -42,8 +42,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.getListTopics()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<TopicPage>)
-        assert(results[1] is DgfrResource.ClientError<TopicPage>)
+        assert(results[0] is DgfrCallState.Loading<TopicPage>)
+        assert(results[1] is DgfrCallState.ClientError<TopicPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -54,8 +54,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.getListTopics()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<TopicPage>)
-        assert(results[1] is DgfrResource.ServerError<TopicPage>)
+        assert(results[0] is DgfrCallState.Loading<TopicPage>)
+        assert(results[1] is DgfrCallState.ServerError<TopicPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -66,8 +66,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.getListTopics()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<TopicPage>)
-        assert(results[1] is DgfrResource.Success<TopicPage>)
+        assert(results[0] is DgfrCallState.Loading<TopicPage>)
+        assert(results[1] is DgfrCallState.Success<TopicPage>)
     }
 
     // endregion getListTopics
@@ -81,8 +81,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.postCreateTopic(mockTopic)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.ClientError<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.ClientError<Topic>)
     }
 
     @Test
@@ -92,8 +92,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.postCreateTopic(mockTopic)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.ServerError<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.ServerError<Topic>)
     }
 
     @Test
@@ -103,8 +103,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.postCreateTopic(mockTopic)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.Success<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.Success<Topic>)
     }
 
     // endregion postCreateTopic
@@ -118,8 +118,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.deleteTopic("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -129,8 +129,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.deleteTopic("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -140,8 +140,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.deleteTopic("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteTopic
@@ -155,8 +155,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.getTopic("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.ClientError<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.ClientError<Topic>)
     }
 
     @Test
@@ -166,8 +166,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.getTopic("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.ServerError<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.ServerError<Topic>)
     }
 
     @Test
@@ -177,8 +177,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.getTopic("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.Success<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.Success<Topic>)
     }
 
     // endregion getTopic
@@ -192,8 +192,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.putUpdateTopic("", mockTopic)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.ClientError<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.ClientError<Topic>)
     }
 
     @Test
@@ -203,8 +203,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.putUpdateTopic("", mockTopic)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.ServerError<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.ServerError<Topic>)
     }
 
     @Test
@@ -214,8 +214,8 @@ internal class TopicsApiImplTest {
         val flow = apiImpl.putUpdateTopic("", mockTopic)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Topic>)
-        assert(results[1] is DgfrResource.Success<Topic>)
+        assert(results[0] is DgfrCallState.Loading<Topic>)
+        assert(results[1] is DgfrCallState.Success<Topic>)
     }
 
     // endregion putUpdateTopic

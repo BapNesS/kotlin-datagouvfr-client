@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.api.WorkersApiImpl
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.ApiMockEngine
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.mockBoolean
@@ -33,6 +34,7 @@ internal class WorkersApiImplTest {
 
     // region getListJobs
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getListJobs when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -40,10 +42,11 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getListJobs()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Job>>)
-        assert(results[1] is DgfrResource.ClientError<List<Job>>)
+        assert(results[0] is DgfrCallState.Loading<List<Job>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Job>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getListJobs when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, emptyList<Job>())
@@ -51,10 +54,11 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getListJobs()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Job>>)
-        assert(results[1] is DgfrResource.ServerError<List<Job>>)
+        assert(results[0] is DgfrCallState.Loading<List<Job>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Job>>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getListJobs when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, emptyList<Job>())
@@ -62,14 +66,15 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getListJobs()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Job>>)
-        assert(results[1] is DgfrResource.Success<List<Job>>)
+        assert(results[0] is DgfrCallState.Loading<List<Job>>)
+        assert(results[1] is DgfrCallState.Success<List<Job>>)
     }
 
     // endregion getListJobs
 
     // region postJobsApi
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postJobsApi when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -77,10 +82,11 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.postJobsApi(mockJob)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.ClientError<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.ClientError<Job>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postJobsApi when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockJob)
@@ -88,10 +94,11 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.postJobsApi(mockJob)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.ServerError<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.ServerError<Job>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `postJobsApi when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockJob)
@@ -99,8 +106,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.postJobsApi(mockJob)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.Success<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.Success<Job>)
     }
 
     // endregion postJobsApi
@@ -114,8 +121,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getJobsReferenceApi()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.ClientError<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.ClientError<List<String>>)
     }
 
     @Test
@@ -125,8 +132,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getJobsReferenceApi()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.ServerError<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.ServerError<List<String>>)
     }
 
     @Test
@@ -136,8 +143,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getJobsReferenceApi()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.Success<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.Success<List<String>>)
     }
 
     // endregion getJobsReferenceApi
@@ -151,8 +158,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.deleteJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -162,8 +169,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.deleteJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -173,14 +180,15 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.deleteJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteJobApi
 
     // region getJobApi
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getJobApi when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -188,10 +196,11 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.ClientError<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.ClientError<Job>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getJobApi when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockJob)
@@ -199,10 +208,11 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.ServerError<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.ServerError<Job>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getJobApi when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockJob)
@@ -210,8 +220,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.Success<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.Success<Job>)
     }
 
     // endregion getJobApi
@@ -219,36 +229,39 @@ internal class WorkersApiImplTest {
     // region putJobApi
 
     @Test
+    @OptIn(MissingFieldMapping::class)
     fun `putJobApi when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
 
         val flow = apiImpl.putJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.ClientError<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.ClientError<Job>)
     }
 
     @Test
+    @OptIn(MissingFieldMapping::class)
     fun `putJobApi when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockJob)
 
         val flow = apiImpl.putJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.ServerError<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.ServerError<Job>)
     }
 
     @Test
+    @OptIn(MissingFieldMapping::class)
     fun `putJobApi when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockJob)
 
         val flow = apiImpl.putJobApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Job>)
-        assert(results[1] is DgfrResource.Success<Job>)
+        assert(results[0] is DgfrCallState.Loading<Job>)
+        assert(results[1] is DgfrCallState.Success<Job>)
     }
 
     // endregion putJobApi
@@ -262,8 +275,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getTaskApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Task>)
-        assert(results[1] is DgfrResource.ClientError<Task>)
+        assert(results[0] is DgfrCallState.Loading<Task>)
+        assert(results[1] is DgfrCallState.ClientError<Task>)
     }
 
     @Test
@@ -273,8 +286,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getTaskApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Task>)
-        assert(results[1] is DgfrResource.ServerError<Task>)
+        assert(results[0] is DgfrCallState.Loading<Task>)
+        assert(results[1] is DgfrCallState.ServerError<Task>)
     }
 
     @Test
@@ -284,8 +297,8 @@ internal class WorkersApiImplTest {
         val flow = apiImpl.getTaskApi("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Task>)
-        assert(results[1] is DgfrResource.Success<Task>)
+        assert(results[0] is DgfrCallState.Loading<Task>)
+        assert(results[1] is DgfrCallState.Success<Task>)
     }
 
     // endregion getTaskApi

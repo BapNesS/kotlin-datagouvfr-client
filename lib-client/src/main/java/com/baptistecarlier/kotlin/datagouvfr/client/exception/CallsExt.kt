@@ -1,10 +1,10 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.exception
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import kotlinx.coroutines.flow.flow
 
 internal inline fun <reified T> loadingFlow(crossinline ktorCall: suspend () -> T) = flow {
-    emit(DgfrResource.Loading())
+    emit(DgfrCallState.Loading())
     emit(
         exceptionalHandledCall {
             ktorCall.invoke()
@@ -12,13 +12,13 @@ internal inline fun <reified T> loadingFlow(crossinline ktorCall: suspend () -> 
     )
 }
 
-internal suspend inline fun <reified T> exceptionalHandledCall(ktorCall: suspend () -> T): DgfrResource<T> {
+internal suspend inline fun <reified T> exceptionalHandledCall(ktorCall: suspend () -> T): DgfrCallState<T> {
     return try {
         val success = ktorCall.invoke()
-        DgfrResource.Success(success)
+        DgfrCallState.Success(success)
     } catch (dgfrException: DgfrException) {
-        DgfrResource.ServerError(dgfrException.httpCode)
+        DgfrCallState.ServerError(dgfrException.httpCode)
     } catch (e: Exception) {
-        DgfrResource.ClientError(ClientErrorCode.UNKNOWN)
+        DgfrCallState.ClientError(ClientErrorCode.UNKNOWN)
     }
 }

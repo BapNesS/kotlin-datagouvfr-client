@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -28,6 +29,7 @@ import java.security.acl.Owner
  * @property organization The producer organization
  * @property owner The user information
  */
+@MissingFieldMapping
 @Serializable
 data class CommunityResource(
     @SerialName("filetype")
@@ -37,7 +39,7 @@ data class CommunityResource(
     @SerialName("title")
     var title: String,
     @SerialName("type")
-    var type: Type,
+    var type: TypeEnum,
     @SerialName("url")
     var url: String,
     // @SerialName("checksum")
@@ -72,25 +74,4 @@ data class CommunityResource(
     // var organization: Map<String, Any?>? = null,
     @SerialName("owner")
     var owner: Owner? = null
-) {
-
-    /**
-     * Resource type (documentation, API...)
-     * Values: MAIN, DOCUMENTATION, UPDATE, API, CODE, OTHER
-     */
-    @Serializable
-    enum class Type {
-        @SerialName("main")
-        MAIN,
-        @SerialName("documentation")
-        DOCUMENTATION,
-        @SerialName("update")
-        UPDATE,
-        @SerialName("api")
-        API,
-        @SerialName("code")
-        CODE,
-        @SerialName("other")
-        OTHER
-    }
-}
+)

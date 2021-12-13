@@ -44,8 +44,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.getListPosts()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<PostPage>)
-        assert(results[1] is DgfrResource.ClientError<PostPage>)
+        assert(results[0] is DgfrCallState.Loading<PostPage>)
+        assert(results[1] is DgfrCallState.ClientError<PostPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -56,8 +56,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.getListPosts()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<PostPage>)
-        assert(results[1] is DgfrResource.ServerError<PostPage>)
+        assert(results[0] is DgfrCallState.Loading<PostPage>)
+        assert(results[1] is DgfrCallState.ServerError<PostPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -68,8 +68,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.getListPosts()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<PostPage>)
-        assert(results[1] is DgfrResource.Success<PostPage>)
+        assert(results[0] is DgfrCallState.Loading<PostPage>)
+        assert(results[1] is DgfrCallState.Success<PostPage>)
     }
 
     // endregion getListPosts
@@ -83,8 +83,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postCreatePost(mockPost)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ClientError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ClientError<Post>)
     }
 
     @Test
@@ -94,8 +94,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postCreatePost(mockPost)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ServerError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ServerError<Post>)
     }
 
     @Test
@@ -105,8 +105,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postCreatePost(mockPost)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.Success<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.Success<Post>)
     }
 
     // endregion postCreatePost
@@ -120,8 +120,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.deletePost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -131,8 +131,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.deletePost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -142,8 +142,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.deletePost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deletePost
@@ -157,8 +157,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.getPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ClientError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ClientError<Post>)
     }
 
     @Test
@@ -168,8 +168,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.getPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ServerError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ServerError<Post>)
     }
 
     @Test
@@ -179,8 +179,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.getPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.Success<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.Success<Post>)
     }
 
     // endregion getPost
@@ -194,8 +194,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.putUpdatePost("", mockPost)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ClientError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ClientError<Post>)
     }
 
     @Test
@@ -205,8 +205,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.putUpdatePost("", mockPost)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ServerError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ServerError<Post>)
     }
 
     @Test
@@ -216,8 +216,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.putUpdatePost("", mockPost)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.Success<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.Success<Post>)
     }
 
     // endregion putUpdatePost
@@ -231,8 +231,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -242,8 +242,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -253,8 +253,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion postImage
@@ -268,8 +268,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.putResizePostImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -279,8 +279,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.putResizePostImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -290,8 +290,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.putResizePostImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion putResizePostImage
@@ -305,8 +305,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.deleteUnpublishPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ClientError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ClientError<Post>)
     }
 
     @Test
@@ -316,8 +316,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.deleteUnpublishPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ServerError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ServerError<Post>)
     }
 
     @Test
@@ -327,8 +327,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.deleteUnpublishPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.Success<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.Success<Post>)
     }
 
     // endregion deleteUnpublishPost
@@ -342,8 +342,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postPublishPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ClientError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ClientError<Post>)
     }
 
     @Test
@@ -353,8 +353,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postPublishPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.ServerError<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.ServerError<Post>)
     }
 
     @Test
@@ -364,8 +364,8 @@ internal class PostsApiImplTest {
         val flow = apiImpl.postPublishPost("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Post>)
-        assert(results[1] is DgfrResource.Success<Post>)
+        assert(results[0] is DgfrCallState.Loading<Post>)
+        assert(results[1] is DgfrCallState.Success<Post>)
     }
 
     // endregion postPublishPost

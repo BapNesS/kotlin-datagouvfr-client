@@ -37,8 +37,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestBackends()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestBackend>)
-        assert(results[1] is DgfrResource.ClientError<HarvestBackend>)
+        assert(results[0] is DgfrCallState.Loading<HarvestBackend>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestBackend>)
     }
 
     @Test
@@ -48,8 +48,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestBackends()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestBackend>)
-        assert(results[1] is DgfrResource.ServerError<HarvestBackend>)
+        assert(results[0] is DgfrCallState.Loading<HarvestBackend>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestBackend>)
     }
 
     @Test
@@ -59,8 +59,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestBackends()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestBackend>)
-        assert(results[1] is DgfrResource.Success<HarvestBackend>)
+        assert(results[0] is DgfrCallState.Loading<HarvestBackend>)
+        assert(results[1] is DgfrCallState.Success<HarvestBackend>)
     }
 
     // endregion getHarvestBackends
@@ -75,8 +75,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestJob("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPage>)
-        assert(results[1] is DgfrResource.ClientError<HarvestJobPage>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPage>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestJobPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -87,8 +87,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestJob("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPage>)
-        assert(results[1] is DgfrResource.ServerError<HarvestJobPage>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPage>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestJobPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -99,8 +99,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestJob("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPage>)
-        assert(results[1] is DgfrResource.Success<HarvestJobPage>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPage>)
+        assert(results[1] is DgfrCallState.Success<HarvestJobPage>)
     }
 
     // endregion getHarvestJob
@@ -114,8 +114,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvesterApi()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.ClientError<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.ClientError<List<String>>)
     }
 
     @Test
@@ -125,8 +125,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvesterApi()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.ServerError<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.ServerError<List<String>>)
     }
 
     @Test
@@ -136,8 +136,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvesterApi()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.Success<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.Success<List<String>>)
     }
 
     // endregion getListHarvesterApi
@@ -151,8 +151,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postPreviewHarvestSourceConfig(mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPreview>)
-        assert(results[1] is DgfrResource.ClientError<HarvestJobPreview>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPreview>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestJobPreview>)
     }
 
     @Test
@@ -162,8 +162,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postPreviewHarvestSourceConfig(mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPreview>)
-        assert(results[1] is DgfrResource.ServerError<HarvestJobPreview>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPreview>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestJobPreview>)
     }
 
     @Test
@@ -173,8 +173,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postPreviewHarvestSourceConfig(mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPreview>)
-        assert(results[1] is DgfrResource.Success<HarvestJobPreview>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPreview>)
+        assert(results[1] is DgfrCallState.Success<HarvestJobPreview>)
     }
 
     // endregion postPreviewHarvestSourceConfig
@@ -188,8 +188,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.deleteHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -199,8 +199,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.deleteHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -210,8 +210,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.deleteHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion deleteHarvestSource
@@ -225,8 +225,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -236,8 +236,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -247,8 +247,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion getHarvestSource
@@ -262,8 +262,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.putUpdateHarvestSource("", mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -273,8 +273,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.putUpdateHarvestSource("", mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -284,8 +284,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.putUpdateHarvestSource("", mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion putUpdateHarvestSource
@@ -299,8 +299,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvestJobs("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJob>)
-        assert(results[1] is DgfrResource.ClientError<HarvestJob>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJob>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestJob>)
     }
 
     @Test
@@ -310,8 +310,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvestJobs("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJob>)
-        assert(results[1] is DgfrResource.ServerError<HarvestJob>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJob>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestJob>)
     }
 
     @Test
@@ -321,8 +321,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvestJobs("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJob>)
-        assert(results[1] is DgfrResource.Success<HarvestJob>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJob>)
+        assert(results[1] is DgfrCallState.Success<HarvestJob>)
     }
 
     // endregion getListHarvestJobs
@@ -336,8 +336,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getPreviewHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPreview>)
-        assert(results[1] is DgfrResource.ClientError<HarvestJobPreview>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPreview>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestJobPreview>)
     }
 
     @Test
@@ -347,8 +347,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getPreviewHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPreview>)
-        assert(results[1] is DgfrResource.ServerError<HarvestJobPreview>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPreview>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestJobPreview>)
     }
 
     @Test
@@ -358,8 +358,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getPreviewHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestJobPreview>)
-        assert(results[1] is DgfrResource.Success<HarvestJobPreview>)
+        assert(results[0] is DgfrCallState.Loading<HarvestJobPreview>)
+        assert(results[1] is DgfrCallState.Success<HarvestJobPreview>)
     }
 
     // endregion getPreviewHarvestSource
@@ -373,8 +373,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.deleteUnscheduleHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -384,8 +384,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.deleteUnscheduleHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -395,8 +395,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.deleteUnscheduleHarvestSource("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion deleteUnscheduleHarvestSource
@@ -410,8 +410,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postScheduleHarvestSource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -421,8 +421,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postScheduleHarvestSource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -432,8 +432,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postScheduleHarvestSource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion postScheduleHarvestSource
@@ -447,8 +447,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postValidateHarvestSource("", mockHarvestSourceValidation)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -458,8 +458,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postValidateHarvestSource("", mockHarvestSourceValidation)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -469,8 +469,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postValidateHarvestSource("", mockHarvestSourceValidation)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion postValidateHarvestSource
@@ -485,8 +485,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvestSources(null, null, null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<HarvestSourcePage>>)
-        assert(results[1] is DgfrResource.ClientError<List<HarvestSourcePage>>)
+        assert(results[0] is DgfrCallState.Loading<List<HarvestSourcePage>>)
+        assert(results[1] is DgfrCallState.ClientError<List<HarvestSourcePage>>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -497,8 +497,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvestSources(null, null, null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<HarvestSourcePage>>)
-        assert(results[1] is DgfrResource.ServerError<List<HarvestSourcePage>>)
+        assert(results[0] is DgfrCallState.Loading<List<HarvestSourcePage>>)
+        assert(results[1] is DgfrCallState.ServerError<List<HarvestSourcePage>>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -509,8 +509,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.getListHarvestSources(null, null, null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<HarvestSourcePage>>)
-        assert(results[1] is DgfrResource.Success<List<HarvestSourcePage>>)
+        assert(results[0] is DgfrCallState.Loading<List<HarvestSourcePage>>)
+        assert(results[1] is DgfrCallState.Success<List<HarvestSourcePage>>)
     }
 
     // endregion getListHarvestSources
@@ -524,8 +524,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postCreateHarvestSource(mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ClientError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ClientError<HarvestSource>)
     }
 
     @Test
@@ -535,8 +535,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postCreateHarvestSource(mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.ServerError<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.ServerError<HarvestSource>)
     }
 
     @Test
@@ -546,8 +546,8 @@ internal class HarvestApiImplTest {
         val flow = apiImpl.postCreateHarvestSource(mockHarvestSource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<HarvestSource>)
-        assert(results[1] is DgfrResource.Success<HarvestSource>)
+        assert(results[0] is DgfrCallState.Loading<HarvestSource>)
+        assert(results[1] is DgfrCallState.Success<HarvestSource>)
     }
 
     // endregion postCreateHarvestSource

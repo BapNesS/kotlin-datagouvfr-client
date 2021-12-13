@@ -62,8 +62,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DatasetPage>)
-        assert(results[1] is DgfrResource.ClientError<DatasetPage>)
+        assert(results[0] is DgfrCallState.Loading<DatasetPage>)
+        assert(results[1] is DgfrCallState.ClientError<DatasetPage>)
     }
 
     @Test
@@ -93,10 +93,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DatasetPage>)
-        assert(results[1] is DgfrResource.ServerError<DatasetPage>)
+        assert(results[0] is DgfrCallState.Loading<DatasetPage>)
+        assert(results[1] is DgfrCallState.ServerError<DatasetPage>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -128,8 +128,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<DatasetPage>)
-        assert(results[1] is DgfrResource.Success<DatasetPage>)
+        assert(results[0] is DgfrCallState.Loading<DatasetPage>)
+        assert(results[1] is DgfrCallState.Success<DatasetPage>)
     }
 
     // endregion getListDatasets
@@ -144,8 +144,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ClientError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ClientError<Dataset>)
     }
 
     @Test
@@ -156,10 +156,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ServerError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ServerError<Dataset>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -172,8 +172,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.Success<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.Success<Dataset>)
     }
 
     // endregion postCreateDataset
@@ -188,8 +188,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.ClientError<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.ClientError<Map<String, String>>)
     }
 
     @Test
@@ -200,10 +200,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.ServerError<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.ServerError<Map<String, String>>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -216,8 +216,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.Success<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.Success<Map<String, String>>)
     }
 
     // endregion getAvailableDatasetBadges
@@ -232,8 +232,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResourcePage>)
-        assert(results[1] is DgfrResource.ClientError<CommunityResourcePage>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResourcePage>)
+        assert(results[1] is DgfrCallState.ClientError<CommunityResourcePage>)
     }
 
     @Test
@@ -244,10 +244,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResourcePage>)
-        assert(results[1] is DgfrResource.ServerError<CommunityResourcePage>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResourcePage>)
+        assert(results[1] is DgfrCallState.ServerError<CommunityResourcePage>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -260,8 +260,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResourcePage>)
-        assert(results[1] is DgfrResource.Success<CommunityResourcePage>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResourcePage>)
+        assert(results[1] is DgfrCallState.Success<CommunityResourcePage>)
     }
 
     // endregion getListCommunityResources
@@ -276,8 +276,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.ClientError<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.ClientError<CommunityResource>)
     }
 
     @Test
@@ -289,10 +289,10 @@ internal class DatasetsApiImplTest {
 
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<CommunityResource>)
-            assert(results[1] is DgfrResource.ServerError<CommunityResource>)
+            assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+            assert(results[1] is DgfrCallState.ServerError<CommunityResource>)
             Assert.assertEquals(
-                (results[1] as DgfrResource.ServerError).httpCode,
+                (results[1] as DgfrCallState.ServerError).httpCode,
                 HttpStatusCode.BadRequest.value
             )
         }
@@ -305,8 +305,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.Success<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.Success<CommunityResource>)
     }
 
     // endregion postCreateCommunityResource
@@ -321,8 +321,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.ClientError<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.ClientError<CommunityResource>)
     }
 
     @Test
@@ -333,10 +333,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.ServerError<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.ServerError<CommunityResource>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -349,8 +349,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.Success<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.Success<CommunityResource>)
     }
 
     // endregion deleteCommunityResource
@@ -365,8 +365,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.ClientError<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.ClientError<CommunityResource>)
     }
 
     @Test
@@ -378,10 +378,10 @@ internal class DatasetsApiImplTest {
 
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<CommunityResource>)
-            assert(results[1] is DgfrResource.ServerError<CommunityResource>)
+            assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+            assert(results[1] is DgfrCallState.ServerError<CommunityResource>)
             Assert.assertEquals(
-                (results[1] as DgfrResource.ServerError).httpCode,
+                (results[1] as DgfrCallState.ServerError).httpCode,
                 HttpStatusCode.BadRequest.value
             )
         }
@@ -394,8 +394,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.Success<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.Success<CommunityResource>)
     }
 
     // endregion getRetrieveCommunityResource
@@ -410,8 +410,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.ClientError<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.ClientError<CommunityResource>)
     }
 
     @Test
@@ -422,10 +422,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.ServerError<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.ServerError<CommunityResource>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -438,8 +438,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<CommunityResource>)
-        assert(results[1] is DgfrResource.Success<CommunityResource>)
+        assert(results[0] is DgfrCallState.Loading<CommunityResource>)
+        assert(results[1] is DgfrCallState.Success<CommunityResource>)
     }
 
     // endregion putUpdateCommunityResource
@@ -454,8 +454,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource>)
-        assert(results[1] is DgfrResource.ClientError<UploadedResource>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedResource>)
     }
 
     @Test
@@ -467,10 +467,10 @@ internal class DatasetsApiImplTest {
 
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<UploadedResource>)
-            assert(results[1] is DgfrResource.ServerError<UploadedResource>)
+            assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+            assert(results[1] is DgfrCallState.ServerError<UploadedResource>)
             Assert.assertEquals(
-                (results[1] as DgfrResource.ServerError).httpCode,
+                (results[1] as DgfrCallState.ServerError).httpCode,
                 HttpStatusCode.BadRequest.value
             )
         }
@@ -483,8 +483,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource>)
-        assert(results[1] is DgfrResource.Success<UploadedResource>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+        assert(results[1] is DgfrCallState.Success<UploadedResource>)
     }
 
     // endregion postUploadCommunityResource
@@ -499,8 +499,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.ClientError<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.ClientError<List<String>>)
     }
 
     @Test
@@ -511,10 +511,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.ServerError<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.ServerError<List<String>>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -527,8 +527,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<String>>)
-        assert(results[1] is DgfrResource.Success<List<String>>)
+        assert(results[0] is DgfrCallState.Loading<List<String>>)
+        assert(results[1] is DgfrCallState.Success<List<String>>)
     }
 
     // endregion getAllowedExtensions
@@ -543,8 +543,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Frequency>>)
-        assert(results[1] is DgfrResource.ClientError<List<Frequency>>)
+        assert(results[0] is DgfrCallState.Loading<List<Frequency>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Frequency>>)
     }
 
     @Test
@@ -555,10 +555,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Frequency>>)
-        assert(results[1] is DgfrResource.ServerError<List<Frequency>>)
+        assert(results[0] is DgfrCallState.Loading<List<Frequency>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Frequency>>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -571,8 +571,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Frequency>>)
-        assert(results[1] is DgfrResource.Success<List<Frequency>>)
+        assert(results[0] is DgfrCallState.Loading<List<Frequency>>)
+        assert(results[1] is DgfrCallState.Success<List<Frequency>>)
     }
 
     // endregion getListFrequencies
@@ -587,8 +587,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<License>>)
-        assert(results[1] is DgfrResource.ClientError<List<License>>)
+        assert(results[0] is DgfrCallState.Loading<List<License>>)
+        assert(results[1] is DgfrCallState.ClientError<List<License>>)
     }
 
     @Test
@@ -599,10 +599,10 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<License>>)
-        assert(results[1] is DgfrResource.ServerError<List<License>>)
+        assert(results[0] is DgfrCallState.Loading<List<License>>)
+        assert(results[1] is DgfrCallState.ServerError<List<License>>)
         Assert.assertEquals(
-            (results[1] as DgfrResource.ServerError).httpCode,
+            (results[1] as DgfrCallState.ServerError).httpCode,
             HttpStatusCode.BadRequest.value
         )
     }
@@ -615,8 +615,8 @@ internal class DatasetsApiImplTest {
 
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<License>>)
-        assert(results[1] is DgfrResource.Success<List<License>>)
+        assert(results[0] is DgfrCallState.Loading<List<License>>)
+        assert(results[1] is DgfrCallState.Success<List<License>>)
     }
 
     // endregion getListLicenses
@@ -630,8 +630,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRedirectResource("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -641,8 +641,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRedirectResource("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -652,8 +652,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRedirectResource("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getRedirectResource
@@ -667,8 +667,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getResourceTypes()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ResourceType>>)
-        assert(results[1] is DgfrResource.ClientError<List<ResourceType>>)
+        assert(results[0] is DgfrCallState.Loading<List<ResourceType>>)
+        assert(results[1] is DgfrCallState.ClientError<List<ResourceType>>)
     }
 
     @Test
@@ -678,8 +678,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getResourceTypes()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ResourceType>>)
-        assert(results[1] is DgfrResource.ServerError<List<ResourceType>>)
+        assert(results[0] is DgfrCallState.Loading<List<ResourceType>>)
+        assert(results[1] is DgfrCallState.ServerError<List<ResourceType>>)
     }
 
     @Test
@@ -689,8 +689,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getResourceTypes()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ResourceType>>)
-        assert(results[1] is DgfrResource.Success<List<ResourceType>>)
+        assert(results[0] is DgfrCallState.Loading<List<ResourceType>>)
+        assert(results[1] is DgfrCallState.Success<List<ResourceType>>)
     }
 
     // endregion getResourceTypes
@@ -704,8 +704,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSchemas()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Schema>>)
-        assert(results[1] is DgfrResource.ClientError<List<Schema>>)
+        assert(results[0] is DgfrCallState.Loading<List<Schema>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Schema>>)
     }
 
     @Test
@@ -715,8 +715,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSchemas()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Schema>>)
-        assert(results[1] is DgfrResource.ServerError<List<Schema>>)
+        assert(results[0] is DgfrCallState.Loading<List<Schema>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Schema>>)
     }
 
     @Test
@@ -726,8 +726,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSchemas()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Schema>>)
-        assert(results[1] is DgfrResource.Success<List<Schema>>)
+        assert(results[0] is DgfrCallState.Loading<List<Schema>>)
+        assert(results[1] is DgfrCallState.Success<List<Schema>>)
     }
 
     // endregion getSchemas
@@ -741,8 +741,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestDatasets("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<DatasetSuggestion>>)
-        assert(results[1] is DgfrResource.ClientError<List<DatasetSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<DatasetSuggestion>>)
+        assert(results[1] is DgfrCallState.ClientError<List<DatasetSuggestion>>)
     }
 
     @Test
@@ -752,8 +752,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestDatasets("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<DatasetSuggestion>>)
-        assert(results[1] is DgfrResource.ServerError<List<DatasetSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<DatasetSuggestion>>)
+        assert(results[1] is DgfrCallState.ServerError<List<DatasetSuggestion>>)
     }
 
     @Test
@@ -763,8 +763,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestDatasets("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<DatasetSuggestion>>)
-        assert(results[1] is DgfrResource.Success<List<DatasetSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<DatasetSuggestion>>)
+        assert(results[1] is DgfrCallState.Success<List<DatasetSuggestion>>)
     }
 
     // endregion getSuggestDatasets
@@ -778,8 +778,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestFormats("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Format>>)
-        assert(results[1] is DgfrResource.ClientError<List<Format>>)
+        assert(results[0] is DgfrCallState.Loading<List<Format>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Format>>)
     }
 
     @Test
@@ -789,8 +789,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestFormats("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Format>>)
-        assert(results[1] is DgfrResource.ServerError<List<Format>>)
+        assert(results[0] is DgfrCallState.Loading<List<Format>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Format>>)
     }
 
     @Test
@@ -800,8 +800,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestFormats("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Format>>)
-        assert(results[1] is DgfrResource.Success<List<Format>>)
+        assert(results[0] is DgfrCallState.Loading<List<Format>>)
+        assert(results[1] is DgfrCallState.Success<List<Format>>)
     }
 
     // endregion getSuggestFormats
@@ -815,8 +815,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestMime("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Mime>>)
-        assert(results[1] is DgfrResource.ClientError<List<Mime>>)
+        assert(results[0] is DgfrCallState.Loading<List<Mime>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Mime>>)
     }
 
     @Test
@@ -826,8 +826,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestMime("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Mime>>)
-        assert(results[1] is DgfrResource.ServerError<List<Mime>>)
+        assert(results[0] is DgfrCallState.Loading<List<Mime>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Mime>>)
     }
 
     @Test
@@ -837,8 +837,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getSuggestMime("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Mime>>)
-        assert(results[1] is DgfrResource.Success<List<Mime>>)
+        assert(results[0] is DgfrCallState.Loading<List<Mime>>)
+        assert(results[1] is DgfrCallState.Success<List<Mime>>)
     }
 
     // endregion getSuggestMime
@@ -852,8 +852,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -863,8 +863,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -874,8 +874,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteDataset
@@ -889,8 +889,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ClientError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ClientError<Dataset>)
     }
 
     @Test
@@ -900,8 +900,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ServerError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ServerError<Dataset>)
     }
 
     @Test
@@ -911,8 +911,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.Success<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.Success<Dataset>)
     }
 
     // endregion getDataset
@@ -926,8 +926,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateDataset("", mockDataset)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ClientError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ClientError<Dataset>)
     }
 
     @Test
@@ -937,8 +937,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateDataset("", mockDataset)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ServerError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ServerError<Dataset>)
     }
 
     @Test
@@ -948,8 +948,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateDataset("", mockDataset)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.Success<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.Success<Dataset>)
     }
 
     // endregion putUpdateDataset
@@ -963,8 +963,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postAddDatasetBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.ClientError<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.ClientError<Badge>)
     }
 
     @Test
@@ -974,8 +974,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postAddDatasetBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.ServerError<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.ServerError<Badge>)
     }
 
     @Test
@@ -985,8 +985,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postAddDatasetBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.Success<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.Success<Badge>)
     }
 
     // endregion postAddDatasetBadge
@@ -1000,8 +1000,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteDatasetBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -1011,8 +1011,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteDatasetBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -1022,8 +1022,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteDatasetBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteDatasetBadge
@@ -1037,8 +1037,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteUnfeatureDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ClientError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ClientError<Dataset>)
     }
 
     @Test
@@ -1048,8 +1048,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteUnfeatureDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ServerError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ServerError<Dataset>)
     }
 
     @Test
@@ -1059,8 +1059,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteUnfeatureDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.Success<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.Success<Dataset>)
     }
 
     // endregion deleteUnfeatureDataset
@@ -1074,8 +1074,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postFeatureDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ClientError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ClientError<Dataset>)
     }
 
     @Test
@@ -1085,8 +1085,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postFeatureDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.ServerError<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.ServerError<Dataset>)
     }
 
     @Test
@@ -1096,8 +1096,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postFeatureDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Dataset>)
-        assert(results[1] is DgfrResource.Success<Dataset>)
+        assert(results[0] is DgfrCallState.Loading<Dataset>)
+        assert(results[1] is DgfrCallState.Success<Dataset>)
     }
 
     // endregion postFeatureDataset
@@ -1111,8 +1111,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRdfDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -1122,8 +1122,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRdfDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -1133,8 +1133,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRdfDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getRdfDataset
@@ -1148,8 +1148,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRdfDatasetFormat("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -1159,8 +1159,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRdfDatasetFormat("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -1170,8 +1170,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getRdfDatasetFormat("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getRdfDatasetFormat
@@ -1185,8 +1185,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postCreateResource("", mockResource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.ClientError<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.ClientError<Resource>)
     }
 
     @Test
@@ -1196,8 +1196,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postCreateResource("", mockResource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.ServerError<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.ServerError<Resource>)
     }
 
     @Test
@@ -1207,8 +1207,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postCreateResource("", mockResource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.Success<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.Success<Resource>)
     }
 
     // endregion postCreateResource
@@ -1222,8 +1222,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateResources("", emptyList<Resource>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Resource>>)
-        assert(results[1] is DgfrResource.ClientError<List<Resource>>)
+        assert(results[0] is DgfrCallState.Loading<List<Resource>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Resource>>)
     }
 
     @Test
@@ -1233,8 +1233,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateResources("", emptyList<Resource>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Resource>>)
-        assert(results[1] is DgfrResource.ServerError<List<Resource>>)
+        assert(results[0] is DgfrCallState.Loading<List<Resource>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Resource>>)
     }
 
     @Test
@@ -1244,8 +1244,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateResources("", emptyList<Resource>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Resource>>)
-        assert(results[1] is DgfrResource.Success<List<Resource>>)
+        assert(results[0] is DgfrCallState.Loading<List<Resource>>)
+        assert(results[1] is DgfrCallState.Success<List<Resource>>)
     }
 
     // endregion putUpdateResources
@@ -1259,8 +1259,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -1270,8 +1270,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -1281,8 +1281,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteResource
@@ -1296,8 +1296,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.ClientError<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.ClientError<Resource>)
     }
 
     @Test
@@ -1307,8 +1307,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.ServerError<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.ServerError<Resource>)
     }
 
     @Test
@@ -1318,8 +1318,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.Success<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.Success<Resource>)
     }
 
     // endregion getResource
@@ -1333,8 +1333,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateResource("", "", mockResource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.ClientError<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.ClientError<Resource>)
     }
 
     @Test
@@ -1344,8 +1344,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateResource("", "", mockResource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.ServerError<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.ServerError<Resource>)
     }
 
     @Test
@@ -1355,8 +1355,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.putUpdateResource("", "", mockResource)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Resource>)
-        assert(results[1] is DgfrResource.Success<Resource>)
+        assert(results[0] is DgfrCallState.Loading<Resource>)
+        assert(results[1] is DgfrCallState.Success<Resource>)
     }
 
     // endregion putUpdateResource
@@ -1370,8 +1370,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getCheckDatasetResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.ClientError<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.ClientError<Map<String, String>>)
     }
 
     @Test
@@ -1381,8 +1381,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getCheckDatasetResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.ServerError<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.ServerError<Map<String, String>>)
     }
 
     @Test
@@ -1392,8 +1392,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getCheckDatasetResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Map<String, String>>)
-        assert(results[1] is DgfrResource.Success<Map<String, String>>)
+        assert(results[0] is DgfrCallState.Loading<Map<String, String>>)
+        assert(results[1] is DgfrCallState.Success<Map<String, String>>)
     }
 
     // endregion getCheckDatasetResource
@@ -1407,8 +1407,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postUploadDatasetResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource>)
-        assert(results[1] is DgfrResource.ClientError<UploadedResource>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedResource>)
     }
 
     @Test
@@ -1418,8 +1418,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postUploadDatasetResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource>)
-        assert(results[1] is DgfrResource.ServerError<UploadedResource>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedResource>)
     }
 
     @Test
@@ -1429,8 +1429,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postUploadDatasetResource("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource>)
-        assert(results[1] is DgfrResource.Success<UploadedResource>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+        assert(results[1] is DgfrCallState.Success<UploadedResource>)
     }
 
     // endregion postUploadDatasetResource
@@ -1454,8 +1454,8 @@ internal class DatasetsApiImplTest {
         )
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource?>)
-        assert(results[1] is DgfrResource.ClientError<UploadedResource?>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource?>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedResource?>)
     }
 
     @Test
@@ -1475,8 +1475,8 @@ internal class DatasetsApiImplTest {
         )
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource?>)
-        assert(results[1] is DgfrResource.ServerError<UploadedResource?>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource?>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedResource?>)
     }
 
     @Test
@@ -1496,8 +1496,8 @@ internal class DatasetsApiImplTest {
         )
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedResource?>)
-        assert(results[1] is DgfrResource.Success<UploadedResource?>)
+        assert(results[0] is DgfrCallState.Loading<UploadedResource?>)
+        assert(results[1] is DgfrCallState.Success<UploadedResource?>)
     }
 
     // endregion postUploadNewDatasetResource
@@ -1522,8 +1522,8 @@ internal class DatasetsApiImplTest {
             )
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<UploadedResource>)
-            assert(results[1] is DgfrResource.ClientError<UploadedResource>)
+            assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+            assert(results[1] is DgfrCallState.ClientError<UploadedResource>)
         }
 
     @Test
@@ -1544,8 +1544,8 @@ internal class DatasetsApiImplTest {
             )
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<UploadedResource>)
-            assert(results[1] is DgfrResource.ServerError<UploadedResource>)
+            assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+            assert(results[1] is DgfrCallState.ServerError<UploadedResource>)
         }
 
     @Test
@@ -1566,8 +1566,8 @@ internal class DatasetsApiImplTest {
             )
             val results = flow.toList()
             Assert.assertEquals(results.size, 2)
-            assert(results[0] is DgfrResource.Loading<UploadedResource>)
-            assert(results[1] is DgfrResource.Success<UploadedResource>)
+            assert(results[0] is DgfrCallState.Loading<UploadedResource>)
+            assert(results[1] is DgfrCallState.Success<UploadedResource>)
         }
 
     // endregion postUploadNewCommunityResource
@@ -1581,8 +1581,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteUnfollowDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -1592,8 +1592,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteUnfollowDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -1603,8 +1603,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.deleteUnfollowDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteUnfollowDataset
@@ -1618,8 +1618,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getListDatasetFollowers("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ClientError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ClientError<FollowPage>)
     }
 
     @Test
@@ -1629,8 +1629,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getListDatasetFollowers("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ServerError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ServerError<FollowPage>)
     }
 
     @Test
@@ -1640,8 +1640,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.getListDatasetFollowers("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.Success<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.Success<FollowPage>)
     }
 
     // endregion getListDatasetFollowers
@@ -1655,8 +1655,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postFollowDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -1666,8 +1666,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postFollowDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -1677,8 +1677,8 @@ internal class DatasetsApiImplTest {
         val flow = apiImpl.postFollowDataset("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion postFollowDataset

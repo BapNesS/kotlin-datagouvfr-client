@@ -1,12 +1,12 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
-import com.baptistecarlier.kotlin.datagouvfr.client.model.*
+import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
+import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
+import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -26,23 +26,23 @@ internal class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         forIds: List<String>?,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<IssuePage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("closed", closed)
-        // Not sure about this
-        forIds?.forEach { item ->
-            builder.appendIfNotNull("for", item)
-        }
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<IssuePage>> = loadingFlow {
         client.get(
-            path = "issues/?${builder.urlEncore()}"
-        )
+            path = "issues/"
+        ) {
+            parameter("sort", sort)
+            parameter("closed", closed)
+            // TODO Not sure about this
+            forIds?.forEach { item ->
+                parameter("for", item)
+            }
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postCreateIssue(payload: Issue): Flow<DgfrResource<Issue>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postCreateIssue(payload: Issue): Flow<DgfrCallState<Issue>> = loadingFlow {
         client.post(
             path = "issues/"
         ) {
@@ -52,13 +52,15 @@ internal class IssuesApiImpl(private val client: HttpClient) : IssuesApi {
         }
     }
 
-    override fun getIssue(id: String): Flow<DgfrResource<Issue>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getIssue(id: String): Flow<DgfrCallState<Issue>> = loadingFlow {
         client.get(
             path = "issues/$id/"
         )
     }
 
-    override fun postCommentIssue(id: String, payload: IssueResponse): Flow<DgfrResource<Issue>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postCommentIssue(id: String, payload: IssueResponse): Flow<DgfrCallState<Issue>> = loadingFlow {
         client.post(
             path = "issues/$id/"
         ) {

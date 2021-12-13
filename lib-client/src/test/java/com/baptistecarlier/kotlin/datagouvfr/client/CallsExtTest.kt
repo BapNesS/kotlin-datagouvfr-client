@@ -16,7 +16,7 @@ internal class CallsExtTest {
 
         val result = flow.toList()
         Assert.assertTrue(result.isNotEmpty())
-        assert(result[0] is DgfrResource.Loading<*>)
+        assert(result[0] is DgfrCallState.Loading<*>)
     }
 
     @Test
@@ -25,7 +25,7 @@ internal class CallsExtTest {
             true
         }
 
-        assert(result is DgfrResource.Success<*>)
+        assert(result is DgfrCallState.Success<*>)
     }
 
     @Test
@@ -35,7 +35,7 @@ internal class CallsExtTest {
             true
         }
 
-        assert(result is DgfrResource.ServerError<*>)
+        assert(result is DgfrCallState.ServerError<*>)
     }
 
     @Test
@@ -45,6 +45,6 @@ internal class CallsExtTest {
             true
         }
 
-        assert(result is DgfrResource.ClientError<*>)
+        assert(result is DgfrCallState.ClientError<*>)
     }
 }

@@ -38,8 +38,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getListUsers("", "", "", "", "", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UserPage>)
-        assert(results[1] is DgfrResource.ClientError<UserPage>)
+        assert(results[0] is DgfrCallState.Loading<UserPage>)
+        assert(results[1] is DgfrCallState.ClientError<UserPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -50,8 +50,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getListUsers("", "", "", "", "", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UserPage>)
-        assert(results[1] is DgfrResource.ServerError<UserPage>)
+        assert(results[0] is DgfrCallState.Loading<UserPage>)
+        assert(results[1] is DgfrCallState.ServerError<UserPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -62,8 +62,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getListUsers("", "", "", "", "", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UserPage>)
-        assert(results[1] is DgfrResource.Success<UserPage>)
+        assert(results[0] is DgfrCallState.Loading<UserPage>)
+        assert(results[1] is DgfrCallState.Success<UserPage>)
     }
 
     // endregion getListUsers
@@ -77,8 +77,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postCreateUser(mockUser)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.ClientError<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.ClientError<User>)
     }
 
     @Test
@@ -88,8 +88,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postCreateUser(mockUser)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.ServerError<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.ServerError<User>)
     }
 
     @Test
@@ -99,8 +99,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postCreateUser(mockUser)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.Success<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.Success<User>)
     }
 
     // endregion postCreateUser
@@ -114,8 +114,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getUserRoles()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<UserRole>>)
-        assert(results[1] is DgfrResource.ClientError<List<UserRole>>)
+        assert(results[0] is DgfrCallState.Loading<List<UserRole>>)
+        assert(results[1] is DgfrCallState.ClientError<List<UserRole>>)
     }
 
     @Test
@@ -125,8 +125,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getUserRoles()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<UserRole>>)
-        assert(results[1] is DgfrResource.ServerError<List<UserRole>>)
+        assert(results[0] is DgfrCallState.Loading<List<UserRole>>)
+        assert(results[1] is DgfrCallState.ServerError<List<UserRole>>)
     }
 
     @Test
@@ -136,8 +136,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getUserRoles()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<UserRole>>)
-        assert(results[1] is DgfrResource.Success<List<UserRole>>)
+        assert(results[0] is DgfrCallState.Loading<List<UserRole>>)
+        assert(results[1] is DgfrCallState.Success<List<UserRole>>)
     }
 
     // endregion getUserRoles
@@ -151,8 +151,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getSuggestUsers("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<UserSuggestion>>)
-        assert(results[1] is DgfrResource.ClientError<List<UserSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<UserSuggestion>>)
+        assert(results[1] is DgfrCallState.ClientError<List<UserSuggestion>>)
     }
 
     @Test
@@ -162,8 +162,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getSuggestUsers("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<UserSuggestion>>)
-        assert(results[1] is DgfrResource.ServerError<List<UserSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<UserSuggestion>>)
+        assert(results[1] is DgfrCallState.ServerError<List<UserSuggestion>>)
     }
 
     @Test
@@ -173,8 +173,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getSuggestUsers("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<UserSuggestion>>)
-        assert(results[1] is DgfrResource.Success<List<UserSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<UserSuggestion>>)
+        assert(results[1] is DgfrCallState.Success<List<UserSuggestion>>)
     }
 
     // endregion getSuggestUsers
@@ -188,8 +188,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.deleteUnfollowUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -199,8 +199,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.deleteUnfollowUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -210,8 +210,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.deleteUnfollowUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteUnfollowUser
@@ -226,8 +226,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getListUserFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ClientError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ClientError<FollowPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -238,8 +238,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getListUserFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ServerError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ServerError<FollowPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -250,8 +250,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getListUserFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.Success<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.Success<FollowPage>)
     }
 
     // endregion getListUserFollowers
@@ -265,8 +265,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postFollowUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -276,8 +276,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postFollowUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -287,8 +287,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postFollowUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion postFollowUser
@@ -302,8 +302,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.deleteUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -313,8 +313,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.deleteUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -324,8 +324,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.deleteUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteUser
@@ -339,8 +339,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.ClientError<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.ClientError<User>)
     }
 
     @Test
@@ -350,8 +350,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.ServerError<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.ServerError<User>)
     }
 
     @Test
@@ -361,8 +361,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.getUser("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.Success<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.Success<User>)
     }
 
     // endregion getUser
@@ -376,8 +376,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.putUpdateUser("", mockUser)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.ClientError<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.ClientError<User>)
     }
 
     @Test
@@ -387,8 +387,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.putUpdateUser("", mockUser)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.ServerError<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.ServerError<User>)
     }
 
     @Test
@@ -398,8 +398,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.putUpdateUser("", mockUser)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<User>)
-        assert(results[1] is DgfrResource.Success<User>)
+        assert(results[0] is DgfrCallState.Loading<User>)
+        assert(results[1] is DgfrCallState.Success<User>)
     }
 
     // endregion putUpdateUser
@@ -413,8 +413,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postUserAvatar("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -424,8 +424,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postUserAvatar("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -435,8 +435,8 @@ internal class UsersApiImplTest {
         val flow = apiImpl.postUserAvatar("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion postUserAvatar

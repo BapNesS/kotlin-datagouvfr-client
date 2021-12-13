@@ -41,8 +41,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getActivity()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ActivityPage>>)
-        assert(results[1] is DgfrResource.ClientError<List<ActivityPage>>)
+        assert(results[0] is DgfrCallState.Loading<List<ActivityPage>>)
+        assert(results[1] is DgfrCallState.ClientError<List<ActivityPage>>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -53,8 +53,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getActivity()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ActivityPage>>)
-        assert(results[1] is DgfrResource.ServerError<List<ActivityPage>>)
+        assert(results[0] is DgfrCallState.Loading<List<ActivityPage>>)
+        assert(results[1] is DgfrCallState.ServerError<List<ActivityPage>>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -65,8 +65,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getActivity()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ActivityPage>>)
-        assert(results[1] is DgfrResource.Success<List<ActivityPage>>)
+        assert(results[0] is DgfrCallState.Loading<List<ActivityPage>>)
+        assert(results[1] is DgfrCallState.Success<List<ActivityPage>>)
     }
 
     // endregion getActivity
@@ -80,8 +80,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getOembed("", null, null, "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Oembed>)
-        assert(results[1] is DgfrResource.ClientError<Oembed>)
+        assert(results[0] is DgfrCallState.Loading<Oembed>)
+        assert(results[1] is DgfrCallState.ClientError<Oembed>)
     }
 
     @Test
@@ -91,8 +91,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getOembed("", null, null, "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Oembed>)
-        assert(results[1] is DgfrResource.ServerError<Oembed>)
+        assert(results[0] is DgfrCallState.Loading<Oembed>)
+        assert(results[1] is DgfrCallState.ServerError<Oembed>)
     }
 
     @Test
@@ -102,8 +102,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getOembed("", null, null, "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Oembed>)
-        assert(results[1] is DgfrResource.Success<Oembed>)
+        assert(results[0] is DgfrCallState.Loading<Oembed>)
+        assert(results[1] is DgfrCallState.Success<Oembed>)
     }
 
     // endregion getOembed
@@ -117,8 +117,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getOembeds("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Oembed>>)
-        assert(results[1] is DgfrResource.ClientError<List<Oembed>>)
+        assert(results[0] is DgfrCallState.Loading<List<Oembed>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Oembed>>)
     }
 
     @Test
@@ -128,8 +128,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getOembeds("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Oembed>>)
-        assert(results[1] is DgfrResource.ServerError<List<Oembed>>)
+        assert(results[0] is DgfrCallState.Loading<List<Oembed>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Oembed>>)
     }
 
     @Test
@@ -139,8 +139,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getOembeds("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Oembed>>)
-        assert(results[1] is DgfrResource.Success<List<Oembed>>)
+        assert(results[0] is DgfrCallState.Loading<List<Oembed>>)
+        assert(results[1] is DgfrCallState.Success<List<Oembed>>)
     }
 
     // endregion getOembeds
@@ -154,8 +154,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSite()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Site>)
-        assert(results[1] is DgfrResource.ClientError<Site>)
+        assert(results[0] is DgfrCallState.Loading<Site>)
+        assert(results[1] is DgfrCallState.ClientError<Site>)
     }
 
     @Test
@@ -165,8 +165,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSite()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Site>)
-        assert(results[1] is DgfrResource.ServerError<Site>)
+        assert(results[0] is DgfrCallState.Loading<Site>)
+        assert(results[1] is DgfrCallState.ServerError<Site>)
     }
 
     @Test
@@ -176,8 +176,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSite()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Site>)
-        assert(results[1] is DgfrResource.Success<Site>)
+        assert(results[0] is DgfrCallState.Loading<Site>)
+        assert(results[1] is DgfrCallState.Success<Site>)
     }
 
     // endregion getSite
@@ -191,8 +191,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteRdfCatalog()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -202,8 +202,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteRdfCatalog()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -213,8 +213,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteRdfCatalog()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getSiteRdfCatalog
@@ -228,8 +228,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteRdfCatalogFormat("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -239,8 +239,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteRdfCatalogFormat("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -250,8 +250,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteRdfCatalogFormat("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getSiteRdfCatalogFormat
@@ -265,8 +265,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteJsonLdContext()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -276,8 +276,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteJsonLdContext()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -287,8 +287,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteJsonLdContext()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getSiteJsonLdContext
@@ -302,8 +302,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteDataPortal("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ClientError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ClientError<String>)
     }
 
     @Test
@@ -313,8 +313,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteDataPortal("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.ServerError<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.ServerError<String>)
     }
 
     @Test
@@ -324,8 +324,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSiteDataPortal("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<String>)
-        assert(results[1] is DgfrResource.Success<String>)
+        assert(results[0] is DgfrCallState.Loading<String>)
+        assert(results[1] is DgfrCallState.Success<String>)
     }
 
     // endregion getSiteDataPortal
@@ -339,8 +339,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getHomeDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ClientError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Dataset>>)
     }
 
     @Test
@@ -350,8 +350,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getHomeDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ServerError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Dataset>>)
     }
 
     @Test
@@ -361,8 +361,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getHomeDatasets()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.Success<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.Success<List<Dataset>>)
     }
 
     // endregion getHomeDatasets
@@ -376,8 +376,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.putSetHomeDatasets(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ClientError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Dataset>>)
     }
 
     @Test
@@ -387,8 +387,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.putSetHomeDatasets(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.ServerError<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Dataset>>)
     }
 
     @Test
@@ -398,8 +398,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.putSetHomeDatasets(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Dataset>>)
-        assert(results[1] is DgfrResource.Success<List<Dataset>>)
+        assert(results[0] is DgfrCallState.Loading<List<Dataset>>)
+        assert(results[1] is DgfrCallState.Success<List<Dataset>>)
     }
 
     // endregion putSetHomeDatasets
@@ -413,8 +413,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getHomeReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ClientError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Reuse>>)
     }
 
     @Test
@@ -424,8 +424,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getHomeReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ServerError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Reuse>>)
     }
 
     @Test
@@ -435,8 +435,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getHomeReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.Success<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.Success<List<Reuse>>)
     }
 
     // endregion getHomeReuses
@@ -450,8 +450,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.putSetHomeReuses(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ClientError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Reuse>>)
     }
 
     @Test
@@ -461,8 +461,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.putSetHomeReuses(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.ServerError<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Reuse>>)
     }
 
     @Test
@@ -472,8 +472,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.putSetHomeReuses(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Reuse>>)
-        assert(results[1] is DgfrResource.Success<List<Reuse>>)
+        assert(results[0] is DgfrCallState.Loading<List<Reuse>>)
+        assert(results[1] is DgfrCallState.Success<List<Reuse>>)
     }
 
     // endregion putSetHomeReuses
@@ -487,8 +487,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSuggestTerritory("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Territory>>)
-        assert(results[1] is DgfrResource.ClientError<List<Territory>>)
+        assert(results[0] is DgfrCallState.Loading<List<Territory>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Territory>>)
     }
 
     @Test
@@ -498,8 +498,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSuggestTerritory("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Territory>>)
-        assert(results[1] is DgfrResource.ServerError<List<Territory>>)
+        assert(results[0] is DgfrCallState.Loading<List<Territory>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Territory>>)
     }
 
     @Test
@@ -509,8 +509,8 @@ internal class SiteApiImplTest {
         val flow = apiImpl.getSuggestTerritory("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Territory>>)
-        assert(results[1] is DgfrResource.Success<List<Territory>>)
+        assert(results[0] is DgfrCallState.Loading<List<Territory>>)
+        assert(results[1] is DgfrCallState.Success<List<Territory>>)
     }
 
     // endregion getSuggestTerritory

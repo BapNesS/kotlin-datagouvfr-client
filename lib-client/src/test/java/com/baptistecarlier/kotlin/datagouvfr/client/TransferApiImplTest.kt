@@ -39,8 +39,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.getTransfer("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.ClientError<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.ClientError<Transfer>)
     }
 
     @Test
@@ -50,8 +50,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.getTransfer("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.ServerError<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.ServerError<Transfer>)
     }
 
     @Test
@@ -61,8 +61,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.getTransfer("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.Success<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.Success<Transfer>)
     }
 
     // endregion getTransfer
@@ -76,8 +76,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.getListTransfers()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Transfer>>)
-        assert(results[1] is DgfrResource.ClientError<List<Transfer>>)
+        assert(results[0] is DgfrCallState.Loading<List<Transfer>>)
+        assert(results[1] is DgfrCallState.ClientError<List<Transfer>>)
     }
 
     @Test
@@ -87,8 +87,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.getListTransfers()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Transfer>>)
-        assert(results[1] is DgfrResource.ServerError<List<Transfer>>)
+        assert(results[0] is DgfrCallState.Loading<List<Transfer>>)
+        assert(results[1] is DgfrCallState.ServerError<List<Transfer>>)
     }
 
     @Test
@@ -98,8 +98,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.getListTransfers()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<Transfer>>)
-        assert(results[1] is DgfrResource.Success<List<Transfer>>)
+        assert(results[0] is DgfrCallState.Loading<List<Transfer>>)
+        assert(results[1] is DgfrCallState.Success<List<Transfer>>)
     }
 
     // endregion getListTransfers
@@ -113,8 +113,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.postRequestTransfer(mockTransferRequest)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.ClientError<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.ClientError<Transfer>)
     }
 
     @Test
@@ -124,8 +124,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.postRequestTransfer(mockTransferRequest)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.ServerError<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.ServerError<Transfer>)
     }
 
     @Test
@@ -135,8 +135,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.postRequestTransfer(mockTransferRequest)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.Success<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.Success<Transfer>)
     }
 
     // endregion postRequestTransfer
@@ -150,8 +150,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.postRespondToTransfer("", mockTransferResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.ClientError<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.ClientError<Transfer>)
     }
 
     @Test
@@ -161,8 +161,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.postRespondToTransfer("", mockTransferResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.ServerError<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.ServerError<Transfer>)
     }
 
     @Test
@@ -172,8 +172,8 @@ internal class TransferApiImplTest {
         val flow = apiImpl.postRespondToTransfer("", mockTransferResponse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Transfer>)
-        assert(results[1] is DgfrResource.Success<Transfer>)
+        assert(results[0] is DgfrCallState.Loading<Transfer>)
+        assert(results[1] is DgfrCallState.Success<Transfer>)
     }
 
     // endregion postRespondToTransfer

@@ -45,8 +45,8 @@ data class Me(
     var avatar: String? = null,
     @SerialName("avatar_thumbnail")
     var avatarThumbnail: String? = null,
-    /*@SerialName("email")
-    var email: Map<String, Any?>? = null,*/
+    @SerialName("email")
+    var email: String? = null,
     @SerialName("metrics")
     var metrics: Metrics? = null,
     @SerialName("organizations")

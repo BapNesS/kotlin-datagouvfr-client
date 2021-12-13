@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,6 +17,7 @@ import kotlinx.serialization.Serializable
  * @property url The issue API URI
  * @property user The issue author
  */
+@MissingFieldMapping
 @Serializable
 data class Issue(
     @SerialName("class")

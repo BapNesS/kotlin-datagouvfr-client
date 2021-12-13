@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -22,6 +23,7 @@ import kotlinx.serialization.Serializable
  * @property uri The user API URI
  * @property website The user website
  */
+@MissingFieldMapping
 @Serializable
 data class User(
     @SerialName("first_name")

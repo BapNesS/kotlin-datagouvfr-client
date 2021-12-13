@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.api.SpatialApiImpl
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.ApiMockEngine
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.mockGeoJSONFeature
@@ -38,8 +39,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialCoverage("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoJSONFeatureCollection>>)
-        assert(results[1] is DgfrResource.ClientError<List<GeoJSONFeatureCollection>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoJSONFeatureCollection>>)
+        assert(results[1] is DgfrCallState.ClientError<List<GeoJSONFeatureCollection>>)
     }
 
     @Test
@@ -49,8 +50,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialCoverage("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoJSONFeatureCollection>>)
-        assert(results[1] is DgfrResource.ServerError<List<GeoJSONFeatureCollection>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoJSONFeatureCollection>>)
+        assert(results[1] is DgfrCallState.ServerError<List<GeoJSONFeatureCollection>>)
     }
 
     @Test
@@ -60,8 +61,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialCoverage("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoJSONFeatureCollection>>)
-        assert(results[1] is DgfrResource.Success<List<GeoJSONFeatureCollection>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoJSONFeatureCollection>>)
+        assert(results[1] is DgfrCallState.Success<List<GeoJSONFeatureCollection>>)
     }
 
     // endregion getSpatialCoverage
@@ -75,8 +76,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialGranularities()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoGranularity>>)
-        assert(results[1] is DgfrResource.ClientError<List<GeoGranularity>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoGranularity>>)
+        assert(results[1] is DgfrCallState.ClientError<List<GeoGranularity>>)
     }
 
     @Test
@@ -86,8 +87,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialGranularities()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoGranularity>>)
-        assert(results[1] is DgfrResource.ServerError<List<GeoGranularity>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoGranularity>>)
+        assert(results[1] is DgfrCallState.ServerError<List<GeoGranularity>>)
     }
 
     @Test
@@ -97,8 +98,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialGranularities()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoGranularity>>)
-        assert(results[1] is DgfrResource.Success<List<GeoGranularity>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoGranularity>>)
+        assert(results[1] is DgfrCallState.Success<List<GeoGranularity>>)
     }
 
     // endregion getSpatialGranularities
@@ -112,8 +113,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialLevels()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoLevel>>)
-        assert(results[1] is DgfrResource.ClientError<List<GeoLevel>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoLevel>>)
+        assert(results[1] is DgfrCallState.ClientError<List<GeoLevel>>)
     }
 
     @Test
@@ -123,8 +124,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialLevels()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoLevel>>)
-        assert(results[1] is DgfrResource.ServerError<List<GeoLevel>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoLevel>>)
+        assert(results[1] is DgfrCallState.ServerError<List<GeoLevel>>)
     }
 
     @Test
@@ -134,14 +135,15 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialLevels()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoLevel>>)
-        assert(results[1] is DgfrResource.Success<List<GeoLevel>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoLevel>>)
+        assert(results[1] is DgfrCallState.Success<List<GeoLevel>>)
     }
 
     // endregion getSpatialLevels
 
     // region getSpatialZone
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getSpatialZone when client error then Loading+ClientError`() = runBlocking {
         mockClientForClientError()
@@ -149,10 +151,11 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZone("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<GeoJSONFeature>)
-        assert(results[1] is DgfrResource.ClientError<GeoJSONFeature>)
+        assert(results[0] is DgfrCallState.Loading<GeoJSONFeature>)
+        assert(results[1] is DgfrCallState.ClientError<GeoJSONFeature>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getSpatialZone when client error then Loading+ServerError`() = runBlocking {
         mockClient(HttpStatusCode.BadRequest, mockGeoJSONFeature)
@@ -160,10 +163,11 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZone("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<GeoJSONFeature>)
-        assert(results[1] is DgfrResource.ServerError<GeoJSONFeature>)
+        assert(results[0] is DgfrCallState.Loading<GeoJSONFeature>)
+        assert(results[1] is DgfrCallState.ServerError<GeoJSONFeature>)
     }
 
+    @OptIn(MissingFieldMapping::class)
     @Test
     fun `getSpatialZone when client error then Loading+Success`() = runBlocking {
         mockClient(HttpStatusCode.OK, mockGeoJSONFeature)
@@ -171,8 +175,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZone("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<GeoJSONFeature>)
-        assert(results[1] is DgfrResource.Success<GeoJSONFeature>)
+        assert(results[0] is DgfrCallState.Loading<GeoJSONFeature>)
+        assert(results[1] is DgfrCallState.Success<GeoJSONFeature>)
     }
 
     // endregion getSpatialZone
@@ -186,8 +190,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZoneChildren("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoJSONFeatureCollection>>)
-        assert(results[1] is DgfrResource.ClientError<List<GeoJSONFeatureCollection>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoJSONFeatureCollection>>)
+        assert(results[1] is DgfrCallState.ClientError<List<GeoJSONFeatureCollection>>)
     }
 
     @Test
@@ -197,8 +201,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZoneChildren("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoJSONFeatureCollection>>)
-        assert(results[1] is DgfrResource.ServerError<List<GeoJSONFeatureCollection>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoJSONFeatureCollection>>)
+        assert(results[1] is DgfrCallState.ServerError<List<GeoJSONFeatureCollection>>)
     }
 
     @Test
@@ -208,8 +212,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZoneChildren("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<GeoJSONFeatureCollection>>)
-        assert(results[1] is DgfrResource.Success<List<GeoJSONFeatureCollection>>)
+        assert(results[0] is DgfrCallState.Loading<List<GeoJSONFeatureCollection>>)
+        assert(results[1] is DgfrCallState.Success<List<GeoJSONFeatureCollection>>)
     }
 
     // endregion getSpatialZoneChildren
@@ -223,8 +227,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZoneDatasets("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<DatasetReference>>)
-        assert(results[1] is DgfrResource.ClientError<List<DatasetReference>>)
+        assert(results[0] is DgfrCallState.Loading<List<DatasetReference>>)
+        assert(results[1] is DgfrCallState.ClientError<List<DatasetReference>>)
     }
 
     @Test
@@ -234,8 +238,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZoneDatasets("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<DatasetReference>>)
-        assert(results[1] is DgfrResource.ServerError<List<DatasetReference>>)
+        assert(results[0] is DgfrCallState.Loading<List<DatasetReference>>)
+        assert(results[1] is DgfrCallState.ServerError<List<DatasetReference>>)
     }
 
     @Test
@@ -245,8 +249,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZoneDatasets("", null, null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<DatasetReference>>)
-        assert(results[1] is DgfrResource.Success<List<DatasetReference>>)
+        assert(results[0] is DgfrCallState.Loading<List<DatasetReference>>)
+        assert(results[1] is DgfrCallState.Success<List<DatasetReference>>)
     }
 
     // endregion getSpatialZoneDatasets
@@ -260,8 +264,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSuggestZones("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<TerritorySuggestion>>)
-        assert(results[1] is DgfrResource.ClientError<List<TerritorySuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<TerritorySuggestion>>)
+        assert(results[1] is DgfrCallState.ClientError<List<TerritorySuggestion>>)
     }
 
     @Test
@@ -271,8 +275,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSuggestZones("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<TerritorySuggestion>>)
-        assert(results[1] is DgfrResource.ServerError<List<TerritorySuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<TerritorySuggestion>>)
+        assert(results[1] is DgfrCallState.ServerError<List<TerritorySuggestion>>)
     }
 
     @Test
@@ -282,8 +286,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSuggestZones("", null)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<TerritorySuggestion>>)
-        assert(results[1] is DgfrResource.Success<List<TerritorySuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<TerritorySuggestion>>)
+        assert(results[1] is DgfrCallState.Success<List<TerritorySuggestion>>)
     }
 
     // endregion getSuggestZones
@@ -297,8 +301,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZones(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<GeoJSONFeatureCollection>)
-        assert(results[1] is DgfrResource.ClientError<GeoJSONFeatureCollection>)
+        assert(results[0] is DgfrCallState.Loading<GeoJSONFeatureCollection>)
+        assert(results[1] is DgfrCallState.ClientError<GeoJSONFeatureCollection>)
     }
 
     @Test
@@ -308,8 +312,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZones(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<GeoJSONFeatureCollection>)
-        assert(results[1] is DgfrResource.ServerError<GeoJSONFeatureCollection>)
+        assert(results[0] is DgfrCallState.Loading<GeoJSONFeatureCollection>)
+        assert(results[1] is DgfrCallState.ServerError<GeoJSONFeatureCollection>)
     }
 
     @Test
@@ -319,8 +323,8 @@ internal class SpatialApiImplTest {
         val flow = apiImpl.getSpatialZones(emptyList<String>())
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<GeoJSONFeatureCollection>)
-        assert(results[1] is DgfrResource.Success<GeoJSONFeatureCollection>)
+        assert(results[0] is DgfrCallState.Loading<GeoJSONFeatureCollection>)
+        assert(results[1] is DgfrCallState.Success<GeoJSONFeatureCollection>)
     }
 
     // endregion getSpatialZones

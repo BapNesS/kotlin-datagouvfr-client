@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource.*
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState.*
 import com.baptistecarlier.kotlin.datagouvfr.client.api.AvatarsApiImpl
 import com.baptistecarlier.kotlin.datagouvfr.client.mock.ApiMockEngine
 import io.ktor.http.*

@@ -12,8 +12,9 @@ internal val mockBoolean = true
 
 internal val mockBadge = Badge("")
 
+@OptIn(MissingFieldMapping::class)
 internal val mockCommunityResource = CommunityResource(
-    FileTypeEnum.FILE, "", "", CommunityResource.Type.API, ""
+    FileTypeEnum.FILE, "", "", TypeEnum.API, ""
 )
 
 @OptIn(MissingFieldMapping::class)
@@ -37,12 +38,14 @@ internal val mockDataset = Dataset(
 @OptIn(MissingFieldMapping::class)
 internal val mockDatasetPage = DatasetPage(0, 0, 0)
 
+@OptIn(MissingFieldMapping::class)
 internal val mockDiscussion = Discussion("")
 
 internal val mockDiscussionResponse = DiscussionResponse("")
 
 internal val mockDiscussionSubject = DiscussionSubject(null, null, null)
 
+@OptIn(MissingFieldMapping::class)
 internal val mockDiscussionStart = DiscussionStart("", mockDiscussionSubject, "")
 
 @OptIn(MissingFieldMapping::class)
@@ -51,22 +54,25 @@ internal val mockDiscussionPage = DiscussionPage(0, 0, 0)
 @OptIn(MissingFieldMapping::class)
 internal val mockFollowPage = FollowPage(0, 0, 0)
 
+@OptIn(MissingFieldMapping::class)
 internal val mockResource = Resource(
     fileType = FileTypeEnum.FILE,
     format = "",
     title = "",
-    type = Resource.Type.API,
+    type = TypeEnum.API,
     url = ""
 )
 
+@OptIn(MissingFieldMapping::class)
 internal val mockUploadedResource = UploadedResource(
-    filetype = UploadedResource.FiletypeEnum.FILE,
+    fileType = FileTypeEnum.FILE,
     format = "",
     title = "",
-    type = UploadedResource.TypeEnum.API,
+    type = TypeEnum.API,
     url = ""
 )
 
+@OptIn(MissingFieldMapping::class)
 internal val mockHarvestSource = HarvestSource(
     active = true,
     autoarchive = true,
@@ -88,8 +94,9 @@ internal val mockHarvestJob = HarvestJob(
 @OptIn(MissingFieldMapping::class)
 internal val mockHarvestJobPage = HarvestJobPage(0, 0, 0)
 
+@OptIn(MissingFieldMapping::class)
 internal val mockHarvestSourceValidation =
-    HarvestSourceValidation(HarvestSourceValidation.StateEnum.ACCEPTED)
+    HarvestSourceValidation(StatusEnum.ACCEPTED)
 
 internal val mockHarvestJobPreview = HarvestJobPreview(
     created = Clock.System.now().toLocalDateTime(TimeZone.UTC),
@@ -98,6 +105,7 @@ internal val mockHarvestJobPreview = HarvestJobPreview(
     status = HarvestJobStatusEnum.DONE
 )
 
+@OptIn(MissingFieldMapping::class)
 internal val mockOrganization = Organization(
     id = "",
     name = "",
@@ -113,7 +121,7 @@ internal val mockMember = Member(Member.RoleEnum.EDITOR)
 
 internal val mockMembershipRequest = MembershipRequest(
     comment = "",
-    status = MembershipRequest.StatusEnum.ACCEPTED
+    status = StatusEnum.ACCEPTED
 )
 
 internal val mockRefuseMembership = RefuseMembership()
@@ -121,13 +129,14 @@ internal val mockRefuseMembership = RefuseMembership()
 @OptIn(MissingFieldMapping::class)
 internal val mockReusePage = ReusePage(0, 0, 0)
 
-internal val mockReuse = Reuse("", "", Reuse.TypeEnum.API, "")
+internal val mockReuse = Reuse("", "", TypeEnum.API, "")
 
 internal val mockDatasetReference = DatasetReference("", "")
 
 @OptIn(MissingFieldMapping::class)
 internal val mockUserPage = UserPage(0, 0, 0)
 
+@OptIn(MissingFieldMapping::class)
 internal val mockUser = User(
     firstName = "",
     id = "",
@@ -145,10 +154,12 @@ internal val mockOembed = Oembed(0, "", 0, 0, "", "", 0)
 
 internal val mockSite = Site("", "")
 
+@OptIn(MissingFieldMapping::class)
 internal val mockJob = Job("", Job.TaskEnum.HARVEST)
 
 internal val mockTask = Task()
 
+@OptIn(MissingFieldMapping::class)
 internal val mockGeoJSONFeature = GeoJSONFeature(
     GeoJSON(GeoJSON.TypeEnum.LINESTRING),
     GeoJSONFeature.TypeEnum.FEATURE
@@ -167,6 +178,7 @@ internal val mockTransferResponse = TransferResponse(TransferResponse.ResponseEn
 
 internal val mockTransferRequest = TransferRequest("", TransferRequestRecipient(), TransferRequestSubject())
 
+@OptIn(MissingFieldMapping::class)
 internal val mockIssue = Issue("", "", mockUser)
 
 @OptIn(MissingFieldMapping::class)

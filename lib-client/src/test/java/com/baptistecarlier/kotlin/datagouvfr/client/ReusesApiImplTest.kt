@@ -38,8 +38,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getListReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<ReusePage>)
-        assert(results[1] is DgfrResource.ClientError<ReusePage>)
+        assert(results[0] is DgfrCallState.Loading<ReusePage>)
+        assert(results[1] is DgfrCallState.ClientError<ReusePage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -50,8 +50,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getListReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<ReusePage>)
-        assert(results[1] is DgfrResource.ServerError<ReusePage>)
+        assert(results[0] is DgfrCallState.Loading<ReusePage>)
+        assert(results[1] is DgfrCallState.ServerError<ReusePage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -62,8 +62,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getListReuses()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<ReusePage>)
-        assert(results[1] is DgfrResource.Success<ReusePage>)
+        assert(results[0] is DgfrCallState.Loading<ReusePage>)
+        assert(results[1] is DgfrCallState.Success<ReusePage>)
     }
 
     // endregion getListReuses
@@ -77,8 +77,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postCreateReuse(mockReuse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ClientError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ClientError<Reuse>)
     }
 
     @Test
@@ -88,8 +88,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postCreateReuse(mockReuse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ServerError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ServerError<Reuse>)
     }
 
     @Test
@@ -99,8 +99,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postCreateReuse(mockReuse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.Success<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.Success<Reuse>)
     }
 
     // endregion postCreateReuse
@@ -114,8 +114,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getAvailableReuseBadges()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -125,8 +125,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getAvailableReuseBadges()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -136,8 +136,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getAvailableReuseBadges()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion getAvailableReuseBadges
@@ -151,8 +151,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getSuggestReuses("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ReuseSuggestion>>)
-        assert(results[1] is DgfrResource.ClientError<List<ReuseSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<ReuseSuggestion>>)
+        assert(results[1] is DgfrCallState.ClientError<List<ReuseSuggestion>>)
     }
 
     @Test
@@ -162,8 +162,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getSuggestReuses("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ReuseSuggestion>>)
-        assert(results[1] is DgfrResource.ServerError<List<ReuseSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<ReuseSuggestion>>)
+        assert(results[1] is DgfrCallState.ServerError<List<ReuseSuggestion>>)
     }
 
     @Test
@@ -173,8 +173,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getSuggestReuses("", 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ReuseSuggestion>>)
-        assert(results[1] is DgfrResource.Success<List<ReuseSuggestion>>)
+        assert(results[0] is DgfrCallState.Loading<List<ReuseSuggestion>>)
+        assert(results[1] is DgfrCallState.Success<List<ReuseSuggestion>>)
     }
 
     // endregion getSuggestReuses
@@ -188,8 +188,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getReuseTypes()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ReuseType>>)
-        assert(results[1] is DgfrResource.ClientError<List<ReuseType>>)
+        assert(results[0] is DgfrCallState.Loading<List<ReuseType>>)
+        assert(results[1] is DgfrCallState.ClientError<List<ReuseType>>)
     }
 
     @Test
@@ -199,8 +199,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getReuseTypes()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ReuseType>>)
-        assert(results[1] is DgfrResource.ServerError<List<ReuseType>>)
+        assert(results[0] is DgfrCallState.Loading<List<ReuseType>>)
+        assert(results[1] is DgfrCallState.ServerError<List<ReuseType>>)
     }
 
     @Test
@@ -210,8 +210,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getReuseTypes()
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<List<ReuseType>>)
-        assert(results[1] is DgfrResource.Success<List<ReuseType>>)
+        assert(results[0] is DgfrCallState.Loading<List<ReuseType>>)
+        assert(results[1] is DgfrCallState.Success<List<ReuseType>>)
     }
 
     // endregion getReuseTypes
@@ -225,8 +225,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteUnfollowReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -236,8 +236,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteUnfollowReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -247,8 +247,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteUnfollowReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteUnfollowReuse
@@ -263,8 +263,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getListReuseFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ClientError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ClientError<FollowPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -275,8 +275,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getListReuseFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.ServerError<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.ServerError<FollowPage>)
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -287,8 +287,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getListReuseFollowers("", 0, 0)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<FollowPage>)
-        assert(results[1] is DgfrResource.Success<FollowPage>)
+        assert(results[0] is DgfrCallState.Loading<FollowPage>)
+        assert(results[1] is DgfrCallState.Success<FollowPage>)
     }
 
     // endregion getListReuseFollowers
@@ -302,8 +302,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postFollowReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -313,8 +313,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postFollowReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -324,8 +324,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postFollowReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion postFollowReuse
@@ -339,8 +339,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -350,8 +350,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -361,8 +361,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteReuse
@@ -376,8 +376,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ClientError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ClientError<Reuse>)
     }
 
     @Test
@@ -387,8 +387,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ServerError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ServerError<Reuse>)
     }
 
     @Test
@@ -398,8 +398,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.getReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.Success<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.Success<Reuse>)
     }
 
     // endregion getReuse
@@ -413,8 +413,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.putUpdateReuse("", mockReuse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ClientError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ClientError<Reuse>)
     }
 
     @Test
@@ -424,8 +424,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.putUpdateReuse("", mockReuse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ServerError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ServerError<Reuse>)
     }
 
     @Test
@@ -435,8 +435,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.putUpdateReuse("", mockReuse)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.Success<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.Success<Reuse>)
     }
 
     // endregion putUpdateReuse
@@ -450,8 +450,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postAddReuseBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.ClientError<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.ClientError<Badge>)
     }
 
     @Test
@@ -461,8 +461,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postAddReuseBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.ServerError<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.ServerError<Badge>)
     }
 
     @Test
@@ -472,8 +472,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postAddReuseBadge("", mockBadge)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Badge>)
-        assert(results[1] is DgfrResource.Success<Badge>)
+        assert(results[0] is DgfrCallState.Loading<Badge>)
+        assert(results[1] is DgfrCallState.Success<Badge>)
     }
 
     // endregion postAddReuseBadge
@@ -487,8 +487,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteReuseBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ClientError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ClientError<Boolean>)
     }
 
     @Test
@@ -498,8 +498,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteReuseBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.ServerError<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.ServerError<Boolean>)
     }
 
     @Test
@@ -509,8 +509,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteReuseBadge("", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Boolean>)
-        assert(results[1] is DgfrResource.Success<Boolean>)
+        assert(results[0] is DgfrCallState.Loading<Boolean>)
+        assert(results[1] is DgfrCallState.Success<Boolean>)
     }
 
     // endregion deleteReuseBadge
@@ -524,8 +524,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postReuseAddDataset("", mockDatasetReference)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ClientError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ClientError<Reuse>)
     }
 
     @Test
@@ -535,8 +535,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postReuseAddDataset("", mockDatasetReference)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ServerError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ServerError<Reuse>)
     }
 
     @Test
@@ -546,8 +546,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postReuseAddDataset("", mockDatasetReference)
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.Success<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.Success<Reuse>)
     }
 
     // endregion postReuseAddDataset
@@ -561,8 +561,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteUnfeatureReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ClientError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ClientError<Reuse>)
     }
 
     @Test
@@ -572,8 +572,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteUnfeatureReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ServerError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ServerError<Reuse>)
     }
 
     @Test
@@ -583,8 +583,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.deleteUnfeatureReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.Success<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.Success<Reuse>)
     }
 
     // endregion deleteUnfeatureReuse
@@ -598,8 +598,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postFeatureReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ClientError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ClientError<Reuse>)
     }
 
     @Test
@@ -609,8 +609,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postFeatureReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.ServerError<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.ServerError<Reuse>)
     }
 
     @Test
@@ -620,8 +620,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postFeatureReuse("")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<Reuse>)
-        assert(results[1] is DgfrResource.Success<Reuse>)
+        assert(results[0] is DgfrCallState.Loading<Reuse>)
+        assert(results[1] is DgfrCallState.Success<Reuse>)
     }
 
     // endregion postFeatureReuse
@@ -635,8 +635,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postReuseImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ClientError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ClientError<UploadedImage>)
     }
 
     @Test
@@ -646,8 +646,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postReuseImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.ServerError<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.ServerError<UploadedImage>)
     }
 
     @Test
@@ -657,8 +657,8 @@ internal class ReusesApiImplTest {
         val flow = apiImpl.postReuseImage("", ByteArray(0), "", "")
         val results = flow.toList()
         Assert.assertEquals(results.size, 2)
-        assert(results[0] is DgfrResource.Loading<UploadedImage>)
-        assert(results[1] is DgfrResource.Success<UploadedImage>)
+        assert(results[0] is DgfrCallState.Loading<UploadedImage>)
+        assert(results[1] is DgfrCallState.Success<UploadedImage>)
     }
 
     // endregion postReuseImage
