@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -35,6 +36,7 @@ import kotlinx.serialization.Serializable
  * @property uri The dataset API URI
  */
 @Serializable
+@OptIn(MissingFieldMapping::class)
 data class Dataset(
     @SerialName("created_at")
     var createdAt: LocalDateTime,
@@ -64,8 +66,8 @@ data class Dataset(
     var communityResources: List<CommunityResource>? = null,
     @SerialName("deleted")
     var deleted: LocalDateTime? = null,
-    //@SerialName("extras")
-    //var extras: Map<String, Any?>? = null,
+    // @SerialName("extras")
+    // var extras: Map<String, Any?>? = null,
     @SerialName("featured")
     var featured: Boolean? = null,
     @SerialName("frequency_date")
@@ -82,16 +84,16 @@ data class Dataset(
     var owner: User? = null,
     @SerialName("private")
     var private: Boolean? = null,
-    //@SerialName("quality")
-    //var quality: Map<String, Any?>? = null,
+    // @SerialName("quality")
+    // var quality: Map<String, Any?>? = null,
     @SerialName("resources")
     var resources: List<Resource>? = null,
-    //@SerialName("spatial")
-    //var spatial: Map<String, Any?>? = null,
+    // @SerialName("spatial")
+    // var spatial: Map<String, Any?>? = null,
     @SerialName("tags")
     var tags: List<String>? = null,
-    //@SerialName("temporal_coverage")
-    //var temporalCoverage: Map<String, Any?>? = null
+    // @SerialName("temporal_coverage")
+    // var temporalCoverage: Map<String, Any?>? = null
 ) {
     /**
      * The update frequency
@@ -152,6 +154,5 @@ data class Dataset(
         QUINQUENNIAL,
         @SerialName("irregular")
         IRREGULAR
-
     }
 }

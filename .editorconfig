@@ -1,0 +1,6 @@
+# top-most EditorConfig file
+root=true
+
+# Comma-separated list of rules to disable (Since 0.34.0)
+[*.{kt,kts}]
+disabled_rules=no-wildcard-imports

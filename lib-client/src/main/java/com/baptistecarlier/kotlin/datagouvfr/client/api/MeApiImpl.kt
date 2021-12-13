@@ -1,12 +1,11 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -14,7 +13,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class MeApiImpl(private val client: HttpClient): MeApi {
+internal class MeApiImpl(private val client: HttpClient) : MeApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -30,7 +29,7 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getMe(): Flow<DgfrResource<Me>> = loadingFlow {
+    override fun getMe(): Flow<DgfrCallState<Me>> = loadingFlow {
         client.get(
             path = "me/"
         ) {
@@ -38,26 +37,7 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         }
     }
 
-    override fun postMyAvatar(
-        file: ByteArray,
-        fileName: String,
-        contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
-        client.submitFormWithBinaryData(
-            url = "me/avatar",
-            formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
-            }
-        ) {
-            method = HttpMethod.Post
-            header("X-API-KEY", apiKey)
-        }
-    }
-
-    override fun putUpdateMe(payload: Me): Flow<DgfrResource<Me>> = loadingFlow {
+    override fun putUpdateMe(payload: Me): Flow<DgfrCallState<Me>> = loadingFlow {
         client.put(
             path = "me/"
         ) {
@@ -67,25 +47,47 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         }
     }
 
-    override fun deleteClearApikey(): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteClearApikey(): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
-            path = "me/apikey/"
+            path = "me/apikey"
         ) {
             addApiKey(apiKey)
         }
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun postGenerateApikey(): Flow<DgfrResource<ApiKey>> = loadingFlow {
+    override fun postGenerateApikey(): Flow<DgfrCallState<ApiKey>> = loadingFlow {
         client.post(
-            path = "me/"
+            path = "me/apikey"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
         }
     }
 
-    override fun getMyDatasets(): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
+    override fun postMyAvatar(
+        file: ByteArray,
+        fileName: String,
+        contentType: String
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
+        client.submitFormWithBinaryData(
+            url = "me/avatar",
+            formData = formData {
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
+            }
+        ) {
+            method = HttpMethod.Post
+            header("X-API-KEY", apiKey)
+        }
+    }
+
+    override fun getMyDatasets(): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
         client.get(
             path = "me/datasets/"
         ) {
@@ -93,7 +95,7 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         }
     }
 
-    override fun getMyMetrics(): Flow<DgfrResource<List<MyMetrics>>> = loadingFlow {
+    override fun getMyMetrics(): Flow<DgfrCallState<List<MyMetrics>>> = loadingFlow {
         client.get(
             path = "me/metrics/"
         ) {
@@ -101,67 +103,59 @@ internal class MeApiImpl(private val client: HttpClient): MeApi {
         }
     }
 
-    override fun getMyOrgCommunityResources(q: String?): Flow<DgfrResource<List<CommunityResource>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
+    @OptIn(MissingFieldMapping::class)
+    override fun getMyOrgCommunityResources(q: String?): Flow<DgfrCallState<List<CommunityResource>>> = loadingFlow {
         client.get(
-            path = "me/org_community_resources/?${builder.urlEncore()}"
+            path = "me/org_community_resources/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
-    override fun getMyOrgDatasets(q: String?): Flow<DgfrResource<List<Dataset>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
+    override fun getMyOrgDatasets(q: String?): Flow<DgfrCallState<List<Dataset>>> = loadingFlow {
         client.get(
-            path = "me/org_datasets/?${builder.urlEncore()}"
+            path = "me/org_datasets/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
-    override fun getMyOrgDiscussions(q: String?): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
+    @OptIn(MissingFieldMapping::class)
+    override fun getMyOrgDiscussions(q: String?): Flow<DgfrCallState<List<Discussion>>> = loadingFlow {
         client.get(
-            path = "me/org_discussions/?${builder.urlEncore()}"
+            path = "me/org_discussions/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
-    override fun getMyOrgIssues(q: String?): Flow<DgfrResource<List<Issue>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
+    @OptIn(MissingFieldMapping::class)
+    override fun getMyOrgIssues(q: String?): Flow<DgfrCallState<List<Issue>>> = loadingFlow {
         client.get(
-            path = "me/org_issues/?${builder.urlEncore()}"
+            path = "me/org_issues/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
-    override fun getMyOrgReuses(q: String?): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-
+    override fun getMyOrgReuses(q: String?): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.get(
-            path = "me/org_reuses/?${builder.urlEncore()}"
+            path = "me/org_reuses/"
         ) {
             addApiKey(apiKey)
+            parameter("q", q)
         }
     }
 
-    override fun getMyReuses(): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getMyReuses(): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.get(
             path = "me/reuses/"
         ) {
             addApiKey(apiKey)
         }
     }
-
 }

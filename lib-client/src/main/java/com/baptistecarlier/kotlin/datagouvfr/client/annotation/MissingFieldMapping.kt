@@ -7,10 +7,3 @@ package com.baptistecarlier.kotlin.datagouvfr.client.annotation
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.CLASS)
 annotation class MissingFieldMapping
-
-/**
- * A function parameter is missing regarding to API call.
- */
-@Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.FUNCTION)
-internal annotation class MissingApiParamter

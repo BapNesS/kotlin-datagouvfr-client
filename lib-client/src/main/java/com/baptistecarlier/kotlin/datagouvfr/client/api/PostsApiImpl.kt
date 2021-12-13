@@ -1,12 +1,13 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Post
 import com.baptistecarlier.kotlin.datagouvfr.client.model.PostPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.UploadedImage
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.*
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
+import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -14,7 +15,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class PostsApiImpl(private val client: HttpClient): PostsApi {
+internal class PostsApiImpl(private val client: HttpClient) : PostsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -22,18 +23,17 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    override fun getListPosts(page: Int?, pageSize: Int?, sort: String?): Flow<DgfrResource<PostPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    override fun getListPosts(page: Int?, pageSize: Int?, sort: String?): Flow<DgfrCallState<PostPage>> = loadingFlow {
         client.get(
-            path = "posts/?${builder.urlEncore()}"
-        )
+            path = "posts/"
+        ) {
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postCreatePost(payload: Post): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun postCreatePost(payload: Post): Flow<DgfrCallState<Post>> = loadingFlow {
         client.post(
             path = "posts/"
         ) {
@@ -43,7 +43,7 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         }
     }
 
-    override fun deletePost(post: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deletePost(post: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "posts/$post/"
         ) {
@@ -52,13 +52,13 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun getPost(post: String): Flow<DgfrCallState<Post>> = loadingFlow {
         client.get(
             path = "posts/$post/"
         )
     }
 
-    override fun putUpdatePost(post: String, payload: Post): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun putUpdatePost(post: String, payload: Post): Flow<DgfrCallState<Post>> = loadingFlow {
         client.put(
             path = "posts/$post/"
         ) {
@@ -73,14 +73,17 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "posts/$post/image",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
@@ -93,14 +96,17 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "posts/$post/image",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Put
@@ -108,17 +114,17 @@ internal class PostsApiImpl(private val client: HttpClient): PostsApi {
         }
     }
 
-    override fun deleteUnpublishPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun deleteUnpublishPost(post: String): Flow<DgfrCallState<Post>> = loadingFlow {
         client.delete(
-            path = "posts/$post/publish/"
+            path = "posts/$post/publish"
         ) {
             addApiKey(apiKey)
         }
     }
 
-    override fun postPublishPost(post: String): Flow<DgfrResource<Post>> = loadingFlow {
+    override fun postPublishPost(post: String): Flow<DgfrCallState<Post>> = loadingFlow {
         client.post(
-            path = "posts/$post/publish/"
+            path = "posts/$post/publish"
         ) {
             addApiKey(apiKey)
         }

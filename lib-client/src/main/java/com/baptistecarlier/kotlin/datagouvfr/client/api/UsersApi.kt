@@ -1,7 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * User related operations
  */
-internal interface UsersApi: WithApiKey {
+interface UsersApi : WithApiKey {
 
     /**
      * List all users
@@ -23,7 +22,6 @@ internal interface UsersApi: WithApiKey {
      * @param pageSize The page size (optional, default to 20)
      */
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     fun getListUsers(
         q: String?,
         /*facets: List<String>?,*/
@@ -33,32 +31,33 @@ internal interface UsersApi: WithApiKey {
         sort: String?,
         page: Int?,
         pageSize: Int?,
-    ): Flow<DgfrResource<UserPage>>
+    ): Flow<DgfrCallState<UserPage>>
 
     /**
      * Create a new object
      * @param payload (required)
      */
-    fun postCreateUser(payload: User): Flow<DgfrResource<User>>
+    @OptIn(MissingFieldMapping::class)
+    fun postCreateUser(payload: User): Flow<DgfrCallState<User>>
 
     /**
      * List all possible user roles
      */
-    fun getUserRoles(): Flow<DgfrResource<List<UserRole>>>
+    fun getUserRoles(): Flow<DgfrCallState<List<UserRole>>>
 
     /**
      * Suggest users
      * @param q The string to autocomplete/suggest (required)
      * @param size The amount of suggestion to fetch (optional, default to 10)
      */
-    fun getSuggestUsers(q: String, size: Int?): Flow<DgfrResource<List<UserSuggestion>>>
+    fun getSuggestUsers(q: String, size: Int?): Flow<DgfrCallState<List<UserSuggestion>>>
 
     /**
      * Unfollow an object given its ID
      * Returns the number of followers left after the operation
      * @param id (required)
      */
-    fun deleteUnfollowUser(id: String): Flow<DgfrResource<Boolean>>
+    fun deleteUnfollowUser(id: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * List all followers for a given object
@@ -67,32 +66,34 @@ internal interface UsersApi: WithApiKey {
      * @param pageSize The page size to fetch (optional, default to 20)
      */
     @OptIn(MissingFieldMapping::class)
-    fun getListUserFollowers(id: String, page: Int?, pageSize: Int?): Flow<DgfrResource<FollowPage>>
+    fun getListUserFollowers(id: String, page: Int?, pageSize: Int?): Flow<DgfrCallState<FollowPage>>
 
     /**
      * Follow a user given its ID
      * @param id (required)
      */
-    fun postFollowUser(id: String): Flow<DgfrResource<Boolean>>
+    fun postFollowUser(id: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * Delete a user given its identifier
      * @param user (required)
      */
-    fun deleteUser(user: String): Flow<DgfrResource<Boolean>>
+    fun deleteUser(user: String): Flow<DgfrCallState<Boolean>>
 
     /**
      * Get a user given its identifier
      * @param user (required)
      */
-    fun getUser(user: String): Flow<DgfrResource<User>>
+    @OptIn(MissingFieldMapping::class)
+    fun getUser(user: String): Flow<DgfrCallState<User>>
 
     /**
      * Update a user given its identifier
      * @param user (required)
      * @param payload (required)
      */
-    fun putUpdateUser(user: String, payload: User): Flow<DgfrResource<User>>
+    @OptIn(MissingFieldMapping::class)
+    fun putUpdateUser(user: String, payload: User): Flow<DgfrCallState<User>>
 
     /**
      * Upload a new avatar for a given user
@@ -106,6 +107,5 @@ internal interface UsersApi: WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
-
+    ): Flow<DgfrCallState<UploadedImage>>
 }

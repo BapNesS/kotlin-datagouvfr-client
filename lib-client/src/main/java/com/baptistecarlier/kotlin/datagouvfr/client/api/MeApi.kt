@@ -1,40 +1,40 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Connected user related operations
  */
-internal interface MeApi: WithApiKey {
+interface MeApi : WithApiKey {
 
     /**
      * Delete my profile
      */
-    fun deleteMe(): Flow<DgfrResource<Boolean>>
+    fun deleteMe(): Flow<DgfrCallState<Boolean>>
 
     /**
      * Fetch the current user (me) identity
      */
-    fun getMe(): Flow<DgfrResource<Me>>
+    fun getMe(): Flow<DgfrCallState<Me>>
 
     /**
      * Update my profile
      * @param payload (required)
      */
-    fun putUpdateMe(payload: Me): Flow<DgfrResource<Me>>
+    fun putUpdateMe(payload: Me): Flow<DgfrCallState<Me>>
 
     /**
      * Clear/destroy an apikey
      */
-    fun deleteClearApikey(): Flow<DgfrResource<Boolean>>
+    fun deleteClearApikey(): Flow<DgfrCallState<Boolean>>
 
     /**
      * (Re)Generate my API Key
      */
-    fun postGenerateApikey(): Flow<DgfrResource<ApiKey>>
+    fun postGenerateApikey(): Flow<DgfrCallState<ApiKey>>
 
     /**
      * Upload a new avatar
@@ -46,52 +46,53 @@ internal interface MeApi: WithApiKey {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>>
+    ): Flow<DgfrCallState<UploadedImage>>
 
     /**
      * List all my datasets (including private ones)
      */
-    fun getMyDatasets(): Flow<DgfrResource<List<Dataset>>>
+    fun getMyDatasets(): Flow<DgfrCallState<List<Dataset>>>
 
     /**
      * Fetch the current user (me) metrics
      */
-    fun getMyMetrics(): Flow<DgfrResource<List<MyMetrics>>>
+    fun getMyMetrics(): Flow<DgfrCallState<List<MyMetrics>>>
 
     /**
      * List all community resources related to me and my organizations
      * @param q The string to filter items (optional)
      */
-    fun getMyOrgCommunityResources(q: String? = null): Flow<DgfrResource<List<CommunityResource>>>
+    @OptIn(MissingFieldMapping::class)
+    fun getMyOrgCommunityResources(q: String? = null): Flow<DgfrCallState<List<CommunityResource>>>
 
     /**
      * List all datasets related to me and my organizations
      * @param q The string to filter items (optional)
      */
-    fun getMyOrgDatasets(q: String? = null): Flow<DgfrResource<List<Dataset>>>
+    fun getMyOrgDatasets(q: String? = null): Flow<DgfrCallState<List<Dataset>>>
 
     /**
      * List all discussions related to my organizations
      * @param q The string to filter items (optional)
      */
-    fun getMyOrgDiscussions(q: String? = null): Flow<DgfrResource<List<Discussion>>>
+    @OptIn(MissingFieldMapping::class)
+    fun getMyOrgDiscussions(q: String? = null): Flow<DgfrCallState<List<Discussion>>>
 
     /**
      * List all issues related to my organizations
      * @param q The string to filter items (optional)
      */
-    fun getMyOrgIssues(q: String? = null): Flow<DgfrResource<List<Issue>>>
+    @OptIn(MissingFieldMapping::class)
+    fun getMyOrgIssues(q: String? = null): Flow<DgfrCallState<List<Issue>>>
 
     /**
      * List all reuses related to me and my organizations
      * @param q The string to filter items (optional)
      */
-    fun getMyOrgReuses(q: String? = null): Flow<DgfrResource<List<Reuse>>>
+    fun getMyOrgReuses(q: String? = null): Flow<DgfrCallState<List<Reuse>>>
 
     /**
      * List all my reuses (including private ones)
      */
-    fun getMyReuses(): Flow<DgfrResource<List<Reuse>>>
-
+    fun getMyReuses(): Flow<DgfrCallState<List<Reuse>>>
 }
-

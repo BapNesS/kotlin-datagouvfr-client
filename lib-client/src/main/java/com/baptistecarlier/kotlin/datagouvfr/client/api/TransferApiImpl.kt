@@ -1,28 +1,28 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
+import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class TransferApiImpl(private val client: HttpClient): TransferApi {
+internal class TransferApiImpl(private val client: HttpClient) : TransferApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
 
-    override fun getListTransfers(): Flow<DgfrResource<List<Transfer>>> = loadingFlow {
+    override fun getListTransfers(): Flow<DgfrCallState<List<Transfer>>> = loadingFlow {
         client.get(
             path = "transfer/"
         )
     }
 
-    override fun postRequestTransfer(payload: TransferRequest): Flow<DgfrResource<Transfer>> = loadingFlow {
+    override fun postRequestTransfer(payload: TransferRequest): Flow<DgfrCallState<Transfer>> = loadingFlow {
         client.post(
             path = "transfer/"
         ) {
@@ -32,7 +32,7 @@ internal class TransferApiImpl(private val client: HttpClient): TransferApi {
         }
     }
 
-    override fun getTransfer(id: String): Flow<DgfrResource<Transfer>> = loadingFlow {
+    override fun getTransfer(id: String): Flow<DgfrCallState<Transfer>> = loadingFlow {
         client.get(
             path = "transfer/$id/"
         )
@@ -41,7 +41,7 @@ internal class TransferApiImpl(private val client: HttpClient): TransferApi {
     override fun postRespondToTransfer(
         id: String,
         payload: TransferResponse
-    ): Flow<DgfrResource<Transfer>> = loadingFlow {
+    ): Flow<DgfrCallState<Transfer>> = loadingFlow {
         client.post(
             path = "transfer/$id/"
         ) {
@@ -50,5 +50,4 @@ internal class TransferApiImpl(private val client: HttpClient): TransferApi {
             body = payload
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.extensions
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Dataset
 
 fun Dataset.truncatedDescription(): String = with(description) {
@@ -15,6 +16,7 @@ fun Dataset.truncatedDescription(): String = with(description) {
 fun Dataset.getTagsOrNull() =
     tags?.joinToString(separator = ", ")?.nullIfEmpty()
 
+@OptIn(MissingFieldMapping::class)
 fun Dataset.getAuthor() =
     organization?.name.let {
         it

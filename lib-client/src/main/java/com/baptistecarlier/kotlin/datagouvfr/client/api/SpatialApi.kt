@@ -1,6 +1,7 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
 
@@ -13,29 +14,30 @@ internal interface SpatialApi {
      * List each zone for a given level with their datasets count
      * @param level
      */
-    fun getSpatialCoverage(level: String) : Flow<DgfrResource<List<GeoJSONFeatureCollection>>>
+    fun getSpatialCoverage(level: String): Flow<DgfrCallState<List<GeoJSONFeatureCollection>>>
 
     /**
      * List all known spatial granularities
      */
-    fun getSpatialGranularities() : Flow<DgfrResource<List<GeoGranularity>>>
+    fun getSpatialGranularities(): Flow<DgfrCallState<List<GeoGranularity>>>
 
     /**
      * List all known levels
      */
-    fun getSpatialLevels() : Flow<DgfrResource<List<GeoLevel>>>
+    fun getSpatialLevels(): Flow<DgfrCallState<List<GeoLevel>>>
 
     /**
      * Fetch a zone
      * @param id A zone identifier
      */
-    fun getSpatialZone(id: String) : Flow<DgfrResource<GeoJSONFeature>>
+    @OptIn(MissingFieldMapping::class)
+    fun getSpatialZone(id: String): Flow<DgfrCallState<GeoJSONFeature>>
 
     /**
      * Fetch children of a zone
      * @param id A zone identifier
      */
-    fun getSpatialZoneChildren(id: String) : Flow<DgfrResource<List<GeoJSONFeatureCollection>>>
+    fun getSpatialZoneChildren(id: String): Flow<DgfrCallState<List<GeoJSONFeatureCollection>>>
 
     /**
      * Fetch datasets for a given zone
@@ -47,7 +49,7 @@ internal interface SpatialApi {
         id: String,
         dynamic: Boolean? = null,
         size: Int? = null
-    ) : Flow<DgfrResource<List<DatasetReference>>>
+    ): Flow<DgfrCallState<List<DatasetReference>>>
 
     /**
      * Suggest geospatial zones
@@ -57,7 +59,7 @@ internal interface SpatialApi {
     fun getSuggestZones(
         q: String,
         size: Int? = null
-    ) : Flow<DgfrResource<List<TerritorySuggestion>>>
+    ): Flow<DgfrCallState<List<TerritorySuggestion>>>
 
     /**
      * Fetch a zone list as GeoJSON
@@ -65,6 +67,5 @@ internal interface SpatialApi {
      */
     fun getSpatialZones(
         ids: List<String>
-    ) : Flow<DgfrResource<GeoJSONFeatureCollection>>
-
+    ): Flow<DgfrCallState<GeoJSONFeatureCollection>>
 }

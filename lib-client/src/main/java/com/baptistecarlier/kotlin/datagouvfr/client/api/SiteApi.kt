@@ -1,15 +1,14 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Site global namespace
  */
-internal interface SiteApi: WithApiKey {
+interface SiteApi : WithApiKey {
 
     /**
      * Fetch site activity, optionally filtered by user of org
@@ -24,7 +23,7 @@ internal interface SiteApi: WithApiKey {
         pageSize: Int? = null,
         user: String? = null,
         organization: String? = null
-    ): Flow<DgfrResource<List<ActivityPage>>>
+    ): Flow<DgfrCallState<List<ActivityPage>>>
 
     /**
      * An OEmbed compliant API endpoint
@@ -38,7 +37,8 @@ internal interface SiteApi: WithApiKey {
         url: String,
         maxWidth: String? = null,
         maxHeight: String? = null,
-        format: String? = null): Flow<DgfrResource<Oembed>>
+        format: String? = null
+    ): Flow<DgfrCallState<Oembed>>
 
     /**
      * The returned payload is a list of OEmbed formatted responses
@@ -48,58 +48,58 @@ internal interface SiteApi: WithApiKey {
      * E.g: dataset-5369992aa3a729239d205183, territory-fr:departement:33@1860-07-01:emploi_dep
      * Only datasets and territories are supported for now.
      */
-    fun getOembeds(references: String): Flow<DgfrResource<List<Oembed>>>
+    fun getOembeds(references: String): Flow<DgfrCallState<List<Oembed>>>
 
     /**
      * Site-wide variables
      */
-    fun getSite(): Flow<DgfrResource<Site>>
+    fun getSite(): Flow<DgfrCallState<Site>>
 
     /**
      * Root RDF endpoint with content negociation handling
      * @return Content as [String]
      */
-    fun getSiteRdfCatalog(): Flow<DgfrResource<String>>
+    fun getSiteRdfCatalog(): Flow<DgfrCallState<String>>
 
     /**
      * Root RDF endpoint with content negociation handling in specified [format]
      * @param format (required)
      * @return Content as [String]
      */
-    fun getSiteRdfCatalogFormat(format: String): Flow<DgfrResource<String>>
+    fun getSiteRdfCatalogFormat(format: String): Flow<DgfrCallState<String>>
 
     /**
      * @return Content as [String]
      */
-    fun getSiteJsonLdContext(): Flow<DgfrResource<String>>
+    fun getSiteJsonLdContext(): Flow<DgfrCallState<String>>
 
     /**
      * Root RDF endpoint with content negociation handling
      * @param format (required)
      */
-    fun getSiteDataPortal(format: String): Flow<DgfrResource<String>>
+    fun getSiteDataPortal(format: String): Flow<DgfrCallState<String>>
 
     /**
      * List homepage datasets
      */
-    fun getHomeDatasets(): Flow<DgfrResource<List<Dataset>>>
+    fun getHomeDatasets(): Flow<DgfrCallState<List<Dataset>>>
 
     /**
      * Set the homepage datasets editorial selection
      * @param datasetIds Dataset IDs to put in homepage
      */
-    fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrResource<List<Dataset>>>
+    fun putSetHomeDatasets(datasetIds: List<String>): Flow<DgfrCallState<List<Dataset>>>
 
     /**
      * List homepage featured reuses
      */
-    fun getHomeReuses(): Flow<DgfrResource<List<Reuse>>>
+    fun getHomeReuses(): Flow<DgfrCallState<List<Reuse>>>
 
     /**
      * Set the homepage reuses editorial selection
      * @param reuseIds Reuse IDs to put in homepage (required)
      */
-    fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrResource<List<Reuse>>>
+    fun putSetHomeReuses(reuseIds: List<String>): Flow<DgfrCallState<List<Reuse>>>
 
     /**
      * @param q The string to autocomplete/suggest (required)
@@ -108,6 +108,5 @@ internal interface SiteApi: WithApiKey {
     fun getSuggestTerritory(
         q: String,
         size: Int? = null
-    ): Flow<DgfrResource<List<Territory>>>
-
+    ): Flow<DgfrCallState<List<Territory>>>
 }

@@ -1,9 +1,9 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 /**
  * @property about The user self description
@@ -23,6 +23,7 @@ import kotlinx.serialization.Serializable
  * @property uri The user API URI
  * @property website The user website
  */
+@MissingFieldMapping
 @Serializable
 data class User(
     @SerialName("first_name")
@@ -45,10 +46,10 @@ data class User(
     var avatar: String? = null,
     @SerialName("avatar_thumbnail")
     var avatarThumbnail: String? = null,
-    //@SerialName("email")
-    //var email: Map<String, Any?>? = null,
-    //@SerialName("metrics")
-    //var metrics: Map<String, Any?>? = null,
+    // @SerialName("email")
+    // var email: Map<String, Any?>? = null,
+    // @SerialName("metrics")
+    // var metrics: Map<String, Any?>? = null,
     @SerialName("organizations")
     var organizations: List<OrganizationReference>? = null,
     @SerialName("page")

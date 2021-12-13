@@ -1,14 +1,11 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -16,7 +13,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class UsersApiImpl(private val client: HttpClient): UsersApi {
+internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -24,7 +21,6 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
     }
 
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     override fun getListUsers(
         q: String?,
         /*facets: List<String>?,*/
@@ -34,23 +30,26 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         sort: String?,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<UserPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        /*builder.appendIfNotNull("facets", facets)*/
-        builder.appendIfNotNull("organization", organization)
-        builder.appendIfNotNull("datasets", datasets)
-        builder.appendIfNotNull("followers", followers)
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<UserPage>> = loadingFlow {
         client.get(
-            path = "users/?${builder.urlEncore()}"
-        )
+            path = "users/"
+        ) {
+            parameter("q", q)
+            // TODO Not sure about this
+            facets?.forEach { item ->
+                parameter("facets", item)
+            }
+            parameter("organization", organization)
+            parameter("datasets", datasets)
+            parameter("followers", followers)
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postCreateUser(payload: User): Flow<DgfrResource<User>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postCreateUser(payload: User): Flow<DgfrCallState<User>> = loadingFlow {
         client.post(
             path = "users/"
         ) {
@@ -60,23 +59,22 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         }
     }
 
-    override fun getUserRoles(): Flow<DgfrResource<List<UserRole>>> = loadingFlow {
+    override fun getUserRoles(): Flow<DgfrCallState<List<UserRole>>> = loadingFlow {
         client.get(
             path = "users/roles/"
         )
     }
 
-    override fun getSuggestUsers(q: String, size: Int?): Flow<DgfrResource<List<UserSuggestion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("size", size)
-
+    override fun getSuggestUsers(q: String, size: Int?): Flow<DgfrCallState<List<UserSuggestion>>> = loadingFlow {
         client.get(
-            path = "users/suggest/?${builder.urlEncore()}"
-        )
+            path = "users/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
+        }
     }
 
-    override fun deleteUnfollowUser(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUnfollowUser(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "users/$id/followers/"
         ) {
@@ -90,18 +88,17 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         id: String,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<FollowPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("id", id)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<FollowPage>> = loadingFlow {
         client.get(
-            path = "users/$id/followers/?${builder.urlEncore()}"
-        )
+            path = "users/$id/followers/"
+        ) {
+            parameter("id", id)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postFollowUser(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun postFollowUser(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "users/$id/followers/"
         ) {
@@ -111,7 +108,7 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun deleteUser(user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUser(user: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "users/$user/"
         ) {
@@ -120,13 +117,15 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getUser(user: String): Flow<DgfrResource<User>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getUser(user: String): Flow<DgfrCallState<User>> = loadingFlow {
         client.get(
             path = "users/$user/"
         )
     }
 
-    override fun putUpdateUser(user: String, payload: User): Flow<DgfrResource<User>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun putUpdateUser(user: String, payload: User): Flow<DgfrCallState<User>> = loadingFlow {
         client.put(
             path = "users/$user/"
         ) {
@@ -141,19 +140,21 @@ internal class UsersApiImpl(private val client: HttpClient): UsersApi {
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "users/$user/avatar",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
             header("X-API-KEY", apiKey)
         }
     }
-
 }

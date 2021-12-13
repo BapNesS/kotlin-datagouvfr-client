@@ -1,9 +1,9 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 /**
  * @property created The job creation date
@@ -16,6 +16,7 @@ import kotlinx.serialization.Serializable
  * @property status The job status
  */
 @Serializable
+@OptIn(MissingFieldMapping::class)
 data class HarvestJobPreview(
     @SerialName("created")
     var created: LocalDateTime,

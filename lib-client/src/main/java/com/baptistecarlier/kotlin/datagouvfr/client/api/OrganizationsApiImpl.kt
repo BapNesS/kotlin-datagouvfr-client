@@ -1,15 +1,12 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
-import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingApiParamter
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.exception.loadingFlow
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.HttpCodeRangeSuccess
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.addApiKey
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.appendIfNotNull
 import com.baptistecarlier.kotlin.datagouvfr.client.tools.readAndClose
-import com.baptistecarlier.kotlin.datagouvfr.client.tools.urlEncore
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
@@ -17,7 +14,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 
-internal class OrganizationsApiImpl(private val client: HttpClient): OrganizationsApi {
+internal class OrganizationsApiImpl(private val client: HttpClient) : OrganizationsApi {
 
     private var apiKey: String = ""
     override fun setApiKey(apiKey: String) {
@@ -25,10 +22,9 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
     }
 
     @OptIn(MissingFieldMapping::class)
-    @MissingApiParamter
     override fun getListOrganizations(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         reuses: String?,
         badge: String?,
         datasets: String?,
@@ -36,23 +32,27 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         sort: String?,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<OrganizationPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("reuses", reuses)
-        builder.appendIfNotNull("badge", badge)
-        builder.appendIfNotNull("datasets", datasets)
-        builder.appendIfNotNull("followers", followers)
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<OrganizationPage>> = loadingFlow {
         client.get(
-            path = "organizations/?${builder.urlEncore()}"
-        )
+            path = "organizations/"
+        ) {
+            parameter("q", q)
+            // TODO Not sure about this
+            facets?.forEach { item ->
+                parameter("facets", item)
+            }
+            parameter("reuses", reuses)
+            parameter("badge", badge)
+            parameter("datasets", datasets)
+            parameter("followers", followers)
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postCreateOrganization(payload: Organization): Flow<DgfrResource<Organization>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun postCreateOrganization(payload: Organization): Flow<DgfrCallState<Organization>> = loadingFlow {
         client.post(
             path = "organizations/"
         ) {
@@ -62,13 +62,13 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         }
     }
 
-    override fun getAvailableOrganizationBadges(): Flow<DgfrResource<Map<String, String>>> = loadingFlow {
+    override fun getAvailableOrganizationBadges(): Flow<DgfrCallState<Map<String, String>>> = loadingFlow {
         client.get(
             path = "organizations/badges/"
         )
     }
 
-    override fun getOrgRoles(): Flow<DgfrResource<List<OrganizationRole>>> = loadingFlow {
+    override fun getOrgRoles(): Flow<DgfrCallState<List<OrganizationRole>>> = loadingFlow {
         client.get(
             path = "organizations/roles/"
         )
@@ -77,17 +77,16 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
     override fun getSuggestOrganizations(
         q: String,
         size: Int?
-    ): Flow<DgfrResource<List<OrganizationSuggestion>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("q", q)
-        builder.appendIfNotNull("size", size)
-
+    ): Flow<DgfrCallState<List<OrganizationSuggestion>>> = loadingFlow {
         client.get(
-            path = "organizations/suggest/?${builder.urlEncore()}"
-        )
+            path = "organizations/suggest/"
+        ) {
+            parameter("q", q)
+            parameter("size", size)
+        }
     }
 
-    override fun deleteUnfollowOrganization(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteUnfollowOrganization(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$id/followers/"
         ) {
@@ -101,17 +100,16 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         id: String,
         page: Int?,
         pageSize: Int?
-    ): Flow<DgfrResource<FollowPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<FollowPage>> = loadingFlow {
         client.get(
-            path = "organizations/$id/followers/?${builder.urlEncore()}"
-        )
+            path = "organizations/$id/followers/"
+        ) {
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun postFollowOrganization(id: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun postFollowOrganization(id: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "organizations/$id/followers/"
         ) {
@@ -120,7 +118,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun deleteOrganization(org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteOrganization(org: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$org/"
         ) {
@@ -129,16 +127,18 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getOrganization(org: String): Flow<DgfrResource<Organization>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getOrganization(org: String): Flow<DgfrCallState<Organization>> = loadingFlow {
         client.get(
             path = "organizations/$org/"
         )
     }
 
+    @OptIn(MissingFieldMapping::class)
     override fun putUpdateOrganization(
         org: String,
         payload: Organization
-    ): Flow<DgfrResource<Organization>> = loadingFlow {
+    ): Flow<DgfrCallState<Organization>> = loadingFlow {
         client.put(
             path = "organizations/$org/"
         ) {
@@ -148,7 +148,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         }
     }
 
-    override fun postAddOrganizationBadge(org: String, payload: Badge): Flow<DgfrResource<Badge>> = loadingFlow {
+    override fun postAddOrganizationBadge(org: String, payload: Badge): Flow<DgfrCallState<Badge>> = loadingFlow {
         client.post(
             path = "organizations/$org/badges/"
         ) {
@@ -158,7 +158,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         }
     }
 
-    override fun deleteOrganizationBadge(badgeKind: String, org: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteOrganizationBadge(badgeKind: String, org: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
             path = "organizations/$org/badges/$badgeKind/"
         ) {
@@ -167,18 +167,18 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getRdfOrganization(org: String): Flow<DgfrResource<String>> = loadingFlow {
-         val response = client.get<HttpResponse>(
+    override fun getRdfOrganization(org: String): Flow<DgfrCallState<String>> = loadingFlow {
+        val response = client.get<HttpResponse>(
             path = "organizations/$org/catalog"
         )
-         response.content.readAndClose().orEmpty()
+        response.content.readAndClose().orEmpty()
     }
 
-    override fun getRdfOrganizationFormat(org: String, format: String): Flow<DgfrResource<String>> = loadingFlow {
-         val response = client.get<HttpResponse>(
+    override fun getRdfOrganizationFormat(org: String, format: String): Flow<DgfrCallState<String>> = loadingFlow {
+        val response = client.get<HttpResponse>(
             path = "organizations/$org/catalog.$format"
         )
-         response.content.readAndClose().orEmpty()
+        response.content.readAndClose().orEmpty()
     }
 
     @OptIn(MissingFieldMapping::class)
@@ -187,24 +187,25 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         page: Int?,
         pageSize: Int?,
         sort: String?
-    ): Flow<DgfrResource<DatasetPage>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("sort", sort)
-        builder.appendIfNotNull("page", page)
-        builder.appendIfNotNull("page_size", pageSize)
-
+    ): Flow<DgfrCallState<DatasetPage>> = loadingFlow {
         client.get(
-            path = "organizations/$org/datasets/?${builder.urlEncore()}"
-        )
+            path = "organizations/$org/datasets/"
+        ) {
+            parameter("sort", sort)
+            parameter("page", page)
+            parameter("page_size", pageSize)
+        }
     }
 
-    override fun getListOrganizationDiscussions(org: String): Flow<DgfrResource<List<Discussion>>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getListOrganizationDiscussions(org: String): Flow<DgfrCallState<List<Discussion>>> = loadingFlow {
         client.get(
             path = "organizations/$org/discussions/"
         )
     }
 
-    override fun getListOrganizationIssues(org: String): Flow<DgfrResource<List<Issue>>> = loadingFlow {
+    @OptIn(MissingFieldMapping::class)
+    override fun getListOrganizationIssues(org: String): Flow<DgfrCallState<List<Issue>>> = loadingFlow {
         client.get(
             path = "organizations/$org/issues/"
         )
@@ -215,14 +216,17 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "organizations/$org/logo",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Post
@@ -235,14 +239,17 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         file: ByteArray,
         fileName: String,
         contentType: String
-    ): Flow<DgfrResource<UploadedImage>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedImage>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "organizations/$org/logo",
             formData = formData {
-                append("file", file, Headers.build {
-                    append(HttpHeaders.ContentDisposition, "filename=$fileName")
-                    append(HttpHeaders.ContentType, contentType)
-                })
+                append(
+                    "file", file,
+                    Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$fileName")
+                        append(HttpHeaders.ContentType, contentType)
+                    }
+                )
             }
         ) {
             method = HttpMethod.Put
@@ -250,9 +257,9 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         }
     }
 
-    override fun deleteOrganizationMember(org: String, user: String): Flow<DgfrResource<Boolean>> = loadingFlow {
+    override fun deleteOrganizationMember(org: String, user: String): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.delete<HttpResponse>(
-            path = "organizations/$org/member/$user/"
+            path = "organizations/$org/member/$user"
         ) {
             addApiKey(apiKey)
         }
@@ -263,9 +270,9 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         org: String,
         user: String,
         payload: Member
-    ): Flow<DgfrResource<Member>> = loadingFlow {
+    ): Flow<DgfrCallState<Member>> = loadingFlow {
         client.post(
-            path = "organizations/$org/member/$user/"
+            path = "organizations/$org/member/$user"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
@@ -277,9 +284,9 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         org: String,
         user: String,
         payload: Member
-    ): Flow<DgfrResource<Member>> = loadingFlow {
+    ): Flow<DgfrCallState<Member>> = loadingFlow {
         client.put(
-            path = "organizations/$org/member/$user/"
+            path = "organizations/$org/member/$user"
         ) {
             addApiKey(apiKey)
             contentType(ContentType.Application.Json)
@@ -290,19 +297,18 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
     override fun getListMembershipRequests(
         org: String,
         status: String?
-    ): Flow<DgfrResource<List<MembershipRequest>>> = loadingFlow {
-        val builder = StringBuilder()
-        builder.appendIfNotNull("status", status)
-
+    ): Flow<DgfrCallState<List<MembershipRequest>>> = loadingFlow {
         client.get(
-            path = "organizations/$org/membership/?${builder.urlEncore()}"
-        )
+            path = "organizations/$org/membership/"
+        ) {
+            parameter("status", status)
+        }
     }
 
     // A bit light, isn't ?
     override fun postMembershipRequest(
         org: String
-    ) : Flow<DgfrResource<MembershipRequest>> = loadingFlow {
+    ): Flow<DgfrCallState<MembershipRequest>> = loadingFlow {
         client.post(
             path = "organizations/$org/membership/"
         ) {
@@ -310,7 +316,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         }
     }
 
-    override fun postAcceptMembership(id: String, org: String): Flow<DgfrResource<Member>> = loadingFlow {
+    override fun postAcceptMembership(id: String, org: String): Flow<DgfrCallState<Member>> = loadingFlow {
         client.post(
             path = "organizations/$org/membership/$id/accept/"
         ) {
@@ -322,7 +328,7 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         id: String,
         org: String,
         payload: RefuseMembership
-    ): Flow<DgfrResource<Boolean>> = loadingFlow {
+    ): Flow<DgfrCallState<Boolean>> = loadingFlow {
         val response = client.post<HttpResponse>(
             path = "organizations/$org/membership/$id/refuse/"
         ) {
@@ -331,10 +337,9 @@ internal class OrganizationsApiImpl(private val client: HttpClient): Organizatio
         response.status.value in HttpCodeRangeSuccess
     }
 
-    override fun getListOrganizationReuses(org: String): Flow<DgfrResource<List<Reuse>>> = loadingFlow {
+    override fun getListOrganizationReuses(org: String): Flow<DgfrCallState<List<Reuse>>> = loadingFlow {
         client.get(
             path = "organizations/$org/reuses/"
         )
     }
-
 }

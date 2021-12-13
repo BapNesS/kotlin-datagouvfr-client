@@ -1,18 +1,17 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Discussion
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionPage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionResponse
 import com.baptistecarlier.kotlin.datagouvfr.client.model.DiscussionStart
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Discussion related operations
  */
-internal interface DiscussionsApi: WithApiKey {
+interface DiscussionsApi : WithApiKey {
 
     /**
      * List all Discussions
@@ -29,15 +28,16 @@ internal interface DiscussionsApi: WithApiKey {
         forIds: List<String>? = null,
         page: Int? = null,
         pageSize: Int? = null,
-    ): Flow<DgfrResource<DiscussionPage>>
+    ): Flow<DgfrCallState<DiscussionPage>>
 
     /**
      * Create a new Discussion
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCreateDiscussion(
         payload: DiscussionStart,
-    ): Flow<DgfrResource<Discussion>>
+    ): Flow<DgfrCallState<Discussion>>
 
     /**
      * Delete a discussion given its ID
@@ -45,25 +45,27 @@ internal interface DiscussionsApi: WithApiKey {
      */
     fun deleteDiscussion(
         id: String
-    ): Flow<DgfrResource<Boolean>>
+    ): Flow<DgfrCallState<Boolean>>
 
     /**
      * Get a discussion given its ID
      * @param id (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getDiscussion(
-        id: String,
-    ): Flow<DgfrResource<Discussion>>
+        id: String
+    ): Flow<DgfrCallState<Discussion>>
 
     /**
      * Add comment and optionally close a discussion given its ID
      * @param id (required)
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCommentDiscussion(
         id: String,
-        payload: DiscussionResponse,
-    ): Flow<DgfrResource<Discussion>>
+        payload: DiscussionResponse
+    ): Flow<DgfrCallState<Discussion>>
 
     /**
      * Delete a comment given its index
@@ -73,6 +75,5 @@ internal interface DiscussionsApi: WithApiKey {
     fun deleteDiscussionComment(
         id: String,
         cidx: Int
-    ): Flow<DgfrResource<Boolean>>
-
+    ): Flow<DgfrCallState<Boolean>>
 }

@@ -1,6 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Tag
 import kotlinx.coroutines.flow.Flow
 
@@ -16,8 +16,5 @@ internal interface TagsApi {
     fun getTagsSuggest(
         q: String,
         size: Int? = null
-    ): Flow<DgfrResource<List<Tag>>>
-
+    ): Flow<DgfrCallState<List<Tag>>>
 }
-
-

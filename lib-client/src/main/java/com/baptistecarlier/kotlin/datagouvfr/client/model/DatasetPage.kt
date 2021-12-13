@@ -24,8 +24,8 @@ data class DatasetPage(
     var total: Int,
     @SerialName("data")
     var data: List<Dataset>? = null,
-    //@SerialName("facets")
-    //var facets: Map<String, Any?>? = null,
+    // @SerialName("facets")
+    // var facets: Map<String, Any?>? = null,
     @SerialName("next_page")
     var nextPage: String? = null,
     @SerialName("previous_page")

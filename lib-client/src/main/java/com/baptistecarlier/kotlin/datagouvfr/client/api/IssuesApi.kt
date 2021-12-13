@@ -1,17 +1,16 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.api
 
-import com.baptistecarlier.kotlin.datagouvfr.client.DgfrResource
+import com.baptistecarlier.kotlin.datagouvfr.client.DgfrCallState
 import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import com.baptistecarlier.kotlin.datagouvfr.client.model.Issue
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssuePage
 import com.baptistecarlier.kotlin.datagouvfr.client.model.IssueResponse
-import com.baptistecarlier.kotlin.datagouvfr.client.api.WithApiKey
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Issue related operations
  */
-internal interface IssuesApi: WithApiKey {
+interface IssuesApi : WithApiKey {
 
     /**
      * List all Issues
@@ -28,32 +27,34 @@ internal interface IssuesApi: WithApiKey {
         forIds: List<String>? = null,
         page: Int? = null,
         pageSize: Int? = null
-    ): Flow<DgfrResource<IssuePage>>
+    ): Flow<DgfrCallState<IssuePage>>
 
     /**
      * Create a new Issue
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCreateIssue(
         payload: Issue
-    ): Flow<DgfrResource<Issue>>
+    ): Flow<DgfrCallState<Issue>>
 
     /**
      * Get an issue given its ID
      * @param id (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun getIssue(
         id: String
-    ): Flow<DgfrResource<Issue>>
+    ): Flow<DgfrCallState<Issue>>
 
     /**
      * Add comment and optionally close an issue given its ID
      * @param id (required)
      * @param payload (required)
      */
+    @OptIn(MissingFieldMapping::class)
     fun postCommentIssue(
         id: String,
         payload: IssueResponse
-    ): Flow<DgfrResource<Issue>>
-
+    ): Flow<DgfrCallState<Issue>>
 }

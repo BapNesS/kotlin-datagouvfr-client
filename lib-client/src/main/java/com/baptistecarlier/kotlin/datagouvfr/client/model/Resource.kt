@@ -1,5 +1,6 @@
 package com.baptistecarlier.kotlin.datagouvfr.client.model
 
+import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMapping
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -24,6 +25,7 @@ import kotlinx.serialization.Serializable
  * @property type Resource type (documentation, API...)
  * @property url The resource URL
  */
+@MissingFieldMapping
 @Serializable
 data class Resource(
     @SerialName("filetype")
@@ -33,17 +35,17 @@ data class Resource(
     @SerialName("title")
     var title: String,
     @SerialName("type")
-    var type: Type,
+    var type: TypeEnum,
     @SerialName("url")
     var url: String,
-    //@SerialName("checksum")
-    //var checksum: Map<String, Any?>? = null,
+    // @SerialName("checksum")
+    // var checksum: Map<String, Any?>? = null,
     @SerialName("created_at")
     var createdAt: LocalDateTime? = null,
     @SerialName("description")
     var description: String? = null,
-    //@SerialName("extras")
-    //var extras: Map<String, Any?>? = null,
+    // @SerialName("extras")
+    // var extras: Map<String, Any?>? = null,
     @SerialName("filesize")
     var filesize: Long? = null,
     @SerialName("id")
@@ -52,35 +54,14 @@ data class Resource(
     var lastModified: LocalDateTime? = null,
     @SerialName("latest")
     var latest: String? = null,
-    //@SerialName("metrics")
-    //var metrics: Map<String, Any?>? = null,
+    // @SerialName("metrics")
+    // var metrics: Map<String, Any?>? = null,
     @SerialName("mime")
     var mime: String? = null,
     @SerialName("preview_url")
     var previewUrl: String? = null,
     @SerialName("published")
     var published: LocalDateTime? = null,
-    //@SerialName("schema")
-    //var schema: Map<String, Any?>? = null
-) {
-
-    /**
-     * Resource type (documentation, API...)
-     * Values: MAIN, DOCUMENTATION, UPDATE, API, CODE, OTHER
-     */
-    @Serializable
-    enum class Type {
-        @SerialName("main")
-        MAIN,
-        @SerialName("documentation")
-        DOCUMENTATION,
-        @SerialName("update")
-        UPDATE,
-        @SerialName("api")
-        API,
-        @SerialName("code")
-        CODE,
-        @SerialName("other")
-        OTHER
-    }
-}
+    // @SerialName("schema")
+    // var schema: Map<String, Any?>? = null
+)
