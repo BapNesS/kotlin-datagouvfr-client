@@ -32,7 +32,7 @@ internal interface DatasetsApi : WithApiKey {
     @OptIn(MissingFieldMapping::class)
     fun getListDatasets(
         q: String? = null,
-        /*facets: List<String>? = null,*/
+        facets: List<String>? = null,
         tag: String? = null,
         badge: String? = null,
         organization: String? = null,

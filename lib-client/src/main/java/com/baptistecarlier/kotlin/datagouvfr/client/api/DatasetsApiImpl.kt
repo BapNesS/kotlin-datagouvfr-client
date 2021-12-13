@@ -22,7 +22,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
     @OptIn(MissingFieldMapping::class)
     override fun getListDatasets(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         tag: String?,
         badge: String?,
         organization: String?,

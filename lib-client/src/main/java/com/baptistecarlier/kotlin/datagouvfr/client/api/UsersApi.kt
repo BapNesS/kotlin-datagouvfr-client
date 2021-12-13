@@ -24,7 +24,7 @@ interface UsersApi : WithApiKey {
     @OptIn(MissingFieldMapping::class)
     fun getListUsers(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         organization: String?,
         datasets: String?,
         followers: String?,

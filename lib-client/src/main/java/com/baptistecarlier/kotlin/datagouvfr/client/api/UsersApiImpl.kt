@@ -23,7 +23,7 @@ internal class UsersApiImpl(private val client: HttpClient) : UsersApi {
     @OptIn(MissingFieldMapping::class)
     override fun getListUsers(
         q: String?,
-        /*facets: List<String>?,*/
+        facets: List<String>?,
         organization: String?,
         datasets: String?,
         followers: String?,
