@@ -67,7 +67,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setStatsNotNull(view: TextView, @StringRes label: Int, value: Any?) {
-        view.isVisible = (value != null)
+        view.isVisible = value != null
         view.text = view.context.getString(label, value)
     }
 
