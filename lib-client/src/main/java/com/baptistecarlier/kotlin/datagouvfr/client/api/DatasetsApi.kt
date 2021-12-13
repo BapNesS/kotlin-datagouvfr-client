@@ -6,7 +6,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMappi
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
 
-internal interface DatasetsApi : WithApiKey {
+interface DatasetsApi : WithApiKey {
 
     /**
      * List or search all datasets
@@ -409,7 +409,7 @@ internal interface DatasetsApi : WithApiKey {
         partByteOffset: Int? = null,
         totalParts: Int? = null,
         chunkSize: Int? = null
-    ): Flow<DgfrCallState<UploadedResource?>>
+    ): Flow<DgfrCallState<UploadedResource>>
 
     /**
      * Unfollow an object given its ID

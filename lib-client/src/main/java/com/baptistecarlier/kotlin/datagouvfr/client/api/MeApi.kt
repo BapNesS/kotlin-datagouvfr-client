@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Connected user related operations
  */
-internal interface MeApi : WithApiKey {
+interface MeApi : WithApiKey {
 
     /**
      * Delete my profile

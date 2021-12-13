@@ -83,7 +83,8 @@ project.afterEvaluate {
                   // sealed and data classes
                   '**/*$Result.*',
                   '**/*$Result$*.*',
-                  '**/*serializer*.*'
+                  '**/*serializer*.*',
+                  '**/com/baptistecarlier/kotlin/datagouvfr/client/model/*.*'
             ]
 
             def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,

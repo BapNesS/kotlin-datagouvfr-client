@@ -6,7 +6,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferRequest
 import com.baptistecarlier.kotlin.datagouvfr.client.model.TransferResponse
 import kotlinx.coroutines.flow.Flow
 
-internal interface TransferApi : WithApiKey {
+interface TransferApi : WithApiKey {
 
     /**
      * Fetch a transfer request given its identifier

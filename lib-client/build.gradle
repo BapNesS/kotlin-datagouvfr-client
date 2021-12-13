@@ -52,6 +52,7 @@ dependencies {
     implementation "io.ktor:ktor-client-logging:1.6.2"
     implementation "io.ktor:ktor-client-android:1.6.2"
     implementation "org.jetbrains.kotlinx:kotlinx-datetime:0.2.1"
+    testImplementation "io.ktor:ktor-client-mock:1.6.2"
 
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.5.30")
 }
@@ -63,6 +64,8 @@ sonarqube {
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.projectVersion", rootProject.versionCode
         property "sonar.junit.reportsPath", "build/test-results/testReleaseUnitTest/"
+        // Tmp
+        property "sonar.coverage.exclusions", "lib-client/src/main/java/com/baptistecarlier/kotlin/datagouvfr/client/model/**"
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/testReleaseUnitTestCoverage/testReleaseUnitTestCoverage.xml"
         def unit = fileTree(dir: project.projectDir, includes: ['**/*.exec']).files

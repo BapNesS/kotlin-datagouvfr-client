@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Posts related operations
  */
-internal interface PostsApi : WithApiKey {
+interface PostsApi : WithApiKey {
 
     /**
      * List all posts

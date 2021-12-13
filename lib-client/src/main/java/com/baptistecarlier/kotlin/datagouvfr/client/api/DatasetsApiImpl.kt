@@ -466,7 +466,7 @@ internal class DatasetsApiImpl(private val client: HttpClient) : DatasetsApi {
         partByteOffset: Int?,
         totalParts: Int?,
         chunkSize: Int?
-    ): Flow<DgfrCallState<UploadedResource?>> = loadingFlow {
+    ): Flow<DgfrCallState<UploadedResource>> = loadingFlow {
         client.submitFormWithBinaryData(
             url = "datasets/$dataset/upload/community/",
             formData = formData {
