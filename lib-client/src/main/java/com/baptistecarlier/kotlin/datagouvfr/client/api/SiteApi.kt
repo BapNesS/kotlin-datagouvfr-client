@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Site global namespace
  */
-internal interface SiteApi : WithApiKey {
+interface SiteApi : WithApiKey {
 
     /**
      * Fetch site activity, optionally filtered by user of org

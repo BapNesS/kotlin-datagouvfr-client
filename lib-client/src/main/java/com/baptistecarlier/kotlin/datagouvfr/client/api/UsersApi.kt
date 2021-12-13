@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * User related operations
  */
-internal interface UsersApi : WithApiKey {
+interface UsersApi : WithApiKey {
 
     /**
      * List all users

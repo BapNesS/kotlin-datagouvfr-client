@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Topics related operations
  */
-internal interface TopicsApi : WithApiKey {
+interface TopicsApi : WithApiKey {
 
     /**
      * List all topics

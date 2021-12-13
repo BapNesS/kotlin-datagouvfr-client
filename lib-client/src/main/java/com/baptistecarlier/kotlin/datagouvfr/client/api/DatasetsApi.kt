@@ -6,7 +6,7 @@ import com.baptistecarlier.kotlin.datagouvfr.client.annotation.MissingFieldMappi
 import com.baptistecarlier.kotlin.datagouvfr.client.model.*
 import kotlinx.coroutines.flow.Flow
 
-internal interface DatasetsApi : WithApiKey {
+interface DatasetsApi : WithApiKey {
 
     /**
      * List or search all datasets

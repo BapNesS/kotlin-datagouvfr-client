@@ -63,32 +63,32 @@ private fun HttpClientConfig<CIOEngineConfig>.installers(
     }
 }
 
-private val siteApi by lazy { SiteApiImpl(httpClient) }
-private val spatialApi by lazy { SpatialApiImpl(httpClient) }
-private val issuesApi by lazy { IssuesApiImpl(httpClient) }
-private val discussionsApiImpl by lazy { DiscussionsApiImpl(httpClient) }
-private val usersApi by lazy { UsersApiImpl(httpClient) }
-private val meApi by lazy { MeApiImpl(httpClient) }
-private val datasetsApi by lazy { DatasetsApiImpl(httpClient) }
-private val reusesApi by lazy { ReusesApiImpl(httpClient) }
-private val organizationsApi by lazy { OrganizationsApiImpl(httpClient) }
-private val workersApi by lazy { WorkersApiImpl(httpClient) }
-private val tagsApi by lazy { TagsApiImpl(httpClient) }
-private val topicsApi by lazy { TopicsApiImpl(httpClient) }
-private val postsApi by lazy { PostsApiImpl(httpClient) }
-private val transferApi by lazy { TransferApiImpl(httpClient) }
-private val notificationsApi by lazy { NotificationsApiImpl(httpClient) }
-private val avatarsApi by lazy { AvatarsApiImpl(httpClient) }
-private val harvestApiImpl by lazy { HarvestApiImpl(httpClient) }
-
 /**
  * @param apiKey Clé d'API (optionnel)
  */
-class DgfrService(apiKey: String = "") :
+class DgfrService private constructor(
+    private val siteApi: SiteApi,
+    private val spatialApi: SpatialApi,
+    private val issuesApi: IssuesApi,
+    private val discussionsApi: DiscussionsApi,
+    private val usersApi: UsersApi,
+    private val meApi: MeApi,
+    private val datasetsApi: DatasetsApi,
+    private val reusesApi: ReusesApi,
+    private val organizationsApi: OrganizationsApi,
+    private val workersApi: WorkersApi,
+    private val tagsApi: TagsApi,
+    private val topicsApi: TopicsApi,
+    private val postsApi: PostsApi,
+    private val transferApi: TransferApi,
+    private val notificationsApi: NotificationsApi,
+    private val avatarsApi: AvatarsApi,
+    private val harvestApiImpl: HarvestApi
+) :
     SiteApi by siteApi,
     SpatialApi by spatialApi,
     IssuesApi by issuesApi,
-    DiscussionsApi by discussionsApiImpl,
+    DiscussionsApi by discussionsApi,
     UsersApi by usersApi,
     MeApi by meApi,
     DatasetsApi by datasetsApi,
@@ -103,15 +103,11 @@ class DgfrService(apiKey: String = "") :
     AvatarsApi by avatarsApi,
     HarvestApi by harvestApiImpl {
 
-    init {
-        setApiKey(apiKey)
-    }
-
     override fun setApiKey(apiKey: String) {
         meApi.setApiKey(apiKey)
         siteApi.setApiKey(apiKey)
         issuesApi.setApiKey(apiKey)
-        discussionsApiImpl.setApiKey(apiKey)
+        discussionsApi.setApiKey(apiKey)
         usersApi.setApiKey(apiKey)
         meApi.setApiKey(apiKey)
         datasetsApi.setApiKey(apiKey)
@@ -123,5 +119,51 @@ class DgfrService(apiKey: String = "") :
         transferApi.setApiKey(apiKey)
         notificationsApi.setApiKey(apiKey)
         harvestApiImpl.setApiKey(apiKey)
+    }
+
+    companion object {
+        operator fun invoke(apiKey: String? = null): DgfrService {
+            val siteApi = SiteApiImpl(httpClient)
+            val spatialApi = SpatialApiImpl(httpClient)
+            val issuesApi = IssuesApiImpl(httpClient)
+            val discussionsApi = DiscussionsApiImpl(httpClient)
+            val usersApi = UsersApiImpl(httpClient)
+            val meApi = MeApiImpl(httpClient)
+            val datasetsApi = DatasetsApiImpl(httpClient)
+            val reusesApi = ReusesApiImpl(httpClient)
+            val organizationsApi = OrganizationsApiImpl(httpClient)
+            val workersApi = WorkersApiImpl(httpClient)
+            val tagsApi = TagsApiImpl(httpClient)
+            val topicsApi = TopicsApiImpl(httpClient)
+            val postsApi = PostsApiImpl(httpClient)
+            val transferApi = TransferApiImpl(httpClient)
+            val notificationsApi = NotificationsApiImpl(httpClient)
+            val avatarsApi = AvatarsApiImpl(httpClient)
+            val harvestApiImpl = HarvestApiImpl(httpClient)
+
+            return DgfrService(
+                siteApi,
+                spatialApi,
+                issuesApi,
+                discussionsApi,
+                usersApi,
+                meApi,
+                datasetsApi,
+                reusesApi,
+                organizationsApi,
+                workersApi,
+                tagsApi,
+                topicsApi,
+                postsApi,
+                transferApi,
+                notificationsApi,
+                avatarsApi,
+                harvestApiImpl
+            ).apply {
+                if (apiKey != null) {
+                    setApiKey(apiKey)
+                }
+            }
+        }
     }
 }

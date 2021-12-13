@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Spatial references
  */
-internal interface SpatialApi {
+interface SpatialApi {
 
     /**
      * List each zone for a given level with their datasets count

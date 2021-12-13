@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Issue related operations
  */
-internal interface IssuesApi : WithApiKey {
+interface IssuesApi : WithApiKey {
 
     /**
      * List all Issues

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Discussion related operations
  */
-internal interface DiscussionsApi : WithApiKey {
+interface DiscussionsApi : WithApiKey {
 
     /**
      * List all Discussions

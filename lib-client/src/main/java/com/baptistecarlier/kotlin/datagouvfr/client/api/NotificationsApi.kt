@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Notifications API
  */
-internal interface NotificationsApi : WithApiKey {
+interface NotificationsApi : WithApiKey {
 
     /**
      * List all current user pending notifications

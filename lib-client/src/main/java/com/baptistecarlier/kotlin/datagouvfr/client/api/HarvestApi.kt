@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Harvest related operations
  */
-internal interface HarvestApi : WithApiKey {
+interface HarvestApi : WithApiKey {
 
     /**
      * List all available harvest backends

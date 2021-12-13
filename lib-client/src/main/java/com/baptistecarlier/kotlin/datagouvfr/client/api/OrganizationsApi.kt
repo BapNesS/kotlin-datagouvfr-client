@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Organization related operations
  */
-internal interface OrganizationsApi : WithApiKey {
+interface OrganizationsApi : WithApiKey {
 
     /**
      * List or search all organizations

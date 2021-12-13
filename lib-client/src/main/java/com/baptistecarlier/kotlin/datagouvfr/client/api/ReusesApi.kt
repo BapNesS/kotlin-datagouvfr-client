@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Reuse related operations
  */
-internal interface ReusesApi : WithApiKey {
+interface ReusesApi : WithApiKey {
 
     /**
      * @param q The search query (optional)
