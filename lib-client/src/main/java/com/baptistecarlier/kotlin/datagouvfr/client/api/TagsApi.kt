@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Tags related operations
  */
-interface TagsApi {
+internal interface TagsApi {
 
     /**
      * @param q The string to autocomplete/suggest

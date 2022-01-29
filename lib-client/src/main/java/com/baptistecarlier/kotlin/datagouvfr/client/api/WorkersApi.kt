@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Asynchronous workers related operations
  */
-interface WorkersApi : WithApiKey {
+internal interface WorkersApi : WithApiKey {
 
     /**
      * List all scheduled jobs

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Get a deterministic avatar given an identifier at a given size
  */
-interface AvatarsApi {
+internal interface AvatarsApi {
 
     /**
      * @param identifier
