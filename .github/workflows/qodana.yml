@@ -14,7 +14,7 @@ jobs:
       - name: 'Qodana - Code Inspection'
         uses: JetBrains/qodana-action@v4.2.2
         with:
-          linter: jetbrains/qodana-jvm
+          linter: jetbrains/qodana-jvm-android
       - uses: actions/upload-artifact@v2
         with:
           path: ${{ github.workspace }}/qodana
